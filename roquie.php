@@ -8,3 +8,4 @@
  */
 
 echo 'I\'am BIGGY LOOOL';
+echo 'привет';

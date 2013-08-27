@@ -17,7 +17,7 @@ else
 }
 
 /**
- * Set the default time zone.
+ * Set the default time zone. fff
  *
  * @link http://kohanaframework.org/guide/using.configuration
  * @link http://www.php.net/manual/timezones

@@ -48,6 +48,7 @@
 <?=HTML::script('js/vendor/jquery.noty.js')?>
 <?=HTML::script('js/equalHeight.js')?>
 <?=HTML::script('js/popup.js')?>
+<?=HTML::script('js/validation.js')?>
 
 <script>
 

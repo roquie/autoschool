@@ -5,7 +5,7 @@
  */
 $(function() {
 
-    $('#to').prop('disabled',true).css({backgroundColor : '#ffffff'});
+    //$('#to').prop('disabled',true).css({backgroundColor : '#ffffff'});
 
     /**
      * Загрузка в поле "сообщение" текста из выбранного шаблона
@@ -33,51 +33,11 @@ $(function() {
     /**
      * Отправка письма
      */
-    $('#send').submit(function(event) {
-        event.preventDefault();
-        var to = $('#to'),
-            subj = $('#subject'),
-            message = $('#editor'),
-            err = 0,
-            data = {};
-        if ( to.val() === '' || to.val() === to.data('value') ) {
-            noty({
-                text   : 'Заполните поле "Кому"',
-                type   : 'error'
-            });
-            err++;
-        }
-        if ( subj.val() === '' || subj.val() === subj.data('value') ) {
-            noty({
-                text   : 'Заполните поле "Тема"',
-                type   : 'error'
-            });
-            err++;
-        }
-        if ( message.html() === '' ) {
-            noty({
-                text   : 'Заполните поле "Сообщение"',
-                type   : 'error'
-            });
-            err++;
-        }
-        data.to = to.val().slice(0, -2);
-        data.subject = subj.val();
-        data.msg = message.html();
-        if (err != 0) { exit(); }
-        $.post(
-            '/admin/send_mail',
-            data,
-            function (response)
-            {
-                noty({
-                    text   : response.msg,
-                    type   : response.status
-                });
-                $('#reset').trigger('click');
-            },
-            'json'
-        );
+    $('#send').ajaxForm({
+        callback : function(response) {
+            alert('LOL');
+        },
+        fields : ['editor']
     });
     /**
      * Кнопка "Очистить" в форме отправки письма

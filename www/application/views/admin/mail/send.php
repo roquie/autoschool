@@ -1,5 +1,10 @@
 <?=HTML::style('css/send.css')?>
-
+<?=HTML::script('js/mail.js')?>
+<script>
+    $().ready(function() {
+        equalHeight($('#formSend'), $('#listStd'));
+    });
+</script>
 <div class="container">
     <div class="span12">
 
@@ -9,12 +14,11 @@
             <div class="span8">
 
                 <div class="well" id="formSend">
-                    <form action="#" method="post" id="send">
+                    <form action="<?=URL::site('admin/send_mail')?>" method="post" id="send">
                         <legend>Сообщение</legend>
                         <!--контейнер с инпутами Кому, Тема-->
-
-                        <input style="width: 98%"  type="text" name="to" id="to" data-value="Кому"><br>
-                        <input style="width: 98%" type="text" id="subject" name="subject" data-value="Тема">
+                        <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-value="Кому"><br>
+                        <input style="width: 98%" type="text" name="subject" data-req="true" data-value="Тема">
 
                         <!-- Редактор -->
                         <?=View::factory('admin/mail/editor')
@@ -25,7 +29,7 @@
                         <!---->
                         <!--контейнер с кнопками Отправить и Очистить-->
                         <div style="margin-top: 10px">
-                            <button type="submit" class="btn btn-success">Отправить</button>
+                            <input type="submit" class="btn btn-success" value="Отправить">
                             <button type="button" id="reset" class="btn">Очистить</button>
                             <div class="pull-right">
                                 <div class="btn-group dropup">
@@ -103,11 +107,3 @@
     </div>
 </div>
 <!-- end Modal -->
-
-
-<?=HTML::script('js/mail.js')?>
-<script>
-    $().ready(function() {
-        equalHeight($('#formSend'), $('#listStd'));
-    });
-</script>

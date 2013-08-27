@@ -41,7 +41,7 @@
 
 </div>
 
-<div id="<?=$id_div_editor?>"></div>
+<div id="<?=$id_div_editor?>" data-req="true" data-name="message"></div>
 
 <?if($script_load):?>
 
@@ -60,8 +60,6 @@
             $.each(fonts, function (idx, fontName) {
                 fontTarget.append($('<li><a data-edit="fontName ' + fontName +'" style="font-family:\''+ fontName +'\'">'+fontName + '</a></li>'));
             });
-
-
             $('.dropdown-menu input').click(function() {return false;})
                 .change(function () {$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle');})
                 .keydown('esc', function () {this.value='';$(this).change();});

@@ -1,23 +1,9 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Admin_Papers extends Controller_Admin
+class Controller_Admin_Papers extends Controller_Ajax
 {
 
-    public function action_index()
-    {
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
 
-        $req = $this->request->query('vedomost');
-        if ($req)
-            $this->template->content = View::factory('admin/papers/vedomost', array(
-                'name' => URL::site('uploads_old/downloaded/'.$req)
-            ));
-        else
-            $this->template->content = View::factory('admin/papers/view', array(
-                'downloadedFiles' => $this->scanDownloadedFolder(),
-            ));
-
-    }
 
     /**
      * метод для загрузки файлов в указанную директорию
@@ -25,10 +11,6 @@ class Controller_Admin_Papers extends Controller_Admin
      * */
     public function action_upload_file()
     {
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
-
-        $this->auto_render = false;
-
         $uploadDir = APPPATH.'uploads_old/downloaded/';
         $file = $uploadDir . basename($_FILES['uploadfile']['name']);
 
@@ -38,28 +20,11 @@ class Controller_Admin_Papers extends Controller_Admin
             echo 'error';
     }
 
-    /**
-     * сканирование папки downloaded с файлами
-     * @return array с именами файлов
-     */
-    public function scanDownloadedFolder()
-    {
-        return array_diff(scandir(APPPATH.'/uploads_old/downloaded/'), array('..', '.'));
-    }
 
-
-    /**
-     * сканирование папки created с файлами
-     * @return array с именами файлов
-     */
-    public function scanCreatedFolder()
-    {
-        return array_diff(scandir(APPPATH.'uploads_old/created/'), array('..', '.'));
-    }
 
     public function action_gup()
     {
-        $client = new Google_Client();
+     /*   $client = new Google_Client();
 // Get your credentials from the APIs Console
         $client->setClientId('1064636737871-4asm4jhp13cd56lqq8h1fn2174irkfb3.apps.googleusercontent.com');
         $client->setClientSecret('KVbrfm0DecnWnwoiv_P8AviT');
@@ -93,12 +58,7 @@ class Controller_Admin_Papers extends Controller_Admin
             'mimeType' => 'text/plain',
         ));
 
-        print_r($createdFile);
+        print_r($createdFile);*/
     }
-
-
-
-
-
 
 }

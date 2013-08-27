@@ -160,7 +160,7 @@ Route::set('download', 'download/<folder>/<filename>.<format>',
 
 Route::set('all_media', '<type_media>(/<folder>(/<subfolder>(/<file>)))',
     array(
-        'type_media' => '(css|js|img|admin/css|admin/js|font|admin/font)',
+        'type_media' => '(css|js|img|admin/css|admin/js|font|admin/font|admin/img)',
         'folder' => '.+',
         'subfolder' => '.+',
         'file' => '.+',
@@ -172,12 +172,28 @@ Route::set('all_media', '<type_media>(/<folder>(/<subfolder>(/<file>)))',
 
 
 
-
-Route::set('admin', 'admin(/<controller>(/<action>(/<id>)))')
+Route::set('auth.admin', 'admin/auth(/<action>(/<id>))')
     ->defaults(array(
         'directory'  => 'Admin',
-        'controller' => 'index',
+        'controller' => 'Auth',
+    ));
+
+
+Route::set('admin', 'admin(/<action>)')
+    ->defaults(array(
+        'controller' => 'Admin',
         'action'     => 'index',
+    ));
+
+Route::set('main', '(<action>(/<id>))')
+    ->defaults(array(
+        'controller' => 'Main',
+        'action' => 'index'
+    ));
+
+Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
+    ->defaults(array(
+        'directory'  => 'Admin',
     ));
 
 Route::set('WordTemplate', 'wordtemplate(/<action>(/<id>))')
@@ -186,12 +202,7 @@ Route::set('WordTemplate', 'wordtemplate(/<action>(/<id>))')
         //'action'     => 'index',
     ));
 
-Route::set('main', '(<action>(/<id>))')
-    ->defaults(array(
-        'directory' => 'Main',
-        'controller' => 'index',
-        'action' => 'index'
-    ));
+
 
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')

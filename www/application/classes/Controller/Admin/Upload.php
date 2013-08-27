@@ -15,9 +15,7 @@ class Controller_Admin_Upload extends Controller_Admin
 
     public function action_newupload()
     {
-        //if (Request::initial()->is_ajax()) {
 
-        //}
     }
 
 

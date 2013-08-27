@@ -38,3 +38,6 @@
 #5 L:\domains\localhost\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
 #6 L:\domains\localhost\www\index.php(118): Kohana_Request->execute()
 #7 {main} in L:\domains\localhost\www\application\classes\Controller\WordTemplate.php:56
+2013-08-27 23:26:14 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method Controller_Admin_Index::scanDownloadedFolder() ~ APPPATH\classes\Controller\Admin\Index.php [ 42 ] in file:line
+2013-08-27 23:26:14 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line

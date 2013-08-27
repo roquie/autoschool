@@ -9,14 +9,7 @@
 
 class Controller_Admin_Tpl extends Controller_Admin
 {
-    public function action_index()
-    {
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
 
-        $this->template->content = View::factory('admin/mail/tpl', array(
-            'titles' => Model::factory('Admin_MsgTemplate')->getAll(),
-        ));
-    }
 
     /**
      * Добавление шаблона сообщения
@@ -29,41 +22,35 @@ class Controller_Admin_Tpl extends Controller_Admin
 
     public function action_add()
     {
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
-        $this->auto_render = false;
-        if (Request::initial()->is_ajax()) {
+        $title = Security::xss_clean(Arr::get($_POST, 'title'));
+        $result = Model::factory('Admin_MsgTemplate')->getTitle($title);
+        if (empty($result['title'])) {
 
-            $title = Security::xss_clean(Arr::get($_POST, 'title'));
-            $result = Model::factory('Admin_MsgTemplate')->getTitle($title);
-            if (empty($result['title'])) {
+            Model::factory('Admin_MsgTemplate')->addMsgTemplate(array(
+                'title' => $title,
+                'message' => Security::xss_clean(Arr::get($_POST, 'text')),
+                'author' => Session::instance()->get('first_name').' '.Session::instance()->get('last_name'),
+                'time' => date('H:i:s'), // need use helper Date ... gavno-code
+                'date' => date('Y-m-d'),
+            ));
 
-                Model::factory('Admin_MsgTemplate')->addMsgTemplate(array(
-                    'title' => $title,
-                    'message' => Security::xss_clean(Arr::get($_POST, 'text')),
-                    'author' => Session::instance()->get('first_name').' '.Session::instance()->get('last_name'),
-                    'time' => date('H:i:s'), // need use helper Date ... gavno-code
-                    'date' => date('Y-m-d'),
-                ));
+            echo json_encode(array(
+                    'status' => 'success', //error or info
+                    'msg' => 'Шаблон '.$title.' успешно добавлен',
+                    'data'   => array(
+                        'id'     => 13, //айди вставленноё записи
+                        'title'  => $title  //это то которое тебе придёт постом
+                    ),
+                    'success' => 1
+            ));
+        } else {
+            echo json_encode(array(
+                    'status'  => 'error',
+                    'msg'     => 'Шаблон с названием '.$title.' уже существует',
+                    'success' => 0
+            ));
+        }
 
-                echo json_encode(array(
-                        'status' => 'success', //error or info
-                        'msg' => 'Шаблон '.$title.' успешно добавлен',
-                        'data'   => array(
-                            'id'     => 13, //айди вставленноё записи
-                            'title'  => $title  //это то которое тебе придёт постом
-                        ),
-                        'success' => 1
-                ));
-            } else {
-                echo json_encode(array(
-                        'status'  => 'error',
-                        'msg'     => 'Шаблон с названием '.$title.' уже существует',
-                        'success' => 0
-                ));
-            }
-
-        } else
-            throw new HTTP_Exception_404();
     }
 
     /**
@@ -77,47 +64,41 @@ class Controller_Admin_Tpl extends Controller_Admin
      */
     public function action_edit()
     {
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
-        $this->auto_render = false;
-        if (Request::initial()->is_ajax()) {
+        $title = Security::xss_clean(Arr::get($_POST, 'title'));
+        $result = Model::factory('Admin_MsgTemplate')->getTitle($title);
 
-            $title = Security::xss_clean(Arr::get($_POST, 'title'));
-            $result = Model::factory('Admin_MsgTemplate')->getTitle($title);
+        if (empty($result['title'])) {
 
-            if (empty($result['title'])) {
+            Model::factory('Admin_MsgTemplate')->updateMsgTemplate(array(
+                'id' => Arr::get($_POST, 'id'),
+                'title' => $title,
+                'message' => Security::xss_clean(Arr::get($_POST, 'text')),
+                'author' => Session::instance()->get('first_name').' '.Session::instance()->get('last_name'),
+                'time' => date('H:i:s'), // need use helper Date ... gavno-code
+                'date' => date('Y-m-d'),
+            ));
 
-                Model::factory('Admin_MsgTemplate')->updateMsgTemplate(array(
-                    'id' => Arr::get($_POST, 'id'),
-                    'title' => $title,
-                    'message' => Security::xss_clean(Arr::get($_POST, 'text')),
-                    'author' => Session::instance()->get('first_name').' '.Session::instance()->get('last_name'),
-                    'time' => date('H:i:s'), // need use helper Date ... gavno-code
-                    'date' => date('Y-m-d'),
-                ));
+            $res = Model::factory('Admin_MsgTemplate')->getLastRecord();
 
-                $res = Model::factory('Admin_MsgTemplate')->getLastRecord();
+            echo json_encode(array(
+                    'status' => 'success', //error or info
+                    'msg' => 'Шаблон '.$title.' успешно обновлен',
+                    'data'   => array(
+                        'id'     => $res['id'], //айди вставленноё записи
+                        'title'  => $title //это то которое тебе придёт постом
+                    ),
+                    'success' => 1
+            ));
 
-                echo json_encode(array(
-                        'status' => 'success', //error or info
-                        'msg' => 'Шаблон '.$title.' успешно обновлен',
-                        'data'   => array(
-                            'id'     => $res['id'], //айди вставленноё записи
-                            'title'  => $title //это то которое тебе придёт постом
-                        ),
-                        'success' => 1
-                ));
+        } else {
 
-            } else {
+            echo json_encode(array(
+                    'status'  => 'error',
+                    'msg'     => 'Шаблон '.$title.' уже существует',
+                    'success' => 0
+            ));
+        }
 
-                echo json_encode(array(
-                        'status'  => 'error',
-                        'msg'     => 'Шаблон '.$title.' уже существует',
-                        'success' => 0
-                ));
-            }
-
-        } else
-            throw new HTTP_Exception_404();
     }
 
     /**
@@ -129,37 +110,30 @@ class Controller_Admin_Tpl extends Controller_Admin
      */
     public function action_select()
     {
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
-        $this->auto_render = false;
 
-        if (Request::initial()->is_ajax()) {
+        $id = Security::xss_clean(Arr::get($_POST, 'id'));
+        $result = Model::factory('Admin_MsgTemplate')->getTplById($id);
 
-            $id = Security::xss_clean(Arr::get($_POST, 'id'));
-            $result = Model::factory('Admin_MsgTemplate')->getTplById($id);
+        if (!empty($result['id'])) {
 
-            if (!empty($result['id'])) {
+            $data = array(
+                'title'      => $result['title'],    //Название шаблона
+                'text'  => $result['message']      //Текст шаблона
+            );
 
-                $data = array(
-                    'title'      => $result['title'],    //Название шаблона
-                    'text'  => $result['message']      //Текст шаблона
-                );
+            echo json_encode(array(
+                    'status'  => 'success', //error or info
+                    'data'    => $data,
+                    'success' => 1
+            ));
+        } else {
 
-                echo json_encode(array(
-                        'status'  => 'success', //error or info
-                        'data'    => $data,
-                        'success' => 1
-                ));
-            } else {
-
-                echo json_encode(array(
-                        'status'  => 'error', //error or info
-                        'msg'     => 'Шаблон не найден/не существует',
-                        'success' => 0
-                ));
-            }
-
-        } else
-            throw new HTTP_Exception_404();
+            echo json_encode(array(
+                    'status'  => 'error', //error or info
+                    'msg'     => 'Шаблон не найден/не существует',
+                    'success' => 0
+            ));
+        }
 
     }
 
@@ -173,18 +147,13 @@ class Controller_Admin_Tpl extends Controller_Admin
 
     public function action_remove()
     {
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
-        $this->auto_render = false;
 
-        if (Request::initial()->is_ajax()) {
-            Model::factory('Admin_MsgTemplate')->deleteTpl(Security::xss_clean(Arr::get($_POST, 'id')));
-            echo json_encode(array(
-                'status' => 'success', //error or info
-                'msg' => 'Шаблон удалён',
-                'id' => Arr::get($_POST, 'id')
-            ));
+        Model::factory('Admin_MsgTemplate')->deleteTpl(Security::xss_clean(Arr::get($_POST, 'id')));
 
-        } else
-            throw new HTTP_Exception_404();
+        echo json_encode(array(
+            'status' => 'success', //error or info
+            'msg' => 'Шаблон удалён',
+            'id' => Arr::get($_POST, 'id')
+        ));
     }
 }

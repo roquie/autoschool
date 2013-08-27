@@ -9,7 +9,7 @@ class Controller_Admin_Auth extends Controller
         if (!isset($email))
             GOAuth::factory()->getAuthData();
         else
-            HTTP::redirect(URL::site('/admin'));
+            HTTP::redirect('/admin');
     }
 
     public function action_goauth()
@@ -44,14 +44,14 @@ class Controller_Admin_Auth extends Controller
             Session::instance()->set('photo', $user['photo']);
 
 
-        HTTP::redirect(URL::site('admin'));
+        HTTP::redirect('/admin');
 
     }
 
     public function action_logout()
     {
         Session::instance()->destroy();
-        HTTP::redirect(URL::site());
+        HTTP::redirect('/');
     }
 
 }

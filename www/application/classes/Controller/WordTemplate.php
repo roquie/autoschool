@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_WordTemplate extends Controller_Main
+class Controller_WordTemplate extends Controller_Ajax
 {
 
     public function before()
@@ -33,7 +33,7 @@ class Controller_WordTemplate extends Controller_Main
             }
 
         if (!empty($error))
-            $this->ajax->msg($error, 'error');
+            $this->ajax_msg($error, 'error');
 
 
         $PHPWord = new PHPWord();
@@ -42,7 +42,7 @@ class Controller_WordTemplate extends Controller_Main
         if (is_readable($path))
             $document = $PHPWord->loadTemplate($path);
         else
-            $this->ajax->msg('Файла шаблона нет и/или не читается', 'error');
+            $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
         /**
          * ====================================
          * Формирование заявления
@@ -82,12 +82,12 @@ class Controller_WordTemplate extends Controller_Main
          */
         //$contract = $PHPWord->loadTemplate(APPPATH.'templates/zayavlenie/statement.docx');
         //@todo
-        $this->ajax->msg(array(
+        $this->ajax_msg(
             View::factory('main/blank/result', array(
-                'statement' => URL::site('download/zayavleniya/zayavlenie_'.$data['imya'].'_'.$data['familiya'].'_'.$data['ot4estvo'].'_'.date('d-m-Y_H:i:s').'.docx'),
-                'contract' => URL::site('download/contracts/contract_'.$data['imya'].'_'.$data['familiya'].'_'.$data['ot4estvo'].'_'.date('d-m-Y_H:i:s').'.docx'),
+                'statement' => URL::site('download/zayavleniya/zayavlenie_'.date('d-m-Y_H:i:s').'.docx'),
+                'contract' => URL::site('download/contracts/contract_'.date('d-m-Y_H:i:s').'.docx'),
             ))->render()
-        ));
+        );
 
 //        $this->template->content = View::factory('main/word');
     }

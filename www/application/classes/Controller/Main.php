@@ -32,10 +32,16 @@ class Controller_Main extends Controller_Template
 
     }
 
-    public function action_after()
+    public function action_index()
     {
-
+        $this->template->content = View::factory('main/index');
     }
+
+    public function action_statement()
+    {
+        $this->template->content = View::factory('main/blank/statement');
+    }
+
 
 
 

@@ -3,6 +3,7 @@
 class HTML extends Kohana_HTML
 {
     /**
+     * js
      * @param string $file
      * @param array $attributes
      * @param null $protocol

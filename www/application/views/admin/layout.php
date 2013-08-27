@@ -47,7 +47,7 @@
 <?=HTML::script('js/placeholder.js')?>
 <?=HTML::script('js/vendor/jquery.noty.js')?>
 <?=HTML::script('js/equalHeight.js')?>
-<?=HTML::script('js/jquery.popup.js')?>
+<?=HTML::script('js/popup.js')?>
 
 <script>
 
@@ -83,18 +83,9 @@
         });
 
         $('#user_name').popupWin({
-            width      : '280px',
-            popWin     : '#popup',
             edgeOffset : 49,
-            left_right : {'right' : '-10px'}
+            delay : 400
         });
-        $('#settings').popupWin({
-            width      : '215px',
-            popWin     : '.setting',
-            edgeOffset : 49,
-            left_right : {'right' : '-9px'}
-        });
-
 
     });
 </script>

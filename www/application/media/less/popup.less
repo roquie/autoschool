@@ -13,7 +13,7 @@
 /*
   Главная функция, реализующая прорисовку окошка
 */
-.general (@left : auto, @right : -14px, @width : 280px) {
+.general (@left : 'auto', @right : -14px, @width : 280px) {
   position: absolute;
   z-index: 1000;
   left : @left;
@@ -27,44 +27,43 @@
   .box-shadow(0, 5px, 10px, rgba(0, 0, 0, 0.2));
   word-break: break-all;
 }
-.border (@color) {
+.top (@bottom : -8px, @color : #ccc ) {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid @color;
-}
-.top (@bottom : -8px, @color : #ccc ) {
-  .border(@color);
   left: 40%;
   bottom: @bottom;
 }
 .bottom (@top : -8px, @color : #ccc) {
-  .border(@color);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid @color;
   right: 20px;
   top: @top;
 }
 .left (@right : -8px, @color : #ccc) {
-  .border(@color);
-  right: @right;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid @color;
+  right: @color;
   top: 10px;
 }
 .right (@left : -8px, @color : #ccc) {
-  .border(@color);
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid @color;
   left: @left;
   top: 10px;
 }
-
 #popup {
-  .general();
+  .general;
 }
 #popup:before, #popup:after {
   content: "";
   position: absolute;
 }
-/*
-  Окно сверху родительского элемента
-*/
 #popup {
-  .popup_top {
+  &.popup_top {
     &:before {
       .top();
     }
@@ -72,31 +71,28 @@
       .top(-7px, #fff);
     }
   }
-}
-/*
-  Окно снизу родительского элемента
-*/
-#popup.popup_bottom:before {
-  .bottom();
-}
-#popup.popup_bottom:after {
-  .bottom(-7px, #fff);
-}
-/*
-  Окно слева родительского элемента
-*/
-#popup.popup_left:before {
-  .left();
-}
-#popup.popup_left:after {
-  .left(-7px, #fff);
-}
-/*
-  Окно справа родительского элемента
-*/
-#popup.popup_right:before {
-  .right();
-}
-#popup.popup_right:after {
-  .right(-7px, #fff);
+  &.popup_bottom {
+    &:before {
+      .bottom();
+    }
+    &:after {
+      .bottom(-7px, #fff);
+    }
+  }
+  &.popup_left {
+    &:before {
+      .left();
+    }
+    &:after {
+      .left(-7px, #fff);
+    }
+  }
+  &.popup_right {
+    &:before {
+      .right();
+    }
+    &:after {
+      .right(-7px, #fff);
+    }
+  }
 }

@@ -4,7 +4,7 @@
 #popup {
   position: absolute;
   z-index: 1000;
-  left: auto;
+  left: 'auto';
   right: -14px;
   min-width: 280px;
   background-color: #ffffff;
@@ -24,71 +24,59 @@
   content: "";
   position: absolute;
 }
-/*
-  Окно сверху родительского элемента
-*/
-#popup .popup_top:before {
+#popup.popup_top:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #cccccc;
   left: 40%;
   bottom: -8px;
 }
-#popup .popup_top:after {
+#popup.popup_top:after {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #ffffff;
   left: 40%;
   bottom: -7px;
 }
-/*
-  Окно снизу родительского элемента
-*/
 #popup.popup_bottom:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-top: 7px solid #cccccc;
+  border-bottom: 7px solid #cccccc;
   right: 20px;
   top: -8px;
 }
 #popup.popup_bottom:after {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-  border-top: 7px solid #ffffff;
+  border-bottom: 7px solid #ffffff;
   right: 20px;
   top: -7px;
 }
-/*
-  Окно слева родительского элемента
-*/
 #popup.popup_left:before {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #cccccc;
-  right: -8px;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid #cccccc;
+  right: #cccccc;
   top: 10px;
 }
 #popup.popup_left:after {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #ffffff;
-  right: -7px;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 7px solid #ffffff;
+  right: #ffffff;
   top: 10px;
 }
-/*
-  Окно справа родительского элемента
-*/
 #popup.popup_right:before {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #cccccc;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid #cccccc;
   left: -8px;
   top: 10px;
 }
 #popup.popup_right:after {
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #ffffff;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 7px solid #ffffff;
   left: -7px;
   top: 10px;
 }

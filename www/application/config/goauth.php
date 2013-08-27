@@ -3,5 +3,5 @@ return array(
     'client_id' => '1064636737871-4asm4jhp13cd56lqq8h1fn2174irkfb3.apps.googleusercontent.com',
     'client_secret' => 'KVbrfm0DecnWnwoiv_P8AviT',
     'redirect_uri' => URL::base().'admin/auth/goauth',
-    'none_avatar_img' => 'public/img/photo.jpg'
+    'none_avatar_img' => URL::site('img/photo.jpg')
 );

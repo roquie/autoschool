@@ -93,7 +93,7 @@ Kohana::$environment =  Kohana::DEVELOPMENT;
 //Kohana::$environment = ($_SERVER['SERVER_NAME'] !== 'localhost') ? Kohana::PRODUCTION : Kohana::DEVELOPMENT;
 
 Kohana::init(array(
-	'base_url'   => 'http://localhost/',
+	'base_url'   => 'http://autoschool/',
     'index_file' => false,
     'errors' => true, //Kohana::$environment ===  Kohana::DEVELOPMENT,
     'profiling' => true,//Kohana::$environment ===  Kohana::DEVELOPMENT,

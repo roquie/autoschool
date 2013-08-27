@@ -1,0 +1,115 @@
+ul.noty_container {
+	position: fixed;
+	z-index: 999;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: 280px;
+	top: 50px;
+    overflow: hidden;
+    height: 500px;
+}
+ul.noty_container li {
+	position: relative;
+	float: left;
+	clear: both;
+	list-style: none;
+	padding: 0;
+	margin: 10px 0 0 10px;
+}
+ul.noty_container.topLeft {
+	left: 20px;
+}
+ul.noty_container.topRight {
+	right:12px;
+}
+ul.noty_container.topRight li {
+	float: right;
+}
+
+/* Fix for: http://bugs.jquery.com/ticket/2278 */
+ul.noty_container.topLeft li, ul.noty_container.topRight li {
+    margin-right: 10px;
+
+}
+.noty_bar {
+	position: fixed;
+	display: none;
+	z-index: 9999999;
+    padding: 8px 35px 8px 14px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    background-color: #fcf8e3;
+    border: 1px solid #fbeed5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+.noty_bar.top {
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+.noty_bar.bottom {
+	bottom: 0;
+	left: 0;
+	width: 100%;
+}
+.noty_bar.center {
+	top: 40%;
+	left: 19.5%;
+	width: 60%;
+	padding: 4px;
+}
+.noty_bar.topLeft, .noty_bar.topRight {
+	width: 260px;
+	clear:both;
+	position: relative;
+	padding: 4px;
+}
+.noty_bar .noty_message {
+    position: relative;
+	padding: 10px 30px 10px 10px;
+	font-size: 16px;
+	font-weight: bold;
+	width: 96%;
+}
+
+.noty_bar .noty_message .noty_buttons {
+	clear: both;
+	font-size: 13px;
+	margin-top: 5px;
+}
+
+.noty_bar .noty_close {
+    float: right;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #000000;
+    text-shadow: 0 1px 0 #ffffff;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    position: absolute;
+    top: 0;
+    right: 5px;
+    cursor: pointer;
+}
+
+.noty_bar.info {
+    color: #c09853;
+    background-color: #fcf8e3;
+    border-color: #fbeed5;
+}
+
+.noty_bar.error {
+    color: #b94a48;
+    background-color: #f2dede;
+    border-color: #eed3d7;
+}
+
+.noty_bar.success {
+    color: #468847;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}

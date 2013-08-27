@@ -1,0 +1,95 @@
+/**
+ * placeholder Plugin
+ * Copyright 2013 Viktor Melnikov
+ * Version 2.1 - Updated: August, 9, 2013
+ * Example:
+ * <input type="text" class="placeholder" data-value="example" data-color="#f00">
+ * $('.placeholder').placeholder();
+ * Вызов отдельных методов:
+ * 1. добавляем метод
+ *      Plugin.prototype.foo = function (n) {
+ *          alert(n);
+ *      };
+ * 2. вызов
+ *      $('.placeholder').placeholder('foo');
+ */
+;(function ( $, window, document, undefined ) {
+
+    /**
+     * Дефолтные параметры
+     * @type {string}
+     */
+    var pluginName = 'placeholder',
+        defaults = {
+            value : '',
+            color : '#999'
+        },
+        elem;
+
+    /**
+     * Конструктор плагина
+     * @param element - элемент, на котором вызван плагин
+     * @param options - опции плагина
+     * @constructor
+     */
+    function Plugin( element, options ) {
+        elem = element;
+        this.element = element;
+        this.metadata = $(this.element).data();
+        this.options = $.extend( {}, defaults, options, this.metadata);
+
+        this._defaults = defaults;
+        this._name = pluginName;
+
+        this.init();
+    }
+
+    /**
+     * Добавляем метод в прототип класса
+     */
+    Plugin.prototype.init = function () {
+        //console.log(this.options.color);
+        var el = $(this.element),
+            options = this.options;
+
+        if (el.val() === '') {
+            el.val(this.options.value).css({color : this.options.color});
+        }
+        el.on('focus', function() {
+            el.css({color : '#000'});
+            if(el.val() == options.value)
+            {
+                el.val('');
+            }
+        }).on('blur', function() {
+                if ($.trim(elem.value == ''))
+                {
+                    this.value = (elem.value != '') ? el.val() : (elem.defaultValue != options.value) ? options.value : elem.defaultValue;
+                }
+                if(elem.value == options.value) {
+                    el.css({color: options.color});
+                } else {
+                    el.css({color:'#000'});
+                }
+        });
+    };
+
+    /**
+     * Предотвращаем дублирование плагина
+     * @param options
+     * @returns {*}
+     */
+    $.fn[pluginName] = function ( options ) {
+        return this.each(function () {
+            var $this   = $(this),
+                data    = $this.data('plugin_' + pluginName),
+                option = typeof options == 'object' && options;
+            if (!data) {
+                $this.data('plugin_' + pluginName, (data = new Plugin(this, option)));
+            } else if (typeof options == 'string') {
+                data[options](Array.prototype.slice.call( arguments, 1 ))
+            }
+        });
+    }
+
+})( jQuery, window, document );

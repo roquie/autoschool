@@ -1,0 +1,306 @@
+/*
+  страшный код и функции
+*/
+
+.box-shadow(@h: 0, @v: 0, @blur: 0, @opacity: 0.2) {
+  -webkit-box-shadow: @h @v @blur rgba(0, 0, 0, @opacity);
+  -moz-box-shadow: @h @v @blur rgba(0, 0, 0, @opacity);
+  box-shadow: @h @v @blur rgba(0, 0, 0, @opacity);
+}
+.shadowInBox() {
+  -webkit-box-shadow:0 1px 3px rgba(0, 0, 0, 0.2), 0 0 30px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow:0 1px 3px rgba(0, 0, 0, 0.2), 0 0 30px rgba(0, 0, 0, 0.1) inset;
+  box-shadow:0 1px 3px rgba(0, 0, 0, 0.2), 0 0 30px rgba(0, 0, 0, 0.1) inset;
+}
+
+.font-setting(@size: 16pt, @line-height: 22px, @weight: 400) {
+  font-size: @size;
+  line-height: @line-height;
+  font-weight: @weight;
+}
+
+.center() {
+  display: block;
+  margin: 0 auto;
+}
+
+.pic() {
+  opacity: 0.8;
+  .center();
+  padding-bottom: 10px;
+}
+
+/*
+  начало всего и вся
+*/
+
+ body * {
+   font-family: 'Open Sans', sans-serif;
+   font-weight: 300;
+   font-size: 11pt;
+   text-shadow: 0 0 1px rgba(0,0,0,0.1);
+ }
+
+ h1, h2 {
+   color: #535456;
+ }
+
+
+ h1 {
+  .font-setting();
+ }
+
+ h2 {
+   .font-setting(14pt, 1.2, 300);
+ }
+
+
+/*
+    общие стили для элементов
+*/
+
+.theory, .contacts, .practice, .price {
+  padding: 50px 50px;
+}
+
+.price, .contacts, .infoblocks {
+  .shadowInBox;
+}
+.infoblocks, .contacts, .practice{
+  background-color: #f5f5f5;
+}
+.price, .theory {
+  background-color: white;
+}
+.navbar-inner, footer {
+  background: #131f2b none;
+}
+
+/*
+    главный блок с машинкой и кнопкой
+*/
+
+.main {
+  margin-top: 55px;  // отступ для фиксированного навбара
+  padding: 30px 50px;
+  img {
+    .center();
+  }
+  img:last-child {    // отступ для знаков пдд
+    padding-top: 20px;
+  }
+  .span5 {
+    padding-top: 20px;
+  }
+}
+
+/*
+  блок с информационными блоками о_О
+*/
+
+.infoblocks {
+  padding-bottom: 60px;
+
+  h2 {
+    text-align: center;
+    width: 800px;
+    padding: 40px 30px;
+  }
+
+  .span3 {
+    background-color: #ffffff;
+    .box-shadow(0,1px,1px,0.07);
+    border: 1px solid #f5f5f5;
+    height: 230px;
+    .grid {
+      padding: 20px;
+      img {
+        .pic();
+      }
+    }
+  }
+
+}
+
+/*
+  чуть уменьшил расстояние между инфоблоками, т.к. изза 1px border"a уезжало на вторую строку
+*/
+[class*="span"] {
+  margin-left: 18px;
+}
+
+/*
+  блок с теорией
+*/
+.theory {
+  .span6:first-child {
+    & > p {
+      padding-top: 18px
+    }
+  }
+}
+
+/*
+  тирЭ для списков
+*/
+
+ul.dash {
+  list-style: none;
+  position: relative;
+  & > li:before {
+    content: "—";
+    left: -23px;
+    position: absolute;
+  }
+  li {
+    span {
+      position: relative;
+      display: block;
+    }
+  }
+}
+
+
+/*
+  блок с ценой и документами
+*/
+.price {
+  .span2, .span3 {
+    img {
+      .pic();
+    }
+    p {
+      text-align: center;
+    }
+  }
+}
+
+/*
+  Контакты отступ карты + практика
+*/
+
+.contacts, .practice  {
+  .span6:last-child {
+    padding-top: 45px;
+  }
+
+}
+
+/*
+  для не кривого отображения формы в контактах
+*/
+form input[name="name"] {
+  padding-right: 17px;
+}
+
+
+/*
+  а тута футер
+*/
+
+footer {
+  text-align: center;
+  padding: 30px 0;
+  line-height: 10px;
+
+  p {
+    color: lightslategray;
+  }
+    ul {
+      padding-top: 10px;
+      font-size: 10pt;
+      li {
+        display: inline-block;
+        a {
+          color: lightslategray;
+        }
+        & > a:hover {
+          color: darkgray;
+        }
+      }
+    }
+}
+
+
+/*
+ стилизация навбара
+*/
+
+.navbar {
+  min-height: 55px;
+  margin-bottom: 0;
+  .box-shadow(0,0,20px, 0.5);
+}
+.navbar-inner {
+  padding: 5px 20px 0 20px;
+  min-height: 55px;
+  border: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  filter: none;
+}
+
+.navbar {
+  .nav {
+    & > li {
+      & > a {
+        margin: 0 10px;
+        padding: 15px 0 2px;
+        color: #ffffff;
+        float: none;
+        text-decoration: none;
+        &:hover {
+          background: none;
+          border-bottom: 2px solid rgba(245,245,245, 0.2);
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}
+
+
+
+/*
+  кнопка подать документы
+*/
+.btn {
+  background-image: none;
+  text-shadow: none;
+  .font-setting(11pt, none, 400);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+
+.btn-docum {
+  margin-top: 6px;
+  line-height: 25px;
+  margin-left: 90px;
+}
+
+
+/*
+    Адаптивность - а нихрена не сделано :(
+*/
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+}

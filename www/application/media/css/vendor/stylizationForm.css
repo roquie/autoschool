@@ -1,0 +1,81 @@
+/* Sprite */
+.radio, .drop li, .slct, .check {
+    background: url('../../img/sprite.png') 0 0 no-repeat;
+}
+/* = Переключатели Radio Button */
+.radio {
+    display: block;
+    height: 25px;
+    background-position: 0 -56px;
+    color: #444;
+    cursor: pointer;
+    text-indent: 22px;
+    font-size: 13px;
+}
+.radio.active {
+    background-position: 0 -86px;
+}
+.radio.error {
+    border-color: #ff0000;
+}
+
+/*	=	CheckBox */
+.check input[type=checkbox] {
+    position: absolute;
+    left: -10000px;
+}
+.check {
+    background-position: 0 3px;
+    padding-left: 25px;
+    cursor: pointer;
+    position: relative;
+}
+.check.active {
+    background-position: 0 -27px;
+}
+
+/*	=	Select */
+.slct {
+    display: block;
+    border-radius: 5px;
+    border: 1px solid #cecece;
+    background-color: #F6F6f6;
+    width: 285px;
+    padding: 4px 15px 4px 10px;
+    color: #444;
+    background-position: 290px -145px;
+    overflow: hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+
+}
+.slct.active {
+    border-radius: 5px 5px 0 0;
+    border-bottom: none;
+}
+.drop {
+    margin: 0;
+    padding: 0;
+    width: 310px;
+    border: 1px solid #cecece;
+    border-top: none;
+    display: none;
+    position: absolute;
+    background: #fff;
+}
+.drop li {
+    list-style: none;
+    border-top: 1px dotted #e8e8e8;
+    cursor: pointer;
+    display: block;
+    color: #444;
+    padding: 4px 15px 4px 25px;
+    background-position: 10px -119px;
+}
+.drop li:hover {
+    background-color: #e8e8e8;
+    color: #222;
+}
+
+

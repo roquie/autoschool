@@ -1,0 +1,84 @@
+.jquery-tree ul {
+  padding: 0;
+  margin: 0;
+}
+.jquery-tree li {
+  list-style: none;
+  padding-left: 8px;
+  margin-left: 8px;
+  border-left: 1px dotted #838383;
+  background: url("../img/tree/line.gif") no-repeat 0px 9px;
+  /* добавляем горизонтальную линию около каждого элемента  */
+
+}
+.jquery-tree {
+  text-decoration: none;
+  padding-left: 20px;
+  font-size: 17px;
+  background: url("../img/tree/file.png") no-repeat 1px 2px;
+  /* картинка для обычного элемента  */
+
+}
+.jquery-tree.excel {
+  background: url("../img/tree/excel.png") no-repeat 1px 2px;
+  /* картинка для документа excel  */
+
+}
+.jquery-tree.download {
+  background: url("../img/tree/download.png") no-repeat 1px 2px;
+  /* картинка для документа загрузки  */
+
+}
+.jquery-tree.excel-view {
+  background: url("../img/tree/excel_view.png") no-repeat 1px 2px;
+  /* картинка для документа загрузки  */
+
+}
+.jquery-tree.icon-g-drive {
+  text-align: center;
+  padding-left: 3px;
+  background: url("../img/google-drive.png") no-repeat;
+}
+.jquery-tree a.folder {
+  background: url("../img/tree/folder.png") no-repeat 1px 2px;
+  /* картинка для закрытой папки */
+
+}
+.jquery-tree .last {
+  border: none;
+  padding-left: 9px;
+  background: url("../img/tree/line_last.gif") 0px top no-repeat;
+  /* закрывающий элемент  */
+
+}
+.jquery-tree .first {
+  /* прикрываем верхнюю часть линии первого элемента  */
+
+  margin-left: -9px;
+  width: 2px;
+  height: 8px;
+  float: left;
+  background-color: #FFF;
+}
+.jquery-tree .show {
+  margin-left: -16px;
+  width: 16px;
+  height: 16px;
+  background: url("../img/tree/plus.png") left 2px no-repeat;
+  /* картинка для кнопки показа */
+
+  float: left;
+  display: block;
+  border: 0;
+  padding: 0;
+}
+.jquery-tree .show.minus {
+  background-image: url("../img/tree/minus.png");
+  /* картинка для кнопки скрытия */
+
+}
+.jquery-tree a.open {
+  background-image: url("../img/tree/folder_open.png");
+  /* картинка для открытой папки */
+
+}

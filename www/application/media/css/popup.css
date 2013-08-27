@@ -1,109 +1,87 @@
-#popup,
-.setting {
+/*
+  Главная функция, реализующая прорисовку окошка
+*/
+#popup {
   position: absolute;
-  left: auto;
   z-index: 1000;
-  min-width: 160px;
+  left: auto;
+  right: -14px;
+  min-width: 280px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   padding: 15px;
   margin: 2px 0 0;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  *border-right-width: 2px;
-  *border-bottom-width: 2px;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-  text-shadow: none;
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   word-break: break-all;
 }
-/**
- * Стиили для PopupWin
- */
-/**
- * Стиили для PopupWin
- */
 #popup:before,
-#popup:after,
-.setting:before,
-.setting:after {
+#popup:after {
   content: "";
   position: absolute;
 }
-/**
- * Всплывающее окно, появляющееся сверху от родительского элемента
- */
-#popup .popup_top:before,
-.setting .popup_top:before {
+/*
+  Окно сверху родительского элемента
+*/
+#popup .popup_top:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #cccccc;
-  border-top-color: rgba(0, 0, 0, 0.2);
   left: 40%;
   bottom: -8px;
 }
-#popup .popup_top:after,
-.setting .popup_top:after {
+#popup .popup_top:after {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #ffffff;
   left: 40%;
   bottom: -7px;
 }
-/**
- * Всплывающее окно, появляющееся снизу от родительского элемента
- */
-#popup .popup_bottom:before,
-.setting .popup_bottom:before {
+/*
+  Окно снизу родительского элемента
+*/
+#popup.popup_bottom:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #cccccc;
-  border-bottom-color: rgba(0, 0, 0, 0.2);
   right: 20px;
   top: -8px;
 }
-#popup .popup_bottom:after,
-.setting .popup_bottom:after {
+#popup.popup_bottom:after {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #ffffff;
   right: 20px;
   top: -7px;
 }
-/**
- * Всплывающее окно, появляющееся слева от родительского элемента
- */
-#popup .popup_left:before,
-.setting .popup_left:before {
+/*
+  Окно слева родительского элемента
+*/
+#popup.popup_left:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #cccccc;
-  border-left-color: rgba(0, 0, 0, 0.2);
   right: -8px;
   top: 10px;
 }
-#popup.popup_left:after,
-.setting.popup_left:after {
+#popup.popup_left:after {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #ffffff;
   right: -7px;
   top: 10px;
 }
-/**
- * Всплывающее окно, появляющееся справа от родительского элемента
- */
+/*
+  Окно справа родительского элемента
+*/
 #popup.popup_right:before {
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
   border-top: 7px solid #cccccc;
-  border-right-color: rgba(0, 0, 0, 0.2);
   left: -8px;
   top: 10px;
 }
@@ -113,21 +91,4 @@
   border-top: 7px solid #ffffff;
   left: -7px;
   top: 10px;
-}
-/**
- * =====================================================
- */
-#popup ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-#popup .buttons {
-  margin-top: 5px;
-}
-.img-login {
-  width: 70px;
-  height: 70px;
-  padding-right: 10px;
-  padding-top: 5px;
 }

@@ -4,7 +4,7 @@
 #popup {
   position: absolute;
   z-index: 1000;
-  left: 'auto';
+  left: auto;
   right: -14px;
   min-width: 280px;
   background-color: #ffffff;
@@ -56,14 +56,14 @@
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
   border-left: 7px solid #cccccc;
-  right: #cccccc;
+  right: -8px;
   top: 10px;
 }
 #popup.popup_left:after {
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
   border-left: 7px solid #ffffff;
-  right: #ffffff;
+  right: -7px;
   top: 10px;
 }
 #popup.popup_right:before {

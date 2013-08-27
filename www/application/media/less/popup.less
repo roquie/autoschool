@@ -13,7 +13,7 @@
 /*
   Главная функция, реализующая прорисовку окошка
 */
-.general (@left : 'auto', @right : -14px, @width : 280px) {
+.general (@left : auto, @right : -14px, @width : 280px) {
   position: absolute;
   z-index: 1000;
   left : @left;
@@ -45,7 +45,7 @@
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
   border-left: 7px solid @color;
-  right: @color;
+  right: @right;
   top: 10px;
 }
 .right (@left : -8px, @color : #ccc) {

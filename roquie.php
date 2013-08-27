@@ -7,7 +7,6 @@
  * All rights reserved (c)
  */
 
-echo 'I\'am BIGGY LOOOL';
+    echo 'I\'am BIGGY LOOOL';
 
 
-echo "ЗДРАСТЕ ПРИЕХАЛИ ЛАЛКА БАГЕТ ВСЕ ЛАЛКИ У НАС БАГЕТЯТЯТЯТ ЕЕЕЕЕЕ!!!!";

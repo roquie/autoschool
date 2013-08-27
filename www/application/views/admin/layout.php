@@ -87,6 +87,7 @@
             delay : 400
         });
 
+        $('.placeholder').placeholder();
     });
 </script>
 

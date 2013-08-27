@@ -13,8 +13,8 @@
                         <legend>Сообщение</legend>
                         <!--контейнер с инпутами Кому, Тема-->
 
-                        <input style="width: 98%"  type="text" name="to" id="to" class="placeholder" data-value="Кому"><br>
-                        <input style="width: 98%" type="text" id="subject" class="placeholder" name="subject" data-value="Тема">
+                        <input style="width: 98%"  type="text" name="to" id="to" data-value="Кому"><br>
+                        <input style="width: 98%" type="text" id="subject" name="subject" data-value="Тема">
 
                         <!-- Редактор -->
                         <?=View::factory('admin/mail/editor')
@@ -109,6 +109,5 @@
 <script>
     $().ready(function() {
         equalHeight($('#formSend'), $('#listStd'));
-        $('.placeholder').placeholder();
     });
 </script>

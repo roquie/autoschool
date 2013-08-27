@@ -92,3 +92,10 @@
     }
 
 })( jQuery, window, document );
+$().ready(function() {
+    $.each($('input'), function() {
+        if ($(this).data('value')) {
+            $(this).addClass('placeholder');
+        }
+    });
+});

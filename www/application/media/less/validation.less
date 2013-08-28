@@ -1,0 +1,69 @@
+.border-radius (@radius : 6px) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+.box-shadow (@inset, @x: 0, @y: 0, @blur: 1px, @color: #000) {
+  box-shadow: @arguments;
+  -moz-box-shadow: @arguments;
+  -webkit-box-shadow: @arguments;
+}
+/*
+  Выделение полей
+*/
+.div-block, input, textarea {
+  &.error {
+    border-color:#bd4247;
+    .box-shadow(inset, 0, 1px, 1px, rgba(0,0,0,0.075));
+  }
+  &:focus {
+    &.error {
+      border-color:#983538;
+      .box-shadow(inset, 0, 1px, 1px, rgba(0,0,0,0.075));
+    }
+  }
+}
+/*
+  Balloon
+*/
+.arrow (@left, @color) {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid @color;
+  left: @left;
+  top: 7px;
+}
+.formError {
+  position:absolute;
+  z-index:1020;
+  display:block;
+  line-height:1.4;
+  opacity:0;
+  filter:alpha(opacity=0);
+  visibility:visible;
+  margin-left:3px;
+  word-break: break-all;
+  max-width:200px;
+  padding:8px;
+  color:#fff;
+  text-align:center;
+  text-decoration:none;
+  background-color:#000;
+  .border-radius(4px);
+  .in {
+    opacity:.8;
+    filter:alpha(opacity=80)
+  }
+  &:before, &:after {
+    content: "";
+    position: absolute;
+  }
+  &.arrow-left {
+    &:before {
+      .arrow(-6px, transparent);
+    }
+    &:after {
+      .arrow(-5px, #000000)
+    }
+  }
+}

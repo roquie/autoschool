@@ -20,6 +20,79 @@
             this.options = $.extend( {}, $.fn[pluginName].defaults, options);
             // вешает на форму обработчик отправки формы
             this.$element.on('submit', $.proxy(this.validation, this));
+            if (this.options.trigger == 'blur') {
+                this.blur();
+            }
+        },
+        /**
+         * Создание сообщения с ошибкой сбоку формы.
+         * @param message
+         * @param input
+         */
+        buildBalloon : function(message, input) {
+            var balloon = $('<div>', {
+                    class : 'formError arrow-left'
+                }),
+                inputTopPosition,
+                inputLeftPosition,
+                inputWidth;
+            inputTopPosition = input.offset().top;
+            inputWidth = input.width();
+            inputLeftPosition = input.offset().left + inputWidth + 16;
+            balloon.html(message).css({
+                top : inputTopPosition,
+                left : inputLeftPosition
+            }).addClass('in').insertAfter(input);
+        },
+        /**
+         * Функция, которая вызывается чтобы повесить на элементы формы обработчик события потери фокуса
+         */
+        blur : function() {
+            var form = this.$element,
+                data = this.$element.serializeArray(),
+                field,
+                $this = this,
+                element,
+                blur = this.eventBlur;
+            if (this.options.fields.length > 0) {
+                $.each(this.options.fields, function(i, v) {
+                    field = $('#'+v);
+                    field.on('blur', $.proxy(blur, $this));
+                });
+            }
+            $.each(data, function(i, v) {
+                element = form.find('input[name="'+ v.name+'"], textarea[name="'+ v.name+'"]');
+                element.on('blur', $.proxy(blur, $this));
+            });
+        },
+        /**
+         * Событие возникает при потере фокуса объектом
+         * @param e
+         */
+        eventBlur : function(e) {
+            var el = $(e.target),
+                empty = false,
+                balloon = el.removeClass('error').next();
+            if (el.data('req')) {
+                switch (el.get(0).nodeName.toLowerCase()) {
+                    case 'div' :
+                        if (this.delSpace(el.text()) === '') {
+                            empty = true;
+                        }
+                        break;
+                    default :
+                        if ( this.delSpace(el.val()) === '' || ( el.data('value') && this.delSpace(el.val()) === el.data('value') ) ) {
+                            empty = true;
+                        }
+                        break;
+                }
+                if (empty) {
+                    el.addClass('error');
+                    this.buildBalloon(el.data('error'), el);
+                } else {
+                    el.removeClass('error').next().remove();
+                }
+            }
         },
         /**
          * Валидация формы, если всё заполнено - отправка данных формы ajax-запросом
@@ -33,32 +106,42 @@
                 form = this.$element,
                 data = this.$element.serializeArray(),
                 func_del = this.delSpace,
-                field;
-            this.$element.find('input, textarea').removeClass('error');
+                balloon = this.buildBalloon,
+                field,
+                empty = false;
+
+            this.$element.find('input, textarea').removeClass('error').next().remove();
 
             if (this.options.fields.length > 0) {
                 $.each(this.options.fields, function(i, v) {
                     field = $('#'+v);
-                    field.removeClass('error');
+                    field.removeClass('error').next().remove();
                 });
-                $.each(this.options.fields, function(i, v) {
-                    field = $('#'+v);
-                    if (field.data('req')) {
-                        // this is govnocode
-                        if ($.trim(field.html()) == '<br>' || $.trim(field.html()) == '') {
-                            is_success = false;
-                            field.addClass('error');
-                        }
-                    }
-                });
+                data = this.options.fields.concat(data);
             }
-
             $.each(data, function(i, v) {
-                element = form.find('input[name="'+ v.name+'"], textarea[name="'+ v.name+'"]');
+                if ( typeof v === 'object') {
+                    element = form.find('input[name="'+ v.name+'"], textarea[name="'+ v.name+'"]');
+                } else {
+                    element = $('#'+v);
+                }
                 if (element.data('req')) {
-                    if ((func_del(v.value) === '') || (element.data('value') && func_del(v.value) === element.data('value'))) {
+                    switch (element.get(0).nodeName.toLowerCase()) {
+                        case 'div' :
+                            if (func_del(element.text()) === '') {
+                                empty = true;
+                            }
+                            break;
+                        default :
+                            if ( func_del(element.val()) === '' || ( element.data('value') && func_del(element.val()) === element.data('value') ) ) {
+                                empty = true;
+                            }
+                            break;
+                    }
+                    if (empty) {
                         is_success = false;
                         element.addClass('error');
+                        balloon(element.data('error'), element);
                     }
                 }
             });
@@ -80,16 +163,12 @@
                 });
             }
             data += this.$element.serialize();
-            //===================================тут надо вернуть отправку ajax
-            alert(data);
-/*
             $.post(
                 action,
                 data,
                 this.options.callback,
                 'json'
             );
-*/
         },
         /**
          * Функция для удаления пробелов в строке
@@ -114,6 +193,7 @@
 
     $.fn[pluginName].defaults = {
         callback : function() {},
+        trigger : 'submit', // submit|blur
         fields : []
     };
 

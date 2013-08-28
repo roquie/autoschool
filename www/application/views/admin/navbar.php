@@ -8,6 +8,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> Щито-то<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?=URL::site('admin/papers')?>">Просмотр</a></li>
+                        <li><a href="<?=URL::site('admin/google')?>">Google Upload</a></li>
                     </ul>
                 </li>
 

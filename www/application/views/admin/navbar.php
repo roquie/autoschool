@@ -1,16 +1,16 @@
 <style>
-    .nav > li a.logo {
+   /* .nav > li a.logo {
         padding: 0 5px;
         margin-right: -10px;
-    }
+    }*/
 </style>
 <div class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-inner">
         <!--<a class="brand" href="#">MPT SpreadSheets</a>-->
         <div class="nav-collapse">
             <ul class="nav">
-                <li><a class="logo" href="<?=URL::site()?>"><img src="<?=URL::site('img/main/logo.png')?>" alt="Автошкола МПТ"/></a></li>
-                <li><a href="<?=URL::site('/admin')?>"><i class="icon-home"></i> Админка</a></li>
+                <li><a href="<?=URL::site()?>"><i class="icon-home"></i> Главная</a></li>
+                <li><a href="<?=URL::site('/admin')?>"><i class="icon-cog"></i> Админка</a></li>
                 <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> Щито-то<b class="caret"></b></a>
                     <ul class="dropdown-menu">

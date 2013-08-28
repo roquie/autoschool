@@ -9,7 +9,7 @@
         <!--<a class="brand" href="#">MPT SpreadSheets</a>-->
         <div class="nav-collapse">
             <ul class="nav">
-                <li><a style="color: red" href="<?=URL::site()?>"><i class="icon-home"></i> Главная</a></li>
+                <li><a style="color: red " href="<?=URL::site()?>"><i class="icon-home"></i> Главная</a></li>
                 <li><a href="<?=URL::site('/admin')?>"><i class="icon-cog"></i> Админка</a></li>
                 <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> Щито-то<b class="caret"></b></a>

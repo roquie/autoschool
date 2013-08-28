@@ -1,12 +1,5 @@
-<style>
-   /* .nav > li a.logo {
-        padding: 0 5px;
-        margin-right: -10px;
-    }*/
-</style>
 <div class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-inner">
-        <!--<a class="brand" href="#">MPT SpreadSheets</a>-->
         <div class="nav-collapse">
             <ul class="nav">
                 <li><a href="<?=URL::site()?>"><i class="icon-home"></i> Главная</a></li>

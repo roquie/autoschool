@@ -1,20 +1,14 @@
-<style>
-   /* .nav > li a.logo {
-        padding: 0 5px;
-        margin-right: -10px;
-    }*/
-</style>
 <div class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-inner">
-        <!--<a class="brand" href="#">MPT SpreadSheets</a>-->
         <div class="nav-collapse">
             <ul class="nav">
                 <li><a href="<?=URL::site()?>"><i class="icon-home"></i> Главная</a></li>
-                <li><a href="<?=URL::site('/admin')?>"><i class="icon-cog"></i> Админка</a></li>
-                <li class="dropdown active">
+                <li class="active"><a href="<?=URL::site('/admin')?>"><i class="icon-bar-chart"></i> Админка</a></li>
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> Щито-то<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?=URL::site('admin/papers')?>">Просмотр</a></li>
+                        <li><a href="<?=URL::site('admin/google')?>">Google Upload</a></li>
                     </ul>
                 </li>
 

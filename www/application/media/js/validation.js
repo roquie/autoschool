@@ -9,6 +9,12 @@
 
     var pluginName = 'ajaxForm';
 
+    /**
+     * Конструктор
+      * @param element
+     * @param options
+     * @constructor
+     */
     function Plugin(element, options) {
         this.init(element, options);
     }

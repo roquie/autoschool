@@ -31,26 +31,24 @@
   border-bottom: 5px solid transparent;
   border-right: 5px solid @color;
   left: @left;
-  top: 7px;
+  top: 12px;
 }
 .formError {
   position:absolute;
   z-index:1020;
-  display:block;
-  line-height:1.4;
   opacity:0;
   filter:alpha(opacity=0);
-  visibility:visible;
-  margin-left:3px;
+  margin-left: 18px;
   word-break: break-all;
-  max-width:200px;
+  display: inline-table;
+  min-width:150px;
+  max-width: 300px;
   padding:8px;
   color:#fff;
-  text-align:center;
   text-decoration:none;
   background-color:#000;
   .border-radius(4px);
-  .in {
+  &.in {
     opacity:.8;
     filter:alpha(opacity=80)
   }

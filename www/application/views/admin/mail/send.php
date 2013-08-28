@@ -14,11 +14,15 @@
             <div class="span8">
 
                 <div class="well" id="formSend">
-                    <form action="<?=URL::site('admin/send_mail')?>" method="post" id="send">
+                    <form action="<?=URL::site('admin/mail/send_mail')?>" method="post" id="send">
                         <legend>Сообщение</legend>
                         <!--контейнер с инпутами Кому, Тема-->
-                        <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-value="Кому" ><br>
-                        <input style="width: 98%" type="text" name="subject" data-req="true" data-value="Тема">
+                        <div style="position: relative">
+                            <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-error="Заполните поле Кому" data-value="Кому" >
+                        </div>
+                        <div style="position: relative">
+                            <input style="width: 98%" type="text" name="subject" data-req="true" data-error="Заполните поле Тема" data-value="Тема">
+                        </div>
 
                         <!-- Редактор -->
                         <?=View::factory('admin/mail/editor')

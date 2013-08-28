@@ -40,8 +40,9 @@
     </div>
 
 </div>
-
-<div id="<?=$id_div_editor?>" data-req="true" data-name="message"></div>
+<div style="position: relative">
+    <div id="<?=$id_div_editor?>" class="div-block" data-req="true" data-name="message" data-error="Заполните поле Сообщение"></div>
+</div>
 
 <?if($script_load):?>
 

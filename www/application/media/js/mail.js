@@ -35,8 +35,21 @@ $(function() {
      */
     $('#send').ajaxForm({
         callback : function(response) {
-            alert('LOL');
+            // Если пустые поля
+            if (response.status === 'empty') {
+                //@todo пройти по массиву с именами полей и вывести ошибку
+            }
+            // Если получена ошибка
+            if (response.status === 'error') {
+                //@todo вывести ошибку в нотификацию
+            }
+            // Если всё нормально
+            if (response.status === 'success') {
+                //@todo вывести сообщение об отправке в нотификацию
+                $('#reset').trigger('click');
+            }
         },
+        trigger : 'blur',
         fields : ['editor']
     });
     /**

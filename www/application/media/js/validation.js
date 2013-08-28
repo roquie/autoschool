@@ -42,9 +42,9 @@
                 inputTopPosition,
                 inputLeftPosition,
                 inputWidth;
-            inputTopPosition = input.offset().top;
+            inputTopPosition = -2;
             inputWidth = input.width();
-            inputLeftPosition = input.offset().left + inputWidth + 16;
+            inputLeftPosition = inputWidth;
             balloon.html(message).css({
                 top : inputTopPosition,
                 left : inputLeftPosition
@@ -56,18 +56,18 @@
         blur : function() {
             var form = this.$element,
                 data = this.$element.serializeArray(),
-                field,
                 $this = this,
                 element,
                 blur = this.eventBlur;
             if (this.options.fields.length > 0) {
-                $.each(this.options.fields, function(i, v) {
-                    field = $('#'+v);
-                    field.on('blur', $.proxy(blur, $this));
-                });
+                data = this.options.fields.concat(data);
             }
             $.each(data, function(i, v) {
-                element = form.find('input[name="'+ v.name+'"], textarea[name="'+ v.name+'"]');
+                if ( typeof v === 'object') {
+                    element = form.find('input[name="'+ v.name+'"], textarea[name="'+ v.name+'"]');
+                } else {
+                    element = $('#'+v);
+                }
                 element.on('blur', $.proxy(blur, $this));
             });
         },
@@ -94,7 +94,8 @@
                 }
                 if (empty) {
                     el.addClass('error');
-                    this.buildBalloon(el.data('error'), el);
+                    if (balloon.length === 0)
+                        this.buildBalloon(el.data('error'), el);
                 } else {
                     el.removeClass('error').next().remove();
                 }
@@ -116,7 +117,7 @@
                 field,
                 empty = false;
 
-            this.$element.find('input, textarea').removeClass('error').next().remove();
+            this.$element.find('input, textarea').removeClass('error').next('.formError').remove();
 
             if (this.options.fields.length > 0) {
                 $.each(this.options.fields, function(i, v) {
@@ -138,7 +139,7 @@
                                 empty = true;
                             }
                             break;
-                        default :
+                        case 'input' :
                             if ( func_del(element.val()) === '' || ( element.data('value') && func_del(element.val()) === element.data('value') ) ) {
                                 empty = true;
                             }
@@ -148,6 +149,7 @@
                         is_success = false;
                         element.addClass('error');
                         balloon(element.data('error'), element);
+                        empty = false;
                     }
                 }
             });
@@ -165,10 +167,10 @@
             if (this.options.fields.length > 0) {
                 $.each(this.options.fields, function(i, v) {
                     field = $('#'+v);
-                    data += field.data('name') + '=' + field.html() + '&';
+                    data = data + field.data('name') + '=' + field.html() + '&';
                 });
             }
-            data += this.$element.serialize();
+            data = data + this.$element.serialize();
             $.post(
                 action,
                 data,

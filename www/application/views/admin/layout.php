@@ -14,6 +14,7 @@
     <?=HTML::style('css/vendor/stylizationForm.css')?>
     <?=HTML::style('css/style.css')?>
     <?=HTML::style('css/popup.css')?>
+    <?=HTML::style('css/validation.css')?>
 
 
     <?=HTML::script('http://yandex.st/jquery/1.10.2/jquery.min.js')?>

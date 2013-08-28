@@ -17,7 +17,7 @@
                     <form action="<?=URL::site('admin/send_mail')?>" method="post" id="send">
                         <legend>Сообщение</legend>
                         <!--контейнер с инпутами Кому, Тема-->
-                        <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-value="Кому"><br>
+                        <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-value="Кому" ><br>
                         <input style="width: 98%" type="text" name="subject" data-req="true" data-value="Тема">
 
                         <!-- Редактор -->

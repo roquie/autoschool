@@ -14,9 +14,60 @@
     <?=HTML::style('css/vendor/stylizationForm.css')?>
     <?=HTML::style('css/style.css')?>
     <?=HTML::style('css/popup.css')?>
+
+
     <?=HTML::script('http://yandex.st/jquery/1.10.2/jquery.min.js')?>
     <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
+    <?=HTML::script('js/vendor/bootstrap/bootstrap.min.js')?>
+    <?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
+    <?=HTML::script('js/vendor/stylizationForm.js')?>
+    <?=HTML::script('js/vendor/html5b/plugins.js')?>
+    <?=HTML::script('js/placeholder.js')?>
+    <?=HTML::script('js/vendor/jquery.noty.js')?>
+    <?=HTML::script('js/equalHeight.js')?>
+    <?=HTML::script('js/popup.js')?>
+    <?=HTML::script('js/validation.js')?>
 
+    <script>
+
+        $().ready(function() {
+
+
+            $('#slimScroll').slimScroll({
+                height: $("#slimScroll").height(),
+                railVisible: true,
+                alwaysVisible: true
+            });
+
+            var navbarH = $('.navbar').outerHeight(),
+                windowH = $(window).outerHeight();
+
+            $('#MainBlok_slimScroll').slimScroll({
+                height: windowH-navbarH,
+                alwaysVisible: true
+            });
+
+
+            $(window).resize(function() {
+                $('#MainBlok_slimScroll').css("height", windowH-navbarH+'px');
+                $("#MainBlok_slimScroll").parent().css("height", windowH-navbarH+'px');
+                //$(".slimScrollBar").css({ height: height + 'px' });
+            });
+
+
+
+            $("[rel='tooltip']").tooltip({
+                delay : 400
+            });
+
+            $('#user_name').popupWin({
+                edgeOffset : 49,
+                delay : 400
+            });
+
+            $('.placeholder').placeholder();
+        });
+    </script>
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -37,60 +88,8 @@
         <div id="push"></div>
     </div>
 </div>
-<?//=$footer.PHP_EOL?>
 
 
-<?=HTML::script('js/vendor/bootstrap/bootstrap.min.js')?>
-<?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
-<?=HTML::script('js/vendor/stylizationForm.js')?>
-<?=HTML::script('js/vendor/html5b/plugins.js')?>
-<?=HTML::script('js/placeholder.js')?>
-<?=HTML::script('js/vendor/jquery.noty.js')?>
-<?=HTML::script('js/equalHeight.js')?>
-<?=HTML::script('js/popup.js')?>
-<?=HTML::script('js/validation.js')?>
-
-<script>
-
-    $().ready(function() {
-
-
-        $('#slimScroll').slimScroll({
-            height: $("#slimScroll").height(),
-            railVisible: true,
-            alwaysVisible: true
-        });
-
-        var navbarH = $('.navbar').outerHeight(),
-            footerH = $('#footer').outerHeight(),
-            windowH = $(window).outerHeight();
-
-        $('#MainBlok_slimScroll').slimScroll({
-            height: windowH-navbarH-footerH,
-            alwaysVisible: true
-        });
-
-
-        $(window).resize(function() {
-            $('#MainBlok_slimScroll').css("height", windowH-navbarH-footerH+'px');
-            $("#MainBlok_slimScroll").parent().css("height", windowH-navbarH-footerH+'px');
-            //$(".slimScrollBar").css({ height: height + 'px' });
-        });
-
-
-
-        $("[rel='tooltip']").tooltip({
-            delay : 400
-        });
-
-        $('#user_name').popupWin({
-            edgeOffset : 49,
-            delay : 400
-        });
-
-        $('.placeholder').placeholder();
-    });
-</script>
 
 </body>
 </html>

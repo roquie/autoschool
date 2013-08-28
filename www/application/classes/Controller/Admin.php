@@ -21,6 +21,13 @@ class Controller_Admin extends Controller_Template
         //$this->template->footer = View::factory('main/footer');
     }
 
+    public function action_google()
+    {
+        $this->template->content = View::factory('admin/google', array(
+            'statements' => $this->scanFolder(APPPATH.'/output_blanks/zayavleniya/')
+        ));
+    }
+
 
     public function action_index()
     {
@@ -44,7 +51,7 @@ class Controller_Admin extends Controller_Template
             ));
         else
             $this->template->content = View::factory('admin/papers/view', array(
-                'downloadedFiles' => $this->scanDownloadedFolder(),
+                'downloadedFiles' => $this->scanDownloadedFolder(APPPATH.'/uploads_old/downloaded/'),
             ));
 
     }
@@ -66,22 +73,14 @@ class Controller_Admin extends Controller_Template
     }
 
     /**
-     * сканирование папки downloaded с файлами
+     * сканирование папки
+     * @param $path
      * @return array с именами файлов
      */
-    protected function scanDownloadedFolder()
+    protected function scanFolder($path)
     {
-        return array_diff(scandir(APPPATH.'/uploads_old/downloaded/'), array('..', '.'));
+        return array_diff(scandir($path), array('..', '.'));
     }
 
-
-    /**
-     * сканирование папки created с файлами
-     * @return array с именами файлов
-     */
-    protected function scanCreatedFolder()
-    {
-        return array_diff(scandir(APPPATH.'uploads_old/created/'), array('..', '.'));
-    }
 
 }

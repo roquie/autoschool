@@ -50,6 +50,7 @@ $(function() {
             }
         },
         trigger : 'blur',
+        offsetTopBalloon : -2,
         fields : ['editor']
     });
     /**

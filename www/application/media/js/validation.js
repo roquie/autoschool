@@ -42,7 +42,7 @@
                 inputTopPosition,
                 inputLeftPosition,
                 inputWidth;
-            inputTopPosition = -2;
+            inputTopPosition = this.options.offsetTopBalloon;
             inputWidth = input.width();
             inputLeftPosition = inputWidth;
             balloon.html(message).css({
@@ -201,6 +201,7 @@
 
     $.fn[pluginName].defaults = {
         callback : function() {},
+        offsetTopBalloon : 0,
         trigger : 'submit', // submit|blur
         fields : []
     };

@@ -1,5 +1,5 @@
-
-<div class="container">
+<?=HTML::script('js/statement.js')?>
+<div class="container" style="margin-top: 75px">
     <h1><small>Подача заявления</small></h1>
     <div class="well well-small">
         <p class="text-center" style="padding-top: 10px; font-size: 15pt;">

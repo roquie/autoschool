@@ -109,7 +109,8 @@
         </div>
     </div>
 </section>
-<section class="row price">
+
+<section class="row price" id="price">
     <div class="container">
         <div class="row">
             <div class="span6">
@@ -142,7 +143,7 @@
     </div>
 </section>
 
-<section class="row contacts">
+<section class="row contacts" id="contacts">
     <div class="container">
         <div class="row">
             <div class="span6">

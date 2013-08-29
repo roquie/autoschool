@@ -31,6 +31,7 @@ $(function() {
      * Переключение ввода регистрации между регистрацией по паспорту и временной регистрацией
      */
     $('body').on('click', '#toggleReg', function () {
+        alert('LOL');
         $('#reg div.control-group').toggle();
         if ($('#sltReg').prop('checked')) {
             $('#adres_reg_po_pasporty').data('req', false);

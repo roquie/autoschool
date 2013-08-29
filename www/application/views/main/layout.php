@@ -30,11 +30,12 @@
     <?=HTML::script('js/placeholder.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap-formhelpers-phone.js')?>
     <?=HTML::script('js/vendor/jquery.flexslider-min.js')?>
-    <?=HTML::script('js/vendor/js/jquery.maskedinput.min.js')?>
+    <?=HTML::script('js/vendor/js/vendor/jquery.maskedinput.min.js')?>
     <script>
-        $(function() {
+        $(function(){
 
             $(window).load(function() {
+                first_load();
                 $('.flexslider').flexslider({
                     animation: "slide"
                 });
@@ -73,19 +74,25 @@
                     return false;
                 }
                 $('html, body').animate({
-                    scrollTop: $('#'+href).offset().top -navbarH
-                }, 300, function() {
+                    scrollTop: $('section[target="'+href+'"]').offset().top -navbarH
+                }, 500, function() {
                     location.hash = href;
                 });
-                //alert($(this).attr('href'));
             });
 
             /**
              * Подсказки в полях ввода
              */
             $('.placeholder').placeholder();
-
         });
+        function first_load() {
+            if (location.hash != '') {
+                var url = location.hash.replace('#', '');
+                $('body,html').delay(100).animate({
+                    scrollTop: $('section[target="'+url+'"]').offset().top
+                }, 500);
+            }
+        }
     </script>
 
 </head>

@@ -35,17 +35,19 @@
          * @param message
          * @param input
          */
-        buildBalloon : function(message, input) {
-            var balloon = $('<div>', {
-                    class : 'formError arrow-left'
-                }),
+        buildBalloon : function(input) {
+            var placement,
+                balloon,
                 inputTopPosition,
                 inputLeftPosition,
                 inputWidth;
+            balloon = $('<div>', {
+                class : 'formError arrow-'
+            });
             inputTopPosition = this.options.offsetTopBalloon;
             inputWidth = input.width();
             inputLeftPosition = inputWidth;
-            balloon.html(message).css({
+            balloon.html(input.data('error')).css({
                 top : inputTopPosition,
                 left : inputLeftPosition
             }).addClass('in').insertAfter(input);
@@ -95,7 +97,7 @@
                 if (empty) {
                     el.addClass('error');
                     if (balloon.length === 0)
-                        this.buildBalloon(el.data('error'), el);
+                        this.buildBalloon(el);
                 } else {
                     el.removeClass('error').next().remove();
                 }
@@ -148,7 +150,7 @@
                     if (empty) {
                         is_success = false;
                         element.addClass('error');
-                        balloon(element.data('error'), element);
+                        balloon(element);
                         empty = false;
                     }
                 }
@@ -202,6 +204,7 @@
     $.fn[pluginName].defaults = {
         callback : function() {},
         offsetTopBalloon : 0,
+        placement : 'right', // top|right|bottom|left
         trigger : 'submit', // submit|blur
         fields : []
     };

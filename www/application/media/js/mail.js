@@ -84,6 +84,11 @@ $(function() {
             to.removeClass('error');
             if (to.next().length > 0)
                 to.next().remove();
+            if (val != '') {
+                if (to.val().slice(-2) != ', ') {
+                    val += ', ';
+                }
+            }
             val += $this.find('input').val() + ', ';
         } else {
             val = val.replace($this.find('input').val()+', ', '');

@@ -1,7 +1,7 @@
 /**
  * ajaxForm Plugin
  * Copyright 2013, Viktor Melnikov
- * Version 1.0 - Updated: August, 27, 2013
+ * Version 2.2 - Updated: August, 29, 2013
  */
 ;(function ( $, window, document, undefined ) {
 
@@ -11,7 +11,7 @@
 
     /**
      * Конструктор
-      * @param element
+     * @param element
      * @param options
      * @constructor
      */
@@ -32,21 +32,34 @@
         },
         /**
          * Создание сообщения с ошибкой сбоку формы.
-         * @param message
          * @param input
          */
         buildBalloon : function(input) {
-            var placement,
-                balloon,
+            var balloon,
                 inputTopPosition,
                 inputLeftPosition,
-                inputWidth;
+                inputWidth,
+                arrowClass;
+            arrowClass = (input.data('placement')) ? input.data('placement') : this.options.placement;
             balloon = $('<div>', {
-                class : 'formError arrow-'
+                class : 'formError arrow-'+arrowClass
             });
-            inputTopPosition = this.options.offsetTopBalloon;
-            inputWidth = input.width();
-            inputLeftPosition = inputWidth;
+
+            switch (arrowClass) {
+                case 'top' :
+                    inputTopPosition = - input.height() - 22;
+                    inputLeftPosition = -18;
+                    break;
+                case 'right' :
+                    inputTopPosition = this.options.offsetTopBalloon;
+                    inputLeftPosition = input.width();
+                    break;
+                case 'bottom' :
+                    inputTopPosition = input.height() + 16;
+                    inputLeftPosition = -18;
+                    break;
+            }
+
             balloon.html(input.data('error')).css({
                 top : inputTopPosition,
                 left : inputLeftPosition
@@ -74,13 +87,13 @@
             });
         },
         /**
-         * Событие возникает при потере фокуса объектом
+         * Событие возникает при потере фокуса элементом
          * @param e
          */
         eventBlur : function(e) {
-            var el = $(e.target),
+            var el = $(e.currentTarget),
                 empty = false,
-                balloon = el.removeClass('error').next();
+                balloon = el.next();
             if (el.data('req')) {
                 switch (el.get(0).nodeName.toLowerCase()) {
                     case 'div' :
@@ -111,11 +124,7 @@
             e.preventDefault();
             var element,
                 is_success = true,
-                error = [],
-                form = this.$element,
                 data = this.$element.serializeArray(),
-                func_del = this.delSpace,
-                balloon = this.buildBalloon,
                 field,
                 empty = false;
 
@@ -128,21 +137,21 @@
                 });
                 data = this.options.fields.concat(data);
             }
-            $.each(data, function(i, v) {
-                if ( typeof v === 'object') {
-                    element = form.find('input[name="'+ v.name+'"], textarea[name="'+ v.name+'"]');
+            for (var i = 0; i < data.length; i++) {
+                if ( typeof data[i] === 'object') {
+                    element = this.$element.find('input[name="'+ data[i].name+'"], textarea[name="'+ data[i].name+'"]');
                 } else {
-                    element = $('#'+v);
+                    element = $('#'+data[i]);
                 }
                 if (element.data('req')) {
                     switch (element.get(0).nodeName.toLowerCase()) {
                         case 'div' :
-                            if (func_del(element.text()) === '') {
+                            if (this.delSpace(element.text()) === '') {
                                 empty = true;
                             }
                             break;
                         case 'input' :
-                            if ( func_del(element.val()) === '' || ( element.data('value') && func_del(element.val()) === element.data('value') ) ) {
+                            if ( this.delSpace(element.val()) === '' || ( element.data('value') && this.delSpace(element.val()) === element.data('value') ) ) {
                                 empty = true;
                             }
                             break;
@@ -150,11 +159,11 @@
                     if (empty) {
                         is_success = false;
                         element.addClass('error');
-                        balloon(element);
+                        this.buildBalloon(element);
                         empty = false;
                     }
                 }
-            });
+            }
             if (is_success) {
                 this.ajax();
             }
@@ -164,7 +173,7 @@
          */
         ajax : function() {
             var action = this.$element.attr('action'),
-                data = '' /*= this.$element.serialize()*/,
+                data = '',
                 field;
             if (this.options.fields.length > 0) {
                 $.each(this.options.fields, function(i, v) {
@@ -204,7 +213,7 @@
     $.fn[pluginName].defaults = {
         callback : function() {},
         offsetTopBalloon : 0,
-        placement : 'right', // top|right|bottom|left
+        placement : 'right', // top|right|bottom
         trigger : 'submit', // submit|blur
         fields : []
     };

@@ -33,29 +33,23 @@
 
         $().ready(function() {
 
-
             $('#slimScroll').slimScroll({
                 height: $("#slimScroll").height(),
                 railVisible: true,
                 alwaysVisible: true
             });
 
-            var navbarH = $('.navbar').outerHeight(),
-                windowH = $(window).outerHeight();
+            var navbarHeight = $('.navbar').height();
 
             $('#MainBlok_slimScroll').slimScroll({
-                height: windowH-navbarH,
+                height: $(window).height()-navbarHeight,
                 alwaysVisible: true
             });
-
-
-            $(window).resize(function() {
-                $('#MainBlok_slimScroll').css("height", windowH-navbarH+'px');
-                $("#MainBlok_slimScroll").parent().css("height", windowH-navbarH+'px');
+            $(window).resize(function(){
+                $('#MainBlok_slimScroll').css("height",$(window).height()-navbarHeight+'px');
+                $("#MainBlok_slimScroll").parent().css("height",$(window).height()-navbarHeight+'px');
                 //$(".slimScrollBar").css({ height: height + 'px' });
             });
-
-
 
             $("[rel='tooltip']").tooltip({
                 delay : 400
@@ -84,13 +78,12 @@
 
 <?=$navbar.PHP_EOL?>
 <div id="wrap">
+
     <div id="MainBlok_slimScroll">
         <?=$content.PHP_EOL?>
-        <div id="push"></div>
     </div>
+
 </div>
-
-
 
 </body>
 </html>

@@ -26,12 +26,26 @@
 /*
   Balloon
 */
-.arrow (@left, @color) {
+.top (@bottom : -6px, @color : transparent ) {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid @color;
+  left: 7px;
+  bottom: @bottom;
+}
+.bottom (@top : -6px, @color : transparent) {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid @color;
+  left: 7px;
+  top: @top;
+}
+.right (@left : -6px, @color : transparent) {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-right: 5px solid @color;
   left: @left;
-  top: 12px;
+  top: 13px;
 }
 .formError {
   position:absolute;
@@ -56,12 +70,31 @@
     content: "";
     position: absolute;
   }
-  &.arrow-left {
+  // блок справа от поля
+  &.arrow-right {
     &:before {
-      .arrow(-6px, transparent);
+      .right();
     }
     &:after {
-      .arrow(-5px, #000000)
+      .right(-5px, #000000);
+    }
+  }
+  // блок сверху от поля
+  &.arrow-top {
+    &:before {
+      .top();
+    }
+    &:after {
+      .top(-5px, #000000);
+    }
+  }
+  // блок снизу от поля
+  &.arrow-bottom {
+    &:before {
+      .bottom();
+    }
+    &:after {
+      .bottom(-5px, #000000);
     }
   }
 }

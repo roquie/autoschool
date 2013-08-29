@@ -47,17 +47,45 @@ textarea:focus.error {
   content: "";
   position: absolute;
 }
-.formError.arrow-left:before {
+.formError.arrow-right:before {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-right: 5px solid transparent;
   left: -6px;
-  top: 12px;
+  top: 13px;
 }
-.formError.arrow-left:after {
+.formError.arrow-right:after {
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
   border-right: 5px solid #000000;
   left: -5px;
-  top: 12px;
+  top: 13px;
+}
+.formError.arrow-top:before {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid transparent;
+  left: 7px;
+  bottom: -6px;
+}
+.formError.arrow-top:after {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid #000000;
+  left: 7px;
+  bottom: -5px;
+}
+.formError.arrow-bottom:before {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  left: 7px;
+  top: -6px;
+}
+.formError.arrow-bottom:after {
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #000000;
+  left: 7px;
+  top: -5px;
 }

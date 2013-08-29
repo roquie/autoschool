@@ -74,7 +74,7 @@
                     return false;
                 }
                 $('html, body').animate({
-                    scrollTop: $('section[target="'+href+'"]').offset().top -navbarH
+                    scrollTop: $('section[target="'+href+'"]').offset().top
                 }, 500, function() {
                     location.hash = href;
                 });

@@ -1,3 +1,18 @@
+<script>
+    $(function() {
+        $('.footer').find('ul').on('click', 'li > a', function() {
+            var href = $(this).attr('href');
+            if (href.indexOf('#')+1) {
+                href = href.split('#');
+                $('html, body').animate({
+                    scrollTop: $('section[target="'+href[1]+'"]').offset().top - $('.navbar').height()
+                }, 500, function() {
+                    location.hash = href[1];
+                });
+            }
+        });
+    });
+</script>
 <section class="row main">
     <div class="container">
         <div class="row">

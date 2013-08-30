@@ -21,7 +21,7 @@ class Controller_Admin_Backup extends Controller_Ajax
 
         $zip->close();
 
-        echo 'create';
+        $this->ajax_msg('Файл успешно создан!');
 
     }
 

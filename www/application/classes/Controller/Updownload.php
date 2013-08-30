@@ -1,11 +1,11 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Download extends Controller_Main
+class Controller_Updownload extends Controller_Main
 {
 
     public function action_google()
     {
-        Google::factory()->upload_file('output_blanks/zayavleniya/'.$this->request->query('upload'));
+        Google::factory()->upload_file('output_blanks/zayavleniya/zayavlenie_30_08_2013_03_53_30.docx');
         echo 'its work!';
     }
 

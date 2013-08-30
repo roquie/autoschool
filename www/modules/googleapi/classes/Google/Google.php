@@ -84,16 +84,31 @@ class Google_Google
      */
     public function upload_file($path, $description = 'Заявление МПТ', $mimeType = 'application/msword')
     {
+        $path = APPPATH.$path;
         $file = new Google_DriveFile();
 
         $file->setTitle(basename($path));
         $file->setDescription($description);
         $file->setMimeType($mimeType);
-
-        $this->_service->files->insert($file, array(
-            'data' => file_get_contents(APPPATH.$path),
+        echo '<pre>';
+        print_r($path);
+        echo '</pre>';
+        echo '<pre><br>';
+        print_r($file);
+        echo '</pre><br>';
+        echo '<pre>';
+        print_r($this->_service);
+        echo '</pre>';
+        $qwe = $this->_service->files->insert($file, array(
+            'data' => file_get_contents($path),
             'mimeType' => $mimeType,
         ));
+
+
+
+        echo '<pre>';
+        print_r($qwe);
+        echo '</pre>';
 
     }
 

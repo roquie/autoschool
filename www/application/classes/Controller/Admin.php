@@ -28,6 +28,34 @@ class Controller_Admin extends Controller_Template
         ));
     }
 
+    public function action_backup()
+    {
+
+        $this->template->content = View::factory('admin/backup', array(
+            'backupFiles' => $this->getBackupFiles(APPPATH.'backups/')
+        ));
+    }
+
+    /**
+     * @DEPRECATED Временно нужна
+     * @todo: Перенести функции для работы с файлами в класс File kohana
+     * @param $path
+     * @return array
+     */
+    protected function getBackupFiles($path)
+    {
+        $data = array();
+        $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
+
+        foreach ($it as $file)
+            if (!$it->isDot() && !$it->isDir()) {
+                $basename = pathinfo($it->getPathname(), PATHINFO_BASENAME);
+                if (strpos($basename, '.zip'))
+                    $data[] = $it->getPathname();
+            }
+
+        return $data;
+    }
 
     public function action_index()
     {

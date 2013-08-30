@@ -9,6 +9,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="<?=URL::site('admin/papers')?>">Просмотр</a></li>
                         <li><a href="<?=URL::site('admin/google')?>">Google Upload</a></li>
+                        <li><a href="<?=URL::site('admin/backup')?>">BackUp Me!</a></li>
                     </ul>
                 </li>
 

@@ -16,6 +16,7 @@ class Less_Core
 
     /**
      * Компиляция всех less в один css
+     * @param null $files
      * @return array
      */
     public function compile($files = null)

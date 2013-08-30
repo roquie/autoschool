@@ -27,6 +27,7 @@ class Controller_Ajax extends Controller
     /**
      * @param array $array
      * @param string $msg_error
+     * @return bool
      */
     protected function ajax_xssclean($array = array(), $msg_error = '')
     {
@@ -36,8 +37,10 @@ class Controller_Ajax extends Controller
         foreach ($cleans as $key => $value)
             if (empty($value))
                 $emptyKeys[] = $key;
-
-        $this->ajax_data($emptyKeys, $msg_error,  'error');
+        if ( !empty($emptyKeys) )
+            $this->ajax_data($emptyKeys, $msg_error,  'empty');
+        else
+            return false;
     }
 
     /**
@@ -46,23 +49,22 @@ class Controller_Ajax extends Controller
      * @param null $msg
      * @param null $status
      */
-    protected function ajax_data($data = array(), $msg = null, $status = null)
+    protected function ajax_data($arr = array(), $msg = null, $status = null)
     {
         $data = array();
         if (is_null($status))
             $data['status'] = 'success';
         else
             $data['status'] = $status;
-
         if (is_null($msg))
-            $data['data'] = $data;
+            $data['data'] = $arr;
         elseif(is_array($msg)) {
             $data['title'] = $msg[0];
             $data['msg'] = $msg[1];
-            $data['data'] = $data;
+            $data['data'] = $arr;
         } else {
             $data['msg'] = $msg;
-            $data['data'] = $data;
+            $data['data'] = $arr;
         }
 
         echo json_encode($data);

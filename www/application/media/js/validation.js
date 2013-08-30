@@ -64,6 +64,7 @@
                 top : inputTopPosition,
                 left : inputLeftPosition
             }).addClass('in').insertAfter(input);
+            balloon.delay( this.options.hideBalloon * 1000).animate({opacity : 0}, 'slow').queue(function() { $(this).remove(); });
         },
         /**
          * Функция, которая вызывается чтобы повесить на элементы формы обработчик события потери фокуса
@@ -151,7 +152,7 @@
                             }
                             break;
                         case 'input' :
-                            if ( this.delSpace(element.val()) === '' || ( element.data('value') && this.delSpace(element.val()) === element.data('value') ) ) {
+                            if ( this.delSpace(element.val()) === '' || ( element.data('value') && (this.delSpace(element.val()) === element.data('value')) ) ) {
                                 empty = true;
                             }
                             break;
@@ -178,7 +179,7 @@
             if (this.options.fields.length > 0) {
                 $.each(this.options.fields, function(i, v) {
                     field = $('#'+v);
-                    data = data + field.data('name') + '=' + field.html() + '&';
+                    data = data + v + '=' + field.html() + '&';
                 });
             }
             data = data + this.$element.serialize();
@@ -215,7 +216,8 @@
         offsetTopBalloon : 0,
         placement : 'right', // top|right|bottom
         trigger : 'submit', // submit|blur
-        fields : []
+        fields : [],
+        hideBalloon : 5
     };
 
 })( jQuery, window, document );

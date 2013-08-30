@@ -26,7 +26,7 @@
             this.options = $.extend( {}, $.fn[pluginName].defaults, options);
             notification_inner = $('<div>', {
                 class : 'alert alert-' + this.options.type
-            }).css({ width : this.options.width });
+            }).css({ 'max-height' : this.options.width });
             if ( !this.options.permanent ) {
                 $('<a>', {
                     class : 'close',

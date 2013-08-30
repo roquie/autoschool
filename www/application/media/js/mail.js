@@ -37,15 +37,30 @@ $(function() {
         callback : function(response) {
             // Если пустые поля
             if (response.status === 'empty') {
-                //@todo пройти по массиву с именами полей и вывести ошибку
+                var element,
+                    $this = $('#send');
+                $.each(response.data, function(i, v) {
+                    if ($this.find('input[name="'+ v +'"], textarea[name="'+ v +'"]').length > 0) {
+                        element = $this.find('input[name="'+ v +'"], textarea[name="'+ v +'"]');
+                    } else {
+                        element = $('#'+v);
+                    }
+                    element.addClass('error');
+                });
             }
             // Если получена ошибка
             if (response.status === 'error') {
-                //@todo вывести ошибку в нотификацию
+                noty({
+                    type : response.status,
+                    message : response.msg
+                });
             }
             // Если всё нормально
             if (response.status === 'success') {
-                //@todo вывести сообщение об отправке в нотификацию
+                noty({
+                    type : response.status,
+                    message : response.msg
+                });
                 $('#reset').trigger('click');
             }
         },
@@ -53,6 +68,7 @@ $(function() {
         offsetTopBalloon : -5,
         fields : ['editor']
     });
+
     /**
      * Кнопка "Очистить" в форме отправки письма
      */
@@ -64,9 +80,9 @@ $(function() {
             $(this).removeClass('active');
             $(this).find('input').removeProp('checked');
         });
-        to.val('').blur();
-        subj.val('').blur();
         message.html('');
+        to.val('');
+        subj.val('');
     });
 
     /**

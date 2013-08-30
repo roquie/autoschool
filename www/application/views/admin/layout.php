@@ -24,7 +24,7 @@
     <?=HTML::script('js/vendor/stylizationForm.js')?>
     <?=HTML::script('js/vendor/html5b/plugins.js')?>
     <?=HTML::script('js/placeholder.js')?>
-    <?=HTML::script('js/vendor/jquery.noty.js')?>
+    <?=HTML::script('js/notification.js')?>
     <?=HTML::script('js/equalHeight.js')?>
     <?=HTML::script('js/popup.js')?>
     <?=HTML::script('js/validation.js')?>

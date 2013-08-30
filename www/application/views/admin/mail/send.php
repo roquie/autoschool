@@ -21,7 +21,7 @@
                             <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-error="Заполните поле Кому" data-value="Кому" >
                         </div>
                         <div style="position: relative">
-                            <input style="width: 98%" type="text" name="subject" data-req="true" data-error="Заполните поле Тема" data-value="Тема" >
+                            <input style="width: 98%" type="text" id="subject" name="subject" data-req="true" data-error="Заполните поле Тема" data-value="Тема" >
                         </div>
 
                         <!-- Редактор -->

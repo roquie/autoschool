@@ -61,6 +61,9 @@ class Google_Google
 
         if ($this->_client->getAccessToken()) {
             $userInfo = $oauth2->userinfo->get();
+            if (empty($userInfo['picture']))
+                $userInfo['picture'] = $this->_config['none_avatar_img'];
+
             Session::instance()->set('token', $this->_client->getAccessToken());
         } else
             HTTP::redirect($this->_client->createAuthUrl());
@@ -70,8 +73,6 @@ class Google_Google
         Session::instance()->set('last_name', $userInfo['family_name']);
         Session::instance()->set('photo', $userInfo['picture']);
 
-        if (empty($userInfo['picture']))
-            $userInfo['picture'] = $this->_config['none_avatar_img'];
 
         return $userInfo;
     }

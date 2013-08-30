@@ -123,11 +123,22 @@ Kohana::modules(array(
 	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
-       'goauth' => MODPATH.'goauth',
+      // 'goauth' => MODPATH.'goauth',
        //'less' => MODPATH.'less',
        // 'minify' => MODPATH.'minify',
        'uploader' => MODPATH.'uploader',
-       //'googleapi' => MODPATH.'googleapi',
+       'googleapi' => MODPATH.'googleapi',
+       'email' => MODPATH.'email',
+       'htmlpurifier' => MODPATH.'htmlpurifier',
+        'phpword' => MODPATH.'phpword',
+      //  '' => MODPATH.'',
+      //  '' => MODPATH.'',
+      //  '' => MODPATH.'',
+      //  '' => MODPATH.'',
+      //  '' => MODPATH.'',
+      //  '' => MODPATH.'',
+      //  '' => MODPATH.'',
+      //  '' => MODPATH.'',
 
 	));
 
@@ -138,17 +149,23 @@ Kohana::modules(array(
  * defaults for the URI.
  */
 
+
+Route::set('WordTemplate', 'wordtemplate(/<action>(/<id>))')
+    ->defaults(array(
+        'controller' => 'WordTemplate',
+    ));
+
 /**
- * для скачивания файлов с папки uploads
+ * для загрузки/скачивания файлов
  */
-Route::set('download', 'download/<folder>/<filename>.<format>',
+Route::set('Updownload', 'updownload/<folder>/<filename>.<format>',
     array(
         'folder' => '.+',
         'filename' => '.+',
-        'format' => 'doc|docx'
+        'format' => '(doc|docx)'
     ))
     ->defaults(array(
-        'controller' => 'download',
+        'controller' => 'Updownload',
         'action' => 'download'
     ));
 
@@ -170,15 +187,6 @@ Route::set('all_media', '<type_media>(/<folder>(/<subfolder>(/<file>)))',
         'action'     => 'load'
     ));
 
-
-
-Route::set('auth.admin', 'admin/auth(/<action>(/<id>))')
-    ->defaults(array(
-        'directory'  => 'Admin',
-        'controller' => 'Auth',
-    ));
-
-
 Route::set('admin', 'admin(/<action>)')
     ->defaults(array(
         'controller' => 'Admin',
@@ -191,15 +199,10 @@ Route::set('main', '(<action>(/<id>))')
         'action' => 'index'
     ));
 
+
 Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
     ->defaults(array(
         'directory'  => 'Admin',
-    ));
-
-Route::set('WordTemplate', 'wordtemplate(/<action>(/<id>))')
-    ->defaults(array(
-        'controller' => 'WordTemplate',
-        //'action'     => 'index',
     ));
 
 
@@ -213,19 +216,3 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
     ));
 
 
-
-/*Route::set('ajax', '<directory>(/<controller>(/<action>(/<id>)))',
-
-    array(
-        'directory' => '(ajax/admin|ajax/main)'
-    ))
-    ->filter(function($route, $params, $request){
-        if ($request->method() !== HTTP_Request::POST)
-        {
-            return false; // только POST запросы
-        }
-    })
-    ->defaults(array(
-        'directory'  => 'Ajax',
-    ));
-*/

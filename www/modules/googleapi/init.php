@@ -1,14 +1,21 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php defined('SYSPATH') OR die('No direct access allowed.');
+/**
+ * Developer: Roquie
+ * DateTime: 28.08.13 22:27
+ * Current file name: init.php
+ * 
+ * All rights reserved (c)
+ */
+require 'vendor/googleapi/src/Google_Client.php';
+require 'vendor/googleapi/src/contrib/Google_DriveService.php';
+require 'vendor/googleapi/src/contrib/Google_Oauth2Service.php';
 
-define('GOOGLE_APIS_PATH', realpath(dirname(__FILE__).'/vendor').DIRECTORY_SEPARATOR);
-	
-require_once GOOGLE_APIS_PATH . 'src/Google_Client.php';
-require_once GOOGLE_APIS_PATH . 'src/contrib/Google_PlusService.php';
-require_once GOOGLE_APIS_PATH . 'src/contrib/Google_Oauth2Service.php';
+//require Kohana::find_file('vendor', 'googleapi/src/Google_Client', EXT); чет искал искал недоискался он
 
-Route::set('googleapi-auth', 'google/auth')
-	->defaults(array(
-		'directory' => 'GoogleAPI',
-		'controller' => 'Auth',
-		'action' => 'auth'
-	));
+
+Route::set('googleapi.auth', 'auth(/<action>)')
+    ->defaults(array(
+        'directory'  => 'GoogleAPI',
+        'controller' => 'Auth',
+
+    ));

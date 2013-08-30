@@ -26,7 +26,7 @@ final class GOAuth
             'redirect_uri'  =>  $this->_config['redirect_uri'],
             'response_type' => 'code',
             'client_id'     =>  $this->_config['client_id'],
-            'scope'         => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+            'scope'         => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive'
         );
 
         HTTP::redirect($this->urlAuth . '?' . urldecode(http_build_query($params)));

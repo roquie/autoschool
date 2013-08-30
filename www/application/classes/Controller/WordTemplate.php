@@ -3,13 +3,6 @@
 class Controller_WordTemplate extends Controller_Ajax
 {
 
-    public function before()
-    {
-        parent::before();
-        require_once Kohana::find_file('vendor', 'PHPWord/PHPWord', 'php');
-    }
-
-
     /**
      * метод добавляет данные в шаблон из формы на сайте - заявление.
      *
@@ -17,7 +10,6 @@ class Controller_WordTemplate extends Controller_Ajax
 
     public function action_zayavlenie()
     {
-        $this->auto_render = false;
 
         $data = array();
         foreach ($_POST as $key => $value)
@@ -84,8 +76,8 @@ class Controller_WordTemplate extends Controller_Ajax
         //@todo
         $this->ajax_msg(
             View::factory('main/blank/result', array(
-                'statement' => URL::site('download/zayavleniya/zayavlenie_'.date('d-m-Y_H:i:s').'.docx'),
-                'contract' => URL::site('download/contracts/contract_'.date('d-m-Y_H:i:s').'.docx'),
+                'statement' => URL::site('updownload/zayavleniya/zayavlenie_'.date('d-m-Y_H:i:s').'.docx'),
+                'contract' => URL::site('updownload/contracts/contract_'.date('d-m-Y_H:i:s').'.docx'),
             ))->render()
         );
 

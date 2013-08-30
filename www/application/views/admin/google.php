@@ -3,7 +3,7 @@
     <div class="well">
         <?foreach($statements as $statement):?>
             <ul style="list-style: none">
-                <li><a href="#"><?=$statement?></a></li>
+                <li><a href="#" data-url="<?=URL::site('/updownload/google')?>"><?=$statement?></a></li>
             </ul>
         <?endforeach?>
     </div>

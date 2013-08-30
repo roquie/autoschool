@@ -51,7 +51,7 @@ class Controller_Admin extends Controller_Template
             ));
         else
             $this->template->content = View::factory('admin/papers/view', array(
-                'downloadedFiles' => $this->scanDownloadedFolder(APPPATH.'/uploads_old/downloaded/'),
+                'downloadedFiles' => $this->scanFolder(APPPATH.'/uploads_old/downloaded/'),
             ));
 
     }

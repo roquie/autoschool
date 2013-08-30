@@ -11,10 +11,10 @@
                         <li><a href="price" id="link"><i class="icon-tags"></i> Цены</a></li>
                         <li><a href="contacts" id="link"><i class="icon-book"></i> Контакты</a></li>
                         <!--<li><a href="<?/*=URL::site('/about')*/?>"><i class="icon-info-sign"></i> О нас</a></li>-->
-                        <li><a href='<?=URL::site('/admin/auth/login')?>'>
+                        <li><a href='<?=URL::site('/auth/google')?>'>
                                 <?$email = Session::instance()->get('email');
                                 if(isset($email)):?>
-                                Перейти в систему <li><a href="<?=URL::site('/admin/auth/logout')?>">Выйти</a>
+                                Перейти в систему <li><a href="<?=URL::site('/auth/logout')?>">Выйти</a>
                                     <?else:?>
                                         <i class="icon-lock"></i> Вход
                                     <?endif?>

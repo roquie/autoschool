@@ -7,7 +7,7 @@ return array(
     'dev_key' => 'AIzaSyCvaaVlh19zKU_HEkGwiVpSamEPx687b0s',
 
     'redirect_uri' => URL::site('/auth/google'),
-    'none_avatar_img' => URL::site('admin/img/photo.jpg'),
+    'none_avatar_img' => URL::site('img/photo.jpg'),
 
     'scopes' => array(
         'https://www.googleapis.com/auth/userinfo.email',

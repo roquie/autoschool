@@ -42,6 +42,7 @@ class Google_Google
         $this->_client->setApplicationName($this->_config['app_name']);
         $this->_client->setClientId($this->_config['client_id']);
         $this->_client->setClientSecret($this->_config['client_secret']);
+        $this->_client->setDeveloperKey($this->_config['dev_key']);
         $this->_client->setRedirectUri($this->_config['redirect_uri']);
         $this->_client->setScopes($this->_config['scopes']);
 

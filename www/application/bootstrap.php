@@ -156,17 +156,17 @@ Route::set('WordTemplate', 'wordtemplate(/<action>(/<id>))')
     ));
 
 /**
- * для загрузки/скачивания файлов @todo не работает :DD /<folder>/<filename>.<format>
+ * для загрузки/скачивания файлов
  */
-Route::set('Updownload', 'updownload(/<action>)',
+Route::set('Updownload', 'updownload/<folder>/<filename>.<format>',
     array(
-      //  'folder' => '.+',
-      //  'filename' => '.+',
-      //  'format' => '(doc|docx)'
+        'folder' => '.+',
+        'filename' => '.+',
+        'format' => '(doc|docx)'
     ))
     ->defaults(array(
         'controller' => 'Updownload',
-   //     'action' => 'download'
+        'action' => 'download'
     ));
 
 

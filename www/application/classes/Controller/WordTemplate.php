@@ -39,6 +39,8 @@ class Controller_WordTemplate extends Controller_Ajax
             $document = $PHPWord->loadTemplate($path);
         else
             $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
+        
+
         /**
          * ====================================
          * Формирование заявления
@@ -68,7 +70,7 @@ class Controller_WordTemplate extends Controller_Ajax
         $document->setValue('About', $data['about']);
 
 
-        $file = APPPATH.'output_blanks/zayavleniya/zayavlenie_'.date('d_m_Y_H:i:s').'.docx';
+        $file = APPPATH.'output_blanks/zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
         $document->save($file);
 
@@ -81,8 +83,8 @@ class Controller_WordTemplate extends Controller_Ajax
         //@todo
         $this->ajax_msg(
             View::factory('main/blank/result', array(
-                'statement' => URL::site('updownload/zayavleniya/zayavlenie_'.date('d-m-Y_H:i:s').'.docx'),
-                'contract' => URL::site('updownload/contracts/contract_'.date('d-m-Y_H:i:s').'.docx'),
+                'statement' => URL::site('updownload/zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx'),
+                'contract' => URL::site('updownload/contracts/contract_'.date('d_m_Y_H_i_s').'.docx'),
             ))->render()
         );
 

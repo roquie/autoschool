@@ -1,0 +1,80 @@
+h2.info {
+  text-align: center;
+  padding: 10px 30px 0;
+}
+/*
+  Стили для добавленных текстов до/после поля
+*/
+.input-append.input-block-level,
+.input-prepend.input-block-level {
+  width: 100%;
+  display: table;
+}
+.input-append.input-block-level .add-on,
+.input-prepend.input-block-level .add-on {
+  display: table-cell;
+  padding: 4px;
+  background-color: #e8e8e8;
+}
+.input-append.input-block-level .add-on:hover,
+.input-prepend.input-block-level .add-on:hover {
+  background-color: #dddddd;
+}
+.input-append.input-block-level > input {
+  border-right: 0;
+}
+.input-prepend.input-block-level > input {
+  border-left: 0;
+}
+.input-append .add-on:last-child,
+.input-append .btn:last-child {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+/*
+  Стиль для блока с формой
+*/
+.form-block {
+  padding: 20px;
+}
+.form-block h1 {
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #ccc;
+  font-weight: bold;
+  font-size: 17pt;
+}
+.form-block .line {
+  height: 1px;
+  width: 100%;
+  border-top: 1px dashed #ccc;
+  margin-top: 10px;
+  padding-bottom: 15px;
+}
+.form-block input,
+.form-block textarea {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  width: 97%;
+}
+.form-block textarea {
+  resize: none;
+  height: 85px;
+}
+.form-block #toggleReg {
+  margin: 5px 0 10px 0;
+}
+.form-block label {
+  font-weight: bolder;
+}
+.form-block span.label-check {
+  font-weight: bolder;
+}
+.form-block #otherText {
+  margin-top: 5px;
+}
+.form-block a:hover.slct {
+  color: #000000;
+  text-decoration: none;
+}

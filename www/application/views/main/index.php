@@ -1,17 +1,34 @@
 <script>
+    var currentState = '';
     $(function() {
-        $('.footer').find('ul').on('click', 'li > a', function() {
+        $('.footer').find('ul').on('click', 'li > a', function(e) {
+            e.preventDefault();
             var href = $(this).attr('href');
-            if (href.indexOf('#')+1) {
-                href = href.split('#');
-                $('html, body').animate({
-                    scrollTop: $('section[target="'+href[1]+'"]').offset().top - $('.navbar').height()
-                }, 500, function() {
-                    location.hash = href[1];
-                });
+            if (href == currentState){
+                return false;
             }
+            scrollToElement(href);
+        });
+        $('.nav').on('click', 'li > a', function(e) {
+            e.preventDefault();
+            var href = $(this).attr('href');
+            if (href == currentState){
+                return false;
+            }
+            scrollToElement(href);
         });
     });
+    function scrollToElement(href) {
+        if (href.indexOf('#')+1) {
+            href = href.split('#');
+            $('html, body').animate({
+                scrollTop: $('section[target="'+href[1]+'"]').offset().top - $('.navbar').height()
+            }, 500, function() {
+                location.hash = href[1];
+            });
+            currentState = href;
+        }
+    }
 </script>
 <section class="row main">
     <div class="container">

@@ -152,7 +152,12 @@
                             }
                             break;
                         case 'input' :
-                            if ( this.delSpace(element.val()) === '' || ( element.data('value') && (this.delSpace(element.val()) === element.data('value')) ) ) {
+                            if ( this.delSpace(element.val()) === '' || ( element.data('value') && (element.val() === element.data('value')) ) ) {
+                                empty = true;
+                            }
+                            break;
+                        case 'textarea' :
+                            if ( this.delSpace(element.val()) === '' || ( element.data('value') && (element.val() === element.data('value')) ) ) {
                                 empty = true;
                             }
                             break;

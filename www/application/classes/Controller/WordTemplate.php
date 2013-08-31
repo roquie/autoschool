@@ -17,16 +17,20 @@ class Controller_WordTemplate extends Controller_Ajax
 
         $error = array();
         foreach ($data as $key => $value)
+        {
             if (empty($value)) {
                 if ((Arr::get($_POST, 'toggleReg') === null && $key === 'vrem_reg') ||
                     (Arr::get($_POST, 'toggleReg') !== null && $key === 'adres_reg_po_pasporty'))
                     continue;
                 $error[] = $key;
             }
+        }
 
         if (!empty($error))
             $this->ajax_msg($error, 'error');
 
+/*        $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
+        exit;*/
 
         $PHPWord = new PHPWord();
         $path = APPPATH.'templates/zayavlenie/template.docx';
@@ -64,7 +68,8 @@ class Controller_WordTemplate extends Controller_Ajax
         $document->setValue('About', $data['about']);
 
 
-        $file = APPPATH.'output_blanks/zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
+        $file = APPPATH.'output_blanks/zayavleniya/zayavlenie_'.date('d_m_Y_H:i:s').'.docx';
+
         $document->save($file);
 
         /**

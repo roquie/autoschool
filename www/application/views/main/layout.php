@@ -11,7 +11,7 @@
     <?=HTML::style('css/datepicker.css')?>
     <?=HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic')?>
     <?=HTML::style('css/vendor/flexslider.css')?>
-
+    <?=HTML::style('css/validation.css')?>
 
     <!--[if IE 9]>
         <link rel="stylesheet" href="css/ie.css"/>
@@ -25,15 +25,16 @@
     <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap.min.js')?>
     <?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
-    <?=HTML::script('js/vendor/jquery.scrollTo-min.js')?>
     <?=HTML::script('js/vendor/stylizationForm.js')?>
     <?=HTML::script('js/placeholder.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap-formhelpers-phone.js')?>
     <?=HTML::script('js/vendor/jquery.flexslider-min.js')?>
-    <?=HTML::script('js/vendor/js/vendor/jquery.maskedinput.min.js')?>
+    <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
+    <?=HTML::script('js/validation.js')?>
+    <?=HTML::script('js/notification.js')?>
+
     <script>
         $(function(){
-
             $(window).load(function() {
                 first_load();
                 $('.flexslider').flexslider({
@@ -66,24 +67,6 @@
 
             $("[rel='tooltip']").tooltip();
 
-
-            $('.nav').on('click', '#link', function(e) {
-                e.preventDefault();
-                var href = $(this).attr("href");
-                if (href == currentState){
-                    return false;
-                }
-                $('html, body').animate({
-                    scrollTop: $('section[target="'+href+'"]').offset().top
-                }, 500, function() {
-                    location.hash = href;
-                });
-            });
-
-            /**
-             * Подсказки в полях ввода
-             */
-            $('.placeholder').placeholder();
         });
         function first_load() {
             if (location.hash != '') {
@@ -99,7 +82,10 @@
 <body>
 
 <?=$navbar.PHP_EOL?>
-<?=$content.PHP_EOL?>
+<div id="wrap">
+    <?=$content.PHP_EOL?>
+    <div id="push"></div>
+</div>
 
 <?=$footer.PHP_EOL?>
 </body>

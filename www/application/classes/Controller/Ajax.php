@@ -45,9 +45,10 @@ class Controller_Ajax extends Controller
 
     /**
      *
-     * @param array $data
+     * @param array $arr
      * @param null $msg
      * @param null $status
+     * @internal param array $data
      */
     protected function ajax_data($arr = array(), $msg = null, $status = null)
     {

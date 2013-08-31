@@ -1,0 +1,88 @@
+.border-radius (@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
+h2.info  {
+  text-align: center;
+  padding: 10px 30px 0;
+}
+
+/*
+  Стили для добавленных текстов до/после поля
+*/
+.input-append.input-block-level,
+.input-prepend.input-block-level {
+  width: 100%;
+  display: table;
+  .add-on {
+    display: table-cell;
+    padding: 4px;
+    background-color:#e8e8e8;
+    &:hover {
+      background-color:#dddddd;
+    }
+  }
+  & > input {
+    //width: 100%;
+  }
+}
+.input-append.input-block-level > input {
+  border-right: 0;
+}
+.input-prepend.input-block-level > input {
+  border-left: 0;
+}
+.input-append .add-on:last-child,
+.input-append .btn:last-child {.border-radius(0px)}
+
+/*
+  Стиль для блока с формой
+*/
+.form-block {
+  padding: 20px;
+  h1 {
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #ccc;
+    font-weight: bold;
+    font-size: 17pt;
+  }
+  .line {
+    height:1px;
+    width: 100%;
+    border-top: 1px dashed #ccc;
+    margin-top: 10px;
+    padding-bottom: 15px;
+  }
+  input, textarea {
+    .border-radius(0);
+    width: 97%;
+  }
+  textarea {
+    resize: none;
+    height: 85px
+  }
+  #toggleReg {
+    margin: 5px 0 10px 0;
+  }
+  label {
+    font-weight: bolder;
+  }
+  span {
+    &.label-check {
+      font-weight: bolder;
+    }
+  }
+  #otherText {
+    margin-top: 5px;
+  }
+  a {
+    &:hover {
+      &.slct {
+        color: #000000;
+        text-decoration: none;
+      }
+    }
+  }
+}

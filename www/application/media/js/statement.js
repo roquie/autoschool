@@ -21,6 +21,11 @@ $(function() {
         changeYear: true
     });
 
+    // Отображение календаря о иконке календаря
+    $('body').on('click', '#calendar', function() {
+        $(this).closest('.input-append').find('input').datepicker( "show" );
+    });
+
     /**
      * Маски для ввода дат и телефонов
      */
@@ -31,8 +36,7 @@ $(function() {
      * Переключение ввода регистрации между регистрацией по паспорту и временной регистрацией
      */
     $('body').on('click', '#toggleReg', function () {
-        alert('LOL');
-        $('#reg div.control-group').toggle();
+        $('#reg div.block').toggle();
         if ($('#sltReg').prop('checked')) {
             $('#adres_reg_po_pasporty').data('req', false);
             $('#vrem_reg').data('req', true);
@@ -47,9 +51,9 @@ $(function() {
      */
     $('.drop').on('click', 'li', function () {
         if ($(this).attr('id') === 'other')
-            $('#otherText').show();
+            $('#otherText').show().data('req', true);
         else
-            $('#otherText').hide();
+            $('#otherText').hide().data('req', false);
     });
     /**
      * Заносим значение введённое в поле "Другое" в поле, откуда берётся значение для заявки
@@ -69,12 +73,14 @@ $(function() {
             data = $this.serializeArray(),
             error = false;
         $('.slct, .drop').css({ 'border-color': '#cecece' });
-        $('.control-group').removeClass('error');
-        if ($('#select').val() === '') {
+        if ($('#select').val() === '' || $('#select').val() === 'Другое') {
             $('.slct, .drop').css({ 'border-color': '#bd4247' });
+            if ($('#otherText').data('req')) {
+                $('#otherText').addClass('error');
+            }
             error = true;
         }
-        //if (validation(data) && !error) {
+        if (validation(data) && !error) {
             $.post(
                 action,
                 data,
@@ -83,13 +89,51 @@ $(function() {
                         $('.well').html(response.msg);
                     }
                     if (response.status === 'error') {
+                        alert(response.msg);
+/*
                         $.each(response.msg, function (i, v) {
                             $('input[name="' + v + '"], textarea[name="' + v + '"]').closest('.control-group').addClass('error');
                         });
+*/
                     }
                 },
                 'json'
             );
-        //}
+        }
     });
+    /**
+     * Подсказки в полях ввода
+     */
+    $('.placeholder').placeholder();
 });
+/**
+ * Функция для валидации полей формы
+ * @param data - массив со значениями формы
+ * @returns {boolean}
+ */
+function validation(data)
+{
+    var element,
+        is_success = true,
+        error = [];
+    $.each(data, function(i, v) {
+        element = $('input[name="'+ v.name+'"], textarea[name="'+ v.name+'"]');
+        element.removeClass('error');
+        if (element.data('req')) {
+            if (removeWhitespaces(v.value) === '' || v.value === element.data('value')) {
+                is_success = false;
+                element.addClass('error');
+            }
+        }
+    });
+    return is_success;
+}
+/**
+ * Функция удаления пробелов из строки
+ * @param str
+ * @returns {XML|string|void}
+ */
+function removeWhitespaces(str)
+{
+    return str.replace(/\s/g, "");
+}

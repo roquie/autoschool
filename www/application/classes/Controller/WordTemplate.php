@@ -53,10 +53,11 @@ class Controller_WordTemplate extends Controller_Ajax
          * Левая сторона бланка
          */
 
+
        // $document->setValue('VU', '');
-        $document->setValue('Fam', $data['familiya']);
-        $document->setValue('Name', $data['imya']);
-        $document->setValue('Otchestvo', $data['ot4estvo']);
+        $document->setValue('Fam', $this->upName($data['familiya']));
+        $document->setValue('Name', $this->upName($data['imya']));
+        $document->setValue('Otchestvo', $this->upName($data['ot4estvo']));
         $document->setValue('DateBirth', $data['data_rojdeniya']);
         $document->setValue('Nationality', $data['grajdanstvo']);
         $document->setValue('PlaceBirth', $data['mesto_rojdeniya']);
@@ -92,6 +93,11 @@ class Controller_WordTemplate extends Controller_Ajax
         );
 
 //        $this->template->content = View::factory('main/word');
+    }
+
+    public function upName($name)
+    {
+        return UTF8::ucfirst(UTF8::strtolower($name));
     }
 
 

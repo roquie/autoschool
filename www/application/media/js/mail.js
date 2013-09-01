@@ -65,7 +65,7 @@ $(function() {
             }
         },
         trigger : 'blur',
-        offsetTopBalloon : -5,
+        offsetTopBalloon : - 4,
         fields : ['editor']
     });
 

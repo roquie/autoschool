@@ -1,7 +1,7 @@
 <script>
     var currentState = '';
     $(function() {
-        $('.footer').find('ul').on('click', 'li > a', function(e) {
+        $('.footer').find('ul').on('click', 'li > a#ajax', function(e) {
             e.preventDefault();
             var href = $(this).attr('href');
             if (href == currentState){
@@ -9,7 +9,7 @@
             }
             scrollToElement(href);
         });
-        $('.nav').on('click', 'li > a', function(e) {
+        $('.nav').on('click', 'li > a#ajax', function(e) {
             e.preventDefault();
             var href = $(this).attr('href');
             if (href == currentState){

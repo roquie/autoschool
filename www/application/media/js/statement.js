@@ -65,6 +65,33 @@ $(function() {
     /**
      * Отправка заявки
      */
+    $('#statement').ajaxForm({
+        before   : function() {
+            $('.slct, .drop').css({ 'border-color': '#cecece' });
+            if ($('#select').val() === '' || $('#select').val() === 'Другое') {
+                $('.slct, .drop').css({ 'border-color': '#bd4247' });
+                if ($('#otherText').data('req')) {
+                    $('#otherText').addClass('error');
+                }
+                return false;
+            }
+            return true;
+        },
+        callback : function(response) {
+            if (response.status === 'success') {
+                $('.well').html(response.msg);
+            }
+            if (response.status === 'error') {
+                $.each(response.data, function (i, v) {
+                    $('input[name="' + v + '"], textarea[name="' + v + '"]').addClass('error');
+                });
+            }
+        },
+        trigger : 'blur',
+        offsetTopBalloon : -4,
+        placement : 'right'
+    });
+/*
     $('#statement').on('submit', function (e) {
         e.preventDefault();
         var element,
@@ -81,6 +108,7 @@ $(function() {
             error = true;
         }
         if (validation(data) && !error) {
+            $('.send').prop('disabled', true);
             $.post(
                 action,
                 data,
@@ -89,18 +117,17 @@ $(function() {
                         $('.well').html(response.msg);
                     }
                     if (response.status === 'error') {
-                        alert(response.msg);
-/*
-                        $.each(response.msg, function (i, v) {
-                            $('input[name="' + v + '"], textarea[name="' + v + '"]').closest('.control-group').addClass('error');
+                        $.each(response.data, function (i, v) {
+                            $('input[name="' + v + '"], textarea[name="' + v + '"]').addClass('error');
                         });
-*/
                     }
+                    $('.send').prop('disabled', false);
                 },
                 'json'
             );
         }
     });
+*/
     /**
      * Подсказки в полях ввода
      */

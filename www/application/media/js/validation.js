@@ -39,28 +39,35 @@
                 inputTopPosition,
                 inputLeftPosition,
                 inputWidth,
-                arrowClass;
+                arrowClass,
+                message;
             arrowClass = (input.data('placement')) ? input.data('placement') : this.options.placement;
             balloon = $('<div>', {
                 class : 'formError arrow-'+arrowClass
             });
 
+            var pos = $.extend({}, (typeof input[0].getBoundingClientRect == 'function') ? input[0].getBoundingClientRect() : {
+                width: input[0].offsetWidth
+                , height: input[0].offsetHeight
+            }, input.offset());
+
             switch (arrowClass) {
                 case 'top' :
-                    inputTopPosition = - input.height() - 22;
-                    inputLeftPosition = -18;
+                    inputTopPosition = pos.top - input.height() - this.options.offsetTopBalloon;
+                    inputLeftPosition = pos.left - 18;
                     break;
                 case 'right' :
-                    inputTopPosition = this.options.offsetTopBalloon;
-                    inputLeftPosition = input.width();
+                    inputTopPosition = pos.top + this.options.offsetTopBalloon;
+                    inputLeftPosition = pos.left + input.width();
                     break;
                 case 'bottom' :
-                    inputTopPosition = input.height() + 16;
-                    inputLeftPosition = -18;
+                    inputTopPosition = pos.top + input.height() + this.options.offsetTopBalloon;
+                    inputLeftPosition = pos.left - 18;
                     break;
             }
 
-            balloon.html(input.data('error')).css({
+            message = (input.data('error')) ? input.data('error') : 'Заполните поле';
+            balloon.html(message).offset({
                 top : inputTopPosition,
                 left : inputLeftPosition
             }).addClass('in').insertAfter(input);
@@ -94,7 +101,7 @@
         eventBlur : function(e) {
             var el = $(e.currentTarget),
                 empty = false,
-                balloon = el.next();
+                balloon = el.next('.formError');
             if (el.data('req')) {
                 switch (el.get(0).nodeName.toLowerCase()) {
                     case 'div' :
@@ -165,10 +172,15 @@
                     if (empty) {
                         is_success = false;
                         element.addClass('error');
-                        this.buildBalloon(element);
+                        if (this.options.balloon)
+                            this.buildBalloon(element);
                         empty = false;
                     }
                 }
+            }
+            if (typeof this.options.before === 'function') {
+                if (!this.options.before())
+                    is_success = false;
             }
             if (is_success) {
                 this.ajax();
@@ -217,8 +229,10 @@
     };
 
     $.fn[pluginName].defaults = {
+        before : '',
         callback : function() {},
         offsetTopBalloon : 0,
+        balloon : true,
         placement : 'right', // top|right|bottom
         trigger : 'submit', // submit|blur
         fields : [],

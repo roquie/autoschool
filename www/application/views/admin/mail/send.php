@@ -17,10 +17,10 @@
                     <form action="<?=URL::site('admin/mail/send_mail')?>" method="post" id="send">
                         <legend>Сообщение</legend>
                         <!--контейнер с инпутами Кому, Тема-->
-                        <div style="position: relative">
+                        <div>
                             <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-error="Заполните поле Кому" data-value="Кому" >
                         </div>
-                        <div style="position: relative">
+                        <div>
                             <input style="width: 98%" type="text" id="subject" name="subject" data-req="true" data-error="Заполните поле Тема" data-value="Тема" >
                         </div>
 

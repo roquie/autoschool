@@ -27,7 +27,10 @@ class Controller_WordTemplate extends Controller_Ajax
         }
 
         if (!empty($error))
-            $this->ajax_msg($error, 'error');
+        {
+            $this->ajax_data($error, null, 'error');
+            exit;
+        }
 
 /*        $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
         exit;*/

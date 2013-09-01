@@ -8,8 +8,8 @@
                 <nav class="nav-collapse">
                     <ul class="nav pull-right" style="margin-right: 73px">
                         <li><a href="<?=URL::site('/forum')?>"><i class="icon-comments"></i> Форум</a></li>
-                        <li><a href="<?=URL::site('/#price')?>"><i class="icon-tags"></i> Цены</a></li>
-                        <li><a href="<?=URL::site('/#contacts')?>"><i class="icon-book"></i> Контакты</a></li>
+                        <li><a href="<?=URL::site('/#price')?>" id="ajax"><i class="icon-tags"></i> Цены</a></li>
+                        <li><a href="<?=URL::site('/#contacts')?>" id="ajax"><i class="icon-book"></i> Контакты</a></li>
                         <!--<li><a href="<?/*=URL::site('/about')*/?>"><i class="icon-info-sign"></i> О нас</a></li>-->
                         <li><a href='<?=URL::site('/auth/google')?>'>
                                 <?$email = Session::instance()->get('email');

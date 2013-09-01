@@ -42,7 +42,7 @@
             var navbarHeight = $('.navbar').height();
 
             $('#MainBlok_slimScroll').slimScroll({
-                height: $(window).height()-navbarHeight,
+                height: $(window).height(),
                 alwaysVisible: true
             });
             $(window).resize(function(){
@@ -69,20 +69,16 @@
 
 
 </head>
-<body style="overflow:hidden">
+<body>
 
 <!-- @todo: оформить модалкой -->
 <!--[if lt IE 7]>
 <p class="browsehappy container well">Вы используете <strong>устаревший</strong> браузер. Пожалуйста <a href="http://browsehappy.com/">обновите его</a>.</p>
 <![endif]-->
 
-<?=$navbar.PHP_EOL?>
 <div id="wrap">
-
-    <div id="MainBlok_slimScroll">
+        <?=$navbar.PHP_EOL?>
         <?=$content.PHP_EOL?>
-    </div>
-
 </div>
 
 </body>

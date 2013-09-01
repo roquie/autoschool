@@ -5,9 +5,9 @@
         <ul>
             <li><a href="<?=URL::site('/forum')?>">Форум</a></li>
             <li class="muted">·</li>
-            <li><a href="<?=URL::site('/#price')?>">Цены</a></li>
+            <li><a href="<?=URL::site('/#price')?>" id="ajax">Цены</a></li>
             <li class="muted">·</li>
-            <li><a href="<?=URL::site('/#contacts')?>">Контакты</a></li>
+            <li><a href="<?=URL::site('/#contacts')?>" id="ajax">Контакты</a></li>
 <!--            <li class="muted">·</li>
             <li><a href="<?/*=URL::site('/about')*/?>">О нас</a></li>-->
         </ul>

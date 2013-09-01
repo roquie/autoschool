@@ -59,6 +59,13 @@
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
+.ui-state-disabled {
+    cursor: default !important;
+    opacity: .35;
+    filter:Alpha(Opacity=35);
+    background-image: none;
+}
+
 
 /* with multiple calendars */
 .ui-datepicker.ui-datepicker-multi { width:auto; }

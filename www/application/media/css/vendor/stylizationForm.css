@@ -37,10 +37,9 @@
 /*	=	Select */
 .slct {
     display: block;
-    border-radius: 5px;
     border: 1px solid #cecece;
     background-color: #F6F6f6;
-    width: 285px;
+    max-width: 285px;
     padding: 4px 15px 4px 10px;
     color: #444;
     background-position: 290px -145px;
@@ -51,7 +50,6 @@
 
 }
 .slct.active {
-    border-radius: 5px 5px 0 0;
     border-bottom: none;
 }
 .drop {

@@ -1,10 +1,3 @@
-/**
- * Developer: V. Melnikov
- * DateTime: 1.09.13 22:27
- * Current file name: init.php
- *
- * All rights reserved (c)
- */
 $(function() {
     /**
      * Настройки для календаря
@@ -20,6 +13,7 @@ $(function() {
     };
     $.datepicker.setDefaults($.datepicker.regional['ru']);
     $('#data_rojdeniya, #pasport_data_vyda4i').datepicker({
+        maxDate: "+0D",
         nextText: "&raquo;",
         prevText: "&laquo;",
         yearRange: "1960:2013",
@@ -28,16 +22,17 @@ $(function() {
         changeYear: true
     });
 
-    // Отображение календаря о иконке календаря
+    // Отображение календаря при нажатии на иконку календаря
     $('body').on('click', '#calendar', function() {
         $(this).closest('.input-append').find('input').datepicker( "show" );
     });
 
     /**
-     * Маски для ввода дат и телефонов
+     * Маски для ввода
      */
     $("#telephone_m, #telephone_d").mask("8 (999) 999-99-99");
-    $("#seriya, #nomer").mask("99.99");
+    $("#seriya").mask("99 99");
+    $("#nomer").mask("999 999");
     $('#data_rojdeniya, #pasport_data_vyda4i').mask('99.99.9999');
 
     /**
@@ -95,81 +90,11 @@ $(function() {
                 });
             }
         },
-        trigger : 'blur',
-        offsetTopBalloon : -4,
         balloon : false,
         placement : 'right'
     });
-/*
-    $('#statement').on('submit', function (e) {
-        e.preventDefault();
-        var element,
-            $this = $(this),
-            action = $this.attr('action'),
-            data = $this.serializeArray(),
-            error = false;
-        $('.slct, .drop').css({ 'border-color': '#cecece' });
-        if ($('#select').val() === '' || $('#select').val() === 'Другое') {
-            $('.slct, .drop').css({ 'border-color': '#bd4247' });
-            if ($('#otherText').data('req')) {
-                $('#otherText').addClass('error');
-            }
-            error = true;
-        }
-        if (validation(data) && !error) {
-            $('.send').prop('disabled', true);
-            $.post(
-                action,
-                data,
-                function (response) {
-                    if (response.status === 'success') {
-                        $('.well').html(response.msg);
-                    }
-                    if (response.status === 'error') {
-                        $.each(response.data, function (i, v) {
-                            $('input[name="' + v + '"], textarea[name="' + v + '"]').addClass('error');
-                        });
-                    }
-                    $('.send').prop('disabled', false);
-                },
-                'json'
-            );
-        }
-    });
-*/
     /**
      * Подсказки в полях ввода
      */
     $('.placeholder').placeholder();
 });
-/**
- * Функция для валидации полей формы
- * @param data - массив со значениями формы
- * @returns {boolean}
- */
-function validation(data)
-{
-    var element,
-        is_success = true,
-        error = [];
-    $.each(data, function(i, v) {
-        element = $('input[name="'+ v.name+'"], textarea[name="'+ v.name+'"]');
-        element.removeClass('error');
-        if (element.data('req')) {
-            if (removeWhitespaces(v.value) === '' || v.value === element.data('value')) {
-                is_success = false;
-                element.addClass('error');
-            }
-        }
-    });
-    return is_success;
-}
-/**
- * Функция удаления пробелов из строки
- * @param str
- * @returns {XML|string|void}
- */
-function removeWhitespaces(str)
-{
-    return str.replace(/\s/g, "");
-}

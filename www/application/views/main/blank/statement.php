@@ -72,8 +72,8 @@
 
 
                             <label>Паспорт</label>
-                            <input class="span6 placeholder" type="text" name="pasport_seriya" data-value="серия" data-req="true" tabindex="8">
-                            <input class="span6 pull-right placeholder" type="text" name="pasport_nomer" data-value="номер" data-req="true" tabindex="9">
+                            <input class="span6 placeholder" type="text" name="pasport_seriya" id="seriya" data-value="серия" data-req="true" tabindex="8">
+                            <input class="span6 pull-right placeholder" type="text" name="pasport_nomer" id="nomer" data-value="номер" data-req="true" tabindex="9">
 
 
 
@@ -107,6 +107,7 @@
                             </ul>
                             <input type="hidden" id="select" name="about" />
                         </div>
+
                         <div style="display: none" id="otherText">
                             <label for="about_us">Укажите, как Вы узнали о нас</label>
                             <textarea id="about_us"></textarea>

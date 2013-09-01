@@ -71,7 +71,7 @@
                 top : inputTopPosition,
                 left : inputLeftPosition
             }).addClass('in').insertAfter(input);
-            //balloon.delay( this.options.hideBalloon * 1000).animate({opacity : 0}, 'slow').queue(function() { $(this).remove(); });
+            balloon.delay( this.options.hideBalloon * 1000).animate({opacity : 0}, 'slow').queue(function() { $(this).remove(); });
         },
         /**
          * Функция, которая вызывается чтобы повесить на элементы формы обработчик события потери фокуса

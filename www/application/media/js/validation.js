@@ -1,7 +1,7 @@
 /**
  * ajaxForm Plugin
  * Copyright 2013, Viktor Melnikov
- * Version 2.2 - Updated: August, 29, 2013
+ * Version 2.3 - Updated: September, 1, 2013
  */
 ;(function ( $, window, document, undefined ) {
 

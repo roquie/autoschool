@@ -73,9 +73,9 @@ class Controller_WordTemplate extends Controller_Ajax
         $document->setValue('About', $data['about']);
 
 
-        $file = APPPATH.'output_blanks/zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
+        $file = 'zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
-        $document->save($file);
+        $document->save(APPPATH.'output_blanks/'.$file);
 
         /**
          * ====================================
@@ -86,7 +86,7 @@ class Controller_WordTemplate extends Controller_Ajax
         //@todo
         $this->ajax_msg(
             View::factory('main/blank/result', array(
-                'statement' => URL::site('updownload/zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx'),
+                'statement' => URL::site('updownload/'.$file),
                 'contract' => URL::site('updownload/contracts/contract_'.date('d_m_Y_H_i_s').'.docx'),
             ))->render()
         );

@@ -1,15 +1,24 @@
-<p>
-    Заявка успешно оставлена.<br>
+<h2 class="info">
+    Обработка завершена. Скачайте и распечатайте документы. После этого прочтите их, поставьте подписи в нужных местах и отнесите их к нам в Автошколу &laquo;МПТ РГТЭУ&raquo;
+</h2>
+<br>
+<div class="well well-small form-block">
+    <h1>Документы для загрузки</h1>
     По вашим данным были сформированы следующие документы:
-    <ol>
-        <li>Заявление о принятии в Автошколу &laquo;МПТ РГТЭУ&raquo;</li>
-        <li>Договор об указании платных образовательных услуг</li>
-    </ol>
-</p>
-<p>
-    Вам осталось поставить только подписи. Для этого необходимо загрузить данные документы и распечатать.
-</p>
-<p>
-    <a class="btn" href="<?=$statement?>"><i class="word"></i> Заявление</a>
-    <a class="btn" href="<?=$contract?>"><i class="word"></i> Договор</a>
-</p>
+    <ul class="dash" style="margin-top: 10px">
+        <li><span>Заявление о принятии в Автошколу &laquo;МПТ РГТЭУ&raquo;</span></li>
+        <li><span>Договор об указании платных образовательных услуг</span></li>
+    </ul>
+
+    <div class="clearfix"></div>
+    <div class="line"></div>
+
+    <div class="row-fluid">
+        <div class="span6 pull-left">
+            <a class="btn btn-success btn-block" href="<?=$statement?>"><i class="icon-file-text"></i> Заявление</a>
+        </div>
+        <div class="span6 pull-right">
+            <a class="btn btn-primary btn-block" href="<?=$contract?>"><i class="icon-file-text"></i> Договор</a>
+        </div>
+    </div>
+</div>

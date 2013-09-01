@@ -1,3 +1,10 @@
+/**
+ * Developer: V. Melnikov
+ * DateTime: 1.09.13 22:27
+ * Current file name: init.php
+ *
+ * All rights reserved (c)
+ */
 $(function() {
     /**
      * Настройки для календаря
@@ -29,7 +36,8 @@ $(function() {
     /**
      * Маски для ввода дат и телефонов
      */
-    $("#telephone_m, #telephone_d ").mask("8 (999) 999-99-99");
+    $("#telephone_m, #telephone_d").mask("8 (999) 999-99-99");
+    $("#seriya, #nomer").mask("99.99");
     $('#data_rojdeniya, #pasport_data_vyda4i').mask('99.99.9999');
 
     /**
@@ -79,7 +87,7 @@ $(function() {
         },
         callback : function(response) {
             if (response.status === 'success') {
-                $('.well').html(response.msg);
+                $('#result').html(response.msg);
             }
             if (response.status === 'error') {
                 $.each(response.data, function (i, v) {

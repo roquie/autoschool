@@ -32,6 +32,19 @@ h2.info {
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
+#wrap {
+  margin-top: 51px;
+}
+.word {
+  display: inline-block;
+  margin-left: -2px;
+  width: 32px;
+  height: 32px;
+  margin-right: .75em;
+  line-height: 14px;
+  vertical-align: middle;
+  background: url("../img/word.png") no-repeat;
+}
 /*
   Стиль для блока с формой
 */

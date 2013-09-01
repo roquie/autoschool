@@ -1,9 +1,9 @@
 <?=HTML::script('js/statement.js')?>
 <?=HTML::style('css/statement.css')?>
 <div class="container" style="margin-top: 75px">
-    <div class="row">
+    <div class="row" id="result">
         <h2 class="info">
-            Чтобы оставить заявку на поступление в автошколу, Вам нужно просто ввести необходимую информацию в соответствующие поля. Всё остальное мы сделаем за Вас. <br>
+            Чтобы оставить заявку на поступление в автошколу, вам нужно просто ввести необходимую информацию в соответствующие поля. Всё остальное мы сделаем за вас. <br>
             В результате вы получите составленное заявление и договор на основе введённых данных.
         </h2>
         <br>
@@ -89,7 +89,7 @@
 
                         <label>Телефон</label>
                         <input class="span6 placeholder" type="text" id="telephone_m" name="dom_tel" data-value="мобильный" data-req="true"  tabindex="12">
-                        <input class="span6 pull-right placeholder" type="text" name="mob_tel" data-value="домашний" data-req="true" tabindex="13">
+                        <input class="span6 pull-right placeholder" type="text" id="telephone_d" name="mob_tel" data-value="домашний" data-req="true" tabindex="13">
 
                         <label for="obrazovanie">Образование</label>
                         <input type="text" name="obrazovanie" id="obrazovanie" data-req="true" tabindex="14">

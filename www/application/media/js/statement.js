@@ -90,8 +90,7 @@ $(function() {
                 });
             }
         },
-        balloon : false,
-        placement : 'right'
+        balloon : false
     });
     /**
      * Подсказки в полях ввода

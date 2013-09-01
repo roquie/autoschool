@@ -1,35 +1,4 @@
-<script>
-    var currentState = '';
-    $(function() {
-        $('.footer').find('ul').on('click', 'li > a#ajax', function(e) {
-            e.preventDefault();
-            var href = $(this).attr('href');
-            if (href == currentState){
-                return false;
-            }
-            scrollToElement(href);
-        });
-        $('.nav').on('click', 'li > a#ajax', function(e) {
-            e.preventDefault();
-            var href = $(this).attr('href');
-            if (href == currentState){
-                return false;
-            }
-            scrollToElement(href);
-        });
-    });
-    function scrollToElement(href) {
-        if (href.indexOf('#')+1) {
-            href = href.split('#');
-            $('html, body').animate({
-                scrollTop: $('section[target="'+href[1]+'"]').offset().top - $('.navbar').height()
-            }, 500, function() {
-                location.hash = href[1];
-            });
-            currentState = href;
-        }
-    }
-</script>
+<?=HTML::script('js/index.js')?>
 <section class="row main">
     <div class="container">
         <div class="row">
@@ -185,10 +154,10 @@
                     <abbr title="Телефон">Тел. 2</abbr>: +7 (499) 317 04 09<br><br>
                     Адрес: г. Москва, нахимовский проспект, 21 <br> <br>
                     Напишите нам: <br> <br>
-                    <form  action="#" data-url="#" method="post" accept-charset="utf-8">
-                        <input name="name" type="text" class="span2" placeholder="Имя">
-                        <input name="email" type="email" class="input-large" placeholder="Email адрес">
-                        <textarea name="message" class="span5" rows="5" placeholder="Сообщение"></textarea>
+                    <form id="send" action="<?=URL::site('mail/...')?>" method="post" accept-charset="utf-8">
+                        <input name="name" type="text" class="span2 placeholder" data-value="Имя">
+                        <input name="email" type="email" class="input-large placeholder" data-value="Email адрес">
+                        <textarea name="message" class="span5 placeholder" rows="5" data-value="Сообщение"></textarea>
                         <input type="submit" class="btn btn-primary span2">
                     </form>
                 </div>

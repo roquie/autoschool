@@ -12,7 +12,7 @@ body {
   height: 100%;
 }
 #wrap {
-  min-height: 100%;
+  min-height: 91%;
   height: auto !important;
   height: 100%;
   margin: 0 auto -60px;
@@ -172,6 +172,9 @@ ul.dash li span {
 */
 form input[name="name"] {
   padding-right: 17px;
+}
+form textarea {
+  resize: none;
 }
 /*
   а тута футер

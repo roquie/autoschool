@@ -89,6 +89,7 @@ $(function() {
         },
         trigger : 'blur',
         offsetTopBalloon : -4,
+        balloon : false,
         placement : 'right'
     });
 /*

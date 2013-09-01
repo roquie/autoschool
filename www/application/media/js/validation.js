@@ -200,6 +200,7 @@
                 });
             }
             data = data + this.$element.serialize();
+            alert(action);
             $.post(
                 action,
                 data,

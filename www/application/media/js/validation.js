@@ -120,7 +120,7 @@
                     if (balloon.length === 0)
                         this.buildBalloon(el);
                 } else {
-                    el.removeClass('error').next().remove();
+                    el.removeClass('error').next('.formError').remove();
                 }
             }
         },

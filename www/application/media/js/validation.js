@@ -58,7 +58,7 @@
                     break;
                 case 'right' :
                     inputTopPosition = pos.top + this.options.offsetTopBalloon;
-                    inputLeftPosition = pos.left + input.width();
+                    inputLeftPosition = input.offset().left + input.width() + 18;
                     break;
                 case 'bottom' :
                     inputTopPosition = pos.top + input.height() + this.options.offsetTopBalloon;
@@ -71,7 +71,7 @@
                 top : inputTopPosition,
                 left : inputLeftPosition
             }).addClass('in').insertAfter(input);
-            balloon.delay( this.options.hideBalloon * 1000).animate({opacity : 0}, 'slow').queue(function() { $(this).remove(); });
+            //balloon.delay( this.options.hideBalloon * 1000).animate({opacity : 0}, 'slow').queue(function() { $(this).remove(); });
         },
         /**
          * Функция, которая вызывается чтобы повесить на элементы формы обработчик события потери фокуса

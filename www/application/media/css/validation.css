@@ -25,9 +25,8 @@ textarea:focus.error {
   z-index: 1020;
   opacity: 0;
   filter: alpha(opacity=0);
-  margin-left: 18px;
   word-break: break-all;
-  display: inline;
+  display: block;
   min-width: 150px;
   max-width: 300px;
   padding: 8px;

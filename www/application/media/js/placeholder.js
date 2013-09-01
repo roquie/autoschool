@@ -39,41 +39,48 @@
         this.element = element;
         this.metadata = $(this.element).data();
         this.options = $.extend( {}, defaults, options, this.metadata);
-
-        this._defaults = defaults;
-        this._name = pluginName;
         this.init();
     }
 
-    /**
-     * Добавляем метод в прототип класса
-     * Инициализация (функционал плагина)
-     */
-    Plugin.prototype.init = function () {
-        var el = $(this.element),
+    Plugin.prototype = {
+        constructor : Plugin,
+        init : function() {
+
+            var el = $(this.element),
+                $this = this.element,
+                options = this.options;
+
+            if (el.val() === '') {
+                el.val(this.options.value).css({color : this.options.color});
+            }
+            el.on('focus', function() {
+                el.css({color : '#000'});
+                if(el.val() == options.value)
+                {
+                    el.val('');
+                }
+            }).on('blur', function() {
+                    if ($.trim($this.value == ''))
+                    {
+                        this.value = ($this.value != '') ? el.val() : ($this.defaultValue != options.value) ? options.value : $this.defaultValue;
+                    }
+                    if($this.value == options.value) {
+                        el.css({color: options.color});
+                    } else {
+                        el.css({color:'#000'});
+                    }
+            });
+        },
+        /**
+         * Необходим после отправки формы, возвращает первичные значения в поля
+         */
+        default : function() {
+            var el = $(this.element),
             $this = this.element,
             options = this.options;
-
-        if (el.val() === '') {
             el.val(this.options.value).css({color : this.options.color});
         }
-        el.on('focus', function() {
-            el.css({color : '#000'});
-            if(el.val() == options.value)
-            {
-                el.val('');
-            }
-        }).on('blur', function() {
-                if ($.trim($this.value == ''))
-                {
-                    this.value = ($this.value != '') ? el.val() : ($this.defaultValue != options.value) ? options.value : $this.defaultValue;
-                }
-                if($this.value == options.value) {
-                    el.css({color: options.color});
-                } else {
-                    el.css({color:'#000'});
-                }
-        });
+
     };
 
     /**
@@ -93,7 +100,7 @@
 
 })( jQuery, window, document );
 $().ready(function() {
-    $.each($('input'), function() {
+    $.each($('input, textarea'), function() {
         if ($(this).data('value')) {
             $(this).addClass('placeholder');
         }

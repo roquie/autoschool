@@ -25,29 +25,31 @@ $(function() {
 
     $('#send').ajaxForm({
         callback : function(response) {
+            var $this = $('#send');
             // Если пустые поля
             if (response.status === 'empty') {
-                var element,
-                    $this = $('#send');
+                var element;
                 $.each(response.data, function(i, v) {
-                    $this.find('input[name="'+ v +'"], textarea[name="'+ v +'"]').addClass('error');
+                    element = $this.find('input[name="'+ v +'"], textarea[name="'+ v +'"]').addClass('error');
                 });
             }
-            // Если получена ошибка
+            // Если получена ошибка или всё нормально
             if (response.status === 'error') {
                 noty({
                     type : response.status,
                     message : response.msg
                 });
             }
-            // Если всё нормально
             if (response.status === 'success') {
                 noty({
                     type : response.status,
                     message : response.msg
                 });
+                $('.placeholder').placeholder('default');
             }
-        }
+        },
+        trigger : 'blur',
+        offsetTopBalloon : 20
     });
 
     /**

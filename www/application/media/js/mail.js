@@ -80,9 +80,7 @@ $(function() {
             $(this).removeClass('active');
             $(this).find('input').removeProp('checked');
         });
-        message.html('');
-        to.val('');
-        subj.val('');
+        $('.placeholder').placeholder('default');
     });
 
     /**

@@ -205,7 +205,11 @@ Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
         'directory'  => 'Admin',
     ));
 
-
+Route::set('main.ajax', 'main(/<controller>(/<action>))')
+    ->defaults(array(
+        'controller' => 'Main',
+        'action'     => 'index',
+    ));
 
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')

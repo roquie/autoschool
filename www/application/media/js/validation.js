@@ -40,13 +40,14 @@
                 inputLeftPosition,
                 inputWidth,
                 arrowClass,
-                message;
+                message,
+                pos;
             arrowClass = (input.data('placement')) ? input.data('placement') : this.options.placement;
             balloon = $('<div>', {
                 class : 'formError arrow-'+arrowClass
             });
 
-            var pos = $.extend({}, (typeof input[0].getBoundingClientRect == 'function') ? input[0].getBoundingClientRect() : {
+            pos = $.extend({}, (typeof input[0].getBoundingClientRect == 'function') ? input[0].getBoundingClientRect() : {
                 width: input[0].offsetWidth
                 , height: input[0].offsetHeight
             }, input.offset());
@@ -57,8 +58,8 @@
                     inputLeftPosition = pos.left - 18;
                     break;
                 case 'right' :
-                    inputTopPosition = pos.top + this.options.offsetTopBalloon;
-                    inputLeftPosition = input.offset().left + input.width() + 18;
+                    inputTopPosition = pos.top - 3;
+                    inputLeftPosition = input.offset().left + input.width();
                     break;
                 case 'bottom' :
                     inputTopPosition = pos.top + input.height() + this.options.offsetTopBalloon;
@@ -200,7 +201,6 @@
                 });
             }
             data = data + this.$element.serialize();
-            alert(action);
             $.post(
                 action,
                 data,

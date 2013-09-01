@@ -15,7 +15,8 @@ class Controller_Ajax extends Controller
     {
         parent::before();
 
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
+
+        //$email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
 
         $this->auto_render = false;
         if (Kohana::$environment === Kohana::PRODUCTION)

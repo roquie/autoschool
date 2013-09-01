@@ -154,10 +154,10 @@
                     <abbr title="Телефон">Тел. 2</abbr>: +7 (499) 317 04 09<br><br>
                     Адрес: г. Москва, нахимовский проспект, 21 <br> <br>
                     Напишите нам: <br> <br>
-                    <form id="send" action="<?=URL::site('mail/send')?>" method="post" accept-charset="utf-8">
-                        <input name="name" type="text" class="span2 placeholder" data-value="Имя">
-                        <in put name="email" type="email" class="input-large placeholder" data-value="Email адрес">
-                        <textarea name="message" class="span5 placeholder" rows="5" data-value="Сообщение"></textarea>
+                    <form id="send" action="<?=URL::site('main/mail/send')?>" method="post" accept-charset="utf-8">
+                        <input name="name" type="text" class="span2" data-placement="top" data-req="true" data-value="Имя">
+                        <input name="email" type="text" class="input-large" data-placement="top" data-req="true" data-value="Email адрес">
+                        <textarea name="message" class="span5" rows="5" data-req="true" data-value="Сообщение"></textarea>
                         <input type="submit" class="btn btn-primary span2">
                     </form>
                 </div>

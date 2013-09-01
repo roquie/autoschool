@@ -16,7 +16,7 @@
 
 
                             <label for="famil">Фамилия</label>
-                            <input type="text" id="famil" autofocus="autofocus" name="familiya" data-error="Заполните поле Фамилия" data-req="true" tabindex="1">
+                            <input type="text" id="famil" autofocus="autofocus" name="familiya" data-placement="top" data-error="Заполните поле Фамилия" data-req="true" tabindex="1">
 
 
 
@@ -72,8 +72,8 @@
 
 
                             <label>Паспорт</label>
-                            <input class="span6 placeholder" type="text" name="pasport_seriya" id="seriya" data-value="серия" data-req="true" tabindex="8">
-                            <input class="span6 pull-right placeholder" type="text" name="pasport_nomer" id="nomer" data-value="номер" data-req="true" tabindex="9">
+                            <input class="span6" type="text" name="pasport_seriya" id="seriya" data-value="серия" data-req="true" tabindex="8">
+                            <input class="span6 pull-right" type="text" name="pasport_nomer" id="nomer" data-value="номер" data-req="true" tabindex="9">
 
 
 
@@ -88,8 +88,8 @@
                         <input type="text" id="from" name="pasport_kem_vydan" data-req="true" tabindex="11">
 
                         <label>Телефон</label>
-                        <input class="span6 placeholder" type="text" id="telephone_m" name="dom_tel" data-value="мобильный" data-req="true"  tabindex="12">
-                        <input class="span6 pull-right placeholder" type="text" id="telephone_d" name="mob_tel" data-value="домашний" data-req="true" tabindex="13">
+                        <input class="span6" type="text" id="telephone_m" name="dom_tel" data-value="мобильный" data-req="true"  tabindex="12">
+                        <input class="span6 pull-right" type="text" id="telephone_d" name="mob_tel" data-value="домашний" data-req="true" tabindex="13">
 
                         <label for="obrazovanie">Образование</label>
                         <input type="text" name="obrazovanie" id="obrazovanie" data-req="true" tabindex="14">

@@ -32,8 +32,8 @@ class Controller_Admin_Mail extends Controller_Ajax
 
         if ($result)
             $this->ajax_msg('Сообщение отправлено');
-            else
-            $this->ajax_msg('Ошибка отправки');
+        else
+            $this->ajax_msg('Ошибка отправки', 'error');
 
     }
 

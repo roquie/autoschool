@@ -9,11 +9,11 @@
  *
  * Для вызова отдельных методов:
  * 1. Создать метод:
- *      Plugin.prototype.message = function (msg) {
- *          alert(msg);
+ *      Plugin.prototype.message = function () {
+ *          //action
  *      }
  * 2. Вызов метода:
- *      $(element).placeholder('message', 'Hello world!');
+ *      $(element).placeholder('message');
  */
 ;(function ( $, window, document, undefined ) {
 

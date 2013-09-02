@@ -28,7 +28,7 @@ class Controller_WordTemplate extends Controller_Ajax
 
         if (!empty($error))
         {
-            $this->ajax_data($error, null, 'error');
+            $this->ajax_data($error, null, 'empty');
             exit;
         }
 
@@ -39,7 +39,7 @@ class Controller_WordTemplate extends Controller_Ajax
         $path = APPPATH.'templates/zayavlenie/template.docx';
 
         if (is_readable($path))
-            $document = $PHPWord->loadTemplate($path);
+            $document = $PHPWord->loadTemplate($path, 2); // задаётся лимит
         else
             $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
         
@@ -83,12 +83,34 @@ class Controller_WordTemplate extends Controller_Ajax
          * Формирование договора
          * ====================================
          */
-        //$contract = $PHPWord->loadTemplate(APPPATH.'templates/zayavlenie/statement.docx');
-        //@todo
+
+        $path = APPPATH.'templates/contract/contract.docx';
+
+        if (is_readable($path))
+            $contract = $PHPWord->loadTemplate($path, 2);
+        else
+            $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
+
+        // Если указано, что 18 лет, то заказчик сам слушатель, иначе родитель или опекун
+        if (isset($data['age'])) {
+            $customer = $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']);
+        } else {
+            $customer = $this->upName($data['familiyaCustomer']) . ' ' . $this->upName($data['imyaCustomer']) . ' ' . $this->upName($data['ot4estvoCustomer']);
+        }
+
+        //@todo setValue - limit in preg_replace
+        $contract->setValue('Customer', $customer);
+        $contract->setValue('Listener', $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']));
+
+
+        $contr = 'contract/contract_'.date('d_m_Y_H_i_s').'.docx';
+
+        $contract->save(APPPATH.'output_blanks/'.$contr);
+
         $this->ajax_msg(
             View::factory('main/blank/result', array(
                 'statement' => URL::site('updownload/'.$file),
-                'contract' => URL::site('updownload/contracts/contract_'.date('d_m_Y_H_i_s').'.docx'),
+                'contract' => URL::site('updownload/'.$contr),
             ))->render()
         );
 

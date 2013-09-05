@@ -5,7 +5,7 @@
  */
 $(function() {
 
-    //$('#to').prop('disabled',true).css({backgroundColor : '#ffffff'});
+    var attache = '';
 
     /**
      * Загрузка в поле "сообщение" текста из выбранного шаблона
@@ -31,10 +31,11 @@ $(function() {
         );
     });
     /**
-     * Отправка письма
+     * Отправка письма (также с прикреплением файлов)
      */
-    $('#send').ajaxForm({
-        callback : function(response) {
+    $('#send').on('submit', function(e) {
+        e.preventDefault();
+        send_ajax($(this), function(response) {
             // Если пустые поля
             if (response.status === 'empty') {
                 var element,
@@ -62,31 +63,28 @@ $(function() {
                     message : response.msg
                 });
                 $('#reset').trigger('click');
+                attache = '';
             }
-        },
-        trigger : 'blur',
-        offsetTopBalloon : - 4,
-        fields : ['editor']
+        }, {offsetTopBalloon : 3}, ['editor'], {'files' : attache});
     });
 
     /**
      * Кнопка "Очистить" в форме отправки письма
      */
     $('#reset').on('click', function() {
-        var to = $('#to'),
-            subj = $('#subject'),
-            message = $('#editor');
+        var message = $('#editor');
         $.each( $('.checkboxes .check'), function() {
             $(this).removeClass('active');
             $(this).find('input').removeProp('checked');
         });
         $('.placeholder').placeholder('default');
+        message.html('');
     });
 
     /**
      * Отображение выбранного e-mail адреса в поле ввода "Кому"
      */
-    $('body').on('click', '.check', function() {
+    $('body').on('click', '.emails', function() {
         var $this = $(this),
             to = $('#to'),
             val = '';
@@ -112,4 +110,48 @@ $(function() {
             to.val(to.data('value')).css({color : '#999'});
         }
     });
+
+    // Обработка перехода по папкам
+    $('body').on('click', '.files li > a', function(e) {
+        e.preventDefault();
+        var dot = true;
+        if ($.trim($(this).text()) == '..' || $.trim($(this).text()) == '.') {
+            dot = false;
+        }
+        if ($(this).attr('type') != 'file') {
+            $('.modal-body').load($('#attacheModal').data('url'), {
+                path : $(this).attr('href'),
+                dot  : dot
+            });
+        }
+    });
+    // При нажатии на файл появляется кнопка прикрепить
+    $(document).on('click', '.file', function() {
+        var ul = $('.modal-body').find('#attache');
+        if (ul.length === 0) {
+            $('.modal-body').append($('<a>', {
+                href : '#',
+                id : 'attache',
+                text : 'Прикрепить',
+                class : 'btn'
+            }));
+        }
+    });
+
+    // Нажатие на кнопку прикрепить
+    $('body').on('click', '#attache', function(e) {
+        e.preventDefault();
+        var list = '';
+        $('#file:checked').each(function() {
+            list += $(this).val() + ',';
+        });
+        attache = list.slice(0, -1)
+    });
+
+    // При нажатии на кнопку "Прикрепить файлы", загружаем их в модальное окно
+    $('#attacheModal').on('click', function() {
+        var action = $(this).data('url');
+        $('.modal-body').load(action);
+    });
+
 });

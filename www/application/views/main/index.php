@@ -163,7 +163,7 @@
                 </div>
             </div>
             <div class="span6">
-                <script charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=zykIeaQ83Zaa2OdE51NOwJfXluULtvrm&width=500&height=325"></script>
+                <script charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=zykIeaQ83Zaa2OdE51NOwJfXluULtvrm&width=460&height=325"></script>
             </div>
         </div>
     </div>

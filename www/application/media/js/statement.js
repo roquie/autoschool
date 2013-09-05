@@ -22,6 +22,8 @@ $(function() {
         changeYear: true
     });
 
+    $('#grajdanstvo').chosen();
+
     // Отображение календаря при нажатии на иконку календаря
     $('body').on('click', '#calendar', function() {
         $(this).closest('.input-append').find('input').datepicker( "show" );

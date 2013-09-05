@@ -1,5 +1,7 @@
 <?=HTML::script('js/statement.js')?>
 <?=HTML::style('css/statement.css')?>
+<?=HTML::script('js/vendor/chosen.js')?>
+<?=HTML::style('css/vendor/chosen.css')?>
 <div class="container" style="margin-top: 75px">
     <div class="row" id="result">
         <h2 class="info">
@@ -30,7 +32,11 @@
                         </div>
 
                         <label for="grajdanstvo">Гражданство</label>
-                        <input type="text" name="grajdanstvo" id="grajdanstvo" data-req="true" tabindex="5">
+                        <select id="grajdanstvo" name="grajdanstvo" style="width: 463px" data-req="true" tabindex="5">
+                            <option>РФ</option>
+                            <option>Украина</option>
+                            <option>Белоруссия</option>
+                        </select>
 
                         <label for="mesto_rojdeniya">Место рождения</label>
                         <input type="text" name="mesto_rojdeniya" id="mesto_rojdeniya" data-req="true" tabindex="6">
@@ -116,7 +122,7 @@
                             <div class="span6 pull-left">
 
                                 <label for="familCustomer">Фамилия</label>
-                                <input type="text" id="familCustomer" autofocus="autofocus" name="familiyaCustomer" data-placement="top" data-req="true" tabindex="16">
+                                <input type="text" id="familCustomer" name="familiyaCustomer" data-placement="top" data-req="true" tabindex="16">
 
                                 <label for="imyaCustomer">Имя</label>
                                 <input type="text" name="imyaCustomer" id="imyaCustomer" data-req="true" tabindex="17">

@@ -3,8 +3,6 @@
 class Controller_Admin_Papers extends Controller_Ajax
 {
 
-
-
     /**
      * метод для загрузки файлов в указанную директорию
      * @type ajax

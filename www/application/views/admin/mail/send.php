@@ -23,7 +23,6 @@
                         <div>
                             <input style="width: 98%" type="text" id="subject" name="subject" data-req="true" data-error="Заполните поле Тема" data-value="Тема" >
                         </div>
-
                         <!-- Редактор -->
                         <?=View::factory('admin/mail/editor')
                             ->set('id_div_editor', 'editor')
@@ -37,11 +36,9 @@
                             <button type="button" id="reset" class="btn">Очистить</button>
                             <div class="pull-right">
                                 <div class="btn-group dropup">
-
                                     <a href="#upload_files" role="button" rel="tooltip" title="Загрузить файл" class="btn" data-toggle="modal"><i class="icon-upload-alt"></i></a>
-
                                     <!--<button  type="button" class="btn"></i></button>-->
-                                    <a href="#" rel="tooltip" title="Прикрепить файл к письму" class="btn"><i class="icon-file-alt"></i></a>
+                                    <a href="#upload_files" rel="tooltip" data-toggle="modal" data-url="<?=URL::site('admin/mail/getFiles')?>" title="Прикрепить файл к письму" id="attacheModal" class="btn"><i class="icon-file-alt"></i></a>
                                 </div>
                                 <div class="btn-group dropup">
                                     <a href="<?=URL::site('admin/tpl/')?>" class="btn">Шаблоны</a>
@@ -71,12 +68,12 @@
                         <div id="slimScroll" class="checkboxes" style="height: 390px; overflow: hidden">
                             <? for($i = 0; $i <= 99; $i++):
                                 if ($i % 2 === 0): ?>
-                            <div class="check">
+                            <div class="check emails">
                                 <?=$i?> Мельников В.И.
                                 <input type="checkbox" value="vik.melnikov@gmail.com" />
                             </div>
                                     <?//else:?>
-                            <div class="check">
+                            <div class="check emails">
                                  Иванов М.В.
                                 <input type="checkbox" value="roquie0@gmail.com" />
                             </div>

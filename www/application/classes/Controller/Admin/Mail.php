@@ -3,6 +3,8 @@
 class Controller_Admin_Mail extends Controller_Ajax
 {
 
+    private $_attache = array();
+
     public function action_send_mail()
     {
         $valid = $this->ajax_xssclean($_POST);
@@ -12,6 +14,10 @@ class Controller_Admin_Mail extends Controller_Ajax
         $to = explode(', ', Arr::get($_POST, 'to'));
         $to = array_filter($to);
         $msg = Arr::get($_POST, 'editor');
+        $files = Arr::get($_POST, 'files');
+        if (isset($files)) {
+            $files = explode(',', $files);
+        }
         $subject = Arr::get($_POST, 'subject');
 
         $validation = Validation::factory($to)
@@ -27,8 +33,13 @@ class Controller_Admin_Mail extends Controller_Ajax
 
         $result = Email::factory($subject, $msg)
             ->to($to)
-            ->from($fromEmail, $fromName)
-            ->send();
+            ->from($fromEmail, $fromName);
+        if (isset($files)) {
+            foreach ($files as $file) {
+                $result->attach_file(APPPATH.$file);
+            };
+        }
+        $result->send();
 
         if ($result)
             $this->ajax_msg('Сообщение отправлено');
@@ -37,5 +48,46 @@ class Controller_Admin_Mail extends Controller_Ajax
 
     }
 
+    public function action_lol()
+    {
+        echo View::factory('admin/mail/files');
+    }
+
+    public function action_getFiles()
+    {
+        $dir = Arr::get($_POST, 'path');
+        $dot = Arr::get($_POST, 'dot');
+        $dot = empty($dot) ? 'false' : $dot;
+        if (empty($dir)) {
+            $dir = 'output_blanks';
+        }
+
+        $path = APPPATH.$dir;
+        $data = array();
+
+        $iterator = new DirectoryIterator($path);
+        $i = 0;
+        foreach($iterator as $entry) {
+            if ($dot == 'false') {
+                if ($iterator->isDot())
+                    continue;
+            }
+            $data[$i]['file'] = $entry->getFilename();
+            $data[$i]['type'] = $entry->getType();
+            $i++;
+        }
+
+        echo View::factory('admin/mail/getFiles', array(
+            'path' => $dir,
+            'files' => $data
+        ))->render();
+    }
+
+    public function action_attache()
+    {
+        foreach (Arr::get($_POST, 'files') as $file)
+            $this->_attache[] = $file;
+        $this->ajax_data($this->_attache);
+    }
 
 }

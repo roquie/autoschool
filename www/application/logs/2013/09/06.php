@@ -533,3 +533,188 @@
 2013-09-06 03:03:24 --- CRITICAL: ErrorException [ 1 ]: Maximum execution time of 60 seconds exceeded ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 75 ] in file:line
 2013-09-06 03:03:24 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
 #1 {main} in file:line
+2013-09-06 16:54:21 --- CRITICAL: ErrorException [ 8 ]: Undefined index: familiyaCustomer ~ APPPATH\classes\Controller\WordTemplate.php [ 81 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:21 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(81): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 81, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:24 --- CRITICAL: ErrorException [ 8 ]: Undefined index: familiyaCustomer ~ APPPATH\classes\Controller\WordTemplate.php [ 81 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:24 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(81): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 81, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:26 --- CRITICAL: ErrorException [ 8 ]: Undefined index: familiyaCustomer ~ APPPATH\classes\Controller\WordTemplate.php [ 81 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:26 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(81): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 81, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:27 --- CRITICAL: ErrorException [ 8 ]: Undefined index: familiyaCustomer ~ APPPATH\classes\Controller\WordTemplate.php [ 81 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:27 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(81): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 81, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:28 --- CRITICAL: ErrorException [ 8 ]: Undefined index: familiyaCustomer ~ APPPATH\classes\Controller\WordTemplate.php [ 81 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:28 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(81): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 81, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:29 --- CRITICAL: ErrorException [ 8 ]: Undefined index: familiyaCustomer ~ APPPATH\classes\Controller\WordTemplate.php [ 81 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:54:29 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(81): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 81, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:56:15 --- CRITICAL: ErrorException [ 8 ]: Undefined index: familiyaCustomer ~ APPPATH\classes\Controller\WordTemplate.php [ 81 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:56:15 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(81): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 81, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:81
+2013-09-06 16:56:30 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку L:\domains\autoschool.ru\www\application\output_blanks/contract невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:30 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('L:\domains\auto...')
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:34 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку L:\domains\autoschool.ru\www\application\output_blanks/contract невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:34 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('L:\domains\auto...')
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:36 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку L:\domains\autoschool.ru\www\application\output_blanks/contract невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:36 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('L:\domains\auto...')
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:36 --- CRITICAL: ErrorException [ 2 ]: unlink(L:\domains\autoschool.ru\www\application\templates/zayavlenie/template\word\webSettings.xml): Permission denied ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 139 ] in file:line
+2013-09-06 16:56:36 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'unlink(L:\domai...', 'L:\domains\auto...', 139, Array)
+#1 L:\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(139): unlink('L:\domains\auto...')
+#2 L:\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(122): Template_TemplateDocx->deleteLocalDir('L:\domains\auto...')
+#3 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(67): Template_TemplateDocx->save('L:\domains\auto...')
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#5 [internal function]: Kohana_Controller->execute()
+#6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#7 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#10 {main} in file:line
+2013-09-06 16:56:36 --- CRITICAL: ErrorException [ 2 ]: file_get_contents(L:\domains\autoschool.ru\www\application\templates/zayavlenie/template/word/document.xml): failed to open stream: No such file or directory ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 66 ] in file:line
+2013-09-06 16:56:36 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'file_get_conten...', 'L:\domains\auto...', 66, Array)
+#1 L:\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(66): file_get_contents('L:\domains\auto...')
+#2 L:\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(49): Template_TemplateDocx->_unzip()
+#3 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(38): Template_TemplateDocx->__construct('L:\domains\auto...')
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#5 [internal function]: Kohana_Controller->execute()
+#6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#7 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#10 {main} in file:line
+2013-09-06 16:56:37 --- CRITICAL: ErrorException [ 2 ]: rmdir(L:\domains\autoschool.ru\www\application\templates/zayavlenie/template\_rels): Directory not empty ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 137 ] in file:line
+2013-09-06 16:56:37 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'rmdir(L:\domain...', 'L:\domains\auto...', 137, Array)
+#1 L:\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(137): rmdir('L:\domains\auto...')
+#2 L:\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(122): Template_TemplateDocx->deleteLocalDir('L:\domains\auto...')
+#3 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(67): Template_TemplateDocx->save('L:\domains\auto...')
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#5 [internal function]: Kohana_Controller->execute()
+#6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#7 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#10 {main} in file:line
+2013-09-06 16:56:37 --- CRITICAL: ErrorException [ 2 ]: rmdir(L:\domains\autoschool.ru\www\application\templates/zayavlenie/template\docProps): Directory not empty ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 137 ] in file:line
+2013-09-06 16:56:37 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'rmdir(L:\domain...', 'L:\domains\auto...', 137, Array)
+#1 L:\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(137): rmdir('L:\domains\auto...')
+#2 L:\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(122): Template_TemplateDocx->deleteLocalDir('L:\domains\auto...')
+#3 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(67): Template_TemplateDocx->save('L:\domains\auto...')
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#5 [internal function]: Kohana_Controller->execute()
+#6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#7 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#10 {main} in file:line
+2013-09-06 16:56:37 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку L:\domains\autoschool.ru\www\application\output_blanks/contract невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:37 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('L:\domains\auto...')
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:37 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку L:\domains\autoschool.ru\www\application\output_blanks/contract невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:56:37 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('L:\domains\auto...')
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:57:17 --- CRITICAL: ErrorException [ 8 ]: Undefined index: familiya ~ APPPATH\classes\Controller\WordTemplate.php [ 47 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:47
+2013-09-06 16:57:17 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(47): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 47, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:47
+2013-09-06 16:57:27 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку L:\domains\autoschool.ru\www\application\output_blanks/contract невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:57:27 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('L:\domains\auto...')
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 16:58:51 --- CRITICAL: ErrorException [ 2 ]: fopen(): Filename cannot be empty ~ SYSPATH\classes\Kohana\Response.php [ 453 ] in file:line
+2013-09-06 16:58:51 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'fopen(): Filena...', 'L:\domains\auto...', 453, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Response.php(453): fopen('', 'rb')
+#2 L:\domains\autoschool.ru\www\application\classes\Controller\Updownload.php(23): Kohana_Response->send_file('L:\domains\auto...')
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Updownload->action_download()
+#4 [internal function]: Kohana_Controller->execute()
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Updownload))
+#6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#8 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#9 {main} in file:line

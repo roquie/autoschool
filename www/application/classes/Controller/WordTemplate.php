@@ -65,14 +65,14 @@ class Controller_WordTemplate extends Controller_Ajax
         $file = 'zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
         $document->save(APPPATH.'output_blanks/'.$file);
-
+        unset($document);
         /**
          * ====================================
          * Формирование договора
          * ====================================
          */
-        $contract = new TemplateDocx(APPPATH.'templates/zayavlenie/statement.docx');
-        $path = APPPATH.'templates/contract/contract.docx';
+        $contract = new TemplateDocx(APPPATH.'templates/contract/contract.docx');
+
 
         // Если указано, что 18 лет, то заказчик сам слушатель, иначе родитель или опекун
         if (isset($data['age'])) {
@@ -86,7 +86,7 @@ class Controller_WordTemplate extends Controller_Ajax
         $contract->setValue('Listener', $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']));
 
 
-        $contr = 'contract/contract_'.date('d_m_Y_H_i_s').'.docx';
+        $contr = 'contracts/contract_'.date('d_m_Y_H_i_s').'.docx';
 
         $contract->save(APPPATH.'output_blanks/'.$contr);
 

@@ -28,31 +28,20 @@ class Controller_WordTemplate extends Controller_Ajax
 
         if (!empty($error))
         {
-            $this->ajax_data($error, null, 'empty');
+            $this->ajax_data($error, null, 'error');
             exit;
         }
 
 /*        $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
         exit;*/
 
-        $PHPWord = new PHPWord();
-        $path = APPPATH.'templates/zayavlenie/template.docx';
-
-        if (is_readable($path))
-            $document = $PHPWord->loadTemplate($path, 2); // задаётся лимит
-        else
-            $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
-        
+        $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
         /**
          * ====================================
          * Формирование заявления
          * ====================================
          */
-        /**
-         * Левая сторона бланка
-         */
-
 
        // $document->setValue('VU', '');
         $document->setValue('Fam', $this->upName($data['familiya']));
@@ -73,23 +62,17 @@ class Controller_WordTemplate extends Controller_Ajax
         $document->setValue('MestoRaboty',$data['mesto_raboty']);
         $document->setValue('About', $data['about']);
 
-
         $file = 'zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
         $document->save(APPPATH.'output_blanks/'.$file);
-
+        unset($document);
         /**
          * ====================================
          * Формирование договора
          * ====================================
          */
+        $contract = new TemplateDocx(APPPATH.'templates/contract/contract.docx');
 
-        $path = APPPATH.'templates/contract/contract.docx';
-
-        if (is_readable($path))
-            $contract = $PHPWord->loadTemplate($path, 2);
-        else
-            $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
 
         // Если указано, что 18 лет, то заказчик сам слушатель, иначе родитель или опекун
         if (isset($data['age'])) {
@@ -103,25 +86,23 @@ class Controller_WordTemplate extends Controller_Ajax
         $contract->setValue('Listener', $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']));
 
 
-        $contr = 'contract/contract_'.date('d_m_Y_H_i_s').'.docx';
+        $contr = 'contracts/contract_'.date('d_m_Y_H_i_s').'.docx';
 
         $contract->save(APPPATH.'output_blanks/'.$contr);
 
         $this->ajax_msg(
             View::factory('main/blank/result', array(
                 'statement' => URL::site('updownload/'.$file),
-                'contract' => URL::site('updownload/'.$contr),
+                'contract' => URL::site('updownload/contracts/contract_'.date('d_m_Y_H_i_s').'.docx'),
             ))->render()
         );
 
-//        $this->template->content = View::factory('main/word');
     }
 
-    public function upName($name)
+    protected function upName($name)
     {
         return UTF8::ucfirst(UTF8::strtolower($name));
     }
-
 
 }
 

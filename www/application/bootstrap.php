@@ -131,7 +131,7 @@ Kohana::modules(array(
        'email' => MODPATH.'email',
        'htmlpurifier' => MODPATH.'htmlpurifier',
         'phpword' => MODPATH.'phpword',
-      //  '' => MODPATH.'',
+        'docxtemplate' => MODPATH.'docxtemplate',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',

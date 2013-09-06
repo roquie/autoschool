@@ -42,10 +42,6 @@ class Controller_WordTemplate extends Controller_Ajax
          * Формирование заявления
          * ====================================
          */
-        /**
-         * Левая сторона бланка
-         */
-
 
        // $document->setValue('VU', '');
         $document->setValue('Fam', $this->upName($data['familiya']));

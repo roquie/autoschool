@@ -71,8 +71,25 @@ class Controller_WordTemplate extends Controller_Ajax
          * Формирование договора
          * ====================================
          */
-        //$contract = $PHPWord->loadTemplate(APPPATH.'templates/zayavlenie/statement.docx');
-        //@todo
+        $contract = new TemplateDocx(APPPATH.'templates/zayavlenie/statement.docx');
+        $path = APPPATH.'templates/contract/contract.docx';
+
+        // Если указано, что 18 лет, то заказчик сам слушатель, иначе родитель или опекун
+        if (isset($data['age'])) {
+            $customer = $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']);
+        } else {
+            $customer = $this->upName($data['familiyaCustomer']) . ' ' . $this->upName($data['imyaCustomer']) . ' ' . $this->upName($data['ot4estvoCustomer']);
+        }
+
+        //@todo setValue - limit in preg_replace
+        $contract->setValue('Customer', $customer);
+        $contract->setValue('Listener', $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']));
+
+
+        $contr = 'contract/contract_'.date('d_m_Y_H_i_s').'.docx';
+
+        $contract->save(APPPATH.'output_blanks/'.$contr);
+
         $this->ajax_msg(
             View::factory('main/blank/result', array(
                 'statement' => URL::site('updownload/'.$file),
@@ -80,14 +97,12 @@ class Controller_WordTemplate extends Controller_Ajax
             ))->render()
         );
 
-//        $this->template->content = View::factory('main/word');
     }
 
-    public function upName($name)
+    protected function upName($name)
     {
         return UTF8::ucfirst(UTF8::strtolower($name));
     }
-
 
 }
 

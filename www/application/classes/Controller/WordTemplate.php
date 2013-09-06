@@ -35,14 +35,7 @@ class Controller_WordTemplate extends Controller_Ajax
 /*        $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
         exit;*/
 
-        $PHPWord = new PHPWord();
-        $path = APPPATH.'templates/zayavlenie/template.docx';
-
-        if (is_readable($path))
-            $document = $PHPWord->loadTemplate($path);
-        else
-            $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
-        
+        $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
         /**
          * ====================================
@@ -72,7 +65,6 @@ class Controller_WordTemplate extends Controller_Ajax
         $document->setValue('Obrazovanie', $data['obrazovanie']);
         $document->setValue('MestoRaboty',$data['mesto_raboty']);
         $document->setValue('About', $data['about']);
-
 
         $file = 'zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 

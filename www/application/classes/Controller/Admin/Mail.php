@@ -46,6 +46,9 @@ class Controller_Admin_Mail extends Controller_Ajax
 
     }
 
+    /**
+     * Получение всех файлов из папки output_blanks
+     */
     public function action_getFiles()
     {
         $dir = Arr::get($_POST, 'path');

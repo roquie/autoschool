@@ -55,6 +55,7 @@ class PHPWord_Template {
      * @var string
      */
     private $_documentXML;
+    private $limit;
     
     
     /**
@@ -62,9 +63,10 @@ class PHPWord_Template {
      * 
      * @param string $strFilename
      */
-    public function __construct($strFilename) {
+    public function __construct($strFilename, $limit) {
         $path = dirname($strFilename);
         $this->_tempFileName = $path.DIRECTORY_SEPARATOR.time().'.docx';
+        $this->limit = $limit;
         
         copy($strFilename, $this->_tempFileName); // Copy the source File to the temp File
 
@@ -108,7 +110,7 @@ class PHPWord_Template {
         */
         //$this->_documentXML = str_replace($search, $replace, $this->_documentXML);
         // template fix 4
-        $this->_documentXML = preg_replace($search, $replace, $this->_documentXML, 2);
+        $this->_documentXML = preg_replace($search, $replace, $this->_documentXML, $this->limit);
     }
     
     /**

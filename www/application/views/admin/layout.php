@@ -28,6 +28,7 @@
     <?=HTML::script('js/equalHeight.js')?>
     <?=HTML::script('js/popup.js')?>
     <?=HTML::script('js/validation.js')?>
+    <?=HTML::script('js/general_fns.js')?>
 
     <script>
 

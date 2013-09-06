@@ -3,6 +3,11 @@
     <div class="container">
         <div class="row">
             <div class="span7">
+                <div class="text">
+                    <!--                    <span class="phone">+7 (925) 800 10 24</span><br>
+                                        <span class="phone">+7 (499) 317 04 09</span><br>-->
+                    <!--<span class="email"><a href="mailto:auto@mpt.ru?subject=придумать тему" target="_blank">auto@mpt.ru</a></span>-->
+                </div>
                 <img src="<?=URL::site('img/main/car.jpeg')?>" alt="KIA SPECTRA"/>
                 <img src="<?=URL::site('img/main/znaki.png')?>" alt="Дорожные знаки"/>
             </div>
@@ -66,15 +71,15 @@
 
             <div class="span6">
                 <h1>Подготовка в области</h1>
-                    <ul class="dash">
-                        <li><span>правил дорожного движения Российской Федерации;</span></li>
-                        <li><span>основных положений по допуску транспортных средств к эксплуатации и обязанностей должностных лиц по обеспечению безопасности дорожного движения;</span></li>
-                        <li><span>законодательства Российской Федерации в части, касающейся обеспечения безопасности дорожного движения, а также уголовной, административной и иной ответственности водителей транспортных средств;</span></li>
-                        <li><span>технических аспектов безопасного управления транспортным средством;</span></li>
-                        <li><span>факторов, способствующих возникновению дорожно-транспортных происшествий;</span></li>
-                        <li><span>элементов конструкции транспортного средства, состояние которых влияет на безопасность дорожного движения;</span></li>
-                        <li><span>методов оказания первой помощи лицам, пострадавшим при дорожно-транспортном происшествии.</span></li>
-                    </ul>
+                <ul class="dash">
+                    <li><span>правил дорожного движения Российской Федерации;</span></li>
+                    <li><span>основных положений по допуску транспортных средств к эксплуатации и обязанностей должностных лиц по обеспечению безопасности дорожного движения;</span></li>
+                    <li><span>законодательства Российской Федерации в части, касающейся обеспечения безопасности дорожного движения, а также уголовной, административной и иной ответственности водителей транспортных средств;</span></li>
+                    <li><span>технических аспектов безопасного управления транспортным средством;</span></li>
+                    <li><span>факторов, способствующих возникновению дорожно-транспортных происшествий;</span></li>
+                    <li><span>элементов конструкции транспортного средства, состояние которых влияет на безопасность дорожного движения;</span></li>
+                    <li><span>методов оказания первой помощи лицам, пострадавшим при дорожно-транспортном происшествии.</span></li>
+                </ul>
             </div>
 
         </div>
@@ -85,27 +90,27 @@
     <div class="container">
         <div class="row">
             <div class="span6">
-            <h1>Практика</h1>
+                <h1>Практика</h1>
                 <p>Курсы автовождения проводят спокойные, опытные, понимающие, адекватные автоинструктора. Как мужчины, так и женщины с большим стажем работы. </p>
                 <p>Наши авто оснащены вторыми педалями и зеркалами, что позволяет контролировать процесс вождения. Обучение проводятся индивидуально для каждого ученика, как на механической коробке переключения передач, так и на «автомате».</p>
                 <p>С учетом новой дорожной обстановки и интенсивности транспортных потоков в городе, в корне, изменилось обучение безопасному управлению автомобилем.</p>
                 <p> Получение водительских прав – это только первый шаг на пути к захватывающему миру управлением автомобилем.</p>
             </div>
             <div class="span6">
-              <div class="flexslider">
-                  <ul class="slides">
-                      <li><img src="<?=URL::site('img/main/practice/5.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/6.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/7.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/8.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/9.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/10.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/11.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/19.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/20.jpg')?>" /></li>
-                      <li><img src="<?=URL::site('img/main/practice/21.jpg')?>" /></li>
-                  </ul>
-              </div>
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li><img src="<?=URL::site('img/main/practice/5.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/6.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/7.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/8.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/9.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/10.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/11.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/19.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/20.jpg')?>" /></li>
+                        <li><img src="<?=URL::site('img/main/practice/21.jpg')?>" /></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -128,7 +133,7 @@
                 </div>
             </div>
             <div class="span6">
-            <h1>Документы для поступления</h1>
+                <h1>Документы для поступления</h1>
                 <ul class="dash">
                     <li><span>заявление;</span></li>
                     <li><span>договор;</span></li>
@@ -163,7 +168,7 @@
                 </div>
             </div>
             <div class="span6">
-                <script charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=zykIeaQ83Zaa2OdE51NOwJfXluULtvrm&width=500&height=325"></script>
+                <script charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=zykIeaQ83Zaa2OdE51NOwJfXluULtvrm&width=460&height=325"></script>
             </div>
         </div>
     </div>

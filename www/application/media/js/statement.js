@@ -22,6 +22,8 @@ $(function() {
         changeYear: true
     });
 
+    $('#grajdanstvo').chosen();
+
     // Отображение календаря при нажатии на иконку календаря
     $('body').on('click', '#calendar', function() {
         $(this).closest('.input-append').find('input').datepicker( "show" );
@@ -30,7 +32,7 @@ $(function() {
     /**
      * Маски для ввода
      */
-    $("#telephone_m, #telephone_d").mask("8 (999) 999-99-99");
+    $("#telephone_m, #telephone_d, #phoneCustomer").mask("8 (999) 999-99-99");
     $("#seriya").mask("99 99");
     $("#nomer").mask("999 999");
     $('#data_rojdeniya, #pasport_data_vyda4i').mask('99.99.9999');
@@ -40,7 +42,7 @@ $(function() {
      */
     $('body').on('click', '#toggleReg', function () {
         $('#reg div.block').toggle();
-        if ($('#sltReg').prop('checked')) {
+        if ($(this).find('input').prop('checked')) {
             $('#adres_reg_po_pasporty').data('req', false);
             $('#vrem_reg').data('req', true);
         } else {
@@ -48,6 +50,21 @@ $(function() {
             $('#vrem_reg').data('req', false);
         }
     });
+
+    /**
+     * Переключение ввода регистрации между регистрацией по паспорту и временной регистрацией
+     */
+    $('body').on('click', '#toggleAge', function () {
+        $('#reg div.block').toggle();
+        if ($(this).find('input').prop('checked')) {
+            $('#adres_reg_po_pasporty').data('req', false);
+            $('#vrem_reg').data('req', true);
+        } else {
+            $('#adres_reg_po_pasporty').data('req', true);
+            $('#vrem_reg').data('req', false);
+        }
+    });
+
 
     /**
      * Отображение поля для ввода другого значения
@@ -85,6 +102,12 @@ $(function() {
                 $('#result').html(response.msg);
             }
             if (response.status === 'error') {
+                noty({
+                    type : response.status,
+                    message : response.msg
+                });
+            }
+            if (response.status === 'empty') {
                 $.each(response.data, function (i, v) {
                     $('input[name="' + v + '"], textarea[name="' + v + '"]').addClass('error');
                 });

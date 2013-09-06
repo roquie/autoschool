@@ -88,3 +88,6 @@ textarea:focus.error {
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d88e90;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d88e90;
 }
+.files a:hover {
+  text-decoration: none;
+}

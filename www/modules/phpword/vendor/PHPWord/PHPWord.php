@@ -218,9 +218,9 @@ class PHPWord {
      * @param string $strFilename
      * @return PHPWord_Template
      */
-    public function loadTemplate($strFilename) {
+    public function loadTemplate($strFilename, $limit = 1) {
         if(file_exists($strFilename)) {
-            $template = new PHPWord_Template($strFilename);
+            $template = new PHPWord_Template($strFilename, $limit);
             return $template;
         } else {
             trigger_error('Template file '.$strFilename.' not found.', E_ERROR);

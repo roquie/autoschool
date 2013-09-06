@@ -113,6 +113,28 @@ body {
   .span5 {
     padding-top: 20px;
   }
+  .span7 {
+    position: relative;
+  }
+  .text {
+    position: absolute;
+    top : 40px;//15px;
+    left : 13px;
+    span{
+      font-size: 14.5pt
+    }
+    span{
+      &.email {
+        a {
+          font-size: 14.5pt !important;
+          border-bottom: 1px dotted #cccccc;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
 }
 
 /*
@@ -272,7 +294,7 @@ footer {
     & > li {
       & > a {
         margin: 0 10px;
-        padding: 15px 0 2px;
+        padding: 11px 0 2px;
         color: #ffffff;
         float: none;
         text-decoration: none;
@@ -280,6 +302,31 @@ footer {
           background: none;
           border-bottom: 2px solid rgba(245,245,245, 0.2);
           color: #ffffff;
+        }
+      }
+    }
+    .text {
+      position: absolute;
+      top: 9px;
+      left: 200px;
+      width: 280px;
+      .phone {
+        margin-bottom: -5px;
+        padding-top: 1px;
+        span {
+          color: #ffffff;
+          &:first-child {
+            margin-right: 10px;
+          }
+        }
+      }
+      span {
+        &.email {
+          a {
+            &:hover {
+              text-decoration: none;
+            }
+          }
         }
       }
     }

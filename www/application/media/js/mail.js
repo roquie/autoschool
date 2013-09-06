@@ -18,12 +18,13 @@ $(function() {
             action,
             { id :  id },
             function(response) {
-                if (response.success === 1) {
+                if (response.status === 'success') {
                     $('#editor').html(response.data.text);
-                } else {
+                }
+                if (response.status === 'error') {
                     noty({
-                        text   : response.msg,
-                        type   : response.status
+                        type   : response.status,
+                        text   : response.msg
                     });
                 }
             },

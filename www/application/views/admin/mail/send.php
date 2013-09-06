@@ -45,7 +45,7 @@
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">
                                         <span class="caret"></span>
                                     </button>
-                                    <ul class="dropdown-menu" id="tpl" data-url="<?=URL::site('admin/send/tpl/select')?>">
+                                    <ul class="dropdown-menu" id="tpl" data-url="<?=URL::site('admin/admin/tpl/select')?>">
                                         <?foreach ($titles as $title): ?>
                                             <li><a href="#" data-id="<?=$title->id?>"><?=Security::xss_clean($title->title)?></a></li>
                                         <?endforeach;?>

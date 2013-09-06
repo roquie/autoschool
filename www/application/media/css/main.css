@@ -90,6 +90,24 @@ footer {
 .main .span5 {
   padding-top: 20px;
 }
+.main .span7 {
+  position: relative;
+}
+.main .text {
+  position: absolute;
+  top: 40px;
+  left: 13px;
+}
+.main .text span {
+  font-size: 14.5pt;
+}
+.main .text span.email a {
+  font-size: 14.5pt !important;
+  border-bottom: 1px dotted #cccccc;
+}
+.main .text span.email a:hover {
+  text-decoration: none;
+}
 /*
   блок с информационными блоками о_О
 */
@@ -221,7 +239,7 @@ footer ul li > a:hover {
 }
 .navbar .nav > li > a {
   margin: 0 10px;
-  padding: 15px 0 2px;
+  padding: 11px 0 2px;
   color: #ffffff;
   float: none;
   text-decoration: none;
@@ -230,6 +248,25 @@ footer ul li > a:hover {
   background: none;
   border-bottom: 2px solid rgba(245, 245, 245, 0.2);
   color: #ffffff;
+}
+.navbar .nav .text {
+  position: absolute;
+  top: 9px;
+  left: 200px;
+  width: 280px;
+}
+.navbar .nav .text .phone {
+  margin-bottom: -5px;
+  padding-top: 1px;
+}
+.navbar .nav .text .phone span {
+  color: #ffffff;
+}
+.navbar .nav .text .phone span:first-child {
+  margin-right: 10px;
+}
+.navbar .nav .text span.email a:hover {
+  text-decoration: none;
 }
 /*
   кнопка подать документы

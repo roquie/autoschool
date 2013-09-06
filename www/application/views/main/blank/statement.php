@@ -3,7 +3,7 @@
 <?=HTML::script('js/vendor/chosen.js')?>
 <?=HTML::style('css/vendor/chosen.css')?>
 <div class="row">
-    <div class="container" style="margin-top: 75px">
+    <div class="container" style="margin-top: 35px">
         <div id="result">
             <h2 class="info">
                 Чтобы оставить заявку на поступление в автошколу, вам нужно просто ввести необходимую информацию в соответствующие поля. Всё остальное мы сделаем за вас. <br>
@@ -33,7 +33,7 @@
                             </div>
 
                             <label for="grajdanstvo">Гражданство</label>
-                            <select id="grajdanstvo" name="grajdanstvo" style="width: 463px" data-req="true" tabindex="5">
+                            <select id="grajdanstvo" name="grajdanstvo" style="width: 453px" data-req="true" tabindex="5">
                                 <option>РФ</option>
                                 <option>Украина</option>
                                 <option>Белоруссия</option>
@@ -77,8 +77,8 @@
                             <input type="text" id="from" name="pasport_kem_vydan" data-req="true" tabindex="11">
 
                             <label>Телефон</label>
-                            <input class="span6" type="text" id="telephone_m" name="dom_tel" data-value="мобильный" data-req="true"  tabindex="12">
-                            <input class="span6 pull-right" type="text" id="telephone_d" name="mob_tel" data-value="домашний" data-req="true" tabindex="13">
+                            <input class="span6" type="text" id="telephone_m" name="mob_tel" data-value="мобильный" data-req="true"  tabindex="12">
+                            <input class="span6 pull-right" type="text" id="telephone_d" name="dom_tel" data-value="домашний" data-req="true" tabindex="13">
 
                             <label for="obrazovanie">Образование</label>
                             <input type="text" name="obrazovanie" id="obrazovanie" data-req="true" tabindex="14">
@@ -108,7 +108,6 @@
                     <br>
                     <h1>Договор</h1>
                     <div class="row-fluid">
-
                         <div class="span12">
 
 <!--                            <div class="check">

@@ -63,7 +63,7 @@ function validate(form, fields, options) {
  * @param fields
  * @param addData
  */
-function send_ajax( form, callback, options, blurBalloon, fields, addData ) {
+function send_ajax( form, callback, options, fields, addData ) {
     var action,
         data = '',
         field,

@@ -3,8 +3,6 @@
 class Controller_Admin_Mail extends Controller_Ajax
 {
 
-    private $_attache = array();
-
     public function action_send_mail()
     {
         $valid = $this->ajax_xssclean($_POST);
@@ -48,11 +46,6 @@ class Controller_Admin_Mail extends Controller_Ajax
 
     }
 
-    public function action_lol()
-    {
-        echo View::factory('admin/mail/files');
-    }
-
     public function action_getFiles()
     {
         $dir = Arr::get($_POST, 'path');
@@ -81,13 +74,6 @@ class Controller_Admin_Mail extends Controller_Ajax
             'path' => $dir,
             'files' => $data
         ))->render();
-    }
-
-    public function action_attache()
-    {
-        foreach (Arr::get($_POST, 'files') as $file)
-            $this->_attache[] = $file;
-        $this->ajax_data($this->_attache);
     }
 
 }

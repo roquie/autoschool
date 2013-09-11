@@ -110,9 +110,9 @@
                     <div class="row-fluid">
                         <div class="span12">
 
-                            <div class="check">
+                            <div class="check active">
                                 <span class="label-check">Заказчиком будет родитель</span>
-                                <input type="checkbox" name="parent">
+                                <input type="checkbox" name="parent" checked>
                             </div>
 
                             <legend>Заказчик</legend>

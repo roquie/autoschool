@@ -107,7 +107,7 @@ class Controller_WordTemplate extends Controller_Ajax
         $this->ajax_msg(
             View::factory('main/blank/result', array(
                 'statement' => URL::site('updownload/'.$file),
-                'contract' => URL::site('updownload/contracts/contract_'.date('d_m_Y_H_i_s').'.docx'),
+                'contract' => URL::site('updownload/'.$contr),
                 'age' => $this->getAge($data['data_rojdeniya'])
             ))->render()
         );

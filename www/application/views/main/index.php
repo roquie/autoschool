@@ -135,10 +135,10 @@
             <div class="span6">
                 <h1>Документы для поступления</h1>
                 <ul class="dash">
-                    <li><span>заявление;</span></li>
-                    <li><span>договор;</span></li>
+                    <li><span>заявление, <a href="<?=URL::site('updownload/other_files/Zaivlenie.doc')?>">скачать</a>;</span></li>
+                    <li><span>договор, <a href="<?=URL::site('updownload/other_files/Dogovor.doc')?>">скачать</a>;</span></li>
                     <li><span>фотографии 3х4 – 3 шт (любые);</span></li>
-                    <li><span>копия паспорта – первой строницы и прописки;</span></li>
+                    <li><span>копия паспорта – первой страницы и прописки;</span></li>
                     <li><span>для жителей других городов – временная регистрация минимум на пол года.</span></li>
                 </ul>
                 <br>
@@ -163,7 +163,7 @@
                         <input name="name" type="text" class="span2" data-placement="top" data-req="true" data-value="Имя">
                         <input name="email" type="text" class="input-large" data-placement="top" data-req="true" data-value="Email адрес">
                         <textarea name="message" class="span5" rows="5" data-req="true" data-value="Сообщение"></textarea>
-                        <input type="submit" class="btn btn-primary span2">
+                        <input type="submit" class="btn btn-primary span2" value="Отправить">
                     </form>
                 </div>
             </div>

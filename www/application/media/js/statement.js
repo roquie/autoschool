@@ -33,8 +33,6 @@ $(function() {
      * Маски для ввода
      */
     $("#telephone_m, #telephone_d, #phoneCustomer").mask("8 (999) 999-99-99");
-    $("#seriya").mask("99 99");
-    $("#nomer").mask("999 999");
     $('#data_rojdeniya, #pasport_data_vyda4i').mask('99.99.9999');
 
     /**

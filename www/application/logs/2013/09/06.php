@@ -718,3 +718,66 @@
 #7 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
 #8 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
 #9 {main} in file:line
+2013-09-06 18:11:24 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку D:\OpenServer\domains\autoschool.ru\www\application\output_blanks/contracts невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 18:11:24 --- DEBUG: #0 D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('D:\OpenServer\d...')
+#1 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 D:\OpenServer\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 18:11:26 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку D:\OpenServer\domains\autoschool.ru\www\application\output_blanks/contracts невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 18:11:26 --- DEBUG: #0 D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('D:\OpenServer\d...')
+#1 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 D:\OpenServer\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 18:12:30 --- CRITICAL: TemplatedocxException [ 0 ]: Запись в папку D:\OpenServer\domains\autoschool.ru\www\application\output_blanks/contracts невозможна ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 112 ] in D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 18:12:30 --- DEBUG: #0 D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(91): Template_TemplateDocx->save('D:\OpenServer\d...')
+#1 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#2 [internal function]: Kohana_Controller->execute()
+#3 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#4 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#6 D:\OpenServer\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php:91
+2013-09-06 18:12:31 --- CRITICAL: ErrorException [ 2 ]: rmdir(D:\OpenServer\domains\autoschool.ru\www\application\templates/zayavlenie/template\docProps): Directory not empty ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 137 ] in file:line
+2013-09-06 18:12:31 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'rmdir(D:\OpenSe...', 'D:\OpenServer\d...', 137, Array)
+#1 D:\OpenServer\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(137): rmdir('D:\OpenServer\d...')
+#2 D:\OpenServer\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(122): Template_TemplateDocx->deleteLocalDir('D:\OpenServer\d...')
+#3 D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(67): Template_TemplateDocx->save('D:\OpenServer\d...')
+#4 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#5 [internal function]: Kohana_Controller->execute()
+#6 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#7 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 D:\OpenServer\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#10 {main} in file:line
+2013-09-06 18:12:31 --- CRITICAL: ErrorException [ 2 ]: unlink(D:\OpenServer\domains\autoschool.ru\www\application\templates/zayavlenie/template\word\document.xml): Permission denied ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 139 ] in file:line
+2013-09-06 18:12:31 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'unlink(D:\OpenS...', 'D:\OpenServer\d...', 139, Array)
+#1 D:\OpenServer\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(139): unlink('D:\OpenServer\d...')
+#2 D:\OpenServer\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(122): Template_TemplateDocx->deleteLocalDir('D:\OpenServer\d...')
+#3 D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(67): Template_TemplateDocx->save('D:\OpenServer\d...')
+#4 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#5 [internal function]: Kohana_Controller->execute()
+#6 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#7 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 D:\OpenServer\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#10 {main} in file:line
+2013-09-06 18:12:31 --- CRITICAL: ErrorException [ 2 ]: rmdir(D:\OpenServer\domains\autoschool.ru\www\application\templates/zayavlenie/template/): Directory not empty ~ MODPATH\docxtemplate\classes\Template\TemplateDocx.php [ 143 ] in file:line
+2013-09-06 18:12:31 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(2, 'rmdir(D:\OpenSe...', 'D:\OpenServer\d...', 143, Array)
+#1 D:\OpenServer\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(143): rmdir('D:\OpenServer\d...')
+#2 D:\OpenServer\domains\autoschool.ru\www\modules\docxtemplate\classes\Template\TemplateDocx.php(122): Template_TemplateDocx->deleteLocalDir('D:\OpenServer\d...')
+#3 D:\OpenServer\domains\autoschool.ru\www\application\classes\Controller\WordTemplate.php(67): Template_TemplateDocx->save('D:\OpenServer\d...')
+#4 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_WordTemplate->action_zayavlenie()
+#5 [internal function]: Kohana_Controller->execute()
+#6 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_WordTemplate))
+#7 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#8 D:\OpenServer\domains\autoschool.ru\www\system\classes\Kohana\Request.php(990): Kohana_Request_Client->execute(Object(Request))
+#9 D:\OpenServer\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#10 {main} in file:line

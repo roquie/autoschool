@@ -32,18 +32,13 @@ class Controller_WordTemplate extends Controller_Ajax
             exit;
         }
 
-/*        $this->ajax_msg('Файла шаблона нет и/или не читается', 'error');
-        exit;*/
-
-        $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
-
         /**
          * ====================================
          * Формирование заявления
          * ====================================
          */
+        $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
-       // $document->setValue('VU', '');
         $document->setValue('Fam', $this->upName($data['familiya']));
         $document->setValue('Name', $this->upName($data['imya']));
         $document->setValue('Otchestvo', $this->upName($data['ot4estvo']));
@@ -71,20 +66,39 @@ class Controller_WordTemplate extends Controller_Ajax
          * Формирование договора
          * ====================================
          */
-        $contract = new TemplateDocx(APPPATH.'templates/contract/contract.docx');
+        $contract = new TemplateDocx(APPPATH.'templates/contract/dogovor.docx');
 
 
         // Если указано, что 18 лет, то заказчик сам слушатель, иначе родитель или опекун
-        if (isset($data['age'])) {
+        if ($this->getAge($data['data_rojdeniya']) > 18) {
             $customer = $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']);
+            $customer_seriya = $data['pasport_seriya'];
+            $customer_nomer = $data['pasport_nomer'];
+            $customer_vidan = $data['pasport_kem_vydan'];
+            $customer_address = $data['adres_reg_po_pasporty'];
+            $customer_phone = $data['mob_tel'];
         } else {
             $customer = $this->upName($data['familiyaCustomer']) . ' ' . $this->upName($data['imyaCustomer']) . ' ' . $this->upName($data['ot4estvoCustomer']);
+            $customer_seriya = $data['pasport_seriyaCustomer'];
+            $customer_nomer = $data['pasport_nomerCustomer'];
+            $customer_vidan = $data['pasport_kem_vydanCustomer'];
+            $customer_address = $data['adres_reg_po_pasportyCustomer'];
+            $customer_phone = $data['phoneCustomer'];
         }
 
-        //@todo setValue - limit in preg_replace
         $contract->setValue('Customer', $customer);
-        $contract->setValue('Listener', $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']));
+        $contract->setValue('CSeriya', $customer_seriya);
+        $contract->setValue('CNomer', $customer_nomer);
+        $contract->setValue('CVidan', $customer_vidan);
+        $contract->setValue('CAddress', $customer_address);
+        $contract->setValue('CPhone', $customer_phone);
 
+        $contract->setValue('Listener', $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']));
+        $contract->setValue('LSeriya', $data['pasport_seriya']);
+        $contract->setValue('LNomer', $data['pasport_nomer']);
+        $contract->setValue('LVidan', $data['pasport_kem_vydan']);
+        $contract->setValue('LAddress', empty($data['adres_reg_po_pasporty']) ? $data['vrem_reg'] : $data['adres_reg_po_pasporty']);
+        $contract->setValue('LPhone', $data['mob_tel']);
 
         $contr = 'contracts/contract_'.date('d_m_Y_H_i_s').'.docx';
 
@@ -94,9 +108,18 @@ class Controller_WordTemplate extends Controller_Ajax
             View::factory('main/blank/result', array(
                 'statement' => URL::site('updownload/'.$file),
                 'contract' => URL::site('updownload/contracts/contract_'.date('d_m_Y_H_i_s').'.docx'),
+                'age' => $this->getAge($data['data_rojdeniya'])
             ))->render()
         );
 
+    }
+
+    protected function getAge($age) {
+        $mas = explode('.', $age);
+        if($mas[1] > date('m') || $mas[1] == date('m') && $mas[0] > date('d'))
+            return (date('Y') - $mas[2] - 1);
+        else
+            return (date('Y') - $mas[2]);
     }
 
     protected function upName($name)

@@ -162,7 +162,7 @@ Route::set('Updownload', 'updownload/<folder>/<filename>.<format>',
     array(
         'folder' => '.+',
         'filename' => '.+',
-        'format' => '(doc|docx)'
+        'format' => '(doc|docx|pdf)'
     ))
     ->defaults(array(
         'controller' => 'Updownload',

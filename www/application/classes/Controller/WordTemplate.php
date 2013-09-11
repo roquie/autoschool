@@ -69,8 +69,8 @@ class Controller_WordTemplate extends Controller_Ajax
         $contract = new TemplateDocx(APPPATH.'templates/contract/dogovor.docx');
 
 
-        // Если указано, что 18 лет, то заказчик сам слушатель, иначе родитель или опекун
-        if ($this->getAge($data['data_rojdeniya']) > 18) {
+        // Если 18 лет и не указано, что заказчиком будет родитель, то заказчик сам слушатель, иначе родитель или опекун
+        if ($this->getAge($data['data_rojdeniya']) > 18 && !isset($data['parent'])) {
             $customer = $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']);
             $customer_seriya = $data['pasport_seriya'];
             $customer_nomer = $data['pasport_nomer'];

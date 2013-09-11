@@ -110,11 +110,11 @@
                     <div class="row-fluid">
                         <div class="span12">
 
-<!--                            <div class="check">
-                                <span class="label-check">Мне есть 18</span>
-                                <input type="checkbox" name="age">
+                            <div class="check">
+                                <span class="label-check">Заказчиком будет родитель</span>
+                                <input type="checkbox" name="parent">
                             </div>
--->
+
                             <legend>Заказчик</legend>
 
                             <div class="row-fluid">

@@ -12,7 +12,7 @@ body {
   height: 100%;
 }
 #wrap {
-  min-height: 91%;
+  min-height: 100%;
   height: auto !important;
   height: 100%;
   margin: 0 auto -60px;
@@ -125,6 +125,7 @@ footer {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.07);
   border: 1px solid #f5f5f5;
   height: 230px;
+  margin-left: 18px;
 }
 .infoblocks .span3 .grid {
   padding: 20px;
@@ -138,9 +139,6 @@ footer {
 /*
   чуть уменьшил расстояние между инфоблоками, т.к. изза 1px border"a уезжало на вторую строку
 */
-[class*="span"] {
-  margin-left: 18px;
-}
 /*
   блок с теорией
 */

@@ -14,7 +14,7 @@
                 </ul>
                 <nav class="nav-collapse">
                     <ul class="nav pull-right" style="margin-right: 65px">
-                        <li><a href="http://twitter.com/autompt" target="_blank"><i class="icon-comments"></i> Новости</a></li>
+                        <li><a href="http://twitter.com/autompt" target="auto-twitter"><i class="icon-comments"></i> Новости</a></li>
                         <li><a href="<?=URL::site('/#price')?>" id="ajax"><i class="icon-tags"></i> Цены</a></li>
                         <li><a href="<?=URL::site('/#contacts')?>" id="ajax"><i class="icon-book"></i> Контакты</a></li>
                         <!--<li><a href="<?/*=URL::site('/about')*/?>"><i class="icon-info-sign"></i> О нас</a></li>-->

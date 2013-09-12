@@ -113,6 +113,8 @@ footer {
 */
 .infoblocks {
   padding-bottom: 60px;
+  display: block;
+  margin: 0 auto;
 }
 .infoblocks h2 {
   text-align: center;
@@ -136,9 +138,6 @@ footer {
   margin: 0 auto;
   padding-bottom: 10px;
 }
-/*
-  чуть уменьшил расстояние между инфоблоками, т.к. изза 1px border"a уезжало на вторую строку
-*/
 /*
   блок с теорией
 */

@@ -1,7 +1,14 @@
 <?=HTML::style('css/send.css')?>
+<?=HTML::style('media/css/style.css')?>
+<?=HTML::script('media/js/jquery.knob.js')?>
+<?=HTML::script('media/js/jquery.ui.widget.js')?>
+<?=HTML::script('media/js/jquery.iframe-transport.js')?>
+<?=HTML::script('media/js/jquery.fileupload.js')?>
+<?=HTML::script('media/js/jquery.fileupload-process.js')?>
+<?=HTML::script('media/js/jquery.fileupload-validate.js')?>
 <?=HTML::script('js/mail.js')?>
 <script>
-    $().ready(function() {
+    $(function() {
         equalHeight($('#formSend'), $('#listStd'));
     });
 </script>
@@ -28,15 +35,22 @@
                             ->set('id_div_editor', 'editor')
                             ->set('script_load', true)
                             ->render()?>
-
                         <!---->
+                        <div id="uploadFiles">
+                            <ul></ul>
+                        </div>
                         <!--контейнер с кнопками Отправить и Очистить-->
                         <div style="margin-top: 10px">
                             <input type="submit" class="btn btn-success" value="Отправить">
+                    </form>
+
                             <button type="button" id="reset" class="btn">Очистить</button>
                             <div class="pull-right">
                                 <div class="btn-group dropup">
-                                    <a href="#upload_files" role="button" rel="tooltip" title="Загрузить файл" class="btn" data-toggle="modal"><i class="icon-upload-alt"></i></a>
+                                    <span class="btn" id="fileUpload">
+                                        <i class="icon-upload-alt"></i>
+                                        <input id="upload" type="file" name="upl" data-url="<?=URL::site('uploadifive')?>" multiple>
+                                    </span>
                                     <!--<button  type="button" class="btn"></i></button>-->
                                     <a href="#upload_files" rel="tooltip" data-toggle="modal" data-url="<?=URL::site('admin/mail/getFiles')?>" title="Прикрепить файл к письму" id="attacheModal" class="btn"><i class="icon-file-alt"></i></a>
                                 </div>
@@ -52,10 +66,7 @@
                                     </ul>
                                 </div>
                             </div>
-
                         </div>
-                    </form>
-
                 </div>
             </div>
 
@@ -99,11 +110,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Загрузить файлы</h3>
     </div>
-    <div class="modal-body">
-        <?Uploader::factory()->getUploadForm()?>
-    </div>
+    <div class="modal-body"></div>
     <div class="modal-footer">
-        <!--<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>-->
         <button data-dismiss="modal" aria-hidden="true" class="pull-left btn btn-primary">Готово</button>
     </div>
 </div>

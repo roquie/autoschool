@@ -52,22 +52,28 @@ class Controller_Uploader extends Controller
     {
         $uploadDir = $this->_config['upload_dir'];
         $fileTypes = $this->_config['file_types'];
-        $verifyToken = md5(md5($this->_config['salt'] . Arr::get($_POST, 'timestamp')));
+        //$verifyToken = md5(md5($this->_config['salt'] . Arr::get($_POST, 'timestamp')));
 
-        if (!empty($_FILES) && Arr::get($_POST, 'token') === $verifyToken) {
-            $tempFile   = $_FILES['Filedata']['tmp_name'];
-            $targetFile = $uploadDir . $_FILES['Filedata']['name'];
+        if (isset($_FILES['upl']) && /*Arr::get($_POST, 'token') === $verifyToken*/$_FILES['upl']['error'] == 0) {
+            $tempFile   = $_FILES['upl']['tmp_name'];
+            $targetFile = $uploadDir . $_FILES['upl']['name'];
             // Проверка типа файла
-            $fileParts = pathinfo($_FILES['Filedata']['name'], PATHINFO_EXTENSION);
+            $fileParts = pathinfo($_FILES['upl']['name'], PATHINFO_EXTENSION);
             if (in_array(strtolower($fileParts), $fileTypes)) {
                 // Сохранение
                 move_uploaded_file($tempFile, $targetFile);
-                echo 1;
+                echo '{"status":"success"}';
+                exit;
+                //echo 1;
             } else {
-                echo 'Неверный тип данных';
+                echo '{"status":"error"}';
+                exit;
+                //echo 'Неверный тип данных';
             }
         } else {
-            echo 'Соль не совпадает';
+            echo '{"status":"error"}';
+            exit;
+            //echo 'Соль не совпадает';
         }
     }
 

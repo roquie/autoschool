@@ -25,8 +25,9 @@ class Kohana_Uploader
     public function getUploadForm()
     {
         $cfg = $this->_config;
-        require Kohana::find_file('view/uploader', 'index', 'php');
-      //return View::factory('uploader/index')->render(); - not working :((
+        //require Kohana::find_file('view/uploader', 'index', 'php');
+      return View::factory('uploader/qwe')->render(); // It's working =) имя папки с вьюшками надо называть не 'view', а 'views'
+        // (old)- not working :((
     }
 
 

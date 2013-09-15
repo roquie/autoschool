@@ -49,7 +49,7 @@ $(function() {
             }
         },
         trigger : 'blur',
-        offsetTopBalloon : 20
+        offsetTopBalloon : 30
     });
 
     /**

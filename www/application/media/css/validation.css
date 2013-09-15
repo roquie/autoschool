@@ -24,7 +24,8 @@ textarea:focus.error {
   position: absolute;
   z-index: 1020;
   opacity: 0;
-  margin-left: 18px;
+  left: 0;
+  top : 0;
   filter: alpha(opacity=0);
   word-break: break-all;
   display: block;

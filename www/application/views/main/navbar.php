@@ -14,7 +14,7 @@
                 </ul>
                 <nav class="nav-collapse">
                     <ul class="nav pull-right" style="margin-right: 65px">
-                        <li><a href="http://twitter.com/autompt" target="auto-twitter"><i class="icon-comments"></i> Новости</a></li>
+                        <li><a href="#secondary" id="slide-left" data-url="<?=URL::site('twitter/tweets')?>"><i class="icon-comments"></i> Новости</a></li><!--http://twitter.com/autompt-->
                         <li><a href="<?=URL::site('/#price')?>" id="ajax"><i class="icon-tags"></i> Цены</a></li>
                         <li><a href="<?=URL::site('/#contacts')?>" id="ajax"><i class="icon-book"></i> Контакты</a></li>
                         <!--<li><a href="<?/*=URL::site('/about')*/?>"><i class="icon-info-sign"></i> О нас</a></li>-->
@@ -32,6 +32,12 @@
         </div>
     </div>
 </header>
+
+<div id="secondary">
+    <div class="title">Последние твиты загружаются... Пожалуйста, подождите</div><br>
+    <div class="loader"><img src="<?=URL::site('img/loader.gif')?>" alt=""/></div>
+</div>
+
 
 
 

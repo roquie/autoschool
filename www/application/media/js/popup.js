@@ -98,7 +98,6 @@
         , show: function () {
             var container = $(this.options.container)
               , placement
-              , popupStyle = {}
               , top = this.$element.offset()['top']
               , left = this.$element.offset()['left']
               , t_class = '';

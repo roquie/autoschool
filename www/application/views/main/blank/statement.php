@@ -38,7 +38,7 @@
                             <option>Белоруссия</option>
                         </select>
 
-                        <label for="mesto_rojdeniya">Место рождения</label>
+                        <label for="mesto_rojdeniya" style="margin-top: 12px">Место рождения</label>
                         <input type="text" name="mesto_rojdeniya" id="mesto_rojdeniya" data-req="true" tabindex="6">
 
                         <div class="check" id="toggleReg">

@@ -42,6 +42,7 @@
                 arrowClass,
                 message,
                 pos;
+
             arrowClass = (input.data('placement')) ? input.data('placement') : this.options.placement;
             balloon = $('<div>', {
                 class : 'formError arrow-'+arrowClass
@@ -52,14 +53,19 @@
                 , height: input[0].offsetHeight
             }, input.offset());
 
+            input.wrap($('<span>').css({
+                    position : 'relative'
+                })
+            );
+
             switch (arrowClass) {
                 case 'top' :
-                    inputTopPosition = pos.top - input.height() - this.options.offsetTopBalloon;
-                    inputLeftPosition = pos.left - 18;
+                    inputTopPosition = - (input.height() + this.options.offsetTopBalloon);
+                    inputLeftPosition = 0;
                     break;
                 case 'right' :
-                    inputTopPosition = pos.top - 3;
-                    inputLeftPosition = input.offset().left + input.width();
+                    inputTopPosition = - (this.options.offsetTopBalloon + 18);
+                    inputLeftPosition = input.width() + 18;
                     break;
                 case 'bottom' :
                     inputTopPosition = pos.top + input.height() + this.options.offsetTopBalloon;

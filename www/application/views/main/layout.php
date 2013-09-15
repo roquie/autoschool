@@ -12,6 +12,9 @@
     <?=HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic')?>
     <?=HTML::style('css/vendor/flexslider.css')?>
     <?=HTML::style('css/validation.css')?>
+    <?=HTML::style('css/pageslide.css')?>
+    <?=HTML::style('css/vendor/jquery.tweet.css')?>
+    <?=HTML::style('media-twitter/css/twitter.css')?>
 
     <!--[if IE 9]>
         <link rel="stylesheet" href="css/ie.css"/>
@@ -31,9 +34,12 @@
     <?=HTML::script('js/vendor/jquery.flexslider-min.js')?>
     <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
     <?=HTML::script('js/validation.js')?>
+    <?=HTML::script('js/vendor/jquery.tweet.js')?>
     <?=HTML::script('js/notification.js')?>
+    <?=HTML::script('js/jquery.pageslide.js')?>
 
     <script>
+        var cnt_click = 0; // кол-во обновлений новостей за 1 раз
         $(function(){
             $(window).load(function() {
                 first_load();
@@ -67,6 +73,40 @@
 
             $("[rel='tooltip']").tooltip();
 
+            /**
+             * Сдвиг контента, выдвигающаяся панель сбоку
+             */
+            $("#slide-left").pageSlide({
+                width : '260px'
+            });
+
+            $('#slide-left').on('click', function(e) {
+                e.preventDefault();
+                if (!$(this).data('load')) {
+                    var action = $(this).data('url');
+                    $('#pageslide-content').load(action);
+                    $(this).data('load', true);
+                }
+            });
+
+            /**
+             * Обновление новостей
+             */
+            $('body').on('click', '#update-slide', function(e) {
+                var action = $('#slide-left').data('url'),
+                    obj = $('#slide-left').attr('href');
+                if (cnt_click < 5) {
+                    $('#pageslide-content').html($(obj).html()).load(action);
+                    $('#slide-left').data('load', true);
+                    cnt_click++;
+                }
+            });
+            /**
+             * Кнопка закрыть боковую панель новостей
+             */
+            $('body').on('click', '#close-slide', function(e) {
+                e.preventDefault();
+            });
         });
         function first_load() {
             if (location.hash != '') {

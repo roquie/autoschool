@@ -137,13 +137,14 @@ function balloon(input, options) {
             break;
         case 'right' :
             inputTopPosition = pos.top - options.offsetTopBalloon;
-            inputLeftPosition = input.offset().left + input.width();
+            inputLeftPosition = input.offset().left + input.width() + 18;
             break;
         case 'bottom' :
             inputTopPosition = pos.top + input.height() + options.offsetTopBalloon;
             inputLeftPosition = pos.left - 18;
             break;
     }
+
 
     message = (input.data('error')) ? input.data('error') : 'Заполните поле';
     balloon.html(message).offset({

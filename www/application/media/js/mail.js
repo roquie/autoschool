@@ -39,8 +39,7 @@ $(function() {
     $('#send').on('submit', function(e) {
         e.preventDefault();
         alert(attache.slice(0, -1));
-/*
-        send_ajax($(this), function(response) {
+/*        send_ajax($(this), function(response) {
             // Если пустые поля
             if (response.status === 'empty') {
                 var element,
@@ -70,8 +69,7 @@ $(function() {
                 $('#reset').trigger('click');
                 attache = '';
             }
-        }, {offsetTopBalloon : 3}, ['editor'], {'files' : attache.slice(0, -1)});
-*/
+        }, {offsetTopBalloon : 5}, ['editor'], {'files' : attache.slice(0, -1)});*/
     });
 
     /**

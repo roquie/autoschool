@@ -1,0 +1,17 @@
+/*****************************
+ * Right Panel
+ *****************************/
+#secondary {
+  display: none;
+}
+#pageslide-content .title {
+  margin-top: 10px;
+}
+#pageslide-content .title,
+#pageslide-content .loader {
+  color: #ffffff;
+  text-align: center;
+}
+#pageslide-slide-wrap {
+  background: url("../img/right_panel.png") repeat-y;
+}

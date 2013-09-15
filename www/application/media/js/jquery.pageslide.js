@@ -91,11 +91,18 @@
                 width: this.options.width
             }, this.options.delay );
             psBodyWrap.stop(true, true).animate( pos_animate, this.options.delay);
-            $(document).on('click', $.proxy(this.close, this));
+            $(document).on('click', $.proxy(this.documentClick, this));
         },
-        close : function(e) {
+        documentClick : function (e) {
+            var el = $('#pageslide-slide-wrap')
+                , self = $(e.target);
+            if(self.closest('#pageslide-slide-wrap').length === 0) {
+                this.close();
+            }
+        },
+        close : function() {
             var pos_animate = (this.options.location === 'left') ? {left: "0"} : {right: "0"};
-            if ($("#pageslide-slide-wrap").css('width') != '0px' && e.target.tagName === "A") {
+            if ($("#pageslide-slide-wrap").css('width') != '0px') {
                 $("#pageslide-body-wrap").animate(pos_animate, this.options.delay);
                 $("#pageslide-slide-wrap").animate({width: "0"}, this.options.delay, function() {
                     //$("#pageslide-content").hide();

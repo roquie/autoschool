@@ -34,7 +34,7 @@
         <? endforeach; ?>
         <div class="button">
             <a href="#" id="close-slide" class="btn pull-left">Закрыть</a>
-            <span class="btn btn-primary pull-right" id="update-slide">Обновить</span>
+            <a href="#" id="update-slide" class="btn btn-primary pull-right">Обновить</a>
         </div>
     </div>
 </div>

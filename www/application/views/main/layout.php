@@ -13,7 +13,6 @@
     <?=HTML::style('css/vendor/flexslider.css')?>
     <?=HTML::style('css/validation.css')?>
     <?=HTML::style('css/pageslide.css')?>
-    <?=HTML::style('css/vendor/jquery.tweet.css')?>
     <?=HTML::style('media-twitter/css/twitter.css')?>
 
     <!--[if IE 9]>
@@ -100,12 +99,14 @@
                     $('#slide-left').data('load', true);
                     cnt_click++;
                 }
+                return false;
             });
             /**
              * Кнопка закрыть боковую панель новостей
              */
             $('body').on('click', '#close-slide', function(e) {
-                e.preventDefault();
+                $("#slide-left").pageSlide('close');
+                return false;
             });
         });
         function first_load() {

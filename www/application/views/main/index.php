@@ -121,17 +121,25 @@
         <div class="row">
             <div class="span6">
                 <h1>Цены</h1>
-                <div class="row">
+<!--                <div class="row">
                     <div class="span2">
-                        <img src="<?=URL::site('img/main/calendar.png')?>" alt="Календарик"/>
+                        <img src="<?/*=URL::site('img/main/calendar.png')*/?>" alt="Календарик"/>
                         <p>Сроки обучения составляют <br> 2-2,5 месяца</p>
                     </div>
                     <div class="span3">
-                        <img src="<?=URL::site('img/main/purse.png')?>" alt="Кошелёк"/>
+                        <img src="<?/*=URL::site('img/main/purse.png')*/?>" alt="Кошелёк"/>
                         <p>Стоимость обучения <br>22 000 <abbr title="рублей">Р.</abbr> с возможностью поблочной оплаты.</p>
                     </div>
                 </div>
-            </div>
+-->
+                <ul class="dash">
+                    <li><span>Сроки обучения составляют 2-2,5 месяца;</span></li>
+                    <li><span>Стоимость обучения 22 000 <abbr title="рублей">Р.</abbr> с возможностью поблочной оплаты.;</span></li>
+                    <li><span>Предоставление медицинской комиссии (на данный момент стоимость составляет 1300 р);</span></li>
+                    <li><span>Комплект литературы ( стоимость минимального комплекта 600 р – максимального 900 р);</span></li>
+                    <li><span>Дополнительные занятия помимо базовых практических часов стоят 1200 р  и составляют 2 академических часа.</span></li>
+                </ul>
+                </div>
             <div class="span6">
                 <h1>Документы для поступления</h1>
                 <ul class="dash">

@@ -1,4 +1,7 @@
 $(function() {
+
+    var body = $('body');
+
     /**
      * Настройки для календаря
      * @type {{monthNames: Array, monthNamesShort: Array, dayNames: Array, dayNamesMin: Array}}
@@ -25,7 +28,7 @@ $(function() {
     $('#grajdanstvo').chosen();
 
     // Отображение календаря при нажатии на иконку календаря
-    $('body').on('click', '#calendar', function() {
+    body.on('click', '#calendar', function() {
         $(this).closest('.input-append').find('input').datepicker( "show" );
     });
 
@@ -38,40 +41,43 @@ $(function() {
     /**
      * Переключение ввода регистрации между регистрацией по паспорту и временной регистрацией
      */
-    $('body').on('click', '#toggleReg', function () {
-        $('#reg div.block').toggle();
+    body.on('click', '#toggleReg', function () {
+        $('#reg').toggle();
         if ($(this).find('input').prop('checked')) {
-            $('#adres_reg_po_pasporty').data('req', false);
             $('#vrem_reg').data('req', true);
         } else {
-            $('#adres_reg_po_pasporty').data('req', true);
             $('#vrem_reg').data('req', false);
         }
     });
 
     /**
-     * Переключение ввода регистрации между регистрацией по паспорту и временной регистрацией
+     * Выбор заказчика
      */
-    $('body').on('click', '#toggleAge', function () {
-        $('#reg div.block').toggle();
+    body.on('click', '#customer', function() {
         if ($(this).find('input').prop('checked')) {
-            $('#adres_reg_po_pasporty').data('req', false);
-            $('#vrem_reg').data('req', true);
+            $('#contract')[0].reset();
+            $(this).closest('.tab-pane').find('.placeholder').placeholder('default');
         } else {
-            $('#adres_reg_po_pasporty').data('req', true);
-            $('#vrem_reg').data('req', false);
+            $('#familCustomer').val($('#famil').val());
+            $('#imyaCustomer').val($('#imya').val());
+            $('#ot4estvoCustomer').val($('#ot4estvo').val());
+            $('#adres_reg_po_pasportyCustomer').val($('#adres_reg_po_pasporty').val());
+            $('#pasport_seriyaCustomer').val($('#seriya').val());
+            $('#pasport_nomerCustomer').val($('#nomer').val());
+            $('#fromCustomer').val($('#from').val());
+            $('#phoneCustomer').val($('#telephone_m').val());
         }
     });
-
 
     /**
      * Отображение поля для ввода другого значения
      */
     $('.drop').on('click', 'li', function () {
-        if ($(this).attr('id') === 'other')
-            $('#otherText').show().data('req', true);
-        else
-            $('#otherText').hide().data('req', false);
+        if ($(this).attr('id') === 'other') {
+            $('#otherText').show();
+        } else {
+            $('#otherText').hide();
+        }
     });
     /**
      * Заносим значение введённое в поле "Другое" в поле, откуда берётся значение для заявки
@@ -81,37 +87,108 @@ $(function() {
     });
 
     /**
-     * Отправка заявки
+     *
      */
-    $('#statement').ajaxForm({
-        before   : function() {
+    $('.tab-pane').hide().eq(0).show();
+    $('ul#tabs').find('li').eq(0).data('resolve', true);
+    /**
+     * Переход по вкладкам
+     */
+    $('ul#tabs').on('click', 'li', function(e) {
+        e.preventDefault();
+        if ($(this).data('resolve')) {
+            var tab = $(this).find('a').attr('href');
+            $('.tab-pane').hide();
+            $('ul#tabs').find('li').removeClass('active');
+            $(this).addClass('active');
+            $(tab).show();
+        }
+    });
+    /**
+     * Кнопка "далее"
+     */
+    body.on('click', 'button#next', function(e) {
+        e.preventDefault();
+        var tab = $('#tabs'),
+            new_tab = $(this).closest('.tab-pane').next('.tab-pane'),
+            cur_tab = $(this).closest('.tab-pane'),
+            nav = new_tab.attr('id'),
+            form = $(this).closest('form'),
+            is_success = false;
+        if (cur_tab.index() === 1) {
             $('.slct, .drop').css({ 'border-color': '#cecece' });
             if ($('#select').val() === '' || $('#select').val() === 'Другое') {
                 $('.slct, .drop').css({ 'border-color': '#bd4247' });
-                if ($('#otherText').data('req')) {
-                    $('#otherText').addClass('error');
+                is_success = false;
+            } else {
+                is_success = true;
+            }
+        }
+        var $link = tab.find('a[href^=#'+cur_tab.attr('id')+']');
+        $link.next('.error').remove();
+        if (validate(form) && is_success) {
+            $('.tab-pane').hide();
+            new_tab.show();
+            tab.find('li').removeClass('active');
+            tab.find('a[href^=#'+nav+']').parent('li').data('resolve', true).addClass('active');
+        } else {
+            $('<span>', {
+                class : 'error'
+            }).insertAfter($link);
+        }
+    });
+
+    /**
+     * Отправка заявки
+     */
+    $('#send').on('click', function(e) {
+        e.preventDefault();
+        var statement = {},
+            contract = {},
+            action,
+            field;
+        $.each($('#statement').serializeArray(), function(k, v) {
+            statement[v.name] = v.value;
+        });
+        $.each($('#contract').serializeArray(), function(k, v) {
+            contract[v.name] = v.value;
+        });
+        action = $(this).data('url');
+        $.post(
+            action,
+            {
+                statement : statement,
+                contract  : contract
+            },
+            function(response) {
+                if (response.status === 'success') {
+                    $('#result').html(response.msg);
                 }
-                return false;
-            }
-            return true;
-        },
-        callback : function(response) {
-            if (response.status === 'success') {
-                $('#result').html(response.msg);
-            }
-            if (response.status === 'error') {
-                noty({
-                    type : response.status,
-                    message : response.msg
-                });
-            }
-            if (response.status === 'empty') {
-                $.each(response.data, function (i, v) {
-                    $('input[name="' + v + '"], textarea[name="' + v + '"]').addClass('error');
-                });
-            }
-        },
-        balloon : false
+                if (response.status === 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status === 'empty') {
+                    var tab, nav, $link;
+                    $.each(response.data, function (key, value) {
+                        $.each(value, function(k, v) {
+                            field = $('input[name="' + v + '"], textarea[name="' + v + '"]');
+                            field.addClass('error');
+                        });
+                        tab = $('#'+key).closest('.tab-pane');
+                        nav = tab.attr('id');
+                        $link = $('#tabs').find('a[href^=#'+nav+']');
+                        $link.next('.error').remove();
+                        $('<span>', {
+                            class : 'error'
+                        }).insertAfter($link);
+                    });
+                }
+            },
+            'json'
+        );
     });
     /**
      * Подсказки в полях ввода

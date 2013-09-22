@@ -22,7 +22,7 @@ class Controller_Mail extends Controller_Ajax {
         }
 
         $result = Email::factory(null, $msg)
-            ->to('vik.melnikov@gmail.com', 'roquie0@gmail.com')
+            ->to('vik.melnikov@gmail.com', 'roquie0@gmail.com', 'auto@mpt.ru')
             ->from($from, $name)
             ->send();
 

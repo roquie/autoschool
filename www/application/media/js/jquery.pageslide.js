@@ -33,7 +33,7 @@
                     position : 'relative',
                     zIndex   : '0'
                 },
-                body = $('body');
+                body = $('#wrap');
             this.$element = $(element);
             this.options = $.extend( {}, $.fn[pluginName].defaults, options);
             if ($("#pageslide-body-wrap, #pageslide-content, #pageslide-slide-wrap").size() == 0) {
@@ -48,7 +48,7 @@
                     });
                 psBodyWrap.css(body_wrap_css).width( body.width() );
                 body.contents().wrapAll( psBodyWrap ); // оборчиваем всё содержимое body
-                //psSlideContent.width( this.options.width );
+                psSlideContent.width( this.options.width );
                 psSlideWrap.css(pageslide_wrap_css).append( psSlideContent );
                 body.append( psSlideWrap );
             }

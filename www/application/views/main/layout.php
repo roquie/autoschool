@@ -33,7 +33,7 @@
     <?=HTML::script('js/vendor/jquery.flexslider-min.js')?>
     <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
     <?=HTML::script('js/validation.js')?>
-    <?=HTML::script('js/vendor/jquery.tweet.js')?>
+    <?=HTML::script('js/general_fns.js')?>
     <?=HTML::script('js/notification.js')?>
     <?=HTML::script('js/jquery.pageslide.js')?>
 
@@ -118,11 +118,10 @@
             }
         }
     </script>
-
 </head>
 <body>
-
 <?=$navbar.PHP_EOL?>
+
 <div id="wrap">
     <?=$content.PHP_EOL?>
     <div id="push"></div>

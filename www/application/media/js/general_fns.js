@@ -5,12 +5,16 @@
  * @param options
  * @returns {boolean}
  */
-function validate(form, fields, options) {
+function validate(form, is_balloon, options, fields) {
     var element,
         is_success = true,
         data = form.serializeArray(),
         field,
         empty = false;
+
+    if (!is_balloon) {
+        is_balloon = false;
+    }
 
     form.find('input, textarea').removeClass('error').next('.formError').remove();
 
@@ -48,7 +52,8 @@ function validate(form, fields, options) {
             if (empty) {
                 is_success = false;
                 element.addClass('error');
-                balloon(element, options);
+                if (is_balloon)
+                    balloon(element, options);
                 empty = false;
             }
         }
@@ -59,21 +64,15 @@ function validate(form, fields, options) {
  * Если валидация прошла успешно, то ajax отправка формы на сервер
  * @param form
  * @param callback
- * @param options
  * @param fields
  * @param addData
  */
-function send_ajax( form, callback, options, fields, addData ) {
+function send_ajax( form, callback, fields, addData) {
     var action,
         data = '',
         field,
         value,
         i;
-
-    if (!validate(form, fields, options)) {
-        exit();
-    }
-
     if (typeof fields === 'object' && fields.length > 0) {
         $.each(fields, function(i, v) {
             field = $('#'+v);

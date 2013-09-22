@@ -12,26 +12,31 @@ class Controller_WordTemplate extends Controller_Ajax
     {
 
         $data = array();
+
         foreach ($_POST as $key => $value)
-            $data[$key] = Security::xss_clean($value);
+            foreach ($value as $k => $v)
+            $data[$key][$k] = Security::xss_clean($v);
 
         $error = array();
         foreach ($data as $key => $value)
-        {
-            if (empty($value)) {
-                if ((Arr::get($_POST, 'toggleReg') === null && $key === 'vrem_reg') ||
-                    (Arr::get($_POST, 'toggleReg') !== null && $key === 'adres_reg_po_pasporty'))
-                    continue;
-                $error[] = $key;
+            foreach ($value as $k => $v)
+            {
+                if (empty($v) && $key != 'contract') {
+                    if (!isset($data['statement']['toggleReg']) && $k === 'vrem_reg')
+                        continue;
+                    $error[$key][] = $k;
+                }
             }
-        }
 
         if (!empty($error))
         {
-            $this->ajax_data($error, null, 'error');
+            $this->ajax_data($error, null, 'empty');
             exit;
         }
-
+/*
+        $this->ajax_msg($data['contract']['familiyaCustomer'], 'error');
+        exit;
+*/
         /**
          * ====================================
          * Формирование заявления
@@ -39,28 +44,28 @@ class Controller_WordTemplate extends Controller_Ajax
          */
         $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
-        $document->setValue('Fam', $this->upName($data['familiya']));
-        $document->setValue('Name', $this->upName($data['imya']));
-        $document->setValue('Otchestvo', $this->upName($data['ot4estvo']));
-        $document->setValue('DateBirth', $data['data_rojdeniya']);
-        $document->setValue('Nationality', $data['grajdanstvo']);
-        $document->setValue('PlaceBirth', $data['mesto_rojdeniya']);
-        $document->setValue('AdresRegPoPasporty', $data['adres_reg_po_pasporty']);
-        $document->setValue('VremReg', $data['vrem_reg']);
-        $document->setValue('Seriya',$data['pasport_seriya']);
-        $document->setValue('Nomer', $data['pasport_nomer']);
-        $document->setValue('Vidacha', $data['pasport_data_vyda4i']);
-        $document->setValue('PasportKemVydan', $data['pasport_kem_vydan']);
-        $document->setValue('DomTel', $data['dom_tel']);
-        $document->setValue('MobTel', $data['mob_tel']);
-        $document->setValue('Obrazovanie', $data['obrazovanie']);
-        $document->setValue('MestoRaboty',$data['mesto_raboty']);
-        $document->setValue('About', $data['about']);
-
+        $document->setValue('Fam', $this->upName($data['statement']['familiya']));
+        $document->setValue('Name', $this->upName($data['statement']['imya']));
+        $document->setValue('Otchestvo', $this->upName($data['statement']['ot4estvo']));
+        $document->setValue('DateBirth', $data['statement']['data_rojdeniya']);
+        $document->setValue('Nationality', $data['statement']['grajdanstvo']);
+        $document->setValue('PlaceBirth', $data['statement']['mesto_rojdeniya']);
+        $document->setValue('AdresRegPoPasporty', $data['statement']['adres_reg_po_pasporty']);
+        $document->setValue('VremReg', $data['statement']['vrem_reg']);
+        $document->setValue('Seriya',$data['statement']['pasport_seriya']);
+        $document->setValue('Nomer', $data['statement']['pasport_nomer']);
+        $document->setValue('Vidacha', $data['statement']['pasport_data_vyda4i']);
+        $document->setValue('PasportKemVydan', $data['statement']['pasport_kem_vydan']);
+        $document->setValue('DomTel', $data['statement']['dom_tel']);
+        $document->setValue('MobTel', $data['statement']['mob_tel']);
+        $document->setValue('Obrazovanie', $data['statement']['obrazovanie']);
+        $document->setValue('MestoRaboty',$data['statement']['mesto_raboty']);
+        $document->setValue('About', $data['statement']['about']);
         $file = 'zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
         $document->save(APPPATH.'output_blanks/'.$file);
         unset($document);
+
         /**
          * ====================================
          * Формирование договора
@@ -68,37 +73,25 @@ class Controller_WordTemplate extends Controller_Ajax
          */
         $contract = new TemplateDocx(APPPATH.'templates/contract/dogovor.docx');
 
-
         // Если 18 лет и не указано, что заказчиком будет родитель, то заказчик сам слушатель, иначе родитель или опекун
-        if ($this->getAge($data['data_rojdeniya']) > 18 && !isset($data['parent'])) {
-            $customer = $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']);
-            $customer_seriya = $data['pasport_seriya'];
-            $customer_nomer = $data['pasport_nomer'];
-            $customer_vidan = $data['pasport_kem_vydan'];
-            $customer_address = $data['adres_reg_po_pasporty'];
-            $customer_phone = $data['mob_tel'];
-        } else {
-            $customer = $this->upName($data['familiyaCustomer']) . ' ' . $this->upName($data['imyaCustomer']) . ' ' . $this->upName($data['ot4estvoCustomer']);
-            $customer_seriya = $data['pasport_seriyaCustomer'];
-            $customer_nomer = $data['pasport_nomerCustomer'];
-            $customer_vidan = $data['pasport_kem_vydanCustomer'];
-            $customer_address = $data['adres_reg_po_pasportyCustomer'];
-            $customer_phone = $data['phoneCustomer'];
+        if ($this->getAge($data['statement']['data_rojdeniya']) < 18 && !isset($data['contract']['parent'])) {
+            $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
+            exit;
         }
 
-        $contract->setValue('Customer', $customer);
-        $contract->setValue('CSeriya', $customer_seriya);
-        $contract->setValue('CNomer', $customer_nomer);
-        $contract->setValue('CVidan', $customer_vidan);
-        $contract->setValue('CAddress', $customer_address);
-        $contract->setValue('CPhone', $customer_phone);
+        $contract->setValue('Customer', $this->upName($data['contract']['familiyaCustomer']) . ' ' . $this->upName($data['contract']['imyaCustomer']) . ' ' . $this->upName($data['contract']['ot4estvoCustomer']));
+        $contract->setValue('CSeriya', $data['contract']['pasport_seriyaCustomer']);
+        $contract->setValue('CNomer', $data['contract']['pasport_nomerCustomer']);
+        $contract->setValue('CVidan', $data['contract']['pasport_kem_vydanCustomer']);
+        $contract->setValue('CAddress', $data['contract']['adres_reg_po_pasportyCustomer']);
+        $contract->setValue('CPhone', $data['contract']['phoneCustomer']);
 
-        $contract->setValue('Listener', $this->upName($data['familiya']) . ' ' . $this->upName($data['imya']) . ' ' . $this->upName($data['ot4estvo']));
-        $contract->setValue('LSeriya', $data['pasport_seriya']);
-        $contract->setValue('LNomer', $data['pasport_nomer']);
-        $contract->setValue('LVidan', $data['pasport_kem_vydan']);
-        $contract->setValue('LAddress', empty($data['adres_reg_po_pasporty']) ? $data['vrem_reg'] : $data['adres_reg_po_pasporty']);
-        $contract->setValue('LPhone', $data['mob_tel']);
+        $contract->setValue('Listener', $this->upName($data['statement']['familiya']) . ' ' . $this->upName($data['statement']['imya']) . ' ' . $this->upName($data['statement']['ot4estvo']));
+        $contract->setValue('LSeriya', $data['statement']['pasport_seriya']);
+        $contract->setValue('LNomer', $data['statement']['pasport_nomer']);
+        $contract->setValue('LVidan', $data['statement']['pasport_kem_vydan']);
+        $contract->setValue('LAddress', $data['statement']['adres_reg_po_pasporty']);
+        $contract->setValue('LPhone', $data['statement']['mob_tel']);
 
         $contr = 'contracts/contract_'.date('d_m_Y_H_i_s').'.docx';
 
@@ -108,7 +101,7 @@ class Controller_WordTemplate extends Controller_Ajax
             View::factory('main/blank/result', array(
                 'statement' => URL::site('updownload/'.$file),
                 'contract' => URL::site('updownload/'.$contr),
-                'age' => $this->getAge($data['data_rojdeniya'])
+                'age' => $this->getAge($data['statement']['data_rojdeniya'])
             ))->render()
         );
 

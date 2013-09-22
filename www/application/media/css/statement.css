@@ -2,6 +2,32 @@ h2.info {
   text-align: center;
   padding: 10px 30px 0;
 }
+.nav-tabs li {
+  position: relative;
+}
+.nav-tabs li a {
+  border: 1px solid #ddd;
+}
+.nav-tabs li a:hover {
+  border: 1px solid #ddd;
+}
+.nav-tabs li.active > a {
+  background: #f5f5f5;
+}
+.nav-tabs li.active > a:hover {
+  background: #f5f5f5;
+}
+.nav-tabs li span.error {
+  background: transparent url(../img/error.png) no-repeat top left;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 4px 0 0 0;
+  -moz-border-radius: 4px 0 0 0;
+  border-radius: 4px 0 0 0;
+}
 /*
   Стили для добавленных текстов до/после поля
 */

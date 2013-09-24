@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Сен 25 2013 г., 01:01
+-- Время создания: Сен 25 2013 г., 01:50
 -- Версия сервера: 5.1.67-community-log
 -- Версия PHP: 5.4.11
 
@@ -191,34 +191,12 @@ INSERT INTO `Statements` (`id`, `famil`, `imya`, `ot4estvo`, `data_rojdeniya`, `
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `ulogins`
---
-
-CREATE TABLE IF NOT EXISTS `ulogins` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `network` varchar(255) NOT NULL,
-  `identity` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `identity` (`identity`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `ulogins`
---
-
-INSERT INTO `ulogins` (`id`, `user_id`, `network`, `identity`) VALUES
-(1, 10, 'google', 'https://plus.google.com/u/0/109654296772264857702/');
-
--- --------------------------------------------------------
-
---
 -- Структура таблицы `users`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `photo` varchar(500) NOT NULL,
+  `photo` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `Statement_id` int(10) unsigned NOT NULL,
@@ -234,34 +212,6 @@ INSERT INTO `users` (`id`, `photo`, `password`, `email`, `Statement_id`, `Contra
 (12, 'img/photo.jpg', '959680866c12e03e4c8bc4a24bcc52379511d3df064b6811a4116d3fb853b8d2', 'lol@lol.ru', 18, 15),
 (13, 'https://lh5.googleusercontent.com/-8tZI2QQx310/AAAAAAAAAAI/AAAAAAAAADo/7_ZOUfX0-gk/photo.jpg?size=100', '959680866c12e03e4c8bc4a24bcc52379511d3df064b6811a4116d3fb853b8d2', 'roquie0@gmail.com', 19, 16),
 (19, 'http://avt.appsmail.ru/bk/asfull/_avatar', 'b66aaf53f30c5aa9e620cd18330fce71bffd52ce39fd32e0e0fe992008e10f43', 'asfull@bk.ru', 25, 22);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `user_tokens`
---
-
-CREATE TABLE IF NOT EXISTS `user_tokens` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) unsigned NOT NULL,
-  `user_agent` varchar(40) NOT NULL,
-  `token` varchar(32) NOT NULL,
-  `created` int(10) unsigned NOT NULL,
-  `expires` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uniq_token` (`token`),
-  KEY `fk_user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Ограничения внешнего ключа сохраненных таблиц
---
-
---
--- Ограничения внешнего ключа таблицы `user_tokens`
---
-ALTER TABLE `user_tokens`
-  ADD CONSTRAINT `user_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

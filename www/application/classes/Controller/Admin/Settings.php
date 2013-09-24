@@ -8,7 +8,7 @@
  *
  * */
 
-class Controller_Admin_Settings extends Controller_Ajax
+class Controller_Admin_Settings extends Controller_Ajax_Admin
 {
 
 

@@ -10,7 +10,7 @@ class Controller_WordTemplate extends Controller_Ajax
 
     public function action_zayavlenie()
     {
-
+        //@todo: ну мы там сделали вкладочки для реги, получили данные сюда, занесли в бд, сгенерировали доки и письмо спаролем на мыло.
         $data = array();
 
         foreach ($_POST as $key => $value)
@@ -107,7 +107,8 @@ class Controller_WordTemplate extends Controller_Ajax
 
     }
 
-    protected function getAge($age) {
+    protected function getAge($age)
+    {
         $mas = explode('.', $age);
         if($mas[1] > date('m') || $mas[1] == date('m') && $mas[0] > date('d'))
             return (date('Y') - $mas[2] - 1);
@@ -122,10 +123,4 @@ class Controller_WordTemplate extends Controller_Ajax
 
 }
 
-/* заголовки для скачивания файлов ворда
- header('Content-disposition: inline');
-        header('Content-type: application/msword');
-        readfile($file);
-        exit;
- */
 

@@ -278,7 +278,7 @@ footer ul li > a:hover {
   box-shadow: none;
 }
 .btn-docum {
-  margin-top: 6px;
+  margin-top: 0;
   line-height: 25px;
   margin-left: 90px;
 }

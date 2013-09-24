@@ -21,12 +21,6 @@ class Controller_Admin extends Controller_Template
         //$this->template->footer = View::factory('main/footer');
     }
 
-    public function action_google()
-    {
-        $this->template->content = View::factory('admin/google', array(
-            'statements' => $this->scanFolder(APPPATH.'/output_blanks/zayavleniya/')
-        ));
-    }
 
     public function action_backup()
     {

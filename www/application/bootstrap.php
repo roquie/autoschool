@@ -64,6 +64,10 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 I18n::lang('en-us');
 
 /**
+ *  Set Cookie salt bla bla bla
+ * */
+Cookie::$salt = '§aJIO[NNJASDCVSSDaО└21a2137Ж21О0♂6545H3sdfshdfipww78GYT&(PFIO:(*F)*)cASDSDFSDFGSDGYIAFrhrtgsd465gsdgu;hwef7iy7yh9&*YUH*)';
+/**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
  *
  * Note: If you supply an invalid environment name, a PHP warning will be thrown
@@ -117,23 +121,23 @@ Kohana::modules(array(
 	// 'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	 'database'   => MODPATH.'database',   // Database access
+	   'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+	   'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
       // 'goauth' => MODPATH.'goauth',
        //'less' => MODPATH.'less',
        // 'minify' => MODPATH.'minify',
        'uploader' => MODPATH.'uploader',
-       'googleapi' => MODPATH.'googleapi',
+       'goauth' => MODPATH.'goauth',
        'email' => MODPATH.'email',
        'htmlpurifier' => MODPATH.'htmlpurifier',
        'phpword' => MODPATH.'phpword',
        'docxtemplate' => MODPATH.'docxtemplate',
        'twitterapi' => MODPATH.'twitterapi',
-      //  '' => MODPATH.'',
+       'lk' => MODPATH.'lk', // зависимый модуль
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
@@ -200,17 +204,17 @@ Route::set('main', '(<action>(/<id>))')
         'action' => 'index'
     ));
 
+Route::set('main.ajax', 'main(/<controller>(/<action>(/<id>)))')
+    ->defaults(array(
+        'directory'  => 'Main',
+   ));
 
 Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
     ->defaults(array(
         'directory'  => 'Admin',
     ));
 
-Route::set('main.ajax', 'main(/<controller>(/<action>))')
-    ->defaults(array(
-        'controller' => 'Main',
-        'action'     => 'index',
-    ));
+
 
 
 Route::set('default', '(<controller>(/<action>(/<id>)))')

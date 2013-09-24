@@ -7,7 +7,7 @@
  * All rights reserved (c)
  */
 
-class Controller_Admin_Tpl extends Controller_Ajax
+class Controller_Admin_Tpl extends Controller_Ajax_Admin
 {
 
 

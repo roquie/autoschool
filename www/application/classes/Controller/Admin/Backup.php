@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Admin_Backup extends Controller_Ajax
+class Controller_Admin_Backup extends Controller_Ajax_Admin
 {
 
     public function action_create()

@@ -1,10 +1,20 @@
 <div class="twitter">
     <div class="twitter-inner">
         <div class="twitter-logo"><i class="icon-twitter icon-4x icon-light"></i></div>
-        <a id="logo" href="//twitter.com/<?=$tweets[0]->user->screen_name?>" rel="nofollow" target="_blank">
+        <div id="transparent">
             <img src="<?=$tweets[0]->user->profile_image_url?>" />
-            <div id="text-logo">@<?=$tweets[0]->user->screen_name?></div>
-        </a>
+            <span class="name">
+                <a href="//twitter.com/<?=$tweets[0]->user->screen_name?>" rel="nofollow" target="_blank">
+                    @<?=$tweets[0]->user->screen_name?>
+                </a>
+            </span>
+            <span class="toolbar pull-right">
+                <a href="#" id="update-slide" class="btn"><i class="icon-refresh"></i></a>
+                <a href="#" id="close-slide" class="btn"><i class="icon-long-arrow-right"></i></a>
+            </span>
+        </div>
+
+        <div id="text">
         <?
             foreach ($tweets as $item) :
                 $date = strtotime('now')-strtotime($item->created_at);
@@ -22,19 +32,21 @@
                     else $date_text = "больше года назад";
                 }
         ?>
-                <div id="text">
+                <div id="tweet">
                     <p>
+                        <?
+                            foreach ($item->entities->urls as $url) :
+                                $item->text = str_replace($url->url, '<a href="'.$url->url.'">'.$url->display_url.'</a>', $item->text);
+                            endforeach;
+                        ?>
                         <?=$item->text?><br>
                     </p>
                     <p id="date">
-                        <a href="//twitter.com/<?=$item->user->screen_name?>/status/<?=$item->id_str?>" target="tweet"><i class="icon-twitter icon-light"></i> Смотреть</a>
                         <time datetime="<?=$item->created_at?>"><?=$date_text?></time>
                     </p>
+                    <div class="clearfix"></div>
                 </div>
         <? endforeach; ?>
-        <div class="button">
-            <a href="#" id="close-slide" class="btn pull-left">Закрыть</a>
-            <a href="#" id="update-slide" class="btn btn-primary pull-right">Обновить</a>
         </div>
     </div>
 </div>

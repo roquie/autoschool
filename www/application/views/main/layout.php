@@ -29,11 +29,13 @@
     <?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
     <?=HTML::script('js/vendor/stylizationForm.js')?>
     <?=HTML::script('js/placeholder.js')?>
+    <?=HTML::script('js/equalHeight.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap-formhelpers-phone.js')?>
     <?=HTML::script('js/vendor/jquery.flexslider-min.js')?>
     <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
     <?=HTML::script('js/validation.js')?>
     <?=HTML::script('js/general_fns.js')?>
+    <?=HTML::script('js/main.js')?>
     <?=HTML::script('js/notification.js')?>
     <?=HTML::script('js/jquery.pageslide.js')?>
 
@@ -67,7 +69,6 @@
             $(window).resize(function() {
                 $('#MainBlok_slimScroll').css("height", $(window).height()-navbarH-footerH+'px');
                 $("#MainBlok_slimScroll").parent().css("height", $(window).height()-navbarH-footerH+'px');
-                //$(".slimScrollBar").css({ height: height + 'px' });
             });
 
             $("[rel='tooltip']").tooltip();
@@ -77,36 +78,6 @@
              */
             $("#slide-left").pageSlide({
                 width : '260px'
-            });
-
-            $('#slide-left').on('click', function(e) {
-                e.preventDefault();
-                if (!$(this).data('load')) {
-                    var action = $(this).data('url');
-                    $('#pageslide-content').load(action);
-                    $(this).data('load', true);
-                }
-            });
-
-            /**
-             * Обновление новостей
-             */
-            $('body').on('click', '#update-slide', function(e) {
-                var action = $('#slide-left').data('url'),
-                    obj = $('#slide-left').attr('href');
-                if (cnt_click < 5) {
-                    $('#pageslide-content').html($(obj).html()).load(action);
-                    $('#slide-left').data('load', true);
-                    cnt_click++;
-                }
-                return false;
-            });
-            /**
-             * Кнопка закрыть боковую панель новостей
-             */
-            $('body').on('click', '#close-slide', function(e) {
-                $("#slide-left").pageSlide('close');
-                return false;
             });
         });
         function first_load() {

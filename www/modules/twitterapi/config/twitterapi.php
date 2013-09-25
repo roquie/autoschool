@@ -8,6 +8,6 @@ return array(
     'oauth_token_secret' => '0wtxORexYJsD7yBTE2vcZVC88uoZmywGQV2GD10ioo',
     'screen_name' => 'autompt',
     'host' => 'https://api.twitter.com/1.1/',
-    'count_tweets' => 3
+    'count_tweets' => 5
 
 );

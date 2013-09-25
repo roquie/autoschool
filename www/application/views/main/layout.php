@@ -29,6 +29,7 @@
     <?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
     <?=HTML::script('js/vendor/stylizationForm.js')?>
     <?=HTML::script('js/placeholder.js')?>
+    <?=HTML::script('js/equalHeight.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap-formhelpers-phone.js')?>
     <?=HTML::script('js/vendor/jquery.flexslider-min.js')?>
     <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
@@ -67,7 +68,6 @@
             $(window).resize(function() {
                 $('#MainBlok_slimScroll').css("height", $(window).height()-navbarH-footerH+'px');
                 $("#MainBlok_slimScroll").parent().css("height", $(window).height()-navbarH-footerH+'px');
-                //$(".slimScrollBar").css({ height: height + 'px' });
             });
 
             $("[rel='tooltip']").tooltip();

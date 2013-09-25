@@ -3,13 +3,6 @@
 class Controller_Updownload extends Controller_Main
 {
 
-    public function action_google()
-    {
-        Google::factory()->upload_file('output_blanks/zayavleniya/zayavlenie_30_08_2013_03_53_30.docx');
-        echo 'its work!';
-    }
-
-
     public function action_download()
     {
         $folder = $this->request->param('folder');

@@ -145,7 +145,7 @@
                 <ul class="dash">
                     <li><span>заявление, <a href="<?=URL::site('updownload/other_files/Zaivlenie.doc')?>">скачать</a>;</span></li>
                     <li><span>договор, <a href="<?=URL::site('updownload/other_files/Dogovor.doc')?>">скачать</a>;</span></li>
-                    <li><span>квитанция;</span></li>
+                    <li><span>квитанция, <a href="<?=URL::site('updownload/other_files/kvitanciya.doc')?>">скачать</a>;</span></li>
                     <li><span>фотографии 3х4 – 3 шт (любые);</span></li>
                     <li><span>копия паспорта – первой страницы и прописки;</span></li>
                     <li><span>для жителей других городов – временная регистрация минимум на пол года.</span></li>

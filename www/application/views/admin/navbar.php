@@ -8,11 +8,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> Щито-то<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?=URL::site('admin/papers')?>">Просмотр</a></li>
-                        <li><a href="<?=URL::site('admin/google')?>">Google Upload</a></li>
                         <li><a href="<?=URL::site('admin/backup')?>">BackUp Me!</a></li>
                     </ul>
                 </li>
-
                 <li><a href="<?=URL::site('admin/mail')?>"><i class="icon-envelope"></i> Рассылка писем</a></li>
             </ul>
             <ul class="nav pull-right">
@@ -29,7 +27,7 @@
                             Администратор
                             <div class="buttons">
                                 <a href="<?=URL::site('admin/settings')?>"><button class="btn">Настройки</button></a>
-                                <a href="<?=URL::site('auth/logout')?>"><button class="btn">Выйти</button></a>
+                                <a href="<?=URL::site('admin/auth/logout')?>"><button class="btn">Выйти</button></a>
                             </div>
                         </div>
                     </div>

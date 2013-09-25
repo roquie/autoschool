@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Admin_Papers extends Controller_Ajax
+class Controller_Admin_Papers extends Controller_Ajax_Admin
 {
 
     /**

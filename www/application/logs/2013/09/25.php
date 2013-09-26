@@ -122,3 +122,6 @@
 2013-09-25 00:44:45 --- CRITICAL: ErrorException [ 1 ]: Call to undefined method Controller_Lk_Lk::hash() ~ MODPATH\lk\classes\Controller\Lk\Lk.php [ 36 ] in file:line
 2013-09-25 00:44:45 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
 #1 {main} in file:line
+2013-09-25 22:42:54 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected '?>' ~ MODPATH\lk\views\lk.php [ 5 ] in file:line
+2013-09-25 22:42:54 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line

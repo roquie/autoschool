@@ -97,10 +97,10 @@ class Controller_Lk_Lk extends Controller_Main
 
         $s = file_get_contents('http://ulogin.ru/token.php?token='.$this->request->post('token').'&host='.$_SERVER['HTTP_HOST']);
         $user = json_decode($s, true);
-        if (empty($user['photo']))
-            $user['photo'] = 'img/photo.jpg';
+        if (empty($user['photo_big']))
+            $user['photo_big'] = 'img/photo.jpg';
 
-        if (!array_key_exists('photo', $user) && !array_key_exists('email', $user))
+        if (!array_key_exists('photo_big', $user) && !array_key_exists('email', $user))
             echo 'говносервис без фотки, мыло обычно запрашивается дополнительно';
 
         $info = Model::factory('Lk_User')->getByEmail($user['email']);
@@ -120,7 +120,7 @@ class Controller_Lk_Lk extends Controller_Main
                 'registration' => array(
                     'Statement_id' =>  $result['statement_id'],
                     'Contract_id' =>  $result['contract_id'],
-                    'photo' =>  $user['photo'],
+                    'photo' =>  $user['photo_big'],
                     'email' =>  $user['email'],
                     'password' => $this->hash($newpass)
                 )

@@ -11,3 +11,8 @@ Route::set('auth.reg.lk', 'lk(/<action>)')
            'directory'  => 'Lk',
            'controller' => 'Lk',
    ));
+Route::set('auth.reg.lk.ajax', 'lk/ajax(/<action>)')
+    ->defaults(array(
+            'directory'  => 'Lk',
+            'controller' => 'Ajax',
+       ));

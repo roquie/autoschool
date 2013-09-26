@@ -60,7 +60,7 @@
                 data : resp
             },
             function(res) {
-                alert('Email: ' + res.email + '   Photo: ' + res.photo);
+                alert('Email: ' + res.email + ' Photo: ' + res.photo);
             },
             'json'
         );

@@ -29,7 +29,7 @@
                                 <input type="text" name="imya" id="imya" data-req="true" tabindex="2">
 
                                 <label for="ot4estvo">Отчество</label>
-                                <input type="text" name="ot4estvo" id="ot4estvo" data-req="true" tabindex="3">
+                                <input type="text" name="ot4estvo" id="ot4estvo" tabindex="3">
 
                                 <label for="data_rojdeniya">Дата рождения</label>
                                 <div class="input-append input-block-level">

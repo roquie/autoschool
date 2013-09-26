@@ -62,7 +62,7 @@ class Controller_Lk_Lk extends Controller_Main
     public function action_lol()
     {
         /*
-            Example: Получение данных от jQuery
+            Example:   Получение данных от jQuery
 
             $data = json_decode($this->request->post('data'), true);
             echo json_encode(array(

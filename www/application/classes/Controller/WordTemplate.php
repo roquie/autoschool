@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_WordTemplate extends Controller_Ajax
+class Controller_WordTemplate extends Controller_Ajax_Main
 {
 
     /**

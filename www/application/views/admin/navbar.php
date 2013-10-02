@@ -28,7 +28,7 @@
                             <div class="buttons">
                                 <a href="<?=URL::site('admin/settings')?>"><button class="btn">Настройки</button></a>
                                 <a href="<?=URL::site('admin/auth/logout')?>"><button class="btn">Выйти</button></a>
-                            </div>
+                            </div>   <!---->
                         </div>
                     </div>
                 <li class="divider-vertical"></li>

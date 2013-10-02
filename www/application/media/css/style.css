@@ -4,7 +4,10 @@
 #notification {
   display: block;
   position: fixed;
-  top: 10px;
+  top: 70px;
   right: 10px;
   z-index: 9999;
+}
+.alert {
+  margin-bottom: 10px;
 }

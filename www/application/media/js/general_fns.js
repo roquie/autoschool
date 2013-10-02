@@ -160,3 +160,13 @@ function balloon(input, options) {
 function delSpace (string) {
     return string.replace(/\s/g, "");
 }
+/**
+ * Функция проверки корректности e-mail адреса
+ * @param email
+ * @returns {boolean}
+ */
+function isValidateEmail(email)
+{
+    var pattern = /^([\w\d\._-]+@([\w-]+\.)+[\w-]{2,4})?$/;
+    return pattern.test(email);
+}

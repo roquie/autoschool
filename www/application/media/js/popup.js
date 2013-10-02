@@ -26,6 +26,11 @@
               , i;
             this.options = $.extend( {}, $.fn[pluginName].defaults, options);
             trigger = this.options.trigger;
+
+            if (this.options.width != '') {
+                $(this.options.container).css({ 'min-width' : this.options.width });
+            }
+
             /**
              * Событие при котором будет срабатывать popup
              */
@@ -98,8 +103,7 @@
         , show: function () {
             var container = $(this.options.container)
               , placement
-              , top = this.$element.offset()['top']
-              , left = this.$element.offset()['left']
+              , top = this.$element.height()//.offset()['top']
               , t_class = '';
 
             placement = this.options.location;
@@ -152,5 +156,6 @@
     ,   edgeOffset  : 3           // отступ блока от родителя
     ,   delay       : 300 // скорость выполнения анимации
     ,   trigger     : 'click' // событие для появления блока
+    ,   width       : ''
     };
 })( jQuery, window, document );

@@ -1,0 +1,1 @@
+<a href="<?=URL::site('lk/ajax/downloadContract')?>">Скачать</a>

@@ -19,6 +19,12 @@
   font-weight: @weight;
 }
 
+.border-radius (@radius) {
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+  border-radius: @radius;
+}
+
 .center() {
   display: block;
   margin: 0 auto;
@@ -75,6 +81,36 @@ body {
    .font-setting(14pt, 1.2, 300);
  }
 
+
+/*
+ Стили для добавленных текстов до/после поля
+*/
+.input-append.input-block-level,
+.input-prepend.input-block-level {
+  width: 100%;
+  display: table;
+  .add-on {
+    display: table-cell;
+    padding: 4px;
+    background-color:#e8e8e8;
+    &:hover {
+      background-color:#dddddd;
+    }
+  }
+  & > input {
+    //width: 100%;
+  }
+}
+.input-append.input-block-level > input {
+  border-right: 0;
+}
+.input-prepend.input-block-level > input {
+  border-left: 0;
+}
+.input-prepend .add-on:first-child,
+.input-prepend .btn:first-child,
+.input-append .add-on:first-child,
+.input-append .btn:first-child {.border-radius(0)}
 
 /*
     общие стили для элементов
@@ -284,6 +320,16 @@ footer {
 
 .navbar {
   .nav {
+    & > .active {
+      & > a {
+        background: none;
+      }
+      & > a {
+        &:hover, &:focus, &:active {
+          background: none;
+        }
+      }
+    }
     & > li {
       & > a {
         margin: 0 10px;
@@ -291,10 +337,25 @@ footer {
         color: #ffffff;
         float: none;
         text-decoration: none;
-        &:hover {
+        &:hover, &:focus {
           background: none;
+        }
+        &:hover {
           border-bottom: 2px solid rgba(245,245,245, 0.2);
           color: #ffffff;
+        }
+        strong {
+          &.caret {
+            border-top: 4px solid #ffffff;
+          }
+        }
+      }
+      & > #popup {
+        & > form {
+          margin-bottom: 0;
+          input {
+            .border-radius(0);
+          }
         }
       }
     }
@@ -341,7 +402,7 @@ footer {
 }
 
 .btn-docum {
-  margin-top: 0;
+  margin-top: 5px;
   line-height: 25px;
   margin-left: 90px;
 }

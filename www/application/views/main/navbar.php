@@ -9,7 +9,11 @@
                             <span>+7 (925) 800 10 24</span>
                             <span>+7 (499) 317 04 09</span><br>
                         </div>
-                        <span class="email"><a href="mailto:auto@mpt.ru?subject=Вопрос по Автошколе МПТ" class="<!--muted-->" target="_blank">auto@mpt.ru</a></span>
+                        <span class="email">
+                            <?=HTML::mailto('&#97;&#117;&#116;&#111;&#64;&#109;&#112;&#116;&#46;&#114;&#117;?subject=Вопрос по Автошколе МПТ', '&#97;&#117;&#116;&#111;&#64;&#109;&#112;&#116;&#46;&#114;&#117;', array(
+                                'target' => '_blank'
+                            ))?>
+                        </span>
                     </div>
                 </ul>
                 <nav class="nav-collapse">
@@ -19,12 +23,32 @@
                         <li><a href="<?=URL::site('/#contacts')?>" id="ajax"><i class="icon-book"></i> Контакты</a></li>
                         <!--<li><a href="<?/*=URL::site('/about')*/?>"><i class="icon-info-sign"></i> О нас</a></li>-->
                         <?
-                            $email = Session::instance()->get('email');
+                            //$email = Session::instance()->get('email');
+                            $email = Cookie::get('userEmail');
                             if(isset($email)):
                         ?>
-                            <li><a href="<?=URL::site('admin/auth/logout')?>"><i class="icon-signin"></i> Выйти</a></li>
+                            <li><a href="<?=URL::site('lk/logout')?>"><i class="icon-signin"></i> Выйти</a></li>
                         <?else: ?>
-                            <li><a href='<?=URL::site('admin/auth/login')?>'><i class="icon-lock"></i> Вход</a></li>
+                            <li style="position: relative">
+                                <a href='#' id="sign_in"><i class="icon-lock"></i> Вход <strong class="caret" style="margin-left: 2px;margin-top: 8px;"></strong></a>
+                                <div id="popup" class="hide">
+                                    <form method="post" action="<?=URL::site('lk/ajax/login')?>" id="sign-in">
+                                        <div class="input-prepend">
+                                            <span class="add-on"><i class="icon-envelope"></i></span>
+                                            <input type="text" id="email" name="email" placeholder="Email">
+                                        </div>
+                                        <div class="input-prepend">
+                                            <span class="add-on"><i class="icon-key"></i></span>
+                                            <input type="password" id="password" name="password" placeholder="Пароль">
+                                        </div>
+                                        <div class="check">
+                                            <span class="label-check">Запомнить</span>
+                                            <input type="checkbox" name="remember">
+                                        </div>
+                                        <input type="submit" value="Войти" class="btn btn-info btn-block"/>
+                                    </form>
+                                </div>
+                            </li>
                         <?endif ?>
                     </ul>
                 </nav>

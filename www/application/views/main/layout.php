@@ -13,6 +13,7 @@
     <?=HTML::style('css/vendor/flexslider.css')?>
     <?=HTML::style('css/validation.css')?>
     <?=HTML::style('css/pageslide.css')?>
+    <?=HTML::style('css/popup.css')?>
     <?=HTML::style('media-twitter/css/twitter.css')?>
 
     <!--[if IE 9]>
@@ -36,14 +37,14 @@
     <?=HTML::script('js/validation.js')?>
     <?=HTML::script('js/general_fns.js')?>
     <?=HTML::script('js/main.js')?>
+    <?=HTML::script('js/popup.js')?>
     <?=HTML::script('js/notification.js')?>
     <?=HTML::script('js/jquery.pageslide.js')?>
 
     <script>
         var cnt_click = 0; // кол-во обновлений новостей за 1 раз
         $(function(){
-            $(window).load(function() {
-                first_load();
+            $(window).on('load', function() {
                 $('.flexslider').flexslider({
                     animation: "slide"
                 });
@@ -79,15 +80,13 @@
             $("#slide-left").pageSlide({
                 width : '260px'
             });
+
+            $('#sign_in').popupWin({
+                edgeOffset : 40,
+                delay      : 400,
+                width      : '200px'
+            });
         });
-        function first_load() {
-            if (location.hash != '') {
-                var url = location.hash.replace('#', '');
-                $('body,html').delay(100).animate({
-                    scrollTop: $('section[target="'+url+'"]').offset().top
-                }, 500);
-            }
-        }
     </script>
 </head>
 <body>

@@ -12,33 +12,81 @@
             Для вас были сформированы следующие документы:
             <ul class="dash" style="margin-top: 10px">
                 <li><span>Заявление о принятии в Автошколу &laquo;МПТ РГТЭУ&raquo;</span></li>
-                <li><span>Договор об указании платных образовательных услуг</span></li>
+                <li><span>Договор об указании платных образовательных услуг;</span></li>
+                <li><span>Квитанция на оплату.</span></li>
             </ul>
-            <div class="clearfix"></div>
-            <div class="line"></div>
-
-            <div class="row-fluid">
-                <div class="span6 pull-left">
-                    <a class="btn btn-success btn-block" href="<?=$statement?>"><i class="icon-file-text"></i> Заявление</a>
-                </div>
-                <div class="span6 pull-right">
-                    <a class="btn btn-primary btn-block" href="<?=$contract?>"><i class="icon-file-text"></i> Договор</a>
-                </div>
-            </div>
+            Загрузить данные документы вы можете в своём личном кабинете, для этого пройдите процедуру регистрации.
         </div>
         <div class="span6">
             <h1>Регистрация</h1>
             Для создания вашего личного кабинета, нам необходимо узнать ваш e-mail адрес. Выберите любую из соц сетей, либо введите свой e-mail самостоятельно.
             <br><br>
-            <div class="clearfix"></div>
-            <div class="line"></div>
+            <div class="check" id="enter-email">
+                <span class="label-check">Ввести e-mail</span>
+                <input type="checkbox" name="your_email">
+            </div>
+            <br>
             <script src="//ulogin.ru/js/ulogin.js"></script>
-            <div id="uLogin" data-ulogin="display=panel;fields=email;optional=photo;providers=google,vkontakte,odnoklassniki,mailru,facebook;hidden=;redirect_uri=;callback=auth"></div>
+            <div id="uLogin" data-ulogin="display=panel;fields=email;optional=photo_big;providers=google,vkontakte,odnoklassniki,mailru,facebook;hidden=;redirect_uri=;callback=auth"></div>
+            <div class="hide" id="b_email">
+                <form action="<?=URL::site('lk/ajax/register')?>" id="reg">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-envelope"></i></span>
+                        <input type="text" name="email" id="v_email" placeholder="Email">
+                    </div>
+                    <input type="submit" class="btn btn-info btn-block" value="Зарегистрироваться"/>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 <script>
-    var data = '';
+    $(function() {
+        var body = $('body');
+        body.on('click', '#enter-email', function () {
+            $('#b_email').toggle();
+            $('#uLogin').toggle();
+        });
+        $('#reg').on('submit', function(e) {
+            e.preventDefault();
+            var action = $(this).attr('action'),
+                data  = $(this).serialize();
+            if ($('#enter-email').find('input').prop('checked')) {
+                data += '&your_email=yes';
+            }
+            if ($('#v_email').val() === '') {
+                noty({
+                    type : 'error',
+                    message : 'Заполните поле e-mail'
+                });
+            } else {
+                $.post(
+                    action,
+                    data,
+                    function(res) {
+                        if (res.status === 'success') {
+                            window.location.href = res.data.redirect;
+/*                            noty({
+                                type : res.status,
+                                message : res.msg
+                            });
+                            setTimeout(function () {
+                                window.location.href = res.data.redirect;
+                            }, 2000);*/
+                        }
+                        if (res.status === 'error') {
+                            console.log(res);
+                            noty({
+                                type   : res.status,
+                                message   : res.msg
+                            });
+                        }
+                    },
+                    'json'
+                );
+            }
+        });
+    });
     function auth(token) {
         var host = encodeURIComponent(location.toString());
         $.get(
@@ -54,13 +102,23 @@
         );
     }
     function getData(resp) {
+        var action = $('#reg').attr('action');
         $.post(
-            'http://autoschool.ru/lk/lol',
+            action,
             {
                 data : resp
             },
             function(res) {
-                alert('Email: ' + res.email + ' Photo: ' + res.photo);
+                if (res.status === 'success') {
+                    window.location.href = res.data.redirect;
+                }
+                if (res.status === 'error') {
+                    console.log(res);
+                    noty({
+                        type   : res.status,
+                        message   : res.msg
+                    });
+                }
             },
             'json'
         );

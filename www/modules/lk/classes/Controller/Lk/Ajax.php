@@ -9,38 +9,6 @@
 class Controller_Lk_Ajax extends Controller_Ajax_Main
 {
     /**
-     * капитан орёт - это вход!
-     */
-    public function action_login()
-    {
-        $result = Model::factory('Lk_User')->login(array(
-            'email' => $this->request->post('email'), //sql inj
-            'password' => $this->hash($this->request->post('password'))
-        ));
-
-        if (array_key_exists('remember', $this->request->post()) && ($result->email && $result->password)) {
-            Cookie::$expiration = Date::MONTH;
-            Cookie::set('userEmail', $result->email);
-            Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->Statement_id);
-            Cookie::set('contract_id', $result->Contract_id);
-            HTTP::redirect('lk');
-        }
-
-        if ($result->email && $result->password) {
-            Cookie::$expiration = 0;
-            Cookie::set('userEmail', $result->email);
-            Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->Statement_id);
-            Cookie::set('contract_id', $result->Contract_id);
-            HTTP::redirect('lk');
-        } else {
-            $this->ajax_msg('Ошибка, попробуйте еще раз', 'error');
-        }
-
-    }
-
-    /**
      * Изменение пароля
      */
     public function action_changepass()
@@ -116,75 +84,174 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     }
 
     /**
+     * Добавление данных для договора и заявления
+     */
+    public function action_addPapers()
+    {
+        // поля необязательные для заполнения
+        $no_required = array('ot4estvo', 'dom_tel');
+
+        $data = array();
+
+        foreach ($_POST as $key => $value)
+            foreach ($value as $k => $v)
+                $data[$key][$k] = Security::xss_clean($v);
+
+        $error = array();
+        foreach ($data as $key => $value)
+            foreach ($value as $k => $v)
+            {
+                if (empty($v) && $key != 'contract') {
+                    if (!isset($data['statement']['toggleReg']) && $k === 'vrem_reg' || in_array($k, $no_required))
+                        continue;
+                    $error[$key][] = $k;
+                }
+            }
+
+        if (!empty($error))
+        {
+            $this->ajax_data($error, null, 'empty');
+            exit;
+        }
+
+        // Если 18 лет и не указано, что заказчиком будет родитель, то заказчик сам слушатель, иначе родитель или опекун
+        if ($this->getAge($data['statement']['data_rojdeniya']) < 18 && !isset($data['contract']['parent'])) {
+            $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
+            exit;
+        }
+
+        Session::instance()->set('key_statement', Model::factory('Lk_Statement')->addData($data['statement']));
+        Session::instance()->set('key_contract', Model::factory('Lk_Contract')->addData($data['contract']));
+
+        $this->ajax_msg(
+            View::factory('main/blank/result', array(
+                'age' => $this->getAge($data['statement']['data_rojdeniya'])
+            ))->render()
+        );
+
+    }
+
+    /**
+     * капитан орёт - это вход!
+     */
+    public function action_login()
+    {
+        $result = Model::factory('Lk_User')->login(array(
+            'email' => $this->request->post('email'), //sql inj
+            'password' => $this->hash($this->request->post('password'))
+        ));
+
+        if (array_key_exists('remember', $this->request->post()) && ($result->email && $result->password)) {
+            Cookie::$expiration = Date::MONTH;
+            Cookie::set('userEmail', $result->email);
+            Cookie::set('userPhoto', $result->photo);
+            Cookie::set('statement_id', $result->Statement_id);
+            Cookie::set('contract_id', $result->Contract_id);
+            $this->ajax_msg(URL::site('lk'));
+            exit;
+        }
+
+        if ($result->email && $result->password) {
+            Cookie::$expiration = 0;
+            Cookie::set('userEmail', $result->email);
+            Cookie::set('userPhoto', $result->photo);
+            Cookie::set('statement_id', $result->Statement_id);
+            Cookie::set('contract_id', $result->Contract_id);
+            $this->ajax_msg(URL::site('lk'));
+        } else {
+            $this->ajax_msg('Пользователь не существует', 'error');
+        }
+
+    }
+
+    /**
+     * Возвращает страницу из личного кабинета "Сообщения"
+     */
+    public function action_messages()
+    {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+        echo View::factory('pages/messages')->render();
+    }
+
+    /**
+     * Возвращает страницу из личного кабинета "Заявление"
+     */
+    public function action_statement()
+    {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+        echo View::factory('pages/statement')->render();
+    }
+
+    /**
+     * Возвращает страницу из личного кабинета "Договор"
+     */
+    public function action_contract()
+    {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+        echo View::factory('pages/contract')->render();
+    }
+
+    /**
+     * Возвращает страницу из личного кабинета "Загрузки"
+     */
+    public function action_download()
+    {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+        echo View::factory('pages/download')->render();
+    }
+
+    /**
      * регистрация новых слушателей
      */
     public function action_register()
     {
-        $testPOST = array(
-            'statement' => array(
-                'famil' => 'Петров',
-                'imya'  => 'Сидр',
-                'ot4estvo'      => 'Сидорович',
-                'data_rojdeniya'      => '01.01.1974',
-                'grajdanstvo'      => 'РФ',
-                'mesto_rojdeniya'      => 'г. Москва, РФ',
-                'adres_reg_po_pasporty'      => 'г. Москва, ул. Петросяна, д.13, к.9',
-                'vrem_reg'      => 'г. Казань, ул. Матрёшкина, д.77',
-                'pasport_seriya'      => '2937',
-                'pasport_nomer'      => '3453890',
-                'pasport_data_vyda4i'      => '20.01.1989',
-                'pasport_kem_vydan'      => 'ОВД Г.КАЗАНИ',
-                'mob_tel'      => '+79091234567',
-                'dom_tel'      => '',
-                'obrazovanie'      => 'Высшее...',
-                'mesto_raboty'      => 'Гендиректор ООО АэроТрансКарго',
-                'about'      => 'Интернет',
-            ),
-            'contract' => array(
-                'famil'      => 'Петрова',
-                'imya'      => 'Анастасия',
-                'ot4estvo'      => 'Агафьевна',
-                'adres_reg_po_pasporty'      => 'г. Москва, ул. Петросяна, д.13, к.9',
-                'pasport_seriya'      => '4382',
-                'pasport_nomer'      => '20934820',
-                'pasport_kem_vydan'      => 'ОВД Г.КАЗАНИ 2',
-                'phone'      => '+79261195550',
+        $is_email = Arr::get($_POST, 'your_email');
+        if (!isset($is_email))
+            $user = json_decode($this->request->post('data'), true);
+        else {
+            $user['email'] = Arr::get($_POST, 'email');
+            $validation = Validation::factory($_POST)
+                ->rule('email', 'email');
 
-            ),
+            if ( !$validation->check() ) {
+                $this->ajax_msg('Неверный email адрес', 'error');
+                exit;
+            }
+        }
 
-        );
-        // иииииииииииииииииииииии это наааахуй...
-        $s = file_get_contents('http://ulogin.ru/token.php?token='.$this->request->post('token').'&host='.$_SERVER['HTTP_HOST']);
-        $user = json_decode($s, true);
-        //
-        if (empty($user['photo_big']))
+        if (empty($user['photo_big']) || $user['photo_big'] === 'https://ulogin.ru/img/photo_big.png')
             $user['photo_big'] = 'img/photo.jpg';
 
-        if (!array_key_exists('photo_big', $user) && !array_key_exists('email', $user))
+        if (!array_key_exists('photo_big', $user) && !array_key_exists('email', $user)) {
             $this->ajax_msg('Непредвиденная ошибка', 'error'); // нет фотки или мыла в ответе
+            exit;
+        }
 
         $info = Model::factory('Lk_User')->getByEmail($user['email']);
 
-        if ($info->email)
+        if ($info->email) {
             $this->ajax_msg('Такой пользователь уже зарегистрирован', 'error');
-
-
-        $result['statement_id'] = Model::factory('Lk_Statement')->addData($testPOST['statement']);
-        $result['contract_id'] = Model::factory('Lk_Contract')->addData($testPOST['contract']);
+            exit;
+        }
 
         $newpass = $this->newpass();
 
-        if ($result['statement_id'] && $result['contract_id']) {
+        $testPOST = array();
+
+        if ((int)(string)Session::instance()->get('key_statement') && (int)(string)Session::instance()->get('key_contract')) {
             $testPOST = array(
                 'registration' => array(
-                    'Statement_id' =>  $result['statement_id'],
-                    'Contract_id' =>  $result['contract_id'],
+                    'Statement_id' =>  (int)(string)Session::instance()->get('key_statement'),
+                    'Contract_id' =>  (int)(string)Session::instance()->get('key_contract'),
                     'photo' =>  $user['photo_big'],
                     'email' =>  $user['email'],
                     'password' => $this->hash($newpass)
                 )
             );
-
         } else {
             $this->ajax_msg('Непредвиденная ошибка БД', 'error');
         }
@@ -200,8 +267,20 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             ->from('info@auto.mpt.ru', 'Автошкола');
         $mail->send();
 
-        if ($mail)
-            $this->ajax_msg('Вы зарегистрированы, см. почту');
+        Cookie::$expiration = 0;
+        Cookie::set('userEmail', $user['email']);
+        Cookie::set('userPhoto', $user['photo_big']);
+        Cookie::set('statement_id', (int)(string)Session::instance()->get('key_statement'));
+        Cookie::set('contract_id', (int)(string)Session::instance()->get('key_contract'));
+
+        if ($mail) {
+            Session::instance()->delete('key_statement');
+            Session::instance()->delete('key_contract');
+            Session::instance()->set('after_register', 'yes');
+            $this->ajax_data(array(
+                'redirect' => URL::site('lk')
+            ));
+        }
         else
             $this->ajax_msg('Непредвиденная ошибка', 'error');
 
@@ -213,10 +292,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_downloadStatement()
     {
         $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('lk/login');
+        if (is_null($email)) HTTP::redirect('/');
 
         $statement = Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'));
-
 
         $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
@@ -242,8 +320,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         $document->save(APPPATH.'output_blanks/'.$file);
 
-        $this->response->send_file(APPPATH.'output_blanks/'.$file);
-
+        $this->response->send_file(APPPATH.'output_blanks/'.$file, null, array(
+            'delete' => true
+        ));
         unset($document);
     }
 
@@ -253,7 +332,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_downloadContract()
     {
         $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('lk/login');
+        if (is_null($email)) HTTP::redirect('/');
 
         $contract = Model::factory('Lk_Contract')->getById(Cookie::get('contract_id'));
         $statement = Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'));
@@ -278,8 +357,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         $obj->save(APPPATH.'output_blanks/'.$contr);
 
-        $this->response->send_file(APPPATH.'output_blanks/'.$contr);
-
+        $this->response->send_file(APPPATH.'output_blanks/'.$contr, null, array(
+            'delete' => true
+        ));
         unset($document);
     }
 
@@ -302,5 +382,14 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         return substr(str_shuffle($chars), 0, 8);
+    }
+
+    protected function getAge($age)
+    {
+        $mas = explode('.', $age);
+        if($mas[1] > date('m') || $mas[1] == date('m') && $mas[0] > date('d'))
+            return (date('Y') - $mas[2] - 1);
+        else
+            return (date('Y') - $mas[2]);
     }
 }

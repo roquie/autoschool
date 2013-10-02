@@ -146,7 +146,11 @@ $(function() {
         var statement = {},
             contract = {},
             action,
-            field;
+            field,
+            phone = $('#telephone_d');
+        if (phone.val() === phone.data('value')) {
+            phone.val('');
+        }
         $.each($('#statement').serializeArray(), function(k, v) {
             statement[v.name] = v.value;
         });

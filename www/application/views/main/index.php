@@ -21,7 +21,7 @@
                 ?>
                     <a class="btn btn-success btn-docum" href="<?=URL::site('/statement')?>">Подать документы</a>
                 <? else : ?>
-                        <a class="btn btn-success btn-docum" href="<?=URL::site('/lk')?>">В личный кабинет</a>
+                        <a class="btn btn-info btn-docum" href="<?=URL::site('/lk')?>">В личный кабинет</a>
                 <? endif; ?>
             </div>
         </div>

@@ -8,6 +8,30 @@ $(function() {
         }
     });
 
+    $('#sign-in').on('submit', function(e) {
+        e.preventDefault();
+        if (isValidateEmail($('#email').val()) && $('#password').val() != '') {
+            send_ajax($(this), function(response) {
+                // Если получена ошибка
+                if (response.status === 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                // Если всё нормально
+                if (response.status === 'success') {
+                    window.location.href = response.msg;
+                }
+            });
+        } else {
+            noty({
+                type : 'error',
+                message : 'Ошибки заполнения полей'
+            });
+        }
+    });
+
     /**
      * Обновление новостей
      */

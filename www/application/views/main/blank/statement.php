@@ -23,13 +23,13 @@
                             <div class="span6 pull-left">
 
                                 <label for="famil">Фамилия</label>
-                                <input type="text" id="famil" autofocus="autofocus" name="familiya" data-placement="top" data-req="true" tabindex="1">
+                                <input type="text" id="famil" autofocus="autofocus" name="famil" data-placement="top" data-req="true" tabindex="1">
 
                                 <label for="imya">Имя</label>
                                 <input type="text" name="imya" id="imya" data-req="true" tabindex="2">
 
                                 <label for="ot4estvo">Отчество</label>
-                                <input type="text" name="ot4estvo" id="ot4estvo" data-req="true" tabindex="3">
+                                <input type="text" name="ot4estvo" id="ot4estvo" tabindex="3">
 
                                 <label for="data_rojdeniya">Дата рождения</label>
                                 <div class="input-append input-block-level">
@@ -160,7 +160,7 @@
                             <div class="clearfix"></div>
                             <div class="line"></div>
 
-                            <input type="button" class="btn btn-success span12 send" id="send" value="Отправить заявку" data-url="<?=URL::site('wordtemplate/zayavlenie')?>">
+                            <input type="button" class="btn btn-success span12 send" id="send" value="Отправить заявку" data-url="<?=URL::site('lk/ajax/addPapers')?>">
                         </div>
                     </form>
                 </div>

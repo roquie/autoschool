@@ -45,6 +45,38 @@ h2 {
   font-weight: 300;
 }
 /*
+ Стили для добавленных текстов до/после поля
+*/
+.input-append.input-block-level,
+.input-prepend.input-block-level {
+  width: 100%;
+  display: table;
+}
+.input-append.input-block-level .add-on,
+.input-prepend.input-block-level .add-on {
+  display: table-cell;
+  padding: 4px;
+  background-color: #e8e8e8;
+}
+.input-append.input-block-level .add-on:hover,
+.input-prepend.input-block-level .add-on:hover {
+  background-color: #dddddd;
+}
+.input-append.input-block-level > input {
+  border-right: 0;
+}
+.input-prepend.input-block-level > input {
+  border-left: 0;
+}
+.input-prepend .add-on:first-child,
+.input-prepend .btn:first-child,
+.input-append .add-on:first-child,
+.input-append .btn:first-child {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+/*
     общие стили для элементов
 */
 .theory,
@@ -233,6 +265,14 @@ footer ul li > a:hover {
   border-radius: 0;
   filter: none;
 }
+.navbar .nav > .active > a {
+  background: none;
+}
+.navbar .nav > .active > a:hover,
+.navbar .nav > .active > a:focus,
+.navbar .nav > .active > a:active {
+  background: none;
+}
 .navbar .nav > li > a {
   margin: 0 10px;
   padding: 11px 0 2px;
@@ -240,10 +280,24 @@ footer ul li > a:hover {
   float: none;
   text-decoration: none;
 }
-.navbar .nav > li > a:hover {
+.navbar .nav > li > a:hover,
+.navbar .nav > li > a:focus {
   background: none;
+}
+.navbar .nav > li > a:hover {
   border-bottom: 2px solid rgba(245, 245, 245, 0.2);
   color: #ffffff;
+}
+.navbar .nav > li > a strong.caret {
+  border-top: 4px solid #ffffff;
+}
+.navbar .nav > li > #popup > form {
+  margin-bottom: 0;
+}
+.navbar .nav > li > #popup > form input {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
 }
 .navbar .nav .text {
   position: absolute;
@@ -278,7 +332,7 @@ footer ul li > a:hover {
   box-shadow: none;
 }
 .btn-docum {
-  margin-top: 0;
+  margin-top: 5px;
   line-height: 25px;
   margin-left: 90px;
 }

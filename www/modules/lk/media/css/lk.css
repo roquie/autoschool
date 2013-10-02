@@ -3,6 +3,7 @@ body {
 }
 .lk {
   margin-top: 110px;
+  margin-bottom: 30px;
   background-color: #ffffff;
   height: 700px;
   border-top: 2px solid rgba(0, 0, 0, 0.1);
@@ -15,10 +16,11 @@ body {
   -webkit-box-shadow: 0 0 0 0, 0 5px 5px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 0 0 0, 0 5px 5px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 0 0, 0 5px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 .back1 {
   color: #ffffff;
-  background: url(../img/right_panel.png) repeat-x;
+  background: url(/img/right_panel.png) repeat-x;
   height: 90px;
   min-height: 90px;
   border-bottom: 1px solid #ccc;
@@ -90,7 +92,7 @@ h1 {
 .imgprofile {
   position: absolute;
   z-index: 1;
-  left: 180px;
+  left: 18px;
   top: 15px;
   height: 180px;
   width: 180px;

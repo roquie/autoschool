@@ -1,5 +1,9 @@
 var currentState = '';
 $(function() {
+
+    $(window).on('load', function() {
+        first_load();
+    });
     /**
      * Прокрутка до блока при нажатии на ссылки в Footer
      */
@@ -66,5 +70,13 @@ function scrollToElement(href) {
             location.hash = href[1];
         });
         currentState = href;
+    }
+}
+function first_load() {
+    if (location.hash != '') {
+        var url = location.hash.replace('#', '');
+        $('body,html').delay(100).animate({
+            scrollTop: $('section[target="'+url+'"]').offset().top
+        }, 500);
     }
 }

@@ -5,6 +5,9 @@ class Controller_Main_Mail extends Controller_Ajax_Main
 
     public function action_send()
     {
+        // @todo заглушка от спама, запилить нормальную защиту
+        $this->ajax_msg('Сообщение отправлено');
+        exit;
 
         $valid = $this->ajax_xssclean($_POST);
         if ($valid)

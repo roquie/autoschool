@@ -8,8 +8,8 @@ class Model_Lk_Statement extends ORM
     public function addData(array $data)
     {
         try {
-            $user = ORM::factory('Lk_Statement');
-            $user->values($data)
+            $user = ORM::factory('Lk_Statement')
+                ->values($data)
                 ->create()->pk();
         } catch(ORM_Validation_Exception $e) {
             return false;

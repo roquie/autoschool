@@ -16,7 +16,6 @@
     <?=HTML::style('css/popup.css')?>
     <?=HTML::style('css/validation.css')?>
 
-
     <?=HTML::script('http://yandex.st/jquery/1.10.2/jquery.min.js')?>
     <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap.min.js')?>
@@ -57,7 +56,7 @@
             });
 
             $('#user_name').popupWin({
-                edgeOffset : 49,
+                edgeOffset : 30,
                 delay : 400
             });
 

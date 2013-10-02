@@ -14,7 +14,6 @@
                 <ul id="tabs" class="nav nav-tabs">
                     <li class="active"><a href="#tab1">Заявление</a></li>
                     <li><a href="#tab2">Договор</a></li>
-                    <li><a href="#tab3">Регистрация</a></li>
                 </ul>
 
                 <div class="tab-pane" id="tab1">
@@ -163,13 +162,7 @@
 
                             <input type="button" class="btn btn-success span12 send" id="send" value="Отправить заявку" data-url="<?=URL::site('wordtemplate/zayavlenie')?>">
                         </div>
-                        <button class="btn btn-info pull-right" id="next">Далее</button>
                     </form>
-                </div>
-
-                <div class="tab-pane" id="tab3">
-                    <div class="line"></div>
-                    <input type="submit" class="btn btn-success span12 send" value="Отправить заявку">
                 </div>
 
             </div>

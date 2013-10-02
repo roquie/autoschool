@@ -31,4 +31,27 @@ class File extends Kohana_File
 
         return $data;
     }
+
+    public static function createZip($name, $paths, $dir = false)
+    {
+        $zip = new ZipArchive();
+        $name = $name.'_'.date('j_m_Y_h_i_s').'.zip';
+        if ($zip->open($name, ZIPARCHIVE::CREATE) !== true)
+            Kohana_Exception::text('ошибка создания zip архива');
+
+        if ($dir) {
+            foreach (File::listFiles($paths) as $file)
+                $zip->addFile($file, basename($file));
+            $zip->close();
+
+            return $name;
+        } else {
+            foreach ($paths as $file)
+                $zip->addFile($file, basename($file));
+            $zip->close();
+
+            return $name;
+        }
+
+    }
 }

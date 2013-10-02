@@ -201,7 +201,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/download')->render();
+        echo View::factory('pages/downloads')->render();
     }
 
     /**
@@ -289,7 +289,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     /**
      * Формирование заявления
      */
-    public function action_downloadStatement()
+    public function action_downloadStatement($delete = true)
     {
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
@@ -316,20 +316,55 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $document->setValue('MestoRaboty',$statement['mesto_raboty']);
         $document->setValue('About', $statement['about']);
 
-        $file = 'zayavleniya/zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
+        $file = 'zayavleniya/'.
+            $this->translit($statement['famil']).'_'.
+            $this->translit($statement['imya']).'_'.
+            $this->translit($statement['ot4estvo']).'_'.
+            'zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
         $document->save(APPPATH.'output_blanks/'.$file);
 
+        if(!$delete)
+            return $file;
+
         $this->response->send_file(APPPATH.'output_blanks/'.$file, null, array(
-            'delete' => true
-        ));
+              'delete' => $delete
+         ));
+
         unset($document);
+
+
+    }
+
+    /**
+     * Все архивчиком
+     */
+    public function action_downloadZip()
+    {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+
+        $contact = $this->action_downloadContract(false);
+        $statement = $this->action_downloadStatement(false);
+
+        $str = File::createZip(
+        APPPATH.'output_blanks/zip/documents_export',
+        array(
+             APPPATH.'output_blanks/'.$contact,
+             APPPATH.'output_blanks/'.$statement
+        ));
+        unlink(APPPATH.'output_blanks/'.$contact);
+        unlink(APPPATH.'output_blanks/'.$statement);
+        $this->response->send_file($str, null, array(
+              'delete' => true
+         ));
+
     }
 
     /**
      * Формирование договора
      */
-    public function action_downloadContract()
+    public function action_downloadContract($delete = true)
     {
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
@@ -353,14 +388,25 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $obj->setValue('LAddress', $statement['adres_reg_po_pasporty']);
         $obj->setValue('LPhone', $statement['mob_tel']);
 
-        $contr = 'contracts/contract_'.date('d_m_Y_H_i_s').'.docx';
+        // @todo: тута $statement а не $contract, потому что в $contract нихера нету, странно
+        $contr = 'contracts/'.
+            $this->translit($statement['famil']).'_'.
+            $this->translit($statement['imya']).'_'.
+            $this->translit($statement['ot4estvo']).'_'.
+            'contract_'.date('d_m_Y_H_i_s').'.docx';
 
         $obj->save(APPPATH.'output_blanks/'.$contr);
 
+        if(!$delete)
+            return $contr;
+
         $this->response->send_file(APPPATH.'output_blanks/'.$contr, null, array(
-            'delete' => true
-        ));
+               'delete' => $delete
+          ));
+
         unset($document);
+
+
     }
 
     /**
@@ -391,5 +437,25 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             return (date('Y') - $mas[2] - 1);
         else
             return (date('Y') - $mas[2]);
+    }
+
+    protected function translit($str)
+    {
+        $tr = array(
+            "А"=>"A","Б"=>"B","В"=>"V","Г"=>"G",
+            "Д"=>"D","Е"=>"E","Ж"=>"J","З"=>"Z","И"=>"I",
+            "Й"=>"Y","К"=>"K","Л"=>"L","М"=>"M","Н"=>"N",
+            "О"=>"O","П"=>"P","Р"=>"R","С"=>"S","Т"=>"T",
+            "У"=>"U","Ф"=>"F","Х"=>"H","Ц"=>"TS","Ч"=>"CH",
+            "Ш"=>"SH","Щ"=>"SCH","Ъ"=>"","Ы"=>"YI","Ь"=>"",
+            "Э"=>"E","Ю"=>"YU","Я"=>"YA","а"=>"a","б"=>"b",
+            "в"=>"v","г"=>"g","д"=>"d","е"=>"e","ж"=>"j",
+            "з"=>"z","и"=>"i","й"=>"y","к"=>"k","л"=>"l",
+            "м"=>"m","н"=>"n","о"=>"o","п"=>"p","р"=>"r",
+            "с"=>"s","т"=>"t","у"=>"u","ф"=>"f","х"=>"h",
+            "ц"=>"ts","ч"=>"ch","ш"=>"sh","щ"=>"sch","ъ"=>"y",
+            "ы"=>"yi","ь"=>"","э"=>"e","ю"=>"yu","я"=>"ya"
+        );
+        return strtr($str,$tr);
     }
 }

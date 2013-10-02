@@ -32,7 +32,7 @@ class Controller_Lk_Lk extends Controller_Main
     }
 
     /**
-     * капитан орёт - это вход!
+     * Страница входа
      */
     public function action_login()
     {

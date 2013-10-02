@@ -76,19 +76,6 @@ h1 {
   background: #f5f5f5;
   font-weight: 600;
 }
-.msg {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-.msg .span4 {
-  border-bottom: 1px solid #cccccc;
-}
-.msg .span4 b {
-  font-weight: 400;
-}
-.msg .span4 .span8 {
-  margin-top: 5px;
-}
 .imgprofile {
   position: absolute;
   z-index: 1;
@@ -117,4 +104,25 @@ h1 {
   background-clip: padding-box;
   position: relative;
   z-index: -2;
+}
+#content {
+  padding-top: 10px;
+}
+#content h1.development {
+  text-align: center;
+  text-transform: uppercase;
+  color: #000000;
+}
+#content .msg {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+#content .msg .span4 {
+  border-bottom: 1px solid #cccccc;
+}
+#content .msg .span4 b {
+  font-weight: 400;
+}
+#content .msg .span4 .span8 {
+  margin-top: 5px;
 }

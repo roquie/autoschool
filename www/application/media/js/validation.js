@@ -53,10 +53,11 @@
                 , height: input[0].offsetHeight
             }, input.offset());
 
-            input.wrap($('<span>').css({
+            if (input.parent('span').length === 0)
+                input.wrap($('<span>').css({
                     position : 'relative'
-                })
-            );
+                    })
+                );
 
             switch (arrowClass) {
                 case 'top' :

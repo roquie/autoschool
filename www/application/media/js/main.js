@@ -52,4 +52,6 @@ $(function() {
         $("#slide-left").pageSlide('close');
         return false;
     });
+
+
 });

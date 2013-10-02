@@ -68,7 +68,7 @@ h2 {
 .input-prepend.input-block-level > input {
   border-left: 0;
 }
-.input-prepend .add-on:first-child,
+.input-append .add-on:first-child,
 .input-prepend .btn:first-child,
 .input-append .add-on:first-child,
 .input-append .btn:first-child {
@@ -216,7 +216,7 @@ ul.dash li span {
 /*
   для не кривого отображения формы в контактах
 */
-form input[name="name"] {
+form input.in-name {
   padding-right: 17px;
 }
 form textarea {
@@ -332,7 +332,7 @@ footer ul li > a:hover {
   box-shadow: none;
 }
 .btn-docum {
-  margin-top: 5px;
+  margin-top: 6px;
   line-height: 25px;
   margin-left: 90px;
 }

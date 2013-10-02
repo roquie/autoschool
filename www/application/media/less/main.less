@@ -107,7 +107,7 @@ body {
 .input-prepend.input-block-level > input {
   border-left: 0;
 }
-.input-prepend .add-on:first-child,
+.input-append .add-on:first-child,
 .input-prepend .btn:first-child,
 .input-append .add-on:first-child,
 .input-append .btn:first-child {.border-radius(0)}
@@ -262,10 +262,11 @@ ul.dash {
   для не кривого отображения формы в контактах
 */
 form {
-  input[name="name"] {
-    padding-right: 17px;
-  }
-  textarea {
+  input {
+    &.in-name {
+      padding-right: 17px;
+    }
+  }  textarea {
     resize: none;
   }
 }
@@ -402,7 +403,7 @@ footer {
 }
 
 .btn-docum {
-  margin-top: 5px;
+  margin-top: 6px;
   line-height: 25px;
   margin-left: 90px;
 }

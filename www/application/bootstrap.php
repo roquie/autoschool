@@ -130,8 +130,8 @@ Kohana::modules(array(
        'phpword' => MODPATH.'phpword',
        'docxtemplate' => MODPATH.'docxtemplate',
        'twitterapi' => MODPATH.'twitterapi',
-       'lk' => MODPATH.'lk', // зависимый модуль
-      //  '' => MODPATH.'',
+       'lk' => MODPATH.'lk', // зависимый от проекта модуль
+       'botobor' => MODPATH.'botobor',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',

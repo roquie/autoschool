@@ -15,8 +15,7 @@ class Controller_Lk_Lk extends Controller_Main
 
         // всх кто без печенек, в клуб долбаебов не пускаем
         $email = Cookie::get('userEmail');
-        // редирект на главную, т.к. теперь вход это попап и возвращать моно токо на главную впринципе))
-        if (is_null($email)) HTTP::redirect('/');
+        if (is_null($email)) HTTP::redirect('lk/login');
     }
 
     /**
@@ -30,6 +29,47 @@ class Controller_Lk_Lk extends Controller_Main
             'userEmail' =>   Cookie::get('userEmail'),
             'userPhoto' =>   Cookie::get('userPhoto'),
         ));
+    }
+
+    /**
+     * капитан орёт - это вход!
+     */
+    public function action_login()
+    {
+        $result = Model::factory('Lk_User')->login(array(
+              'email' => $this->request->post('email'), //sql inj
+              'password' => $this->hash($this->request->post('password'))
+        ));
+
+        if (array_key_exists('remember', $this->request->post()) && ($result->email && $result->password)) {
+            Cookie::$expiration = Date::MONTH;
+            Cookie::set('userEmail', $result->email);
+            Cookie::set('userPhoto', $result->photo);
+            Cookie::set('statement_id', $result->Statement_id);
+            Cookie::set('contract_id', $result->Contract_id);
+            HTTP::redirect('lk');
+        }
+
+        if ($result->email && $result->password) {
+            Cookie::$expiration = 0;
+            Cookie::set('userEmail', $result->email);
+            Cookie::set('userPhoto', $result->photo);
+            Cookie::set('statement_id', $result->Statement_id);
+            Cookie::set('contract_id', $result->Contract_id);
+            HTTP::redirect('lk');
+        } else {
+            echo 'введите данные';
+            exit;
+        }
+
+    }
+
+    /**
+     * морда регистрации
+     */
+    public function action_registration()
+    {
+        $this->template->content = View::factory('reg');
     }
 
     /**
@@ -78,7 +118,7 @@ class Controller_Lk_Lk extends Controller_Main
         Cookie::delete('userPhoto');
         Cookie::delete('statement_id');
         Cookie::delete('contract_id');
-        HTTP::redirect('/');
+        HTTP::redirect('/lk');
     }
 
 }

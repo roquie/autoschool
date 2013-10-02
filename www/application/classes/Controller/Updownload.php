@@ -9,9 +9,9 @@ class Controller_Updownload extends Controller_Main
         $filename = $this->request->param('filename');
         $format = $this->request->param('format');
 
-        $this->response->headers(
+       /* $this->response->headers(
             'Content-type', File::mime_by_ext('docx')
-        );
+        );*/
 
         $this->response->send_file(APPPATH.'output_blanks/'.$folder.'/'.$filename.'.'.$format);
     }

@@ -19,7 +19,11 @@ class Controller_Main extends Controller_Template
 
     public function action_index()
     {
-        $this->template->content = View::factory('main/index');
+        $bform = new Botobor_Form(View::factory('main/contact/form'));
+        $contact = $bform->getCode();
+        $this->template->content =
+            View::factory('main/index')
+                 ->set('contactForm', $contact);
     }
 
     public function action_statement()

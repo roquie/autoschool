@@ -134,10 +134,10 @@
 -->
                 <ul class="dash">
                     <li><span>Сроки обучения составляют 2-2,5 месяца;</span></li>
-                    <li><span>Стоимость обучения 22 000 <abbr title="рублей">Р.</abbr> с возможностью поблочной оплаты.;</span></li>
-                    <li><span>Предоставление медицинской комиссии (на данный момент стоимость составляет 1300 р);</span></li>
-                    <li><span>Комплект литературы ( стоимость минимального комплекта 600 р – максимального 900 р);</span></li>
-                    <li><span>Дополнительные занятия помимо базовых практических часов стоят 1200 р  и составляют 2 академических часа.</span></li>
+                    <li><span>Стоимость обучения 22 000 <abbr title="рублей">Р.</abbr> с возможностью поблочной оплаты;</span></li>
+                    <li><span>Предоставление медицинской комиссии (на данный момент стоимость составляет 1300 <abbr title="рублей">Р.</abbr>);</span></li>
+                    <li><span>Комплект литературы ( стоимость минимального комплекта 600 <abbr title="рублей">Р.</abbr> – максимального 900 <abbr title="рублей">Р.</abbr>);</span></li>
+                    <li><span>Дополнительные занятия помимо базовых практических часов стоят 1200 <abbr title="рублей">Р.</abbr>  и составляют 2 академических часа.</span></li>
                 </ul>
                 </div>
             <div class="span6">
@@ -168,17 +168,7 @@
                     <abbr title="Телефон">Тел. 2</abbr>: +7 (499) 317 04 09<br><br>
                     Адрес: г. Москва, нахимовский проспект, 21 <br> <br>
                     Напишите нам: <br> <br>
-                    <form id="send" action="<?=URL::site('main/mail/send')?>" method="post" accept-charset="utf-8">
-
-                            <input name="name" type="text" class="span2" data-placement="top" data-req="true" data-value="Имя">
-
-                            <input name="email" type="text" class="input-large" data-placement="top" data-req="true" data-value="Email адрес">
-
-                        <span style="position: relative">
-                            <textarea name="message" class="span5" rows="5" data-req="true" data-value="Сообщение"></textarea>
-                        </span>
-                        <input type="submit" class="btn btn-primary span2" value="Отправить">
-                    </form>
+                    <?=$contactForm?>
                 </div>
             </div>
             <div class="span6">

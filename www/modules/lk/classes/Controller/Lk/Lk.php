@@ -15,7 +15,7 @@ class Controller_Lk_Lk extends Controller_Main
 
         // всх кто без печенек, в клуб долбаебов не пускаем
         $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('lk/login');
+        if (is_null($email)) HTTP::redirect('/');
     }
 
     /**
@@ -118,7 +118,7 @@ class Controller_Lk_Lk extends Controller_Main
         Cookie::delete('userPhoto');
         Cookie::delete('statement_id');
         Cookie::delete('contract_id');
-        HTTP::redirect('/lk');
+        HTTP::redirect('/');
     }
 
 }

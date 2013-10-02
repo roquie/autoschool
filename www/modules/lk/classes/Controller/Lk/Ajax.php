@@ -8,39 +8,6 @@
 
 class Controller_Lk_Ajax extends Controller_Ajax_Main
 {
-
-    /**
-     * капитан орёт - это вход!
-     */
-    public function action_login()
-    {
-        $result = Model::factory('Lk_User')->login(array(
-            'email' => $this->request->post('email'), //sql inj
-            'password' => $this->hash($this->request->post('password'))
-        ));
-
-        if (array_key_exists('remember', $this->request->post()) && ($result->email && $result->password)) {
-            Cookie::$expiration = Date::MONTH;
-            Cookie::set('userEmail', $result->email);
-            Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->Statement_id);
-            Cookie::set('contract_id', $result->Contract_id);
-            HTTP::redirect('lk');
-        }
-
-        if ($result->email && $result->password) {
-            Cookie::$expiration = 0;
-            Cookie::set('userEmail', $result->email);
-            Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->Statement_id);
-            Cookie::set('contract_id', $result->Contract_id);
-            HTTP::redirect('lk');
-        } else {
-            $this->ajax_msg('Ошибка, попробуйте еще раз', 'error');
-        }
-
-    }
-
     /**
      * Изменение пароля
      */

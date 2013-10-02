@@ -8,7 +8,12 @@ class Controller_Admin extends Controller_Template
     public function before()
     {
         parent::before();
-        $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
+
+        $email = Session::instance()->get('email');
+        if(empty($email) && $this->request->uri() === 'admin')
+            HTTP::redirect('admin/auth/login');
+        elseif(empty($email))
+            throw new HTTP_Exception_404();
 
         $this->template->title = 'Администратор "МПТ Автошкола"';
 
@@ -53,7 +58,7 @@ class Controller_Admin extends Controller_Template
 
     public function action_index()
     {
-        $this->template->content = 'GitHub 4ever <3 !';
+        $this->template->content = 'Adminka';
     }
 
     public function action_mail()

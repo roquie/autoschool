@@ -31,30 +31,11 @@ class Controller_Admin extends Controller_Template
     {
 
         $this->template->content = View::factory('admin/backup', array(
-            'backupFiles' => $this->getBackupFiles(APPPATH.'backups/')
+            'backupFiles' => File::listFiles(APPPATH.'backups/', 'zip')
         ));
     }
 
-    /**
-     * @DEPRECATED Временно нужна
-     * @todo: Перенести функции для работы с файлами в класс File kohana
-     * @param $path
-     * @return array
-     */
-    protected function getBackupFiles($path)
-    {
-        $data = array();
-        $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
 
-        foreach ($it as $file)
-            if (!$it->isDot() && !$it->isDir()) {
-                $basename = pathinfo($it->getPathname(), PATHINFO_BASENAME);
-                if (strpos($basename, '.zip'))
-                    $data[] = $it->getPathname();
-            }
-
-        return $data;
-    }
 
     public function action_index()
     {
@@ -71,22 +52,22 @@ class Controller_Admin extends Controller_Template
 
     public function action_papers()
     {
-        $req = $this->request->query('vedomost');
+        /*$req = $this->request->query('vedomost');
         if ($req)
             $this->template->content = View::factory('admin/papers/vedomost', array(
                 'name' => URL::site('uploads_old/downloaded/'.$req)
             ));
         else
             $this->template->content = View::factory('admin/papers/view', array(
-                'downloadedFiles' => $this->scanFolder(APPPATH.'/uploads_old/downloaded/'),
-            ));
+                'downloadedFiles' => File::listFiles(APPPATH.'/uploads_old/downloaded/'),
+            ));*/
 
     }
 
     public function action_settings()
     {
         $this->template->content = View::factory('admin/settings', array(
-            'all_users' => Model::factory('Admin_User')->getUsersWithRights(),
+            'all_admins' => Model::factory('Admin_Administrator')->all(),
             'googleAccount' => Model::factory('Admin_GoogleAccount')->getLastRecord(),
             'googleAccountAllRecords' => Model::factory('Admin_GoogleAccount')->getAll(),
         ));
@@ -97,16 +78,6 @@ class Controller_Admin extends Controller_Template
         $this->template->content = View::factory('admin/mail/tpl', array(
             'titles' => Model::factory('Admin_MsgTemplate')->getAll(),
         ));
-    }
-
-    /**
-     * сканирование папки
-     * @param $path
-     * @return array с именами файлов
-     */
-    protected function scanFolder($path)
-    {
-        return array_diff(scandir($path), array('..', '.'));
     }
 
 

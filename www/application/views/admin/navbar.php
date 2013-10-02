@@ -15,7 +15,7 @@
             </ul>
             <ul class="nav pull-right">
                 <li class="divider-vertical"></li>
-                <li style="position: relative">
+                <li style="position: relative"><!----><!----><!----><!----><!---->
                     <a href="#" id="user_name"><span class="login"><i class="icon-user"></i> <?=$session->get('first_name').' '.$session->get('last_name')?></span><strong class="caret" style="margin-left: 2px;margin-top: 8px;"></strong></a>
                     <div id="popup" class="hide">
                         <div class="pull-left">

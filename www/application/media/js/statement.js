@@ -157,13 +157,13 @@ $(function() {
         $.each($('#contract').serializeArray(), function(k, v) {
             contract[v.name] = v.value;
         });
+
+        $.extend(true, statement, contract);
+
         action = $(this).data('url');
         $.post(
             action,
-            {
-                statement : statement,
-                contract  : contract
-            },
+            statement,
             function(response) {
                 if (response.status === 'success') {
                     $('#result').html(response.msg);
@@ -194,6 +194,19 @@ $(function() {
             'json'
         );
     });
+
+    var ArrayMergeRecursive = function(){
+        if(arguments.length < 2){
+            throw new Error("ArrayMergeRecursive: Please enter two or more objects to merge!");
+        }
+
+        var arr1={};
+        for(var i=0; i<=arguments.length; i++ ){
+            $.extend(true, arr1, arguments[i]);
+        }
+
+        return arr1;
+    };
     /**
      * Подсказки в полях ввода
      */

@@ -18,6 +18,9 @@ $(function() {
         link = action.split('/');
         location.hash = link[link.length-1];
     });
+
+    $('.menu').css({'margin-top' : $('.profile').find('img').height() - $('.back1').height() + 20});
+
     function first_load() {
         var url,
             link,

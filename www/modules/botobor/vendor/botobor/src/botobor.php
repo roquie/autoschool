@@ -58,7 +58,7 @@ class Botobor
      */
     private static $conf = array(
         // Секретная строка для подписывания мета-данных
-        'secret' => '',
+        'secret' => 'Нt3)U1♥65щ68Р162ta6╔31▓1А321<21 465s32☺3☺651 35165♣3☻1 1656☺32☺32☺=♠A1а1A1651',
         // Проверка REFERER
         'check.referer' => true,
         // Проверка задержки
@@ -73,7 +73,7 @@ class Botobor
         'check.honeypots' => true,
         // Имена для приманок
         'honeypots' => array(
-            'name', 'mail', 'email'
+            'text', 'mail', 'msg', 'first_name', 'site', 'last_name',
         ),
     );
 

@@ -18,12 +18,6 @@ class Controller_Lk_Lk extends Controller_Main
         //if (is_null($email)) HTTP::redirect('/');
     }
 
-    public function action_lol()
-    {
-        $test = ORM::factory('Lk_Contract')->as_array();
-        var_dump($test);
-    }
-
     /**
      * ЛК, главная страница
      */

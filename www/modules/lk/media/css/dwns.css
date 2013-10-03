@@ -1,0 +1,27 @@
+.downloads {
+  margin-top: 20px;
+}
+.dwn_block {
+  height: 50px;
+  border: 1px dashed #ccc;
+  background-color: #E8E8E8;
+  margin-bottom: 15px;
+}
+.dwn_block .row .span1 {
+  width: 45px;
+}
+.dwn_block .row .span1 img {
+  height: 40px;
+  padding: 5px;
+  opacity: 0.9;
+}
+.dwn_block .row .span3 {
+  margin-left: 0;
+}
+.dwn_block .row .span3 a {
+  display: inline-block;
+  margin-top: 1px;
+}
+.dwn_block .row .span3 p {
+  font-size: 9pt;
+}

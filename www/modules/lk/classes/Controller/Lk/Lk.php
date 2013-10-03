@@ -131,6 +131,16 @@ class Controller_Lk_Lk extends Controller_Main
            'delete' => true
         ));
     }
+    /**
+     * Формирование квитанции
+     */
+    public function action_downloadTicket()
+    {
+        $path = $this->createTicket();
+        $this->response->send_file(APPPATH.'output_blanks/'.$path, null, array(
+          'delete' => true
+        ));
+    }
 
     /**
      * Все архивчиком
@@ -140,16 +150,18 @@ class Controller_Lk_Lk extends Controller_Main
 
         $contact = $this->createContract();
         $statement = $this->createStatement();
+        $ticket = $this->createTicket();
 
-        $str = File::createZip(
-            APPPATH.'output_blanks/temp/documents_exports',
-            array(
-                 APPPATH.'output_blanks/'.$contact,
-                 APPPATH.'output_blanks/'.$statement
-            ));
+        $paths = array(
+            APPPATH.'output_blanks/'.$contact,
+            APPPATH.'output_blanks/'.$statement,
+            APPPATH.'output_blanks/'.$ticket,
+        );
 
-        unlink(APPPATH.'output_blanks/'.$contact);
-        unlink(APPPATH.'output_blanks/'.$statement);
+        $str = File::createZip(APPPATH.'output_blanks/temp/documents_exports', $paths);
+
+        foreach ($paths as $value)
+            unlink($value);
 
         $this->response->send_file($str, null, array(
             'delete' => true
@@ -157,7 +169,29 @@ class Controller_Lk_Lk extends Controller_Main
 
     }
 
+    protected function createTicket()
+    {
+        $statement = Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'));
 
+        $obj = new TemplateDocx(APPPATH.'templates/ticket/ticket.docx');
+
+        $famil = UTF8::ucfirst(UTF8::strtolower($statement['famil']));
+        $imya = UTF8::ucfirst(UTF8::strtolower($statement['imya']));
+        $ot4estvo = UTF8::ucfirst(UTF8::strtolower($statement['ot4estvo']));
+
+        $obj->setValue('Customer', $famil.' '.$imya.' '.$ot4estvo);
+
+        $file = 'temp/'.
+            $this->translit($statement['famil']).'_'.
+            $this->translit($statement['imya']).'_'.
+            $this->translit($statement['ot4estvo']).'_'.
+            'ticket_'.date('d_m_Y_H_i_s').'.docx';
+
+        $obj->save(APPPATH.'output_blanks/'.$file);
+
+        unset($document);
+        return $file;
+    }
 
     protected function createContract()
     {

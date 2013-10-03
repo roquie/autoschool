@@ -29,9 +29,9 @@ class Controller_Main_Mail extends Controller_Ajax_Main
 
             $result = Email::factory('Автошкола МПТ', $msg)
                 ->to(array(
-                          'vik.melnikov@gmail.com' => 'Виктор Мельников',
-                          'roquie0@gmail.com' => 'Алексей Петров',
-                          'auto@mpt.ru' => 'Автошкола МПТ'
+                          'vik.melnikov@gmail.com',
+                          'roquie0@gmail.com',
+                          'auto@mpt.ru'
                      ))
                 ->from($from, $name)
                 ->send();

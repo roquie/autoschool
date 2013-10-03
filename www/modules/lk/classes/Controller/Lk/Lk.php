@@ -15,7 +15,7 @@ class Controller_Lk_Lk extends Controller_Main
 
         // всх кто без печенек, в клуб долбаебов не пускаем
         $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
+        //if (is_null($email)) HTTP::redirect('/');
     }
 
     /**

@@ -88,6 +88,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_addPapers()
     {
+
         // поля необязательные для заполнения
         $no_required = array('ot4estvo', 'dom_tel');
 

@@ -30,10 +30,7 @@
                 </tr>
                 <tr>
                     <td>Гражданство</td>
-                    <td>
-                        <!--<a href="#" id="grajdanstvo" data-type="select2" data-pk="" data-value="<?/*=$info['grajdanstvo']*/?>"></a>-->
-                        <a href="#" id="grajdanstvo" data-type="select2" data-pk="1" data-name="nationality_id" data-value="<?=$info['nationality_id']?>"></a>
-                    </td>
+                    <td><a href="#" id="grajdanstvo" data-type="select2" data-pk="1" data-name="nationality_id" data-value="<?=$info['nationality_id']?>"></a></td>
                 </tr>
                 <tr>
                     <td>Место рождения</td>

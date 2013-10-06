@@ -17,10 +17,7 @@ $(function() {
     $('#famil').editable();
     $('#imya').editable();
     $('#ot4estvo').editable();
-/*    $('#data_rojdeniya').datepicker({
-        format: 'mm/dd/yyyy',
-        language : 'ru'
-    });*/
+
     moment.lang('ru');
     $('#data_rojdeniya').editable({
         format: 'DD.MM.YYYY',

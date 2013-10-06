@@ -35,7 +35,6 @@ $(function() {
         disable_search: true,
         no_results_text: "Ничего не найдено"
     });
-    $('#pasport_seriya').editable();
 
     // Отображение календаря при нажатии на иконку календаря
     body.on('click', '#calendar', function() {

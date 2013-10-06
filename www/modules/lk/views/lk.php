@@ -1,5 +1,12 @@
 <?=HTML::style('css/lk.css')?>
 <?=HTML::script('js/lk.js')?>
+
+<?=HTML::script('js/vendor/moment+langs.min.js')?>
+<?=HTML::style('css/vendor/bootstrap-editable.css')?>
+<?=HTML::script('js/vendor/bootstrap-editable.min.js')?>
+<?=HTML::style('css/lk_statement.css')?>
+<?=HTML::style('css/vendor/select2.css')?>
+<?=HTML::script('js/vendor/select2.min.js')?>
 <?
     $reg = Session::instance()->get('after_register');
     if (!is_null($reg)) :
@@ -49,6 +56,12 @@
                 <li><a href="<?=URL::site('lk/ajax/download')?>"><i class="icon-cloud-download"></i>Загрузки</a></li>
             </ul>
         </div>
-        <div class="span9" id="content"></div>
+
+        <div id="loader">
+            <div class="title">Загрузка данных... Пожалуйста, подождите</div>
+            <div class="loader"><i class="icon-refresh icon-spin icon-3x"></i></div>
+        </div>
+        <div class="span9" id="content">
+        </div>
     </div>
 </div>

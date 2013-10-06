@@ -56,12 +56,22 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         else
             $this->ajax_msg('Непредвиденная ошибка', 'error');
     }
+
     /**
      * Изменение заявления
      */
     public function action_changeStatement()
     {
-        $result = Model::factory('Lk_Statement')->updAll(Cookie::get('statement_id'), $this->request->post());
+
+        $this->ajax_data($this->request->post());
+        exit;
+        $value = Security::xss_clean($this->request->post('value'));
+        if (!$value)
+            $this->ajax_msg('Заполните поле', 'error');
+        $data = array(
+            $this->request->post('name') => $value
+        );
+        $result = Model::factory('Lk_Statement')->updAll(Cookie::get('statement_id'), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
         else
@@ -73,7 +83,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeContract()
     {
-        // а пох на пост, в бд на прямую вставляем все, кохана обо всем позаботилась, кроме xss и csrf
+        // @todo: а post то мб зараженным о_О
         $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $this->request->post());
 
         if (!$result)
@@ -181,7 +191,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/statement')->render();
+        echo View::factory('pages/statement', array(
+            'info' => Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'))
+        ))->render();
     }
 
     /**
@@ -285,6 +297,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->ajax_msg('Непредвиденная ошибка', 'error');
 
     }
+
+
 
     /**
      * хэшируем, хэшируем ИБ гарантируем

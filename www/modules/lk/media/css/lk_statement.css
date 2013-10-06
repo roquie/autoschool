@@ -1,0 +1,9 @@
+.data {
+  margin-top: 20px;
+}
+.data .table tr:first-child td {
+  border-top: none;
+}
+.data .table td {
+  width: 50%;
+}

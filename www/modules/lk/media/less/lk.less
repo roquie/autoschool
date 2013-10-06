@@ -8,7 +8,7 @@ body {
   margin-top: 110px;
   margin-bottom: 30px;
   background-color: #ffffff;
-  height: 700px;
+  min-height: 700px;
   border-top: 2px solid rgba(0,0,0,0.1);
   .border-radius(2px);
   .box-shadow(0 0 0 0, 0 5px 5px rgba(0,0,0, 0.2));
@@ -93,7 +93,19 @@ h1 {
   }
 }
 
+#loader {
+  display: none;
+}
+
 #content {
+  .loader, .title {
+    text-align: center;
+  }
+  .loader {
+    position: absolute;
+    top: 20%;
+    left: 57%;
+  }
   padding-top: 10px;
   h1 {
     &.development {

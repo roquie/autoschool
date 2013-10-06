@@ -5,10 +5,11 @@
                 <li><a href="<?=URL::site()?>"><i class="icon-home"></i> Главная</a></li>
                 <li class="active"><a href="<?=URL::site('/admin')?>"><i class="icon-bar-chart"></i> Админка</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> Щито-то<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> Тестирование<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?=URL::site('admin/papers')?>">Просмотр</a></li>
-                        <li><a href="<?=URL::site('admin/backup')?>">BackUp Me!</a></li>
+                       <!-- <li><a href="<?/*=URL::site('admin/papers')*/?>">Просмотр</a></li>-->
+                        <li><a href="<?=URL::site('admin/gr_obr')?>">Гражданство и образование</a></li>
+                        <li><a href="<?=URL::site('admin/group')?>">Группы</a></li>
                     </ul>
                 </li>
                 <li><a href="<?=URL::site('admin/mail')?>"><i class="icon-envelope"></i> Рассылка писем</a></li>

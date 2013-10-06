@@ -26,16 +26,10 @@ class Controller_Admin extends Controller_Template
         //$this->template->footer = View::factory('main/footer');
     }
 
-
-    public function action_backup()
+    public function action_gr_obr()
     {
-
-        $this->template->content = View::factory('admin/backup', array(
-            'backupFiles' => File::listFiles(APPPATH.'backups/', 'zip')
-        ));
+        $this->template->content = View::factory('admin/gr_obr');
     }
-
-
 
     public function action_index()
     {

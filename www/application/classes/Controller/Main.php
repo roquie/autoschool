@@ -28,7 +28,11 @@ class Controller_Main extends Controller_Template
 
     public function action_statement()
     {
-        $this->template->content = View::factory('main/blank/statement');
+
+        $this->template->content =
+            View::factory('main/blank/statement')
+                ->set('Nationality', Model::factory('Lk_Nationality')->all())
+                ->set('Educations', Model::factory('Lk_Education')->all());
     }
 
 

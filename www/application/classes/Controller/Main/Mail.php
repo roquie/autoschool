@@ -15,17 +15,22 @@ class Controller_Main_Mail extends Controller_Ajax_Main
             if ($valid)
                 exit;
 
-            $from = Arr::get($_POST, 'email');
+            $email = Arr::get($_POST, 'email');
             $name = Arr::get($_POST, 'name');
             $msg = Arr::get($_POST, 'message');
 
-            $validation = Validation::factory($_POST)
-                ->rule('email', 'email');
-
-            if ( !$validation->check() ) {
+            if(!Valid::email($email, true)) {
                 $this->ajax_msg('Неверный email адрес', 'error');
                 exit;
             }
+
+            /*$validation = Validation::factory($_POST)
+                ->rule('email', 'email');
+
+             if ( !$validation->check() ) {
+                $this->ajax_msg('Неверный email адрес', 'error');
+                exit;
+            }*/
 
             $result = Email::factory('Автошкола МПТ', $msg)
                 ->to(array(
@@ -33,7 +38,7 @@ class Controller_Main_Mail extends Controller_Ajax_Main
                           'roquie0@gmail.com',
                           'auto@mpt.ru'
                      ))
-                ->from($from, $name)
+                ->from($email, $name)
                 ->send();
 
             if ($result)

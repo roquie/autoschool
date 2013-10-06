@@ -38,10 +38,10 @@
                                 </div>
 
                                 <label for="grajdanstvo">Гражданство</label>
-                                <select id="grajdanstvo" name="statement[grajdanstvo]" style="width: 453px" data-req="true" tabindex="5">
-                                    <option>РФ</option>
-                                    <option>Украина</option>
-                                    <option>Белоруссия</option>
+                                <select id="grajdanstvo" name="statement[nationality_id]" style="width: 453px" data-req="true" tabindex="5">
+                                    <?foreach ($Nationality as $value):?>
+                                        <option value="<?=$value->id?>"><?=$value->grajdanstvo?></option>
+                                    <?endforeach?>
                                 </select>
 
                                 <label for="mesto_rojdeniya" style="margin-top: 12px">Место рождения</label>
@@ -83,7 +83,11 @@
                                 <input class="span6 pull-right" type="text" id="telephone_d" name="statement[dom_tel]" data-value="домашний" tabindex="13">
 
                                 <label for="obrazovanie">Образование</label>
-                                <input type="text" name="statement[obrazovanie]" id="obrazovanie" data-req="true" tabindex="14">
+                                <select id="obrazovanie" name="statement[education_id]" style="width: 453px" data-req="true" tabindex="14">
+                                    <?foreach ($Educations as $value):?>
+                                        <option value="<?=$value->id?>"><?=$value->obrazovanie?></option>
+                                    <?endforeach?>
+                                </select>
 
                                 <label for="mesto_raboty">Место работы</label>
                                 <input type="text" name="statement[mesto_raboty]" id="mesto_raboty" data-req="true" tabindex="15">

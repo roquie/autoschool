@@ -61,7 +61,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeStatement()
     {
-        // @todo: а post то мб зараженным о_О
         $result = Model::factory('Lk_Statement')->updAll(Cookie::get('statement_id'), $this->request->post());
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
@@ -74,7 +73,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeContract()
     {
-        // @todo: а post то мб зараженным о_О
+        // а пох на пост, в бд на прямую вставляем все, кохана обо всем позаботилась, кроме xss и csrf
         $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $this->request->post());
 
         if (!$result)
@@ -286,8 +285,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->ajax_msg('Непредвиденная ошибка', 'error');
 
     }
-
-
 
     /**
      * хэшируем, хэшируем ИБ гарантируем

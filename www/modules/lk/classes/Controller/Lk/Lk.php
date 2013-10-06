@@ -232,11 +232,14 @@ class Controller_Lk_Lk extends Controller_Main
 
         $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
+        $nationality = Model::factory('Lk_Nationality')->byId($statement['nationality_id']);
+        $education = Model::factory('Lk_Education')->byId($statement['education_id']);
+
         $document->setValue('Fam', $statement['famil']);
         $document->setValue('Name', $statement['imya']);
         $document->setValue('Otchestvo', $statement['ot4estvo']);
         $document->setValue('DateBirth', $statement['data_rojdeniya']);
-        $document->setValue('Nationality', $statement['grajdanstvo']);
+        $document->setValue('Nationality', $nationality['grajdanstvo']);
         $document->setValue('PlaceBirth', $statement['mesto_rojdeniya']);
         $document->setValue('AdresRegPoPasporty', $statement['adres_reg_po_pasporty']);
         $document->setValue('VremReg', $statement['vrem_reg']);
@@ -246,7 +249,7 @@ class Controller_Lk_Lk extends Controller_Main
         $document->setValue('PasportKemVydan', $statement['pasport_kem_vydan']);
         $document->setValue('DomTel', $statement['dom_tel']);
         $document->setValue('MobTel', $statement['mob_tel']);
-        $document->setValue('Obrazovanie', $statement['obrazovanie']);
+        $document->setValue('Obrazovanie', $education['obrazovanie']);
         $document->setValue('MestoRaboty',$statement['mesto_raboty']);
         $document->setValue('About', $statement['about']);
 

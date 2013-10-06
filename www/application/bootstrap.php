@@ -132,7 +132,7 @@ Kohana::modules(array(
        'twitterapi' => MODPATH.'twitterapi',
        'lk' => MODPATH.'lk', // зависимый от проекта модуль
        'botobor' => MODPATH.'botobor',
-       'autocrud' => MODPATH.'autocrud',
+       //'autocrud' => MODPATH.'autocrud',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',

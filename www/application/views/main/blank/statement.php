@@ -1,7 +1,7 @@
 <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
 <?=HTML::script('js/statement.js')?>
 <?=HTML::style('css/statement.css')?>
-<?=HTML::script('js/vendor/chosen.js')?>
+<?=HTML::script('js/vendor/chosen.jquery.min.js')?>
 <?=HTML::style('css/vendor/chosen.css')?>
 <div class="container" style="margin-top: 35px">
     <div id="result">
@@ -39,7 +39,7 @@
                                 </div>
 
                                 <label for="grajdanstvo">Гражданство</label>
-                                <select id="grajdanstvo" name="statement[nationality_id]" style="width: 453px" data-req="true" tabindex="5">
+                                <select id="grajdanstvo" name="statement[nationality_id]" style="width: 440px" data-req="true" tabindex="5">
                                     <?foreach ($Nationality as $value):?>
                                         <option value="<?=$value->id?>"><?=$value->grajdanstvo?></option>
                                     <?endforeach?>
@@ -84,27 +84,24 @@
                                 <input class="span6 pull-right" type="text" id="telephone_d" name="statement[dom_tel]" data-value="домашний" tabindex="13">
 
                                 <label for="obrazovanie">Образование</label>
-                                <select id="obrazovanie" name="statement[education_id]" style="width: 453px" data-req="true" tabindex="14">
+                                <select id="obrazovanie" name="statement[education_id]" style="width: 440px" data-req="true" tabindex="14">
                                     <?foreach ($Educations as $value):?>
                                         <option value="<?=$value->id?>"><?=$value->obrazovanie?></option>
                                     <?endforeach?>
                                 </select>
 
-                                <label for="mesto_raboty">Место работы</label>
+                                <label for="mesto_raboty" style="margin-top: 12px">Место работы</label>
                                 <input type="text" name="statement[mesto_raboty]" id="mesto_raboty" data-req="true" tabindex="15">
 
-                                <div class="select">
-                                    <a href="javascript:void(0);" class="slct">Как Вы узнали о нас</a>
-                                    <ul class="drop">
-                                        <li>Интернет</li>
-                                        <li>Знакомые</li>
-                                        <li>Листовка у метро</li>
-                                        <li id="other">Другое</li>
-                                    </ul>
-                                    <input type="hidden" id="select" name="statement[about]" />
-                                </div>
+                                <label for="about">Как Вы узнали о нас</label>
+                                <select id="about" name="statement[about]" style="width: 440px" data-req="true" tabindex="16">
+                                    <option value="Интернет">Интернет</option>
+                                    <option value="Знакомые">Знакомые</option>
+                                    <option value="Листовка у метро">Листовка у метро</option>
+                                    <option value="other">Другое</option>
+                                </select>
 
-                                <div style="display: none" id="otherText">
+                                <div style="display: none; margin-top: 12px" id="otherText">
                                     <label for="about_us">Укажите, как Вы узнали о нас</label>
                                     <textarea id="about_us"></textarea>
                                 </div>

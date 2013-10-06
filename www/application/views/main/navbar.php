@@ -17,7 +17,7 @@
                     </div>
                 </ul>
                 <nav class="nav-collapse">
-                    <ul class="nav pull-right" style="margin-right: 58px">
+                    <ul class="nav pull-right">
                         <li><a href="#secondary" id="slide-left" data-url="<?=URL::site('twitter/tweets')?>"><i class="icon-twitter"></i> Новости</a></li><!--http://twitter.com/autompt-->
                         <li><a href="<?=URL::site('/#price')?>" id="ajax"><i class="icon-tags"></i> Цены</a></li>
                         <li><a href="<?=URL::site('/#contacts')?>" id="ajax"><i class="icon-book"></i> Контакты</a></li>

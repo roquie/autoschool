@@ -212,3 +212,7 @@
 #6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
 #7 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
 #8 {main} in L:\domains\autoschool.ru\www\modules\database\classes\Kohana\DB.php:89
+2013-10-06 23:18:52 --- CRITICAL: Kohana_Exception [ 0 ]: Attempted to load an invalid or missing module 'autocrud' at 'MODPATH\autocrud' ~ SYSPATH\classes\Kohana\Core.php [ 579 ] in D:\OpenServer\domains\autoschool.ru\www\application\bootstrap.php:141
+2013-10-06 23:18:52 --- DEBUG: #0 D:\OpenServer\domains\autoschool.ru\www\application\bootstrap.php(141): Kohana_Core::modules(Array)
+#1 D:\OpenServer\domains\autoschool.ru\www\index.php(102): require('D:\OpenServer\d...')
+#2 {main} in D:\OpenServer\domains\autoschool.ru\www\application\bootstrap.php:141

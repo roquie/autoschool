@@ -25,7 +25,17 @@ $(function() {
         changeYear: true
     });
 
-    $('#grajdanstvo').chosen();
+    $('#grajdanstvo').chosen({
+        no_results_text: "Ничего не найдено"
+    });
+    $('#obrazovanie').chosen({
+        no_results_text: "Ничего не найдено"
+    });
+    $('#about').chosen({
+        disable_search: true,
+        no_results_text: "Ничего не найдено"
+    });
+    $('#pasport_seriya').editable();
 
     // Отображение календаря при нажатии на иконку календаря
     body.on('click', '#calendar', function() {
@@ -72,8 +82,8 @@ $(function() {
     /**
      * Отображение поля для ввода другого значения
      */
-    $('.drop').on('click', 'li', function () {
-        if ($(this).attr('id') === 'other') {
+    $('#about').on('change', function () {
+        if ($(this).find('option[value="'+$(this).val()+'"]').next('option').length === 0) {
             $('#otherText').show();
         } else {
             $('#otherText').hide();
@@ -83,7 +93,7 @@ $(function() {
      * Заносим значение введённое в поле "Другое" в поле, откуда берётся значение для заявки
      */
     $('#otherText > textarea').on('blur', function () {
-        $('#select').val($(this).val());
+        $('#about').find('option').last().attr('value', $(this).val()).prop('selected');
     });
 
     /**

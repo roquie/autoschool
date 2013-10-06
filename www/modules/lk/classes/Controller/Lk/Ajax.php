@@ -62,11 +62,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeStatement()
     {
-
-        $this->ajax_data($this->request->post());
-        exit;
+        $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
         $value = Security::xss_clean($this->request->post('value'));
-        if (!$value)
+        if (!$value && !in_array($this->request->post('name'), $no_required))
             $this->ajax_msg('Заполните поле', 'error');
         $data = array(
             $this->request->post('name') => $value
@@ -214,6 +212,42 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
         echo View::factory('pages/downloads')->render();
+    }
+
+    /**
+     * Возвращает массив гражданств для select2
+     */
+    public function action_getNat()
+    {
+        $data = array();
+        $temp_data = array();
+        $nationality = Model::factory('Lk_Nationality')->all();
+        foreach ($nationality as $key => $value) {
+            $temp_data['id'] = $value->id;
+            $temp_data['text'] = $value->grajdanstvo;
+            array_push($data, $temp_data);
+        }
+        $ret = array();
+        $ret['results'] = $data;
+        echo json_encode($ret);
+    }
+
+    /**
+     * Возвращает массив образования для select2
+     */
+    public function action_getEdu()
+    {
+        $data = array();
+        $temp_data = array();
+        $education = Model::factory('Lk_Education')->all();
+        foreach ($education as $key => $value) {
+            $temp_data['id'] = $value->id;
+            $temp_data['text'] = $value->obrazovanie;
+            array_push($data, $temp_data);
+        }
+        $ret = array();
+        $ret['results'] = $data;
+        echo json_encode($ret);
     }
 
     /**

@@ -4,6 +4,6 @@
 .data .table tr:first-child td {
   border-top: none;
 }
-.data .table td {
-  width: 50%;
+.data .table td:first-child {
+  width: 40%;
 }

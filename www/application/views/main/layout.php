@@ -25,7 +25,6 @@
     <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
     <![endif]-->
     <?=HTML::script('http://yandex.st/jquery/1.10.2/jquery.min.js')?>
-    <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap.min.js')?>
     <?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
     <?=HTML::script('js/vendor/stylizationForm.js')?>

@@ -195,18 +195,6 @@ $(function() {
         );
     });
 
-    var ArrayMergeRecursive = function(){
-        if(arguments.length < 2){
-            throw new Error("ArrayMergeRecursive: Please enter two or more objects to merge!");
-        }
-
-        var arr1={};
-        for(var i=0; i<=arguments.length; i++ ){
-            $.extend(true, arr1, arguments[i]);
-        }
-
-        return arr1;
-    };
     /**
      * Подсказки в полях ввода
      */

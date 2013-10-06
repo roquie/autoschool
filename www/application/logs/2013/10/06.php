@@ -166,3 +166,49 @@
 #6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
 #7 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
 #8 {main} in L:\domains\autoschool.ru\www\modules\lk\classes\Model\Lk\Nationality.php:51
+2013-10-06 21:39:46 --- CRITICAL: View_Exception [ 0 ]: The requested view template could not be found ~ SYSPATH\classes\Kohana\View.php [ 257 ] in L:\domains\autoschool.ru\www\system\classes\Kohana\View.php:137
+2013-10-06 21:39:46 --- DEBUG: #0 L:\domains\autoschool.ru\www\system\classes\Kohana\View.php(137): Kohana_View->set_filename('template')
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\View.php(30): Kohana_View->__construct('template', NULL)
+#2 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller\Template.php(33): Kohana_View::factory('template')
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(69): Kohana_Controller_Template->before()
+#4 [internal function]: Kohana_Controller->execute()
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Autocrud))
+#6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#8 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#9 {main} in L:\domains\autoschool.ru\www\system\classes\Kohana\View.php:137
+2013-10-06 21:40:15 --- CRITICAL: ErrorException [ 1 ]: Call to a member function as_array() on a non-object ~ MODPATH\autocrud\classes\Controller\Autocrud.php [ 17 ] in file:line
+2013-10-06 21:40:15 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-06 21:47:21 --- CRITICAL: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'NAMES TABLES from mpt_auto' at line 1 [ SHOW NAMES TABLES from mpt_auto ] ~ MODPATH\database\classes\Kohana\Database\MySQL.php [ 194 ] in L:\domains\autoschool.ru\www\modules\database\classes\Kohana\Database\Query.php:251
+2013-10-06 21:47:21 --- DEBUG: #0 L:\domains\autoschool.ru\www\modules\database\classes\Kohana\Database\Query.php(251): Kohana_Database_MySQL->query(NULL, 'SHOW NAMES TABL...', false, Array)
+#1 L:\domains\autoschool.ru\www\modules\autocrud\classes\Controller\Autocrud.php(17): Kohana_Database_Query->execute()
+#2 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Autocrud->action_init()
+#3 [internal function]: Kohana_Controller->execute()
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Autocrud))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in L:\domains\autoschool.ru\www\modules\database\classes\Kohana\Database\Query.php:251
+2013-10-06 21:48:19 --- CRITICAL: ErrorException [ 8 ]: Undefined property: Database_Query::$users ~ MODPATH\autocrud\classes\Controller\Autocrud.php [ 17 ] in L:\domains\autoschool.ru\www\modules\autocrud\classes\Controller\Autocrud.php:17
+2013-10-06 21:48:19 --- DEBUG: #0 L:\domains\autoschool.ru\www\modules\autocrud\classes\Controller\Autocrud.php(17): Kohana_Core::error_handler(8, 'Undefined prope...', 'L:\domains\auto...', 17, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Autocrud->action_init()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Autocrud))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\modules\autocrud\classes\Controller\Autocrud.php:17
+2013-10-06 21:49:45 --- CRITICAL: ErrorException [ 1 ]: Call to a member function execute() on a non-object ~ MODPATH\autocrud\classes\Controller\Autocrud.php [ 17 ] in file:line
+2013-10-06 21:49:45 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-06 22:09:22 --- CRITICAL: ErrorException [ 4096 ]: Argument 2 passed to Kohana_DB::insert() must be of the type array, string given, called in L:\domains\autoschool.ru\www\modules\autocrud\classes\Controller\Autocrud.php on line 36 and defined ~ MODPATH\database\classes\Kohana\DB.php [ 89 ] in L:\domains\autoschool.ru\www\modules\database\classes\Kohana\DB.php:89
+2013-10-06 22:09:22 --- DEBUG: #0 L:\domains\autoschool.ru\www\modules\database\classes\Kohana\DB.php(89): Kohana_Core::error_handler(4096, 'Argument 2 pass...', 'L:\domains\auto...', 89, Array)
+#1 L:\domains\autoschool.ru\www\modules\autocrud\classes\Controller\Autocrud.php(36): Kohana_DB::insert('educations', 'obrazovanie')
+#2 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Autocrud->action_init()
+#3 [internal function]: Kohana_Controller->execute()
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Autocrud))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in L:\domains\autoschool.ru\www\modules\database\classes\Kohana\DB.php:89

@@ -132,7 +132,7 @@ Kohana::modules(array(
        'twitterapi' => MODPATH.'twitterapi',
        'lk' => MODPATH.'lk', // зависимый от проекта модуль
        'botobor' => MODPATH.'botobor',
-      //  '' => MODPATH.'',
+       'autocrud' => MODPATH.'autocrud',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
@@ -146,7 +146,11 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-
+Route::set('autocrud', 'lol(/<action>)')
+    ->defaults(array(
+                    'controller' => 'Autocrud',
+                    'action' => 'init'
+               ));
 
 Route::set('WordTemplate', 'wordtemplate(/<action>(/<id>))')
     ->defaults(array(

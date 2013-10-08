@@ -21,7 +21,7 @@ $(function() {
 
     $('.table').find('a').each(function() {
         if ($(this).attr('id') == null) {
-            $(this).editable();
+            $(this).editable('disable');
         }
     }).on('click', function(e) {
         e.preventDefault();
@@ -50,8 +50,6 @@ $(function() {
             maxYear: 2013
         }
     });
-
-    $('.editable').editable('disable');
 
     $('body').on('click', '#enable', function() {
         $(this).hide();

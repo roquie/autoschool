@@ -64,11 +64,20 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
         $value = Security::xss_clean($this->request->post('value'));
+        
         if (!$value && !in_array($this->request->post('name'), $no_required))
             $this->ajax_msg('Заполните поле', 'error');
         $data = array(
             $this->request->post('name') => $value
         );
+        
+        /*
+        редактирую с браузера, проверить работу не могу, поэтому тут закаментил 
+        $this->upName($data['famil']);
+        $this->upName($data['imya']);
+        $this->upName($data['ot4estvo']);
+        */
+        
         $result = Model::factory('Lk_Statement')->updAll(Cookie::get('statement_id'), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
@@ -81,8 +90,17 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeContract()
     {
-        // @todo: а post то мб зараженным о_О
-        $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $this->request->post());
+        // на пост пофиг, ORM от sql inj позаботилась
+        
+        $data = $this->request->post();
+        /*
+        редактирую с браузера, проверить работу не могу, поэтому тут закаментил 
+        $this->upName($data['famil']);
+        $this->upName($data['imya']);
+        $this->upName($data['ot4estvo']);
+        */
+        
+        $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $data);
 
         if (!$result)
             $this->ajax_msg('Договор изменению не поддается :(', 'error');
@@ -127,7 +145,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
             exit;
         }
-
+        
+        $this->upName($data['statement']['famil']);
+        $this->upName($data['statement']['imya']);
+        $this->upName($data['statement']['ot4estvo']);
+        
         Session::instance()->set('key_statement', Model::factory('Lk_Statement')->addData($data['statement']));
         Session::instance()->set('key_contract', Model::factory('Lk_Contract')->addData($data['contract']));
 
@@ -362,6 +384,15 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             return (date('Y') - $mas[2] - 1);
         else
             return (date('Y') - $mas[2]);
+    }
+    
+    /**
+     * Первую буковку над писать с большой буквы ...
+     * @return string
+     */
+    protected function upName($name)
+    {
+        return UTF8::ucfirst(UTF8::strtolower($name));
     }
 
 }

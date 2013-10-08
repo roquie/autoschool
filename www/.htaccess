@@ -21,5 +21,10 @@ RewriteCond %{REQUEST_FILENAME} !-d
 # Rewrite all other URLs to index.php/URL
 RewriteRule .* index.php/$0 [PT]
 
+# for font awesome firefox bug
+<FilesMatch ".(ttf|otf|woff)$">
+    Header set Access-Control-Allow-Origin "*"
+</FilesMatch>
+
 
 # HTML5 BOILERPLATE HTACCEESS BEGIN --

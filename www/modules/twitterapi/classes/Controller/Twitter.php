@@ -10,11 +10,6 @@ class Controller_Twitter extends Controller
         ))->render();
     }
 
-    public function action_lol()
-    {
-        echo '12';
-    }
-
     public function action_media()
     {
         // Get the file path from the request

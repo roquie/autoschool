@@ -111,18 +111,18 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createTicket()
     {
-        $statement = Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'));
+        $contract = Model::factory('Lk_Contract')->getById(Cookie::get('statement_id'));
 
         $obj = new TemplateDocx(APPPATH.'templates/ticket/ticket.docx');
 
-        $famil = UTF8::ucfirst(UTF8::strtolower($statement['famil']));
-        $imya = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($statement['imya'], 1).'. '));
-        $ot4estvo = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($statement['ot4estvo'], 1).'.'));
+        $famil = UTF8::ucfirst(UTF8::strtolower($contract['famil']));
+        $imya = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($contract['imya'], 1).'. '));
+        $ot4estvo = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($contract['ot4estvo'], 1).'.'));
 
         $obj->setValue('Customer', $famil.' '.$imya.' '.$ot4estvo);
 
         $file = 'temp/'.
-            $this->translit($statement['famil']).'_'.
+            $this->translit($contract['famil']).'_'.
             $this->translit(UTF8::substr($contract['imya'], 1).'. ').'_'.
             $this->translit(UTF8::substr($contract['ot4estvo'], 1).'. ').'_'.
             'ticket_'.date('d_m_Y_H_i_s').'.docx';

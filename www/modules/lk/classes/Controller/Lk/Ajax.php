@@ -62,6 +62,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeStatement()
     {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+
         $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
         $value = Security::xss_clean($this->request->post('value'));
         
@@ -90,16 +93,22 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeContract()
     {
-        // на пост пофиг, ORM от sql inj позаботилась
-        
-        $data = $this->request->post();
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+
+        $value = Security::xss_clean($this->request->post('value'));
+
+        $data = array(
+            $this->request->post('name') => $value
+        );
+
         /*
-        редактирую с браузера, проверить работу не могу, поэтому тут закаментил 
-        $this->upName($data['famil']);
-        $this->upName($data['imya']);
-        $this->upName($data['ot4estvo']);
+            редактирую с браузера, проверить работу не могу, поэтому тут закаментил
+            $this->upName($data['famil']);
+            $this->upName($data['imya']);
+            $this->upName($data['ot4estvo']);
         */
-        
+
         $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $data);
 
         if (!$result)
@@ -223,7 +232,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/contract')->render();
+        echo View::factory('pages/contract', array(
+            'info' => Model::factory('Lk_Contract')->getById(Cookie::get('contract_id'))
+        ))->render();
     }
 
     /**
@@ -241,6 +252,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_getNat()
     {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
         $data = array();
         $temp_data = array();
         $nationality = Model::factory('Lk_Nationality')->all();
@@ -259,6 +272,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_getEdu()
     {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
         $data = array();
         $temp_data = array();
         $education = Model::factory('Lk_Education')->all();

@@ -73,9 +73,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         
         /*
         редактирую с браузера, проверить работу не могу, поэтому тут закаментил 
-        $this->upName($data['famil']);
-        $this->upName($data['imya']);
-        $this->upName($data['ot4estvo']);
+        $this->upName(&$data['famil']);
+        $this->upName(&$data['imya']);
+        $this->upName(&$data['ot4estvo']);
         */
         
         $result = Model::factory('Lk_Statement')->updAll(Cookie::get('statement_id'), $data);
@@ -95,9 +95,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $data = $this->request->post();
         /*
         редактирую с браузера, проверить работу не могу, поэтому тут закаментил 
-        $this->upName($data['famil']);
-        $this->upName($data['imya']);
-        $this->upName($data['ot4estvo']);
+        $this->upName(&$data['famil']);
+        $this->upName(&$data['imya']);
+        $this->upName(&$data['ot4estvo']);
         */
         
         $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $data);
@@ -146,9 +146,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
         
-        $this->upName($data['statement']['famil']);
-        $this->upName($data['statement']['imya']);
-        $this->upName($data['statement']['ot4estvo']);
+        $this->upName(&$data['statement']['famil']);
+        $this->upName(&$data['statement']['imya']);
+        $this->upName(&$data['statement']['ot4estvo']);
         
         Session::instance()->set('key_statement', Model::factory('Lk_Statement')->addData($data['statement']));
         Session::instance()->set('key_contract', Model::factory('Lk_Contract')->addData($data['contract']));

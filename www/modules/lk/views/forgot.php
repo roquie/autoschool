@@ -3,7 +3,7 @@
         <div class="well">
             <h2>Сброс пароля</h2>
             <hr>
-            <form action="<?=URL::site('lk/forgot')?>" method="POST">
+            <form action="<?=URL::site('lk/ajax/forgot')?>" method="POST">
                 <label for="email">Email</label>
                 <input name="email" type="email" placeholder="you@gmail.com"/>
                 <br>

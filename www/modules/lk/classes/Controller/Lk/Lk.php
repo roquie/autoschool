@@ -13,9 +13,9 @@ class Controller_Lk_Lk extends Controller_Main
     {
         parent::before();
 
-        // всх кто без печенек, в клуб долбаебов не пускаем
+        // всх кто без печенек, в лк не пускаем
         $email = Cookie::get('userEmail');
-        //if (is_null($email)) HTTP::redirect('/');
+        if (is_null($email)) HTTP::redirect('/');
     }
 
     /**
@@ -31,46 +31,6 @@ class Controller_Lk_Lk extends Controller_Main
         ));
     }
 
-    /**
-     * Страница входа
-     */
-    public function action_login()
-    {
-        $result = Model::factory('Lk_User')->login(array(
-              'email' => $this->request->post('email'), //sql inj
-              'password' => $this->hash($this->request->post('password'))
-        ));
-
-        if (array_key_exists('remember', $this->request->post()) && ($result->email && $result->password)) {
-            Cookie::$expiration = Date::MONTH;
-            Cookie::set('userEmail', $result->email);
-            Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->Statement_id);
-            Cookie::set('contract_id', $result->Contract_id);
-            HTTP::redirect('lk');
-        }
-
-        if ($result->email && $result->password) {
-            Cookie::$expiration = 0;
-            Cookie::set('userEmail', $result->email);
-            Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->Statement_id);
-            Cookie::set('contract_id', $result->Contract_id);
-            HTTP::redirect('lk');
-        } else {
-            echo 'введите данные';
-            exit;
-        }
-
-    }
-
-    /**
-     * морда регистрации
-     */
-    public function action_registration()
-    {
-        $this->template->content = View::factory('reg');
-    }
 
     /**
      * Изменение пароля
@@ -88,26 +48,6 @@ class Controller_Lk_Lk extends Controller_Main
         $this->template->content = View::factory('forgot');
     }
 
-    /**
-     * Изменение заявления
-     */
-    public function action_changeStatement()
-    {
-        $this->template->content = View::factory('changeStatement', array(
-            'info' => Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'))
-        ));
-    }
-
-    /**
-     * изменеине договора
-     */
-    public function action_changeContract()
-    {
-        $this->template->content = View::factory('changeContract', array(
-             'info' => Model::factory('Lk_Contract')->getById(Cookie::get('contract_id')),
-        ));
-
-    }
 
     /**
      * Формирование заявления
@@ -171,20 +111,20 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createTicket()
     {
-        $statement = Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'));
+        $contract = Model::factory('Lk_Contract')->getById(Cookie::get('statement_id'));
 
         $obj = new TemplateDocx(APPPATH.'templates/ticket/ticket.docx');
 
-        $famil = UTF8::ucfirst(UTF8::strtolower($statement['famil']));
-        $imya = UTF8::ucfirst(UTF8::strtolower($statement['imya']));
-        $ot4estvo = UTF8::ucfirst(UTF8::strtolower($statement['ot4estvo']));
+        $famil = UTF8::ucfirst(UTF8::strtolower($contract['famil']));
+        $imya = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($contract['imya'], 1).'. '));
+        $ot4estvo = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($contract['ot4estvo'], 1).'.'));
 
         $obj->setValue('Customer', $famil.' '.$imya.' '.$ot4estvo);
 
         $file = 'temp/'.
-            $this->translit($statement['famil']).'_'.
-            $this->translit($statement['imya']).'_'.
-            $this->translit($statement['ot4estvo']).'_'.
+            $this->translit($contract['famil']).'_'.
+            $this->translit(UTF8::substr($contract['imya'], 1).'. ').'_'.
+            $this->translit(UTF8::substr($contract['ot4estvo'], 1).'. ').'_'.
             'ticket_'.date('d_m_Y_H_i_s').'.docx';
 
         $obj->save(APPPATH.'output_blanks/'.$file);
@@ -216,8 +156,8 @@ class Controller_Lk_Lk extends Controller_Main
 
         $contr = 'temp/'.
             $this->translit($contract['famil']).'_'.
-            $this->translit($contract['imya']).'_'.
-            $this->translit($contract['ot4estvo']).'_'.
+            $this->translit(UTF8::substr($contract['imya'], 1).'. ').'_'.
+            $this->translit(UTF8::substr($contract['ot4estvo'], 1).'. ').'_'.
             'contract_'.date('d_m_Y_H_i_s').'.docx';
 
         $obj->save(APPPATH.'output_blanks/'.$contr);
@@ -255,8 +195,8 @@ class Controller_Lk_Lk extends Controller_Main
 
         $file = 'temp/'.
             $this->translit($statement['famil']).'_'.
-            $this->translit($statement['imya']).'_'.
-            $this->translit($statement['ot4estvo']).'_'.
+            $this->translit(UTF8::substr($statement['imya'], 1).'. ').'_'.
+            $this->translit(UTF8::substr($statement['ot4estvo'], 1).'. ').'_'.
             'zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
         $document->save(APPPATH.'output_blanks/'.$file);

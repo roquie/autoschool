@@ -3,7 +3,7 @@
         <div class="well">
             <h2>Смена пароля</h2>
             <hr>
-            <form action="<?=URL::site('lk/changepass')?>" method="POST">
+            <form action="<?=URL::site('lk/ajax/changepass')?>" method="POST">
                 <label for="password_old">Старый пароль</label>
                 <input name="password_old" type="password" placeholder="*********"/>
                 <label for="password_new">Новый пароль</label>

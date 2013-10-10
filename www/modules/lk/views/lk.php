@@ -1,6 +1,5 @@
 <?=HTML::style('css/lk.css')?>
 <?=HTML::script('js/lk.js')?>
-
 <?=HTML::script('js/vendor/moment+langs.min.js')?>
 <?=HTML::style('css/vendor/bootstrap-editable.css')?>
 <?=HTML::script('js/vendor/bootstrap-editable.min.js')?>

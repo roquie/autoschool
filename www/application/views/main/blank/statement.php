@@ -120,7 +120,7 @@
 
                                 <div class="check active" id="customer">
                                     <span class="label-check">Заказчиком будет родитель (опекун)</span>
-                                    <input type="checkbox" name="parent" checked>
+                                    <input type="checkbox" name="contract[parent]" checked>
                                 </div>
 
                                 <legend>Заказчик</legend>

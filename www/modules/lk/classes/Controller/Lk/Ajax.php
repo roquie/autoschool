@@ -62,13 +62,25 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeStatement()
     {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+
         $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
         $value = Security::xss_clean($this->request->post('value'));
+        
         if (!$value && !in_array($this->request->post('name'), $no_required))
             $this->ajax_msg('Заполните поле', 'error');
         $data = array(
             $this->request->post('name') => $value
         );
+        
+        /*
+        редактирую с браузера, проверить работу не могу, поэтому тут закаментил 
+        $this->upName($data['famil']);
+        $this->upName($data['imya']);
+        $this->upName($data['ot4estvo']);
+        */
+        
         $result = Model::factory('Lk_Statement')->updAll(Cookie::get('statement_id'), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
@@ -81,8 +93,23 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeContract()
     {
-        // @todo: а post то мб зараженным о_О
-        $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $this->request->post());
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+
+        $value = Security::xss_clean($this->request->post('value'));
+
+        $data = array(
+            $this->request->post('name') => $value
+        );
+
+        /*
+            редактирую с браузера, проверить работу не могу, поэтому тут закаментил
+            $this->upName($data['famil']);
+            $this->upName($data['imya']);
+            $this->upName($data['ot4estvo']);
+        */
+
+        $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $data);
 
         if (!$result)
             $this->ajax_msg('Договор изменению не поддается :(', 'error');
@@ -127,7 +154,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
             exit;
         }
-
+        
+        $this->upName($data['statement']['famil']);
+        $this->upName($data['statement']['imya']);
+        $this->upName($data['statement']['ot4estvo']);
+        
         Session::instance()->set('key_statement', Model::factory('Lk_Statement')->addData($data['statement']));
         Session::instance()->set('key_contract', Model::factory('Lk_Contract')->addData($data['contract']));
 
@@ -201,7 +232,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/contract')->render();
+        echo View::factory('pages/contract', array(
+            'info' => Model::factory('Lk_Contract')->getById(Cookie::get('contract_id'))
+        ))->render();
     }
 
     /**
@@ -219,6 +252,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_getNat()
     {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
         $data = array();
         $temp_data = array();
         $nationality = Model::factory('Lk_Nationality')->all();
@@ -237,6 +272,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_getEdu()
     {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
         $data = array();
         $temp_data = array();
         $education = Model::factory('Lk_Education')->all();
@@ -362,6 +399,15 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             return (date('Y') - $mas[2] - 1);
         else
             return (date('Y') - $mas[2]);
+    }
+    
+    /**
+     * Первую буковку над писать с большой буквы ...
+     * @return string
+     */
+    protected function upName($name)
+    {
+        return UTF8::ucfirst(UTF8::strtolower($name));
     }
 
 }

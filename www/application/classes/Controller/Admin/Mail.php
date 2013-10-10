@@ -18,13 +18,18 @@ class Controller_Admin_Mail extends Controller_Ajax_Admin
         }
         $subject = Arr::get($_POST, 'subject');
 
-        $validation = Validation::factory($to)
-            ->rule(true, 'email');
+         if(!Valid::email($email, true)) {
+                $this->ajax_msg('Неверный email адрес', 'error');
+                exit;
+            }
 
-        if ( !$validation->check() ) {
-            $this->ajax_msg('Неверный email адрес', 'error');
-            exit;
-        }
+            /*$validation = Validation::factory($_POST)
+                ->rule('email', 'email');
+
+             if ( !$validation->check() ) {
+                $this->ajax_msg('Неверный email адрес', 'error');
+                exit;
+            }*/
 
         $fromEmail = Session::instance()->get('email');
         $fromName = Session::instance()->get('first_name').' '.Session::instance()->get('last_name');
@@ -46,37 +51,5 @@ class Controller_Admin_Mail extends Controller_Ajax_Admin
 
     }
 
-    /**
-     * Получение всех файлов из папки output_blanks
-     */
-    public function action_getFiles()
-    {
-        $dir = Arr::get($_POST, 'path');
-        $dot = Arr::get($_POST, 'dot');
-        $dot = empty($dot) ? 'false' : $dot;
-        if (empty($dir)) {
-            $dir = 'output_blanks';
-        }
-
-        $path = APPPATH.$dir;
-        $data = array();
-
-        $iterator = new DirectoryIterator($path);
-        $i = 0;
-        foreach($iterator as $entry) {
-            if ($dot == 'false') {
-                if ($iterator->isDot())
-                    continue;
-            }
-            $data[$i]['file'] = $entry->getFilename();
-            $data[$i]['type'] = $entry->getType();
-            $i++;
-        }
-
-        echo View::factory('admin/mail/getFiles', array(
-            'path' => $dir,
-            'files' => $data
-        ))->render();
-    }
 
 }

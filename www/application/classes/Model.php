@@ -33,6 +33,7 @@ class Model extends Kohana_Model
             throw new HTTP_Exception_404();
     }
 
+
     /**
      * @param array $data
      * @param array $only

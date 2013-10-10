@@ -133,7 +133,9 @@ Kohana::modules(array(
        'lk' => MODPATH.'lk', // зависимый от проекта модуль
        'botobor' => MODPATH.'botobor',
        //'autocrud' => MODPATH.'autocrud',
+
       //  '' => MODPATH.'',
+
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',

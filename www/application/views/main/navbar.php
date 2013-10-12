@@ -41,8 +41,8 @@
                                             <span class="add-on"><i class="icon-key"></i></span>
                                             <input type="password" id="password" name="password" placeholder="Пароль">
                                         </div>
-                                        <div class="check">
-                                            <span class="label-check">Запомнить</span>
+                                        <div class="check"> <!-- @todo: подправить иконку если смотрится криво. -->
+                                            <span class="label-check">Запомнить</span><i title="Забыли пароль?" class="icon-unlock pull-right"></i>
                                             <input type="checkbox" name="remember">
                                         </div>
                                         <input type="submit" value="Войти" class="btn btn-info btn-block"/>

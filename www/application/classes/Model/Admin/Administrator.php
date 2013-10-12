@@ -19,7 +19,7 @@ class Model_Admin_Administrator extends ORM
     {
         $adm = ORM::factory('Admin_Administrator');
 
-        if ($adm->loaded())
+        if (!$adm->loaded())
             return false;
         $adm->values($data)
             ->create();

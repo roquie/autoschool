@@ -49,35 +49,67 @@
             var el = $(this.element),
                 $this = this.element,
                 options = this.options;
-
-            if (el.val() === '') {
-                el.val(this.options.value).css({color : this.options.color});
+            switch (el.get(0).nodeName.toLowerCase()) {
+                case 'div' :
+                    if (el.text() === '') {
+                        el.text(options.value).css({color : options.color});
+                    }
+                    break;
+                default :
+                    if (el.val() === '') {
+                        el.val(options.value).css({color : options.color});
+                    }
+                    break;
             }
             el.on('focus', function() {
                 el.css({color : '#000'});
-                if(el.val() == options.value)
-                {
-                    el.val('');
+                switch (el.get(0).nodeName.toLowerCase()) {
+                    case 'div' :
+                        if(el.text() == options.value)
+                        {
+                            el.text('');
+                        }
+                        break;
+                    default :
+                        if(el.val() == options.value)
+                        {
+                            el.val('');
+                        }
+                        break;
                 }
             }).on('blur', function() {
-                    if ($.trim($this.value == ''))
-                    {
-                        this.value = ($this.value != '') ? el.val() : ($this.defaultValue != options.value) ? options.value : $this.defaultValue;
-                    }
-                    if($this.value == options.value) {
-                        el.css({color: options.color});
-                    } else {
-                        el.css({color:'#000'});
-                    }
+                switch (el.get(0).nodeName.toLowerCase()) {
+                    case 'div' :
+                        if ($.trim(el.text() == ''))
+                        {
+                            var value = (el.text() != '') ? el.text() : (el.text() != options.value) ? options.value : el.text();
+                            el.text(value);
+                        }
+                        if(el.text() == options.value) {
+                            el.css({color: options.color});
+                        } else {
+                            el.css({color:'#000'});
+                        }
+                        break;
+                    default :
+                        if ($.trim($this.value == ''))
+                        {
+                            this.value = ($this.value != '') ? el.val() : ($this.defaultValue != options.value) ? options.value : $this.defaultValue;
+                        }
+                        if($this.value == options.value) {
+                            el.css({color: options.color});
+                        } else {
+                            el.css({color:'#000'});
+                        }
+                        break;
+                }
             });
         },
         /**
          * Необходим после отправки формы, возвращает первичные значения в поля
          */
         default : function() {
-            var el = $(this.element),
-            $this = this.element,
-            options = this.options;
+            var el = $(this.element);
             el.val(this.options.value).css({color : this.options.color});
         }
 

@@ -194,6 +194,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         if ($result->email && $result->password) {
             Cookie::$expiration = 0;
             Cookie::set('userId', $result->id);
+            Cookie::set('userEmail', $result->email);
             Cookie::set('userPhoto', $result->photo);
             Cookie::set('statement_id', $result->Statement_id);
             Cookie::set('contract_id', $result->Contract_id);

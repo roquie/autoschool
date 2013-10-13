@@ -1,0 +1,90 @@
+#mini_send {
+  margin-bottom: -420px;
+  position: fixed;
+  right: 20px;
+  bottom: 0;
+  border: 1px solid #ccc;
+  z-index: 9999;
+  height: 400px;
+  width: 280px;
+  background: #f4f4f4;
+  #header {
+    background: url(/img/right_panel.png) repeat-x;
+    color: #ffffff;
+    padding: 5px;
+    height: 20px;
+    #header-inner {
+      word-wrap: break-word;
+      width: 90%;
+      font-size: 13pt;
+      font-family: arial sans-serif;
+    }
+    .arrow {
+      &:last-child {
+        margin-right: 5px;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  #inner {
+    position: relative;
+    .slimScrollBar  {
+
+    }
+    #messages {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: 335px;
+      &.shadow {
+        -moz-box-shadow: inset 0 4px 10px -5px #000;
+        -webkit-box-shadow: inset 0 4px 10px -5px #000;
+        box-shadow: inset 0 4px 10px -5px #000;
+      }
+      //margin-right: 10px;
+      #message {
+        padding: 5px 12px 5px 5px;
+        border-bottom: 1px dashed #cccccc;
+        &:last-child {
+          border-bottom: none;
+        }
+        .avatar {
+          img {
+            display: block;
+            height: 30px;
+            width: 30px;
+            //margin-right: 5px;
+          }
+        }
+        .time {
+          clear: both;
+          color: #777;
+          font-size: 0.9em;
+          padding: 0 0 4px 4px;
+        }
+        .text {
+          vertical-align: top;
+          margin-left: 32px;
+          word-wrap: break-word;
+        }
+      }
+    }
+    #enter {
+      border-top: 1px solid #cccccc;
+      padding: 3px;
+      background: #ffffff;
+      .message {
+        line-height: 15px;
+        margin-left: 35px;
+        height: 35px;
+        max-height: 35px;
+        width: 240px;
+        overflow: hidden;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+  }
+}

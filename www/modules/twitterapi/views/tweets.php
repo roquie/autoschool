@@ -36,7 +36,7 @@
                     <p>
                         <?
                             foreach ($item->entities->urls as $url) :
-                                $item->text = str_replace($url->url, '<a href="'.$url->url.'">'.$url->display_url.'</a>', $item->text);
+                                $item->text = str_replace($url->url, '<a href="'.$url->url.'" target="twitter">'.$url->display_url.'</a>', $item->text);
                             endforeach;
                         ?>
                         <?=$item->text?><br>
@@ -50,3 +50,13 @@
         </div>
     </div>
 </div>
+<script>
+    $(function() {
+        var navbarH = $('.navbar').outerHeight(),
+            footerH = $('#footer').outerHeight();
+        $('#text').css({height : $('#pageslide-slide-wrap').height()-$('#text').position().top - navbarH - 5});
+        $('#text').slimScroll({
+            height : $('#text').height()
+        });
+    });
+</script>

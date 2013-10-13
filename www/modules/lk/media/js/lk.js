@@ -4,6 +4,11 @@ $(function() {
 
     $('#left_menu').on('click', 'li > a', function(e) {
         e.preventDefault();
+
+        if ($(this).attr('ajax') === 'false') {
+            return false;
+        }
+
         var $this = $(this),
             action = $this.attr('href'),
             nav = $('#left_menu').find('li'),

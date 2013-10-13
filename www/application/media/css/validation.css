@@ -4,7 +4,7 @@
 .div-block.error,
 input.error,
 textarea.error {
-  border-color: #bd4247;
+  border-color: #bd4247 !important;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -12,7 +12,7 @@ textarea.error {
 .div-block:focus.error,
 input:focus.error,
 textarea:focus.error {
-  border-color: #983538;
+  border-color: #983538 !important;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -24,8 +24,7 @@ textarea:focus.error {
   position: absolute;
   z-index: 1020;
   opacity: 0;
-  left: 0;
-  top : 0;
+  margin-left: 18px;
   filter: alpha(opacity=0);
   word-break: break-all;
   display: block;

@@ -182,6 +182,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         if (array_key_exists('remember', $this->request->post()) && ($result->email && $result->password)) {
             Cookie::$expiration = Date::MONTH;
+            Cookie::set('userId', $result->id);
             Cookie::set('userEmail', $result->email);
             Cookie::set('userPhoto', $result->photo);
             Cookie::set('statement_id', $result->Statement_id);
@@ -192,7 +193,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         if ($result->email && $result->password) {
             Cookie::$expiration = 0;
-            Cookie::set('userEmail', $result->email);
+            Cookie::set('userId', $result->id);
             Cookie::set('userPhoto', $result->photo);
             Cookie::set('statement_id', $result->Statement_id);
             Cookie::set('contract_id', $result->Contract_id);
@@ -245,6 +246,18 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
         echo View::factory('pages/downloads')->render();
+    }
+
+    /**
+     * Возвращает страницу из личного кабинета "Помощь"
+     */
+    public function action_help()
+    {
+        $email = Cookie::get('userEmail');
+        if (is_null($email)) HTTP::redirect('/');
+        echo View::factory('pages/help', array(
+            'userPhoto' =>   Cookie::get('userPhoto')
+        ))->render();
     }
 
     /**

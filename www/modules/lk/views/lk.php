@@ -1,4 +1,5 @@
 <?=HTML::style('css/lk.css')?>
+<?=HTML::style('css/chat.css')?>
 <?=HTML::script('js/lk.js')?>
 <?=HTML::script('js/vendor/moment+langs.min.js')?>
 <?=HTML::style('css/vendor/bootstrap-editable.css')?>
@@ -49,16 +50,17 @@
     <div class="row">
         <div class="span3 menu">
             <ul class="nav nav-pills nav-stacked" id="left_menu">
-                <li><a href="<?=URL::site('lk/ajax/messages')?>"><i class="icon-comments"></i>Сообщения</a></li>
+                <li><a href="<?=URL::site('lk/ajax/messages')?>"><i class="icon-comments"></i>Группа</a></li>
                 <li><a href="<?=URL::site('lk/ajax/statement')?>"><i class="icon-file"></i>Заявление</a></li>
                 <li><a href="<?=URL::site('lk/ajax/contract')?>"><i class="icon-file"></i>Договор</a></li>
                 <li><a href="<?=URL::site('lk/ajax/download')?>"><i class="icon-cloud-download"></i>Загрузки</a></li>
+                <li><a href="<?=URL::site('chat/help')?>">&nbsp;<i class="icon-info"></i>&nbsp;Помощь</a></li>
             </ul>
         </div>
 
         <div id="loader">
             <div class="title">Загрузка данных... Пожалуйста, подождите</div>
-            <div class="loader"><i class="icon-refresh icon-spin icon-3x"></i></div>
+            <div class="loader"><i class="icon-refresh icon-spin icon-2x load"></i></div>
         </div>
         <div class="span9" id="content">
         </div>

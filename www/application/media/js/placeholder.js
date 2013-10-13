@@ -110,7 +110,14 @@
          */
         default : function() {
             var el = $(this.element);
-            el.val(this.options.value).css({color : this.options.color});
+            switch (el.get(0).nodeName.toLowerCase()) {
+                case 'div' :
+                    el.text(this.options.value).css({color : this.options.color});
+                    break;
+                default :
+                    el.val(this.options.value).css({color : this.options.color});
+                    break;
+            }
         }
 
     };

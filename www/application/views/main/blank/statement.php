@@ -1,4 +1,3 @@
-<?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
 <?=HTML::script('js/statement.js')?>
 <?=HTML::style('css/statement.css')?>
 <?=HTML::script('js/vendor/chosen.jquery.min.js')?>

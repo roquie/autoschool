@@ -112,6 +112,9 @@ h1 {
 #content .title {
   text-align: center;
 }
+#content .title {
+  font-size: 14pt;
+}
 #content .loader {
   position: absolute;
   top: 20%;

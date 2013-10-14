@@ -32,7 +32,7 @@
             <div class="span9 pull-right">
                 <div class="row">
                     <div class="span4">
-                        <h1><?=$statement['famil'].' '.$statement['imya']?></h1>
+                        <h1><?=$statement->famil.' '.$statement->imya?></h1>
                     </div>
                     <div class="span5">
                         <h1 class="group pull-right" title="твоя группа" >01431</h1>

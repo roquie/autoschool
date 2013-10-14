@@ -7,60 +7,16 @@ class Model_Lk_Statement extends ORM
 
     protected $_has_one = array(
         'Nationality' => array(
-            'model' => 'Nationality',
+            'model' => 'Lk_Nationality',
             'foreign_key' => 'nationality_id',
         ),
         'Education' => array(
-            'model' => 'Education',
+            'model' => 'Lk_Education',
             'foreign_key' => 'education_id',
         ),
     );
 
 
-    public function addData(array $data)
-    {
-        try {
-            $user = ORM::factory('Lk_Statement')
-                ->values($data)
-                ->create()->pk();
-        } catch(ORM_Validation_Exception $e) {
-            return false;
-            //return $e->errors('');
-        }
-
-        return $user;
-    }
-
-    public function getById($id)
-    {
-        try {
-            $statement = ORM::factory('Lk_Statement')
-                            ->where('id', '=', (int)$id)
-                            ->find()
-                            ->as_array();
-        } catch(ORM_Validation_Exception $e) {
-            return false;
-            //return $e->errors('');
-        }
-
-        return $statement;
-    }
-
-
-
-    public function updAll($id, $data)
-    {
-        try {
-            ORM::factory('Lk_Statement', $id)
-                ->values($data)
-                ->update();
-        } catch(ORM_Validation_Exception $e) {
-            return false;
-            //return $e->errors('');
-        }
-
-        return true;
-    }
 /*
     public function getNationalityById($id)
     {
@@ -89,7 +45,6 @@ class Model_Lk_Statement extends ORM
 
         return $nat;
     }*/
-
 
 
 }

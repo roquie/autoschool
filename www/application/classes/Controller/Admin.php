@@ -39,38 +39,24 @@ class Controller_Admin extends Controller_Template
     public function action_mail()
     {
         $this->template->content = View::factory('admin/mail/send', array(
-            'titles' => Model::factory('Admin_MsgTemplate')->getAll(),
+            'titles' => Model::factory('Admin_MsgTemplate')->all(),
         ));
     }
 
 
-    public function action_papers()
-    {
-        /*$req = $this->request->query('vedomost');
-        if ($req)
-            $this->template->content = View::factory('admin/papers/vedomost', array(
-                'name' => URL::site('uploads_old/downloaded/'.$req)
-            ));
-        else
-            $this->template->content = View::factory('admin/papers/view', array(
-                'downloadedFiles' => File::listFiles(APPPATH.'/uploads_old/downloaded/'),
-            ));*/
-
-    }
-
     public function action_settings()
     {
         $this->template->content = View::factory('admin/settings', array(
-            'all_admins' => Model::factory('Admin_Administrator')->all(),
+            'all_admins' => Model::factory('Admin_Administrator')->all('desc'),
             'googleAccount' => Model::factory('Admin_GoogleAccount')->getLastRecord(),
-            'googleAccountAllRecords' => Model::factory('Admin_GoogleAccount')->getAll(),
+            'googleAccountAllRecords' => Model::factory('Admin_GoogleAccount')->all(),
         ));
     }
 
     public function action_tpl()
     {
         $this->template->content = View::factory('admin/mail/tpl', array(
-            'titles' => Model::factory('Admin_MsgTemplate')->getAll(),
+            'titles' => Model::factory('Admin_MsgTemplate')->all(),
         ));
     }
 

@@ -16,28 +16,17 @@ class Controller_Goauth_Auth extends Controller
         $userInfo = Goauth::factory()->getUserData($this->request->query('code'));
         $firstAndLastNames = explode(' ', $userInfo['name']);
 
+        $data = Model::factory('Admin_Administrator')->getBy('email', $userInfo['email']);
+        if (!$data)
+            HTTP::redirect('/');
+        else {
+            Session::instance()->set('email', $userInfo['email']);
+            Session::instance()->set('first_name', $firstAndLastNames[0]);
+            Session::instance()->set('last_name', $firstAndLastNames[1]);
+            Session::instance()->set('photo', $userInfo['picture']);
 
-        //$data = Model::factory('Admin_PreReg')->getOneEmail($userInfo['email']);
-
-        //if (!empty($data['email'])) {
-
-
-            //Model::factory('Admin_PreReg')->delPreRegUser($userInfo['email']);
-       // }
-
-       // $user = Model::factory('Admin_User')->get_email($userInfo['email']);
-
-       // if (empty($user))
-         //   HTTP::redirect('access_denied');
-        
-
-        Session::instance()->set('email', $userInfo['email']);
-        Session::instance()->set('first_name', $firstAndLastNames[0]);
-        Session::instance()->set('last_name', $firstAndLastNames[1]);
-        Session::instance()->set('photo', $userInfo['picture']);
-
-
-        HTTP::redirect(URL::site('/admin'));
+            HTTP::redirect('/admin');
+        }
 
     }
 

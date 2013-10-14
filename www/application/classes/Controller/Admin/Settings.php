@@ -13,54 +13,31 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
 
 
     /**
-     * метод для загрузки автокомплита // жалко удалять :)
-     * @type ajax
-     * */
-   /* public function action_autocomplete()
-    {
-        $arr = array();
-        $emails = Model::factory('Admin_User')->getAllEmails();
-
-        foreach ($emails as $email)
-            $arr[] = $email->email;
-
-
-        echo json_encode(array(
-            'source' => $arr
-        ));
-    }*/
-
-
-    /**
      *
      * @type ajax
      * */
     public function action_newAdmin()
     {
-
         $checkEmail = Model::factory('Admin_Administrator')->getBy('email', Arr::get($_POST, 'email'));
 
+        if (!$checkEmail) {
 
-        if (empty($checkEmail)) {
-
-            Model::factory('Admin_Administrator')->addAdm(array(
+            Model::factory('Admin_Administrator')->addRec(array(
                 'email' => Arr::get($_POST, 'email'),
                 'datetime' => date('Y-m-d H:i:s'),
             ));
 
-            $this->ajax_msg('Пользователь добавлен');
+             $this->ajax_msg('Пользователь добавлен');
+
         } else
             $this->ajax_msg('Такой админ уже есть', 'error');
 
     }
 
-    /**
-     * Удаление админа
-     * Получаемые данные:
-     *
-     * id: $_POST['id']
-     */
 
+    /**
+     *
+     */
     public function action_delAdmin()
     {
 
@@ -72,20 +49,15 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
     }
 
     /**
-     *
-     * Получаемые данные:
-     *
-     * login : $_POST['login']
-     * pass  : $_POST['password']
+     * метод необходим для smtp
      */
-
     /*public function action_accountGoogle()
     {
 
-        Model::factory('Admin_GoogleAccount')->addGoogleAccount(array(
+        Model::factory('Admin_GoogleAccount')->addRec(array(
             'login' => Security::xss_clean(Arr::get($_POST, 'login')),
             'password' => Security::xss_clean(Arr::get($_POST, 'password')),
-            'time' => date('H:i'), // must use Date helper, or -> GOVNO-code!
+            'time' => date('H:i'),
             'date' => date('Y-m-d')
         ));
 

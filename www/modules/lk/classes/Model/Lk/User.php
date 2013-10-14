@@ -6,30 +6,16 @@ class Model_Lk_User extends ORM
 
     protected $_has_one = array(
         'Statement' => array(
-            'model' => 'Statement',
+            'model' => 'Lk_Statement',
             'foreign_key' => 'Statement_id',
         ),
         'Contract' => array(
-            'model' => 'Contract',
+            'model' => 'Lk_Contract',
             'foreign_key' => 'Contract_id',
         ),
     );
 
 
-
-    public function addData(array $data)
-    {
-        try {
-            $user = ORM::factory('Lk_User');
-            $user->values($data)
-                ->create();
-        } catch(ORM_Validation_Exception $e) {
-            return false;
-            //return $e->errors('');
-        }
-
-        return true;
-    }
 
     public function login(array $data)
     {
@@ -46,19 +32,6 @@ class Model_Lk_User extends ORM
         return $result;
     }
 
-    public function getByEmail($email)
-    {
-        try {
-            $user = ORM::factory('Lk_User')
-                ->where('email', '=', $email)
-                ->find();
-        } catch(ORM_Validation_Exception $e) {
-            return false;
-            //return $e->errors('');
-        }
-
-        return $user;
-    }
 
     public function updPwd($id, $pwd)
     {

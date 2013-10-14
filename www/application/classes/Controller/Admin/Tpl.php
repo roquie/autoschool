@@ -1,7 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Developer: Roquie
- * DateTime: 21.07.13 18:09
  * Current file name: Tpl.php
  *
  * All rights reserved (c)
@@ -23,14 +22,14 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
     public function action_add()
     {
         $title = Security::xss_clean(Arr::get($_POST, 'title'));
-        $result = Model::factory('Admin_MsgTemplate')->getTitle($title);
+        $result = Model::factory('Admin_MsgTemplate')->getBy('title', $title);
         if (empty($result['title'])) {
 
-            Model::factory('Admin_MsgTemplate')->addMsgTemplate(array(
+            Model::factory('Admin_MsgTemplate')->addRec(array(
                 'title' => $title,
                 'message' => Security::xss_clean(Arr::get($_POST, 'text')),
                 'author' => Session::instance()->get('first_name').' '.Session::instance()->get('last_name'),
-                'time' => date('H:i:s'), // need use helper Date ... gavno-code
+                'time' => date('H:i:s'),
                 'date' => date('Y-m-d'),
             ));
 
@@ -65,16 +64,15 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
     public function action_edit()
     {
         $title = Security::xss_clean(Arr::get($_POST, 'title'));
-        $result = Model::factory('Admin_MsgTemplate')->getTitle($title);
+        $result = Model::factory('Admin_MsgTemplate')->getBy('title', $title);
 
         if (empty($result['title'])) {
 
-            Model::factory('Admin_MsgTemplate')->updateMsgTemplate(array(
-                'id' => Arr::get($_POST, 'id'),
+            Model::factory('Admin_MsgTemplate')->upd(Arr::get($_POST, 'id'), array(
                 'title' => $title,
                 'message' => Security::xss_clean(Arr::get($_POST, 'text')),
                 'author' => Session::instance()->get('first_name').' '.Session::instance()->get('last_name'),
-                'time' => date('H:i:s'), // need use helper Date ... gavno-code
+                'time' => date('H:i:s'),
                 'date' => date('Y-m-d'),
             ));
 
@@ -112,7 +110,7 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
     {
 
         $id = Security::xss_clean(Arr::get($_POST, 'id'));
-        $result = Model::factory('Admin_MsgTemplate')->getTplById($id);
+        $result = Model::factory('Admin_MsgTemplate')->getBy('id', $id);
 
         if (!empty($result['id'])) {
 
@@ -148,7 +146,7 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
     public function action_remove()
     {
 
-        Model::factory('Admin_MsgTemplate')->deleteTpl(Security::xss_clean(Arr::get($_POST, 'id')));
+        Model::factory('Admin_MsgTemplate')->del(Security::xss_clean(Arr::get($_POST, 'id')));
 
         echo json_encode(array(
             'status' => 'success', //error or info

@@ -24,9 +24,12 @@ class Model extends Kohana_Model
      * @return Database_Result
      * @throws HTTP_Exception_404
      */
-    public function all()
+    public function all($order_by = 'asc')
     {
-        $data = ORM::factory(Model::$_model_name)->find_all();
+        $data = ORM::factory(Model::$_model_name)
+            ->order_by('id', $order_by)
+            ->find_all();
+
         if ($data->count() > 0)
             return $data;
         else
@@ -51,6 +54,9 @@ class Model extends Kohana_Model
             return true;
         else
             throw new HTTP_Exception_404();
+
+
+
     }
 
     /**
@@ -67,7 +73,7 @@ class Model extends Kohana_Model
         if ($data->loaded())
             return $data;
         else
-            throw new HTTP_Exception_404();
+            return false;
 
     }
 

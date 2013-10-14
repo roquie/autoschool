@@ -24,8 +24,8 @@ class Controller_Lk_Lk extends Controller_Main
     public function action_index()
     {
         $this->template->content = View::factory('lk', array(
-            'statement' =>   Model::factory('Lk_Statement')->getById(Cookie::get('statement_id')),
-            'contract'  =>   Model::factory('Lk_Contract')->getById(Cookie::get('contract_id')),
+            'statement' =>   Model::factory('Lk_Statement')->getBy('id', Cookie::get('statement_id')),
+            'contract'  =>   Model::factory('Lk_Contract')->getBy('id', Cookie::get('contract_id')),
             'userEmail' =>   Cookie::get('userEmail'),
             'userPhoto' =>   Cookie::get('userPhoto'),
         ));
@@ -111,20 +111,20 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createTicket()
     {
-        $contract = Model::factory('Lk_Contract')->getById(Cookie::get('statement_id'));
+        $contract = Model::factory('Lk_Contract')->getBy('id', Cookie::get('statement_id'));
 
         $obj = new TemplateDocx(APPPATH.'templates/ticket/ticket.docx');
 
-        $famil = UTF8::ucfirst(UTF8::strtolower($contract['famil']));
-        $imya = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($contract['imya'], 1).'. '));
-        $ot4estvo = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($contract['ot4estvo'], 1).'.'));
+        $famil = UTF8::ucfirst(UTF8::strtolower($contract->famil));
+        $imya = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($contract->imya, 0, 1).'. '));
+        $ot4estvo = UTF8::ucfirst(UTF8::strtolower(UTF8::substr($contract->ot4estvo, 0, 1).'.'));
 
         $obj->setValue('Customer', $famil.' '.$imya.' '.$ot4estvo);
 
         $file = 'temp/'.
-            $this->translit($contract['famil']).'_'.
-            $this->translit(UTF8::substr($contract['imya'], 1).'. ').'_'.
-            $this->translit(UTF8::substr($contract['ot4estvo'], 1).'. ').'_'.
+            $this->translit($contract->famil).'_'.
+            $this->translit(UTF8::substr($contract->imya, 0, 1)).'_'.
+            $this->translit(UTF8::substr($contract->ot4estvo, 0, 1)).'_'.
             'ticket_'.date('d_m_Y_H_i_s').'.docx';
 
         $obj->save(APPPATH.'output_blanks/'.$file);
@@ -135,30 +135,30 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createContract()
     {
-        $contract = Model::factory('Lk_Contract')->getById(Cookie::get('contract_id'));
-        $statement = Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'));
+        $contract = Model::factory('Lk_Contract')->getBy('id', Cookie::get('contract_id'));
+        $statement = Model::factory('Lk_Statement')->getBy('id', Cookie::get('statement_id'));
 
         $obj = new TemplateDocx(APPPATH.'templates/contract/dogovor.docx');
 
-        $obj->setValue('Customer', $contract['famil'].' '.$contract['imya'].' '.$contract['ot4estvo']);
-        $obj->setValue('CSeriya', $contract['pasport_seriya']);
-        $obj->setValue('CNomer', $contract['pasport_nomer']);
-        $obj->setValue('CVidan', $contract['pasport_kem_vydan']);
-        $obj->setValue('CAddress', $contract['adres_reg_po_pasporty']);
-        $obj->setValue('CPhone', $contract['phone']);
+        $obj->setValue('Customer', $contract->famil.' '.$contract->imya.' '.$contract->ot4estvo);
+        $obj->setValue('CSeriya', $contract->pasport_seriya);
+        $obj->setValue('CNomer', $contract->pasport_nomer);
+        $obj->setValue('CVidan', $contract->pasport_kem_vydan);
+        $obj->setValue('CAddress', $contract->adres_reg_po_pasporty);
+        $obj->setValue('CPhone', $contract->phone);
 
-        $obj->setValue('Listener', $statement['famil'].' '.$statement['imya'].' '.$statement['ot4estvo']);
-        $obj->setValue('LSeriya', $statement['pasport_seriya']);
-        $obj->setValue('LNomer', $statement['pasport_nomer']);
-        $obj->setValue('LVidan', $statement['pasport_kem_vydan']);
-        $obj->setValue('LAddress', $statement['adres_reg_po_pasporty']);
-        $obj->setValue('LPhone', $statement['mob_tel']);
+        $obj->setValue('Listener', $statement->famil.' '.$statement->imya.' '.$statement->ot4estvo);
+        $obj->setValue('LSeriya', $statement->pasport_seriya);
+        $obj->setValue('LNomer', $statement->pasport_nomer);
+        $obj->setValue('LVidan', $statement->pasport_kem_vydan);
+        $obj->setValue('LAddress', $statement->adres_reg_po_pasporty);
+        $obj->setValue('LPhone', $statement->mob_tel);
 
         $contr = 'temp/'.
-            $this->translit($contract['famil']).'_'.
-            $this->translit(UTF8::substr($contract['imya'], 1).'. ').'_'.
-            $this->translit(UTF8::substr($contract['ot4estvo'], 1).'. ').'_'.
-            'contract_'.date('d_m_Y_H_i_s').'.docx';
+            $this->translit($contract->famil).'_'.
+            $this->translit(UTF8::substr($contract->imya,0, 1)).'_'.
+            $this->translit(UTF8::substr($contract->ot4estvo,0, 1)).'_'.
+            'dogovor_'.date('d_m_Y_H_i_s').'.docx';
 
         $obj->save(APPPATH.'output_blanks/'.$contr);
 
@@ -168,35 +168,35 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createStatement()
     {
-        $statement = Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'));
+        $statement = Model::factory('Lk_Statement')->getBy('id', Cookie::get('statement_id'));
 
         $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
-        $nationality = Model::factory('Lk_Nationality')->byId($statement['nationality_id']);
-        $education = Model::factory('Lk_Education')->byId($statement['education_id']);
+        $nationality = Model::factory('Lk_Nationality')->getBy('id', $statement->nationality_id);
+        $education = Model::factory('Lk_Education')->getBy('id', $statement->education_id);
 
-        $document->setValue('Fam', $statement['famil']);
-        $document->setValue('Name', $statement['imya']);
-        $document->setValue('Otchestvo', $statement['ot4estvo']);
-        $document->setValue('DateBirth', $statement['data_rojdeniya']);
-        $document->setValue('Nationality', $nationality['grajdanstvo']);
-        $document->setValue('PlaceBirth', $statement['mesto_rojdeniya']);
-        $document->setValue('AdresRegPoPasporty', $statement['adres_reg_po_pasporty']);
-        $document->setValue('VremReg', $statement['vrem_reg']);
-        $document->setValue('Seriya',$statement['pasport_seriya']);
-        $document->setValue('Nomer', $statement['pasport_nomer']);
-        $document->setValue('Vidacha', $statement['pasport_data_vyda4i']);
-        $document->setValue('PasportKemVydan', $statement['pasport_kem_vydan']);
-        $document->setValue('DomTel', $statement['dom_tel']);
-        $document->setValue('MobTel', $statement['mob_tel']);
-        $document->setValue('Obrazovanie', $education['obrazovanie']);
-        $document->setValue('MestoRaboty',$statement['mesto_raboty']);
-        $document->setValue('About', $statement['about']);
+        $document->setValue('Fam', $statement->famil);
+        $document->setValue('Name', $statement->imya);
+        $document->setValue('Otchestvo', $statement->ot4estvo);
+        $document->setValue('DateBirth', $statement->data_rojdeniya);
+        $document->setValue('Nationality', $nationality->grajdanstvo);
+        $document->setValue('PlaceBirth', $statement->mesto_rojdeniya);
+        $document->setValue('AdresRegPoPasporty', $statement->adres_reg_po_pasporty);
+        $document->setValue('VremReg', $statement->vrem_reg);
+        $document->setValue('Seriya',$statement->pasport_seriya);
+        $document->setValue('Nomer', $statement->pasport_nomer);
+        $document->setValue('Vidacha', $statement->pasport_data_vyda4i);
+        $document->setValue('PasportKemVydan', $statement->pasport_kem_vydan);
+        $document->setValue('DomTel', $statement->dom_tel);
+        $document->setValue('MobTel', $statement->mob_tel);
+        $document->setValue('Obrazovanie', $education->obrazovanie);
+        $document->setValue('MestoRaboty',$statement->mesto_raboty);
+        $document->setValue('About', $statement->about);
 
         $file = 'temp/'.
-            $this->translit($statement['famil']).'_'.
-            $this->translit($statement['imya'][0].'. ').'_'.
-            $this->translit($statement['ot4estvo'][0].'. ').'_'.
+            $this->translit($statement->famil).'_'.
+            $this->translit(UTF8::substr($statement->imya,0, 1)).'_'.
+            $this->translit(UTF8::substr($statement->ot4estvo,0, 1)).'_'.
             'zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
         $document->save(APPPATH.'output_blanks/'.$file);

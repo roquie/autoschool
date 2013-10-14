@@ -24,14 +24,6 @@ class Controller_Main_Mail extends Controller_Ajax_Main
                 exit;
             }
 
-            /*$validation = Validation::factory($_POST)
-                ->rule('email', 'email');
-
-             if ( !$validation->check() ) {
-                $this->ajax_msg('Неверный email адрес', 'error');
-                exit;
-            }*/
-
             $result = Email::factory('Автошкола МПТ', $msg)
                 ->to(array(
                           'vik.melnikov@gmail.com',

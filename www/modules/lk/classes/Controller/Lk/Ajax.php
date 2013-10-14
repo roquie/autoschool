@@ -13,7 +13,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changepass()
     {
-        $user = Model::factory('Lk_User')->getByEmail(Cookie::get('userEmail'));
+        $user = Model::factory('Lk_User')->getBy('email', Cookie::get('userEmail'));
 
         $pass_old = $this->request->post('password_old');
         $pass_new = $this->request->post('password_new');
@@ -38,12 +38,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_forgot()
     {
-        $user = Model::factory('Lk_User')->getByEmail($this->request->post('email'));
+        $user = Model::factory('Lk_User')->getBy('email', $this->request->post('email'));
 
         if (!$user->email)
             $this->ajax_msg('Пользователь с таким email не найден', 'error');
 
-        $newpass = $this->newpass();
+        $newpass = Text::random();
         Model::factory('Lk_User')->updPwd($user->id, $this->hash($newpass));
 
         $mail = Email::factory('Смена пароля', 'Ваш пароль был сброшен, новый пароль: '. $newpass)
@@ -76,12 +76,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         
         /*
         редактирую с браузера, проверить работу не могу, поэтому тут закаментил 
-        $this->upName($data['famil']);
-        $this->upName($data['imya']);
-        $this->upName($data['ot4estvo']);
+        $data['famil'] = $this->upName($data['famil']);
+        $data['imya'] = $this->upName($data['imya']);
+        $data['ot4estvo'] = $this->upName($data['ot4estvo']);
         */
         
-        $result = Model::factory('Lk_Statement')->updAll(Cookie::get('statement_id'), $data);
+        $result = Model::factory('Lk_Statement')->upd(Cookie::get('statement_id'), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
         else
@@ -104,12 +104,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         /*
             редактирую с браузера, проверить работу не могу, поэтому тут закаментил
-            $this->upName($data['famil']);
-            $this->upName($data['imya']);
-            $this->upName($data['ot4estvo']);
+            $data['famil'] = $this->upName($data['famil']);
+            $data['imya'] = $this->upName($data['imya']);
+            $data['ot4estvo'] = $this->upName($data['ot4estvo']);
         */
 
-        $result = Model::factory('Lk_Contract')->updAll(Cookie::get('contract_id'), $data);
+        $result = Model::factory('Lk_Contract')->upd(Cookie::get('contract_id'), $data);
 
         if (!$result)
             $this->ajax_msg('Договор изменению не поддается :(', 'error');
@@ -154,13 +154,13 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
             exit;
         }
+
+        $data['statement']['famil'] = $this->upName($data['statement']['famil']);
+        $data['statement']['imya'] = $this->upName($data['statement']['imya']);
+        $data['statement']['ot4estvo'] = $this->upName($data['statement']['ot4estvo']);
         
-        $this->upName($data['statement']['famil']);
-        $this->upName($data['statement']['imya']);
-        $this->upName($data['statement']['ot4estvo']);
-        
-        Session::instance()->set('key_statement', Model::factory('Lk_Statement')->addData($data['statement']));
-        Session::instance()->set('key_contract', Model::factory('Lk_Contract')->addData($data['contract']));
+        Session::instance()->set('key_statement', Model::factory('Lk_Statement')->addRec($data['statement']));
+        Session::instance()->set('key_contract', Model::factory('Lk_Contract')->addRec($data['contract']));
 
         $this->ajax_msg(
             View::factory('main/blank/result', array(
@@ -176,7 +176,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_login()
     {
         $result = Model::factory('Lk_User')->login(array(
-            'email' => $this->request->post('email'), //sql inj
+            'email' => $this->request->post('email'),
             'password' => $this->hash($this->request->post('password'))
         ));
 
@@ -223,7 +223,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
         echo View::factory('pages/statement', array(
-            'info' => Model::factory('Lk_Statement')->getById(Cookie::get('statement_id'))
+            'info' => Model::factory('Lk_Statement')->getBy('id', Cookie::get('statement_id'))
         ))->render();
     }
 
@@ -235,7 +235,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $email = Cookie::get('userEmail');
         if (is_null($email)) HTTP::redirect('/');
         echo View::factory('pages/contract', array(
-            'info' => Model::factory('Lk_Contract')->getById(Cookie::get('contract_id'))
+            'info' => Model::factory('Lk_Contract')->getBy('id', Cookie::get('contract_id'))
         ))->render();
     }
 
@@ -328,14 +328,14 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
 
-        $info = Model::factory('Lk_User')->getByEmail($user['email']);
+        $info = Model::factory('Lk_User')->getBy('email', $user['email']);
 
         if ($info->email) {
             $this->ajax_msg('Такой пользователь уже зарегистрирован', 'error');
             exit;
         }
 
-        $newpass = $this->newpass();
+        $newpass = Text::random();
 
         $testPOST = array();
 
@@ -353,7 +353,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->ajax_msg('Непредвиденная ошибка БД', 'error');
         }
 
-        $r = Model::factory('Lk_User')->addData($testPOST['registration']);
+        $r = Model::factory('Lk_User')->addRec($testPOST['registration']);
 
         if (!$r)
             $this->ajax_msg('Непредвиденная ошибка БД', 'error');
@@ -396,15 +396,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         return hash_hmac('gost', $pass, 'bugaga-vlomaite-menya-polnostiu=▲♠');
     }
 
-    /**
-     * рандомайзер для нового пароля
-     * @return string
-     */
-    protected function newpass()
-    {
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        return substr(str_shuffle($chars), 0, 8);
-    }
 
     protected function getAge($age)
     {

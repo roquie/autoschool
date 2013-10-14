@@ -195,8 +195,8 @@ class Controller_Lk_Lk extends Controller_Main
 
         $file = 'temp/'.
             $this->translit($statement['famil']).'_'.
-            $this->translit(UTF8::substr($statement['imya'], 1).'. ').'_'.
-            $this->translit(UTF8::substr($statement['ot4estvo'], 1).'. ').'_'.
+            $this->translit($statement['imya'][0].'. ').'_'.
+            $this->translit($statement['ot4estvo'][0].'. ').'_'.
             'zayavlenie_'.date('d_m_Y_H_i_s').'.docx';
 
         $document->save(APPPATH.'output_blanks/'.$file);

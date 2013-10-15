@@ -6,6 +6,8 @@
  * All rights reserved (c)
  */
 
+// @todo: переделать всю эту хрень
+
 class Controller_Admin_Tpl extends Controller_Ajax_Admin
 {
 
@@ -76,7 +78,7 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
                 'date' => date('Y-m-d'),
             ));
 
-            $res = Model::factory('Admin_MsgTemplate')->getLastRecord();
+            $res = 5;//Model::factory('Admin_MsgTemplate')->getLastRecord();
 
             echo json_encode(array(
                     'status' => 'success', //error or info

@@ -46,6 +46,7 @@ class Controller_Admin extends Controller_Template
 
     public function action_settings()
     {
+
         $this->template->content = View::factory('admin/settings', array(
             'all_admins' => Model::factory('Admin_Administrator')->all('desc'),
             'googleAccount' => Model::factory('Admin_GoogleAccount')->getLastRecord(),

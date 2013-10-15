@@ -21,7 +21,7 @@
                             <!--
                                 FORM NEW USER
                             -->
-                            <form action="" method="post" id="form1" data-url="<?=URL::site('admin/settings/newAdmin/')?>">
+                            <form action="<?=URL::site('admin/settings/newAdmin/')?>" method="post" > <!--id="form1" data-url=""-->
                                 <legend>Новый администратор</legend>
                                 <label>Введите E-mail</label>
                                 <input name="email" type="email" class="placeholder" data-value="example@gmail.com" id="email">

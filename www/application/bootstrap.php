@@ -142,7 +142,6 @@ Kohana::modules(array(
 	));
 
 
-
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
@@ -179,6 +178,16 @@ Route::set('all_media', '<type_media>(/<folder>(/<subfolder>(/<file>)))',
         'controller' => 'Media',
         'action'     => 'load'
     ));
+Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)',
+    array(
+         'table_name' => '[a-zA-Z]+',
+         'action' => '(create|read|update|delete)',
+         'id' => '[0-9]+'
+    ))
+    ->defaults(array(
+        'controller' => 'Admin',
+        'directory'  => 'Ajax',
+   ));
 
 Route::set('admin', 'admin(/<action>)')
     ->defaults(array(
@@ -196,6 +205,8 @@ Route::set('main.ajax', 'main(/<controller>(/<action>(/<id>)))')
     ->defaults(array(
         'directory'  => 'Main',
    ));
+
+
 
 Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
     ->defaults(array(

@@ -21,8 +21,9 @@ class Model extends Kohana_Model
     }
 
     /**
+     * @param string $order_by
+     *
      * @return Database_Result
-     * @throws HTTP_Exception_404
      */
     public function all($order_by = 'asc')
     {
@@ -33,7 +34,7 @@ class Model extends Kohana_Model
         if ($data->count() > 0)
             return $data;
         else
-            throw new HTTP_Exception_404();
+            return false;
     }
 
 
@@ -42,7 +43,6 @@ class Model extends Kohana_Model
      * @param array $only
      *
      * @return bool
-     * @throws HTTP_Exception_404
      */
     public function addRec(array $data, array $only = null)
     {
@@ -53,10 +53,7 @@ class Model extends Kohana_Model
         if ($result->loaded())
             return true;
         else
-            throw new HTTP_Exception_404();
-
-
-
+            return false;
     }
 
     /**
@@ -64,7 +61,6 @@ class Model extends Kohana_Model
      * @param $value
      *
      * @return ORM
-     * @throws HTTP_Exception_404
      */
     public function getBy($where, $value)
     {
@@ -83,7 +79,6 @@ class Model extends Kohana_Model
      * @param array $only
      *
      * @return bool
-     * @throws HTTP_Exception_404
      */
     public function upd($id, $data, array $only = null)
     {
@@ -94,7 +89,7 @@ class Model extends Kohana_Model
         if ($result->loaded())
             return true;
         else
-            throw new HTTP_Exception_404();
+            return false;
 
     }
 
@@ -102,7 +97,6 @@ class Model extends Kohana_Model
      * @param $id
      *
      * @return bool
-     * @throws HTTP_Exception_404
      */
     public function del($id)
     {
@@ -112,7 +106,7 @@ class Model extends Kohana_Model
             $result->delete();
             return true;
         } else {
-            throw new HTTP_Exception_404();
+            return false;
         }
 
     }

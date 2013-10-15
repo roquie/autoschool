@@ -39,7 +39,7 @@ class Controller_Admin extends Controller_Template
     public function action_mail()
     {
         $this->template->content = View::factory('admin/mail/send', array(
-            'titles' => Model::factory('Admin_MsgTemplate')->all(),
+            'titles' => Model::factory('MsgTemplates')->all(),
         ));
     }
 
@@ -48,16 +48,16 @@ class Controller_Admin extends Controller_Template
     {
 
         $this->template->content = View::factory('admin/settings', array(
-            'all_admins' => Model::factory('Admin_Administrator')->all('desc'),
-            'googleAccount' => Model::factory('Admin_GoogleAccount')->getLastRecord(),
-            'googleAccountAllRecords' => Model::factory('Admin_GoogleAccount')->all(),
+            'all_admins' => Model::factory('Administrators')->all('desc'),
+            'googleAccount' => 2,//Model::factory('GoogleAccounts')->getLastRecord(),
+            'googleAccountAllRecords' => Model::factory('GoogleAccounts')->all(),
         ));
     }
 
     public function action_tpl()
     {
         $this->template->content = View::factory('admin/mail/tpl', array(
-            'titles' => Model::factory('Admin_MsgTemplate')->all(),
+            'titles' => Model::factory('MsgTemplates')->all(),
         ));
     }
 

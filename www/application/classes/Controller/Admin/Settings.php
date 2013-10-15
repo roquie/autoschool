@@ -17,11 +17,11 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
      * */
     public function action_newAdmin()
     {
-        $checkEmail = Model::factory('Administrator')->getBy('email', Arr::get($_POST, 'email'));
+        $checkEmail = Model::factory('Administrators')->getBy('email', Arr::get($_POST, 'email'));
 
         if (!$checkEmail) {
 
-            Model::factory('Admin_Administrator')
+            Model::factory('Administrators')
                    ->addRec(array(
                        'email' => Arr::get($_POST, 'email'),
                        'datetime' => date('Y-m-d H:i:s'),
@@ -42,7 +42,7 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
     {
 
         $id = Arr::get($_POST, 'id');
-        Model::factory('Administrator')->del($id);
+        Model::factory('Administrators')->del($id);
 
         $this->ajax_msg($id);
         exit;

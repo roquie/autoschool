@@ -24,10 +24,10 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
     public function action_add()
     {
         $title = Security::xss_clean(Arr::get($_POST, 'title'));
-        $result = Model::factory('Admin_MsgTemplate')->getBy('title', $title);
+        $result = Model::factory('MsgTemplates')->getBy('title', $title);
         if (empty($result['title'])) {
 
-            Model::factory('Admin_MsgTemplate')->addRec(array(
+            Model::factory('MsgTemplates')->addRec(array(
                 'title' => $title,
                 'message' => Security::xss_clean(Arr::get($_POST, 'text')),
                 'author' => Session::instance()->get('first_name').' '.Session::instance()->get('last_name'),
@@ -66,11 +66,11 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
     public function action_edit()
     {
         $title = Security::xss_clean(Arr::get($_POST, 'title'));
-        $result = Model::factory('Admin_MsgTemplate')->getBy('title', $title);
+        $result = Model::factory('MsgTemplates')->getBy('title', $title);
 
         if (empty($result['title'])) {
 
-            Model::factory('Admin_MsgTemplate')->upd(Arr::get($_POST, 'id'), array(
+            Model::factory('MsgTemplates')->upd(Arr::get($_POST, 'id'), array(
                 'title' => $title,
                 'message' => Security::xss_clean(Arr::get($_POST, 'text')),
                 'author' => Session::instance()->get('first_name').' '.Session::instance()->get('last_name'),
@@ -112,7 +112,7 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
     {
 
         $id = Security::xss_clean(Arr::get($_POST, 'id'));
-        $result = Model::factory('Admin_MsgTemplate')->getBy('id', $id);
+        $result = Model::factory('MsgTemplates')->getBy('id', $id);
 
         if (!empty($result['id'])) {
 
@@ -148,7 +148,7 @@ class Controller_Admin_Tpl extends Controller_Ajax_Admin
     public function action_remove()
     {
 
-        Model::factory('Admin_MsgTemplate')->del(Security::xss_clean(Arr::get($_POST, 'id')));
+        Model::factory('MsgTemplates')->del(Security::xss_clean(Arr::get($_POST, 'id')));
 
         echo json_encode(array(
             'status' => 'success', //error or info

@@ -15,7 +15,7 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
      *
      * @type ajax
      * */
-    public function action_newAdmin()
+   /* public function action_newAdmin()
     {
         $checkEmail = Model::factory('Administrators')->getBy('email', Arr::get($_POST, 'email'));
 
@@ -32,13 +32,13 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
         } else
             $this->ajax_msg('Такой админ уже есть', 'error');
 
-    }
+    }*/
 
 
     /**
      *
      */
-    public function action_delAdmin()
+   /* public function action_delAdmin()
     {
 
         $id = Arr::get($_POST, 'id');
@@ -46,7 +46,7 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
 
         $this->ajax_msg($id);
         exit;
-    }
+    }*/
 
 
 }

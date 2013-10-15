@@ -21,7 +21,7 @@
                             <!--
                                 FORM NEW USER
                             -->
-                            <form action="<?=URL::site('admin/settings/newAdmin/')?>" method="post" > <!--id="form1" data-url=""-->
+                            <form action="<?=URL::site('admin/administrators/create')?>" method="post" > <!--id="form1" data-url=""-->
                                 <legend>Новый администратор</legend>
                                 <label>Введите E-mail</label>
                                 <input name="email" type="email" class="placeholder" data-value="example@gmail.com" id="email">
@@ -63,7 +63,7 @@
                                             <?=$admins->datetime?>
                                         </td>
                                         <td>
-                                            <a onclick="alert('ну оно удаляется, но над ставить модалку, а как я не помню, и лезть в исходники лень')" href="#" data-url="<?=URL::site('admin/settings/delAdmin/'.$admins->id)?>"><i class="icon-trash icon-large"></i></a>
+                   <!-- data-url=""--> <a href="<?=URL::site('admin/administrators/delete/'.$admins->id)?>"><i class="icon-trash icon-large"></i></a>
                                         </td>
                                     </tr>
                                 <?endforeach?>

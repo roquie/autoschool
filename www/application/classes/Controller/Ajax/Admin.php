@@ -45,6 +45,9 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
 
     }
 
+    /**
+     * создание, insert
+     */
     public function action_create()
     {
         $result = Model::factory($this->_table_name)
@@ -59,6 +62,9 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         }
     }
 
+    /**
+     * чтение, select
+     */
     public function action_read()
     {
         $id = $this->request->param('id');
@@ -92,6 +98,9 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         }
     }
 
+    /**
+     * изменение
+     */
     public function action_update()
     {
         $id = $this->request->param('id');
@@ -113,6 +122,9 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
 
     }
 
+    /**
+     * удаление
+     */
     public function action_delete()
     {
         $id = $this->request->param('id');
@@ -133,6 +145,11 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         }
     }
 
+    /**
+     * генерация данных в файл модели
+     * всякий мусор в $_table_columns необходм, чтобы не делать каждый раз запрос SHOW FULL COLUMNS
+     * @param $tables
+     */
     protected function _createAllModels($tables)
     {
         if (empty($tables))
@@ -173,6 +190,12 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         }
     }
 
+    /**
+     * Файлы без php расширения
+     * @param $dir
+     *
+     * @return array
+     */
     public function _listFiles($dir)
     {
         $data = array();

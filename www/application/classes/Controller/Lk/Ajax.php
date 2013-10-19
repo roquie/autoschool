@@ -108,16 +108,14 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
         $value = Security::xss_clean($this->request->post('value'));
         
-        if (!$value && !in_array($this->request->post('name'), $no_required))
+        if (!$value && !in_array($this->request->post('name'), $no_required)) {
             $this->ajax_msg('Заполните поле', 'error');
+            exit;
+        }
         $data = array(
             $this->request->post('name') => $value
         );
-        
 
-        $data['famil'] = $this->upName($data['famil']);
-        $data['imya'] = $this->upName($data['imya']);
-        $data['ot4estvo'] = $this->upName($data['ot4estvo']);
 
         $result = Model::factory('Statements')->upd(Cookie::get('statement_id'), $data);
         if (!$result)
@@ -139,10 +137,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $data = array(
             $this->request->post('name') => $value
         );
-
-        $data['famil'] = $this->upName($data['famil']);
-        $data['imya'] = $this->upName($data['imya']);
-        $data['ot4estvo'] = $this->upName($data['ot4estvo']);
 
 
         $result = Model::factory('Contracts')->upd(Cookie::get('contract_id'), $data);

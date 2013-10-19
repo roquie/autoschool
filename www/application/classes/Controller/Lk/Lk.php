@@ -14,8 +14,8 @@ class Controller_Lk_Lk extends Controller_Main
         parent::before();
 
         // всх кто без печенек, в лк не пускаем
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
     }
 
     /**
@@ -23,9 +23,9 @@ class Controller_Lk_Lk extends Controller_Main
      */
     public function action_index()
     {
-        $this->template->content = View::factory('lk', array(
-            'statement' =>   Model::factory('Lk_Statement')->getBy('id', Cookie::get('statement_id')),
-            'contract'  =>   Model::factory('Lk_Contract')->getBy('id', Cookie::get('contract_id')),
+        $this->template->content = View::factory('lk/lk', array(
+            'statement' =>   Model::factory('Statements')->getBy('id', Cookie::get('statement_id')),
+            'contract'  =>   Model::factory('Contracts')->getBy('id', Cookie::get('contract_id')),
             'userEmail' =>   Cookie::get('userEmail'),
             'userPhoto' =>   Cookie::get('userPhoto'),
         ));
@@ -37,7 +37,7 @@ class Controller_Lk_Lk extends Controller_Main
      */
     public function action_changepass()
     {
-       $this->template->content = View::factory('changepass');
+       $this->template->content = View::factory('lk/changepass');
     }
 
     /**
@@ -45,7 +45,7 @@ class Controller_Lk_Lk extends Controller_Main
      */
     public function action_forgot()
     {
-        $this->template->content = View::factory('forgot');
+        $this->template->content = View::factory('lk/forgot');
     }
 
 
@@ -111,7 +111,7 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createTicket()
     {
-        $contract = Model::factory('Lk_Contract')->getBy('id', Cookie::get('statement_id'));
+        $contract = Model::factory('Contracts')->getBy('id', Cookie::get('statement_id'));
 
         $obj = new TemplateDocx(APPPATH.'templates/ticket/ticket.docx');
 
@@ -125,7 +125,7 @@ class Controller_Lk_Lk extends Controller_Main
             $this->translit($contract->famil).'_'.
             $this->translit(UTF8::substr($contract->imya, 0, 1)).'_'.
             $this->translit(UTF8::substr($contract->ot4estvo, 0, 1)).'_'.
-            'ticket_'.date('d_m_Y_H_i_s').'.docx';
+            'kvitanciya_'.date('d_m_Y_H_i_s').'.docx'; // поменял, потому что все транслитом должно быть, а не в перемешку
 
         $obj->save(APPPATH.'output_blanks/'.$file);
 
@@ -135,8 +135,8 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createContract()
     {
-        $contract = Model::factory('Lk_Contract')->getBy('id', Cookie::get('contract_id'));
-        $statement = Model::factory('Lk_Statement')->getBy('id', Cookie::get('statement_id'));
+        $contract = Model::factory('Contracts')->getBy('id', Cookie::get('contract_id'));
+        $statement = Model::factory('Statements')->getBy('id', Cookie::get('statement_id'));
 
         $obj = new TemplateDocx(APPPATH.'templates/contract/dogovor.docx');
 
@@ -168,12 +168,12 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createStatement()
     {
-        $statement = Model::factory('Lk_Statement')->getBy('id', Cookie::get('statement_id'));
+        $statement = Model::factory('Statements')->getBy('id', Cookie::get('statement_id'));
 
         $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
-        $nationality = Model::factory('Lk_Nationality')->getBy('id', $statement->nationality_id);
-        $education = Model::factory('Lk_Education')->getBy('id', $statement->education_id);
+        $nationality = Model::factory('Nationality')->getBy('id', $statement->nationality_id);
+        $education = Model::factory('Educations')->getBy('id', $statement->education_id);
 
         $document->setValue('Fam', $statement->famil);
         $document->setValue('Name', $statement->imya);
@@ -222,7 +222,7 @@ class Controller_Lk_Lk extends Controller_Main
             "ц"=>"ts","ч"=>"ch","ш"=>"sh","щ"=>"sch","ъ"=>"y",
             "ы"=>"yi","ь"=>"","э"=>"e","ю"=>"yu","я"=>"ya"
         );
-        return strtr($str,$tr);
+        return strtr($str, $tr);
     }
 
     /**
@@ -230,6 +230,7 @@ class Controller_Lk_Lk extends Controller_Main
      */
     public function action_logout()
     {
+        Cookie::delete('userId');
         Cookie::delete('userEmail');
         Cookie::delete('userPhoto');
         Cookie::delete('statement_id');

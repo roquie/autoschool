@@ -9,11 +9,51 @@
 class Controller_Lk_Ajax extends Controller_Ajax_Main
 {
     /**
+     * проверка знает ли юзер свой пароль для изменения почты
+     */
+    public function action_check_pass()
+    {
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
+
+        if ($result)
+            if ($result->password === $this->hash($this->request->post('check_password')))
+                $this->ajax_msg('true'); // так тебе отсылать? Чтобы ты заменил одну форму на другую о_О
+         else
+            $this->ajax_msg('Пароль не совпадает', 'error');
+    }
+
+    /**
+     * изменение email
+     */
+    public function action_change_email()
+    {
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        if (!Valid::email($this->request->post('new_email'), true)) {
+            $this->ajax_msg('Введите Email правильно', 'error');
+            exit;
+        }
+        $result = Model::factory('Users')
+                       ->upd(Cookie::get('userId'), array('email' => $this->request->post('new_email')));
+
+        if ($result)
+            $this->ajax_msg('Email изменен');
+        else
+            $this->ajax_msg('Email не хочет менятся, админа накажи', 'error');
+    }
+    /**
      * Изменение пароля
      */
     public function action_changepass()
     {
-        $user = Model::factory('Lk_User')->getBy('email', Cookie::get('userEmail'));
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        $user = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
         $pass_old = $this->request->post('password_old');
         $pass_new = $this->request->post('password_new');
@@ -25,7 +65,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->ajax_msg('Старый пароль не совпадает с введённым', 'error');
 
 
-        $result = Model::factory('Lk_User')->updPwd($user->id, $this->hash($pass_new));
+        $result = Model::factory('Users')->upd($user->id, array('password' => $this->hash($pass_new)));
 
         if (!$result)
             $this->ajax_msg('Пароль не хочет менятся, админа накажи', 'error');
@@ -38,13 +78,13 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_forgot()
     {
-        $user = Model::factory('Lk_User')->getBy('email', $this->request->post('email'));
+        $user = Model::factory('Users')->getBy('email', $this->request->post('email'));
 
         if (!$user->email)
             $this->ajax_msg('Пользователь с таким email не найден', 'error');
 
         $newpass = Text::random();
-        Model::factory('Lk_User')->updPwd($user->id, $this->hash($newpass));
+        Model::factory('Users')->upd($user->id, array('password' => $this->hash($newpass)));
 
         $mail = Email::factory('Смена пароля', 'Ваш пароль был сброшен, новый пароль: '. $newpass)
             ->to($user->email)
@@ -62,8 +102,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeStatement()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
 
         $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
         $value = Security::xss_clean($this->request->post('value'));
@@ -74,14 +114,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->request->post('name') => $value
         );
         
-        /*
-        редактирую с браузера, проверить работу не могу, поэтому тут закаментил 
+
         $data['famil'] = $this->upName($data['famil']);
         $data['imya'] = $this->upName($data['imya']);
         $data['ot4estvo'] = $this->upName($data['ot4estvo']);
-        */
-        
-        $result = Model::factory('Lk_Statement')->upd(Cookie::get('statement_id'), $data);
+
+        $result = Model::factory('Statements')->upd(Cookie::get('statement_id'), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
         else
@@ -93,8 +131,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeContract()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
 
         $value = Security::xss_clean($this->request->post('value'));
 
@@ -102,14 +140,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->request->post('name') => $value
         );
 
-        /*
-            редактирую с браузера, проверить работу не могу, поэтому тут закаментил
-            $data['famil'] = $this->upName($data['famil']);
-            $data['imya'] = $this->upName($data['imya']);
-            $data['ot4estvo'] = $this->upName($data['ot4estvo']);
-        */
+        $data['famil'] = $this->upName($data['famil']);
+        $data['imya'] = $this->upName($data['imya']);
+        $data['ot4estvo'] = $this->upName($data['ot4estvo']);
 
-        $result = Model::factory('Lk_Contract')->upd(Cookie::get('contract_id'), $data);
+
+        $result = Model::factory('Contracts')->upd(Cookie::get('contract_id'), $data);
 
         if (!$result)
             $this->ajax_msg('Договор изменению не поддается :(', 'error');
@@ -159,8 +195,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $data['statement']['imya'] = $this->upName($data['statement']['imya']);
         $data['statement']['ot4estvo'] = $this->upName($data['statement']['ot4estvo']);
         
-        Session::instance()->set('key_statement', Model::factory('Lk_Statement')->addRec($data['statement']));
-        Session::instance()->set('key_contract', Model::factory('Lk_Contract')->addRec($data['contract']));
+        Session::instance()->set('key_statement', Model::factory('Statements')->addRec($data['statement']));
+        Session::instance()->set('key_contract', Model::factory('Contracts')->addRec($data['contract']));
 
         $this->ajax_msg(
             View::factory('main/blank/result', array(
@@ -175,7 +211,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_login()
     {
-        $result = Model::factory('Lk_User')->login(array(
+        $result = Model::factory('Users')->login(array(
             'email' => $this->request->post('email'),
             'password' => $this->hash($this->request->post('password'))
         ));
@@ -210,9 +246,10 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_messages()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/messages')->render();
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        echo View::factory('lk/pages/messages')->render();
     }
 
     /**
@@ -220,10 +257,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_statement()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/statement', array(
-            'info' => Model::factory('Lk_Statement')->getBy('id', Cookie::get('statement_id'))
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        echo View::factory('lk/pages/statement', array(
+            'info' => Model::factory('Statements')->getBy('id', Cookie::get('statement_id'))
         ))->render();
     }
 
@@ -232,10 +270,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_contract()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/contract', array(
-            'info' => Model::factory('Lk_Contract')->getBy('id', Cookie::get('contract_id'))
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        echo View::factory('lk/pages/contract', array(
+            'info' => Model::factory('Contracts')->getBy('id', Cookie::get('contract_id'))
         ))->render();
     }
 
@@ -244,9 +283,10 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_download()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/downloads')->render();
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        echo View::factory('lk/pages/downloads')->render();
     }
 
     /**
@@ -254,23 +294,37 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_help()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
-        echo View::factory('pages/help', array(
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        echo View::factory('lk/pages/help', array(
             'userPhoto' =>   Cookie::get('userPhoto')
         ))->render();
     }
+
+    /**
+     * Возвращает страницу из личного кабинета "Настройки"
+     */
+    public function action_settings()
+    {
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
+        echo View::factory('lk/pages/help')->render();
+    }
+
 
     /**
      * Возвращает массив гражданств для select2
      */
     public function action_getNat()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
         $data = array();
         $temp_data = array();
-        $nationality = Model::factory('Lk_Nationality')->all();
+        $nationality = Model::factory('Nationality')->all();
         foreach ($nationality as $key => $value) {
             $temp_data['id'] = $value->id;
             $temp_data['text'] = $value->grajdanstvo;
@@ -286,11 +340,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_getEdu()
     {
-        $email = Cookie::get('userEmail');
-        if (is_null($email)) HTTP::redirect('/');
+        $userId = Cookie::get('userId');
+        if (is_null($userId)) HTTP::redirect('/');
+
         $data = array();
         $temp_data = array();
-        $education = Model::factory('Lk_Education')->all();
+        $education = Model::factory('Educations')->all();
         foreach ($education as $key => $value) {
             $temp_data['id'] = $value->id;
             $temp_data['text'] = $value->obrazovanie;
@@ -328,7 +383,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
 
-        $info = Model::factory('Lk_User')->getBy('email', $user['email']);
+        $info = Model::factory('Users')->getBy('email', $user['email']);
 
         if ($info->email) {
             $this->ajax_msg('Такой пользователь уже зарегистрирован', 'error');
@@ -351,12 +406,16 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             );
         } else {
             $this->ajax_msg('Непредвиденная ошибка БД', 'error');
+            exit;
         }
 
-        $r = Model::factory('Lk_User')->addRec($testPOST['registration']);
+        $r = Model::factory('Users')->addRec($testPOST['registration']);
 
-        if (!$r)
+        if (!$r) {
             $this->ajax_msg('Непредвиденная ошибка БД', 'error');
+            exit;
+        }
+
 
 
         $mail = Email::factory('Регистрация в Автошколе МПТ', 'Ваш логин: '.$user['email'].' Ваш пароль : '. $newpass)
@@ -405,9 +464,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         else
             return (date('Y') - $mas[2]);
     }
-    
+
     /**
      * Первую буковку над писать с большой буквы ...
+     * @param $name
+     *
      * @return string
      */
     protected function upName($name)

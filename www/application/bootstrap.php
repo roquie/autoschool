@@ -130,10 +130,9 @@ Kohana::modules(array(
        'phpword' => MODPATH.'phpword',
        'docxtemplate' => MODPATH.'docxtemplate',
        'twitterapi' => MODPATH.'twitterapi',
-       'lk' => MODPATH.'lk', // зависимый от проекта модуль
        'botobor' => MODPATH.'botobor',
        'chat' => MODPATH.'chat',
-       //'autocrud' => MODPATH.'autocrud',
+      //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
@@ -167,6 +166,7 @@ Route::set('Updownload', 'updownload/<folder>/<filename>.<format>',
  *
  * */
 
+
 Route::set('all_media', '<type_media>(/<folder>(/<subfolder>(/<file>)))',
     array(
         'type_media' => '(css|js|img|admin/css|admin/js|font|admin/font|admin/img)',
@@ -178,6 +178,18 @@ Route::set('all_media', '<type_media>(/<folder>(/<subfolder>(/<file>)))',
         'controller' => 'Media',
         'action'     => 'load'
     ));
+
+Route::set('auth.reg.lk', 'lk(/<action>)')
+    ->defaults(array(
+        'directory'  => 'Lk',
+        'controller' => 'Lk',
+    ));
+Route::set('auth.reg.lk.ajax', 'lk/ajax(/<action>)')
+    ->defaults(array(
+        'directory'  => 'Lk',
+        'controller' => 'Ajax',
+    ));
+
 Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)',
     array(
          'table_name' => '[a-zA-Z]+',
@@ -187,7 +199,7 @@ Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)',
     ->defaults(array(
         'controller' => 'Admin',
         'directory'  => 'Ajax',
-   ));
+    ));
 
 Route::set('admin', 'admin(/<action>)')
     ->defaults(array(
@@ -200,6 +212,9 @@ Route::set('main', '(<action>(/<id>))')
         'controller' => 'Main',
         'action' => 'index'
     ));
+
+
+
 
 Route::set('main.ajax', 'main(/<controller>(/<action>(/<id>)))')
     ->defaults(array(

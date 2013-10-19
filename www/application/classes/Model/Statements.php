@@ -27,4 +27,15 @@ class Model_Statements extends ORM
 		'nationality_id' => array('data_type' => 'int', 'is_nullable' => false),
 		'education_id' => array('data_type' => 'int', 'is_nullable' => false),
 	);
+
+    protected $_has_one = array(
+        'Nationality' => array(
+            'model' => 'Nationality',
+            'foreign_key' => 'nationality_id',
+        ),
+        'Educations' => array(
+            'model' => 'Educations',
+            'foreign_key' => 'education_id',
+        ),
+    );
 }

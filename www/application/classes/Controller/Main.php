@@ -28,7 +28,9 @@ class Controller_Main extends Controller_Template
 
     public function action_statement()
     {
-
+        $email = Cookie::get('userEmail');
+        if (!is_null($email)) HTTP::redirect('/');
+        
         $this->template->content =
             View::factory('main/blank/statement')
                 ->set('Nationality', Model::factory('Lk_Nationality')->all())

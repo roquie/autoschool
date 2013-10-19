@@ -28,8 +28,8 @@ class Controller_Main extends Controller_Template
 
     public function action_statement()
     {
-        $email = Cookie::get('userEmail');
-        if (!is_null($email)) HTTP::redirect('/');
+        $id = Cookie::get('userId');
+        if (!is_null($id)) HTTP::redirect('/');
         
         $this->template->content =
             View::factory('main/blank/statement')

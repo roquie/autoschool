@@ -23,9 +23,11 @@ class Controller_Lk_Lk extends Controller_Main
      */
     public function action_index()
     {
+
         $this->template->content = View::factory('lk/lk', array(
             'statement' =>   Model::factory('Statements')->getBy('id', Cookie::get('statement_id')),
             'contract'  =>   Model::factory('Contracts')->getBy('id', Cookie::get('contract_id')),
+            'group'  =>   Model::factory('Groups')->getBy('id', Cookie::get('group_id')),
             'userEmail' =>   Cookie::get('userEmail'),
             'userPhoto' =>   Cookie::get('userPhoto'),
         ));
@@ -235,6 +237,7 @@ class Controller_Lk_Lk extends Controller_Main
         Cookie::delete('userPhoto');
         Cookie::delete('statement_id');
         Cookie::delete('contract_id');
+        Cookie::delete('group_id');
         HTTP::redirect('/');
     }
 

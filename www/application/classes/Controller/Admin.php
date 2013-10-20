@@ -33,7 +33,7 @@ class Controller_Admin extends Controller_Template
 
     public function action_index()
     {
-        $this->template->content = 'Adminka';
+        $this->template->content = View::factory('admin/index');
     }
 
     public function action_mail()
@@ -46,11 +46,8 @@ class Controller_Admin extends Controller_Template
 
     public function action_settings()
     {
-
-        $this->template->content = View::factory('admin/settings', array(
+        $this->template->content = View::factory('admin/settings/index', array(
             'all_admins' => Model::factory('Administrators')->all('desc'),
-            'googleAccount' => 2,//Model::factory('GoogleAccounts')->getLastRecord(),
-            'googleAccountAllRecords' => Model::factory('GoogleAccounts')->all(),
         ));
     }
 

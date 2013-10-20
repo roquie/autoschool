@@ -16,7 +16,7 @@ class Controller_Goauth_Auth extends Controller
         $userInfo = Goauth::factory()->getUserData($this->request->query('code'));
         $firstAndLastNames = explode(' ', $userInfo['name']);
 
-        $data = Model::factory('Admin_Administrator')->getBy('email', $userInfo['email']);
+        $data = Model::factory('Administrators')->getBy('email', $userInfo['email']);
         if (!$data)
             HTTP::redirect('/');
         else {

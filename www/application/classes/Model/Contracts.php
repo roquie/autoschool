@@ -5,7 +5,6 @@ class Model_Contracts extends ORM
 	protected $_db = 'default';
     protected $_table_name  = 'Contracts';
     protected $_primary_key = 'id';
-    protected $_primary_val = 'phone';
 
     protected $_table_columns = array(
 		'id' => array('data_type' => 'int', 'is_nullable' => false),

@@ -1,0 +1,90 @@
+#chat {
+  max-height: 550px;
+  background: #ffffff;
+  border: 1px solid #cccccc;
+}
+#chat #header {
+  background: #f7f7f7;
+  padding: 15px;
+  height: 20px;
+  color: #033464;
+  font-size: 14pt;
+  font-weight: bold;
+  line-height: 20px;
+  border-bottom: 1px solid #cccccc;
+}
+#chat #header.shadow {
+  -moz-box-shadow: 0 3px 8px -4px #000000;
+  -webkit-box-shadow: 0 3px 8px -4px #000000;
+  box-shadow: 0 3px 8px -4px #000000;
+}
+#chat #header #clear:hover {
+  text-decoration: none;
+}
+#chat .slimScrollDiv .slimScrollBar {
+  cursor: pointer;
+}
+#chat #messages {
+  margin: 0 auto;
+  height: 400px;
+  width: 570px !important;
+  overflow: hidden;
+  background: #ffffff;
+  margin-top: 3px;
+}
+#chat #messages #message {
+  padding: 5px 12px 5px 5px;
+  border-bottom: 1px dashed #cccccc;
+}
+#chat #messages #message:last-child {
+  border-bottom: none;
+  margin-bottom: 10px;
+}
+#chat #messages #message .avatar img {
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  display: block;
+  height: 40px;
+  width: 40px;
+}
+#chat #messages #message .time {
+  color: #777;
+  font-size: 0.9em;
+  padding: 0 0 4px 4px;
+  vertical-align: top;
+  width: 55px;
+}
+#chat #messages #message .text {
+  vertical-align: top;
+  margin-left: 15px;
+  width: 435px;
+  word-wrap: break-word;
+}
+#chat #enter {
+  border-top: 1px solid #cccccc;
+  padding: 15px 0 10px;
+  background: #f7f7f7;
+  height: 60px;
+}
+#chat #enter #enter-inner {
+  margin: 0 auto;
+  width: 570px;
+}
+#chat #enter #enter-inner .avatar img {
+  height: 50px;
+  width: 50px;
+}
+#chat #enter #enter-inner .message {
+  padding: 5px;
+  height: 50px;
+  background-color: #ffffff;
+  border: 1px solid#cccccc;
+  overflow: hidden;
+  margin-left: 15px;
+  width: 490px;
+  word-wrap: break-word;
+}
+#chat #enter #enter-inner .message:focus {
+  outline: none;
+}

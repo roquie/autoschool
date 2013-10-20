@@ -31,10 +31,11 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
 
         $this->_table_name = $this->request->param('table_name');
 
-        if (!in_array($this->_table_name, $tables, true)) {
-            $this->ajax_msg('Такой таблицы не существует', 'error');
-            exit;
-        }
+        if (!empty($this->_table_name))
+            if (!in_array($this->_table_name, $tables, true)) {
+                $this->ajax_msg('Такой таблицы не существует', 'error');
+                exit;
+            }
 
         $post = $this->request->post();
 
@@ -47,19 +48,67 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
 
     /**
      * создание, insert
+     * site.ru/admin/table_name/create
+        post => [
+        'field' => 'val',
+        'field2' => 'val2',
+        ...
+        ]
+     *
+     * а тута поле коротое будет указано (если оно есть в табл), будет проверяться по содержимому,
+     * если такое есть - ошибка, если нету такого поля - добивит данные в бд
+     * site.ru/admin/table_name/create|check-field
+        post => [
+        'field' => 'val',
+        'field2' => 'val2',
+        ...
+        ]
      */
     public function action_create()
     {
-        $result = Model::factory($this->_table_name)
-                         ->addRec($this->request->post());
+        $params = $this->request->param('params');
+        if (!empty($params)) {
+            $params = explode('-', $params);
+            if ($params[0] === 'check' && !empty($params[1])) {
+                $columns = Database::instance()->list_columns($this->_table_name);
+                if (!in_array($params[1], array_keys($columns), true)) {
+                    $this->ajax_msg('Такого поля не существует', 'error');
+                    exit;
+                }
+                if (!empty($this->request->post()[$params[1]])) {
+                    $result = Model::factory($this->_table_name)
+                                ->getBy($params[1], $this->request->post()[$params[1]]);
+                    if (!$result) {
+                        $resultAdd = Model::factory($this->_table_name)
+                                           ->addRec($this->request->post());
 
-        if ($result) {
-            $this->ajax_msg('Добавлено');
-            exit;
+                        if ($resultAdd) {
+                            $this->ajax_msg('Добавлено');
+                            exit;
+                        } else {
+                            $this->ajax_msg('Ошибка добавления', 'error');
+                            exit;
+                        }
+                    } else {
+                        $this->ajax_msg('Такие данные уже есть', 'error');
+                        exit;
+                    }
+                }
+
+            }
         } else {
-            $this->ajax_msg('Ошибка добавления', 'error');
-            exit;
+            $result = Model::factory($this->_table_name)
+                ->addRec($this->request->post());
+
+            if ($result) {
+                $this->ajax_msg('Добавлено');
+                exit;
+            } else {
+                $this->ajax_msg('Ошибка добавления', 'error');
+                exit;
+            }
         }
+
     }
 
     /**
@@ -100,16 +149,47 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
 
     /**
      * изменение
+     * site.ru/admin/table_name/update/12
+       post => [
+         'field' => 'val',
+         ...
+       ]
+     * или изменить значение какоголибо поля где field = value
+     * site.ru/admin/table_name/update|field-value
+       post => [
+         'field',
+         'val'
+       ]
      */
     public function action_update()
     {
         $id = $this->request->param('id');
+        $params = $this->request->param('params');
         if (null === $id) {
             $this->ajax_msg('Ошибка обновления записей', 'error');
             exit;
-        } else {
+        } elseif (!empty($params)) {
+
+            $arr = explode('-', $params);
+            if (count($arr) !== 2 ) { //|| count($this->request->post()) !== 2
+                $this->ajax_msg('Ошибка обновления записей', 'error');
+                exit;
+            }
+
             $result = Model::factory($this->_table_name)
-                             ->upd($id, $this->request->post());
+                           ->upd($arr, $this->request->post());
+
+            if ($result) {
+                $this->ajax_msg('Данные обновлены');
+                exit;
+            } else {
+                $this->ajax_msg('Ошибка обновления', 'error');
+                exit;
+            }
+        } else {
+
+            $result = Model::factory($this->_table_name)
+                           ->upd($id, $this->request->post());
 
             if ($result) {
                 $this->ajax_msg('Данные обновлены');
@@ -119,6 +199,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
                 exit;
             }
         }
+
 
     }
 
@@ -163,8 +244,6 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
 
             if (!file_exists($file)) {
                 foreach ($columns as $column) {
-                    if ($column['type'] === 'string')
-                        $primary_val = $column['column_name'];
                     if ($column['key'] === 'PRI')
                         $primary_key = $column['column_name'];
                 }
@@ -175,7 +254,6 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
 	protected \$_db = 'default';
     protected \$_table_name  = '".$modelName."';
     protected \$_primary_key = '$primary_key';
-    protected \$_primary_val = '$primary_val';
 
     protected \$_table_columns = array(\n";
                 foreach ($columns as $column)

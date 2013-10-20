@@ -38,6 +38,20 @@ class Model extends Kohana_Model
     }
 
 
+    public function allWhere($where, $value, $order_by = 'asc')
+    {
+        $data = ORM::factory(Model::$_model_name)
+            ->where($where, '=', $value)
+            ->order_by('id', $order_by)
+            ->find_all();
+
+        if ($data->count() > 0)
+            return $data;
+        else
+            return false;
+    }
+
+
     /**
      * @param array $data
      * @param array $only
@@ -74,22 +88,36 @@ class Model extends Kohana_Model
     }
 
     /**
-     * @param       $id
+     * @param mixed $field
      * @param       $data
      * @param array $only
      *
+     * @internal param $id
      * @return bool
      */
-    public function upd($id, $data, array $only = null)
+    public function upd($field, $data, array $only = null)
     {
-        $result = ORM::factory(Model::$_model_name, $id)
-                    ->values($data, $only)
-                    ->update();
 
-        if ($result->loaded())
-            return true;
-        else
-            return false;
+        if (is_int($field) || is_string($field)) {
+            $model = ORM::factory(Model::$_model_name, $field)
+                         ->values($data, $only)
+                         ->update();
+            if ($model->loaded())
+                return true;
+            else
+                return false;
+        } elseif(is_array($field)) {
+            $db = DB::update(Model::$_model_name)
+                    ->value($data[0], $data[1])
+                    ->where($field[0], '=', $field[1])
+                    ->execute();
+            if ($db)
+                return true;
+            else
+                return false;
+        }
+
+
 
     }
 

@@ -7,7 +7,7 @@ class Model_Message extends ORM
 
     protected $_belongs_to = array(
         'user'  => array(
-            'model'       => 'User',
+            'model'       => 'Users',
             'foreign_key' => 'user_id',
         ),
     );

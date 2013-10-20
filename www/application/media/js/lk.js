@@ -10,19 +10,19 @@ $(function() {
         }
 
         var $this = $(this),
-            action = $this.attr('href'),
-            nav = $('#left_menu').find('li'),
-            arrow = $('<i>', {
-                class : 'icon-angle-right'
-            }),
-            lin,
-            obj = $('#loader');
-        $('#content').html(obj.html()).load(action);
-        nav.removeClass('active').find('a > i.icon-angle-right').remove();
-        $this.parent().addClass('active').find('a').append(arrow);
-        link = action.split('/');
-        location.hash = link[link.length-1];
-    });
+        action = $this.attr('href'),
+        nav = $('#left_menu').find('li'),
+        arrow = $('<i>', {
+            class : 'icon-angle-right'
+        }),
+        lin,
+        obj = $('#loader');
+    $('#content').html(obj.html()).load(action);
+    nav.removeClass('active').find('a > i.icon-angle-right').remove();
+    $this.parent().addClass('active').find('a').append(arrow);
+    link = action.split('/');
+    location.hash = link[link.length-1];
+});
 
     $(window).on('load', function() {
         $('.menu').css({'margin-top' : $('.profile').find('img').height() - $('.back1').height() + 20});

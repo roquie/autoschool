@@ -190,16 +190,7 @@ Route::set('auth.reg.lk.ajax', 'lk/ajax(/<action>)')
         'controller' => 'Ajax',
     ));
 
-Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)',
-    array(
-         'table_name' => '[a-zA-Z]+',
-         'action' => '(create|read|update|delete)',
-         'id' => '[0-9]+'
-    ))
-    ->defaults(array(
-        'controller' => 'Admin',
-        'directory'  => 'Ajax',
-    ));
+
 
 Route::set('admin', 'admin(/<action>)')
     ->defaults(array(
@@ -213,7 +204,17 @@ Route::set('main', '(<action>(/<id>))')
         'action' => 'index'
     ));
 
-
+Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)(|<params>)',
+    array(
+         'table_name' => '[a-zA-Z]+',
+         'action' => '(create|read|update|delete)',
+         'id' => '[0-9]+',
+         'params' => '.+'
+    ))
+    ->defaults(array(
+                    'controller' => 'Admin',
+                    'directory'  => 'Ajax',
+               ));
 
 
 Route::set('main.ajax', 'main(/<controller>(/<action>(/<id>)))')
@@ -227,6 +228,7 @@ Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
     ->defaults(array(
         'directory'  => 'Admin',
     ));
+
 
 
 

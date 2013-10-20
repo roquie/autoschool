@@ -35,12 +35,15 @@
                         <h1><?=$statement->famil.' '.$statement->imya?></h1>
                     </div>
                     <div class="span5">
-                        <h1 class="group pull-right" title="твоя группа" >01431</h1>
+                        <h1 class="group pull-right"
+                            title="Группа">
+                            <?= ($group->name === 0) ? 'Не определен (а)' : $group->name?>
+                        </h1>
                     </div>
                 </div>
                 <div class="row">
                     <div class="span4 settings">
-                        <i class="icon-envelope-alt"></i> <?=$userEmail?>, <a href="<?=URL::site('#')?>"><i class="icon-cog"></i> Настройки</a>
+                        <i class="icon-envelope-alt"></i> <?=$userEmail?>, <a href="<?=URL::site('/lk/ajax/settings')?>"><i class="icon-cog"></i> Настройки</a>
                     </div>
                 </div>
             </div>

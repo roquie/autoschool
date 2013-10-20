@@ -5,6 +5,7 @@ class Controller_Main_Mail extends Controller_Ajax_Main
 
     public function action_send()
     {
+
         if (Botobor_Keeper::get()->isRobot())
         {
             $this->ajax_msg('Ошибка отправки, попробуйте еще раз', 'error');

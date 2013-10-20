@@ -1,0 +1,26 @@
+.settingsContent .span4 {
+  width: 248px;
+  margin-top: 20px;
+  border: 1px solid #f5f5f5;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+.settingsContent .span4:nth-child(2) {
+  margin-left: 20px;
+}
+.settingsContent .span4:nth-child(2) form > p {
+  margin-bottom: 20px;
+}
+.settingsContent .btn {
+  background-image: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  font-weight: 200;
+}
+.settingsContent .input-prepend input {
+  border-radius: 0;
+}

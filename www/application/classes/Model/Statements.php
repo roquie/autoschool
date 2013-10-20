@@ -5,7 +5,6 @@ class Model_Statements extends ORM
 	protected $_db = 'default';
     protected $_table_name  = 'Statements';
     protected $_primary_key = 'id';
-    protected $_primary_val = 'about';
 
     protected $_table_columns = array(
 		'id' => array('data_type' => 'int', 'is_nullable' => false),

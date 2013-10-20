@@ -215,8 +215,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             Cookie::set('userId', $result->id);
             Cookie::set('userEmail', $result->email);
             Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->Statement_id);
-            Cookie::set('contract_id', $result->Contract_id);
+            Cookie::set('statement_id', $result->statement_id);
+            Cookie::set('contract_id', $result->contract_id);
+            Cookie::set('group_id', $result->group_id);
             $this->ajax_msg(URL::site('lk'));
             exit;
         }
@@ -226,8 +227,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             Cookie::set('userId', $result->id);
             Cookie::set('userEmail', $result->email);
             Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->Statement_id);
-            Cookie::set('contract_id', $result->Contract_id);
+            Cookie::set('statement_id', $result->statement_id);
+            Cookie::set('contract_id', $result->contract_id);
+            Cookie::set('group_id', $result->group_id);
             $this->ajax_msg(URL::site('lk'));
         } else {
             $this->ajax_msg('Пользователь не существует', 'error');
@@ -243,7 +245,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $userId = Cookie::get('userId');
         if (is_null($userId)) HTTP::redirect('/');
 
-        echo View::factory('lk/pages/messages')->render();
+        $result = Model::factory('News')->allWhere('group_id', Cookie::get('group_id'));
+
+        echo View::factory('lk/pages/messages')
+            ->set('messages', $result)
+            ->render();
     }
 
     /**
@@ -254,8 +260,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $userId = Cookie::get('userId');
         if (is_null($userId)) HTTP::redirect('/');
 
+        $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
+
         echo View::factory('lk/pages/statement', array(
-            'info' => Model::factory('Statements')->getBy('id', Cookie::get('statement_id'))
+            'info' => Model::factory('Statements')->getBy('id', Cookie::get('statement_id')),
+            'is_approved' => $result->is_approved,
         ))->render();
     }
 
@@ -267,8 +276,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $userId = Cookie::get('userId');
         if (is_null($userId)) HTTP::redirect('/');
 
+        $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
+
         echo View::factory('lk/pages/contract', array(
-            'info' => Model::factory('Contracts')->getBy('id', Cookie::get('contract_id'))
+            'info' => Model::factory('Contracts')->getBy('id', Cookie::get('contract_id')),
+            'is_approved' => $result->is_approved,
         ))->render();
     }
 
@@ -292,7 +304,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         if (is_null($userId)) HTTP::redirect('/');
 
         echo View::factory('lk/pages/help', array(
-            'userPhoto' =>   Cookie::get('userPhoto')
+            'userPhoto' => Cookie::get('userPhoto')
         ))->render();
     }
 
@@ -304,7 +316,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $userId = Cookie::get('userId');
         if (is_null($userId)) HTTP::redirect('/');
 
-        echo View::factory('lk/pages/help')->render();
+        echo View::factory('lk/pages/settings')->render();
     }
 
 
@@ -386,7 +398,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         $newpass = Text::random();
 
-        $testPOST = array();
 
         if ((int)(string)Session::instance()->get('key_statement') && (int)(string)Session::instance()->get('key_contract')) {
             $testPOST = array(

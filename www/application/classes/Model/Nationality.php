@@ -5,7 +5,6 @@ class Model_Nationality extends ORM
 	protected $_db = 'default';
     protected $_table_name  = 'Nationality';
     protected $_primary_key = 'id';
-    protected $_primary_val = 'grajdanstvo';
 
     protected $_table_columns = array(
 		'id' => array('data_type' => 'int', 'is_nullable' => false),

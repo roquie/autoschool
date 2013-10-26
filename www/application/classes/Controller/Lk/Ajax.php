@@ -410,7 +410,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                 )
             );
         } else {
-            $this->ajax_msg((int)(string)Session::instance()->get('key_statement').'Непредвиденная ошибка БД', 'error');
+            $this->ajax_msg('Непредвиденная ошибка БД', 'error');
             exit;
         }
 

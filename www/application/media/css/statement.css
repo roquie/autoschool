@@ -28,36 +28,6 @@ h2.info {
   -moz-border-radius: 4px 0 0 0;
   border-radius: 4px 0 0 0;
 }
-/*
-  Стили для добавленных текстов до/после поля
-*/
-.input-append.input-block-level,
-.input-prepend.input-block-level {
-  width: 100%;
-  display: table;
-}
-.input-append.input-block-level .add-on,
-.input-prepend.input-block-level .add-on {
-  display: table-cell;
-  padding: 4px;
-  background-color: #e8e8e8;
-}
-.input-append.input-block-level .add-on:hover,
-.input-prepend.input-block-level .add-on:hover {
-  background-color: #dddddd;
-}
-.input-append.input-block-level > input {
-  border-right: 0;
-}
-.input-prepend.input-block-level > input {
-  border-left: 0;
-}
-.input-append .add-on:last-child,
-.input-append .btn:last-child {
-  -webkit-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
-}
 #wrap {
   margin-top: 51px;
 }

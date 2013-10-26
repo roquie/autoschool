@@ -2,7 +2,7 @@ $(function() {
 
     first_load();
 
-    $('#left_menu').on('click', 'li > a', function(e) {
+    $('body').on('click', '#ajaxLink', function(e) {
         e.preventDefault();
 
         if ($(this).attr('ajax') === 'false') {
@@ -15,14 +15,16 @@ $(function() {
         arrow = $('<i>', {
             class : 'icon-angle-right'
         }),
-        lin,
+        link,
         obj = $('#loader');
-    $('#content').html(obj.html()).load(action);
-    nav.removeClass('active').find('a > i.icon-angle-right').remove();
-    $this.parent().addClass('active').find('a').append(arrow);
-    link = action.split('/');
-    location.hash = link[link.length-1];
-});
+        $('#content').html(obj.html()).load(action);
+        if ($this.closest('#left_menu').length != 0) {
+            nav.removeClass('active').find('a > i.icon-angle-right').remove();
+            $this.parent().addClass('active').find('a').append(arrow);
+        }
+        link = action.split('/');
+        location.hash = link[link.length-1];
+    });
 
     $(window).on('load', function() {
         $('.menu').css({'margin-top' : $('.profile').find('img').height() - $('.back1').height() + 20});
@@ -33,16 +35,21 @@ $(function() {
             link,
             arrow = $('<i>', {
                 class : 'icon-angle-right'
-            });
+            }),
+            isset = false;
         if (location.hash != '') {
-            url = location.hash.replace('#', '')
-            $('#left_menu > li > a').each(function() {
-                link = $(this).attr('href').split('/');
-                if (link[link.length-1] === url) {
-                    $(this).parent().addClass('active').find('a').append(arrow);
-                    $('#content').html($('#loader').html()).load($(this).attr('href'));
-                }
-            });
+            url = location.hash.replace('#', '');
+            if (url === 'settings') {
+                $('#content').html($('#loader').html()).load($('.settings').find('a#ajaxLink').attr('href'));
+            } else {
+                $('#left_menu > li > a').each(function() {
+                    link = $(this).attr('href').split('/');
+                    if (link[link.length-1] === url) {
+                        $(this).parent().addClass('active').find('a').append(arrow);
+                        $('#content').html($('#loader').html()).load($(this).attr('href'));
+                    }
+                });
+            }
         } else {
             var obj = $('#left_menu > li').eq(0);
             link = obj.find('a').attr('href');

@@ -62,11 +62,11 @@
             switch (arrowClass) {
                 case 'top' :
                     inputTopPosition = - (input.height() + this.options.offsetTopBalloon);
-                    inputLeftPosition = 0;
+                    inputLeftPosition = -18;
                     break;
                 case 'right' :
                     inputTopPosition = - (this.options.offsetTopBalloon + 18);
-                    inputLeftPosition = input.width() + 18;
+                    inputLeftPosition = input.width();
                     break;
                 case 'bottom' :
                     inputTopPosition = pos.top + input.height() + this.options.offsetTopBalloon;

@@ -43,7 +43,7 @@
                 </div>
                 <div class="row">
                     <div class="span4 settings">
-                        <i class="icon-envelope-alt"></i> <?=$userEmail?>, <a href="<?=URL::site('/lk/ajax/settings')?>"><i class="icon-cog"></i> Настройки</a>
+                        <i class="icon-envelope-alt"></i> <?=$userEmail?>, <a href="<?=URL::site('lk/ajax/settings')?>" id="ajaxLink"><i class="icon-cog"></i> Настройки</a>
                     </div>
                 </div>
             </div>
@@ -53,11 +53,11 @@
     <div class="row">
         <div class="span3 menu">
             <ul class="nav nav-pills nav-stacked" id="left_menu">
-                <li><a href="<?=URL::site('lk/ajax/messages')?>"><i class="icon-comments"></i>Группа</a></li>
-                <li><a href="<?=URL::site('lk/ajax/statement')?>"><i class="icon-file"></i>Заявление</a></li>
-                <li><a href="<?=URL::site('lk/ajax/contract')?>"><i class="icon-file"></i>Договор</a></li>
-                <li><a href="<?=URL::site('lk/ajax/download')?>"><i class="icon-cloud-download"></i>Загрузки</a></li>
-                <li><a href="<?=URL::site('chat/help')?>">&nbsp;<i class="icon-info"></i>&nbsp;Помощь</a></li>
+                <li><a href="<?=URL::site('lk/ajax/messages')?>" id="ajaxLink"><i class="icon-comments"></i>Группа</a></li>
+                <li><a href="<?=URL::site('lk/ajax/statement')?>" id="ajaxLink"><i class="icon-file"></i>Заявление</a></li>
+                <li><a href="<?=URL::site('lk/ajax/contract')?>" id="ajaxLink"><i class="icon-file"></i>Договор</a></li>
+                <li><a href="<?=URL::site('lk/ajax/download')?>" id="ajaxLink"><i class="icon-cloud-download"></i>Загрузки</a></li>
+                <li><a href="<?=URL::site('chat/help')?>" id="ajaxLink">&nbsp;<i class="icon-info"></i>&nbsp;Помощь</a></li>
             </ul>
         </div>
 

@@ -76,6 +76,12 @@ h2 {
   -moz-border-radius: 0;
   border-radius: 0;
 }
+.input-append .add-on:last-child,
+.input-append .btn:last-child {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
 /*
     общие стили для элементов
 */

@@ -33,8 +33,8 @@ class Controller_Main extends Controller_Template
         
         $this->template->content =
             View::factory('main/blank/statement')
-                ->set('Nationality', Model::factory('Lk_Nationality')->all())
-                ->set('Educations', Model::factory('Lk_Education')->all());
+                ->set('Nationality', Model::factory('Nationality')->all())
+                ->set('Educations', Model::factory('Educations')->all());
     }
 
 

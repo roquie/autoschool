@@ -37,7 +37,7 @@
                     <div class="span5">
                         <h1 class="group pull-right"
                             title="Группа">
-                            <?= ($group->name === 0) ? 'Не определен (а)' : $group->name?>
+                            <?= ($group === 0) ? 'Не определен (а)' : $group->name?>
                         </h1>
                     </div>
                 </div>

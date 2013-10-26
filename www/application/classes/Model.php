@@ -37,7 +37,13 @@ class Model extends Kohana_Model
             return false;
     }
 
-
+    /**
+     * @param        $where
+     * @param        $value
+     * @param string $order_by
+     *
+     * @return bool|Database_Result
+     */
     public function allWhere($where, $value, $order_by = 'asc')
     {
         $data = ORM::factory(Model::$_model_name)
@@ -56,7 +62,7 @@ class Model extends Kohana_Model
      * @param array $data
      * @param array $only
      *
-     * @return bool
+     * @return int
      */
     public function addRec(array $data, array $only = null)
     {
@@ -65,7 +71,7 @@ class Model extends Kohana_Model
                       ->create();
 
         if ($result->loaded())
-            return true;
+            return $result->pk();
         else
             return false;
     }
@@ -98,7 +104,7 @@ class Model extends Kohana_Model
     public function upd($field, $data, array $only = null)
     {
 
-        if (is_int($field) || is_string($field)) {
+        if (is_numeric($field)) {
             $model = ORM::factory(Model::$_model_name, $field)
                          ->values($data, $only)
                          ->update();

@@ -1,12 +1,12 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 $opt = Kohana::$config->load('settings')->as_array();
-if ($opt['smtp'] === 0) {
+//if ($opt['smtp'] === 0) {
         return array(
             'driver' => 'native',
             'options' => NULL
         );
-    } else {
+  /*  } else {
         $smtp = unserialize($opt['smtp']);
         return array(
             'driver' => 'smtp',
@@ -19,6 +19,6 @@ if ($opt['smtp'] === 0) {
                 'port' => 25 // по дефолту
             )
 
-        );
-}
+        );*/
+//}
 

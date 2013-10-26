@@ -179,24 +179,26 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
 
-        // Если 18 лет и не указано, что заказчиком будет родитель, то заказчик сам слушатель, иначе родитель или опекун
-        if ($this->getAge($data['statement']['data_rojdeniya']) < 18 && !isset($data['contract']['parent'])) {
-            $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
-            exit;
+
+        if (isset($data['statement'])) {
+
+            // Если 18 лет и не указано, что заказчиком будет родитель, то заказчик сам слушатель, иначе родитель или опекун
+            if ($this->getAge($data['statement']['data_rojdeniya']) < 18 && !isset($data['contract']['parent'])) {
+                $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
+                exit;
+            }
+
+            Session::instance()->set('key_statement', Model::factory('Statements')->addRec($data['statement']));
+            Session::instance()->set('key_contract', Model::factory('Contracts')->addRec($data['contract']));
+
+
+            $this->ajax_msg(
+                View::factory('main/blank/result', array(
+                    'age' => $this->getAge($data['statement']['data_rojdeniya'])
+               ))->render()
+            );
         }
 
-        $data['statement']['famil'] = $this->upName($data['statement']['famil']);
-        $data['statement']['imya'] = $this->upName($data['statement']['imya']);
-        $data['statement']['ot4estvo'] = $this->upName($data['statement']['ot4estvo']);
-        
-        Session::instance()->set('key_statement', Model::factory('Statements')->addRec($data['statement']));
-        Session::instance()->set('key_contract', Model::factory('Contracts')->addRec($data['contract']));
-
-        $this->ajax_msg(
-            View::factory('main/blank/result', array(
-                'age' => $this->getAge($data['statement']['data_rojdeniya'])
-            ))->render()
-        );
 
     }
 
@@ -245,10 +247,24 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $userId = Cookie::get('userId');
         if (is_null($userId)) HTTP::redirect('/');
 
-        $result = Model::factory('News')->allWhere('group_id', Cookie::get('group_id'));
+        $result = Model::factory('News')->allWhere('group_id',  Cookie::get('group_id'));
+
+
+
+        if (!$result) {
+            $data[] = array(
+                'title' => 'Группа не определена администратором',
+                'message' => 'Сообщений нет',
+            );
+        } else {
+            $data = array();
+            foreach ($result as $v)
+                $data[] = $v->as_array();
+
+        }
 
         echo View::factory('lk/pages/messages')
-            ->set('messages', $result)
+            ->set('messages', $data)
             ->render();
     }
 
@@ -372,10 +388,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $user = json_decode($this->request->post('data'), true);
         else {
             $user['email'] = Arr::get($_POST, 'email');
-            $validation = Validation::factory($_POST)
-                ->rule('email', 'email');
 
-            if ( !$validation->check() ) {
+            if (!Valid::email($user['email'], true)) {
                 $this->ajax_msg('Неверный email адрес', 'error');
                 exit;
             }
@@ -391,7 +405,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         $info = Model::factory('Users')->getBy('email', $user['email']);
 
-        if ($info->email) {
+        if ($info) {
             $this->ajax_msg('Такой пользователь уже зарегистрирован', 'error');
             exit;
         }
@@ -402,15 +416,15 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         if ((int)(string)Session::instance()->get('key_statement') && (int)(string)Session::instance()->get('key_contract')) {
             $testPOST = array(
                 'registration' => array(
-                    'Statement_id' =>  (int)(string)Session::instance()->get('key_statement'),
-                    'Contract_id' =>  (int)(string)Session::instance()->get('key_contract'),
+                    'statement_id' =>  (int)(string)Session::instance()->get('key_statement'),
+                    'contract_id' =>  (int)(string)Session::instance()->get('key_contract'),
                     'photo' =>  $user['photo_big'],
                     'email' =>  $user['email'],
                     'password' => $this->hash($newpass)
                 )
             );
         } else {
-            $this->ajax_msg('Непредвиденная ошибка БД', 'error');
+            $this->ajax_msg((int)(string)Session::instance()->get('key_statement').'Непредвиденная ошибка БД', 'error');
             exit;
         }
 
@@ -429,10 +443,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $mail->send();
 
         Cookie::$expiration = 0;
+        Cookie::set('userId', $r);
         Cookie::set('userEmail', $user['email']);
         Cookie::set('userPhoto', $user['photo_big']);
         Cookie::set('statement_id', (int)(string)Session::instance()->get('key_statement'));
         Cookie::set('contract_id', (int)(string)Session::instance()->get('key_contract'));
+        Cookie::set('group_id', 0);
 
         if ($mail) {
             Session::instance()->delete('key_statement');

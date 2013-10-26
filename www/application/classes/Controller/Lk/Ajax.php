@@ -9,13 +9,28 @@
 class Controller_Lk_Ajax extends Controller_Ajax_Main
 {
     /**
+     * проверка
+     */
+
+    public function before()
+    {
+        parent::before();
+        $no_check = array(
+            'register',
+            'addPapers',
+            'login',
+            'forgot',
+        );
+        if (!in_array($this->request->action(), $no_check)) {
+            $userId = Cookie::get('userId');
+            if (empty($userId)) HTTP::redirect('/');
+        }
+    }
+    /**
      * проверка знает ли юзер свой пароль для изменения почты
      */
     public function action_check_pass()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
-
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
         if ($result)
@@ -30,8 +45,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_change_email()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
 
         if (!Valid::email($this->request->post('new_email'), true)) {
             $this->ajax_msg('Введите Email правильно', 'error');
@@ -50,8 +63,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changepass()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
 
         $user = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
@@ -102,8 +113,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeStatement()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
 
         $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
         $value = Security::xss_clean($this->request->post('value'));
@@ -129,8 +138,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeContract()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
 
         $value = Security::xss_clean($this->request->post('value'));
 
@@ -244,8 +251,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_messages()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
 
         $result = Model::factory('News')->allWhere('group_id',  Cookie::get('group_id'));
 
@@ -273,8 +278,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_statement()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
 
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
@@ -289,9 +292,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_contract()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
-
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
         echo View::factory('lk/pages/contract', array(
@@ -305,8 +305,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_download()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
 
         echo View::factory('lk/pages/downloads')->render();
     }
@@ -316,9 +314,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_help()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
-
         echo View::factory('lk/pages/help', array(
             'userPhoto' => Cookie::get('userPhoto')
         ))->render();
@@ -329,9 +324,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_settings()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
-
         echo View::factory('lk/pages/settings')->render();
     }
 
@@ -341,9 +333,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_getNat()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
-
         $data = array();
         $temp_data = array();
         $nationality = Model::factory('Nationality')->all();
@@ -362,9 +351,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_getEdu()
     {
-        $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
-
         $data = array();
         $temp_data = array();
         $education = Model::factory('Educations')->all();

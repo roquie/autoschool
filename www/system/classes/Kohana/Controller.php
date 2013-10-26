@@ -32,14 +32,15 @@ abstract class Kohana_Controller {
 	 */
 	public $response;
 
-	/**
-	 * Creates a new controller instance. Each controller must be constructed
-	 * with the request object that created it.
-	 *
-	 * @param   Request   $request  Request that created the controller
-	 * @param   Response  $response The request's response
-	 * @return  void
-	 */
+    /**
+     * Creates a new controller instance. Each controller must be constructed
+     * with the request object that created it.
+     *
+     * @param   Request  $request  Request that created the controller
+     * @param   Response $response The request's response
+     *
+     * @return \Kohana_Controller
+     */
 	public function __construct(Request $request, Response $response)
 	{
 		// Assign the request to the controller
@@ -49,20 +50,20 @@ abstract class Kohana_Controller {
 		$this->response = $response;
 	}
 
-	/**
-	 * Executes the given action and calls the [Controller::before] and [Controller::after] methods.
-	 *
-	 * Can also be used to catch exceptions from actions in a single place.
-	 *
-	 * 1. Before the controller action is called, the [Controller::before] method
-	 * will be called.
-	 * 2. Next the controller action will be called.
-	 * 3. After the controller action is called, the [Controller::after] method
-	 * will be called.
-	 *
-	 * @throws  HTTP_Exception_404
-	 * @return  Response
-	 */
+    /**
+     * Executes the given action and calls the [Controller::before] and [Controller::after] methods.
+     *
+     * Can also be used to catch exceptions from actions in a single place.
+     *
+     * 1. Before the controller action is called, the [Controller::before] method
+     * will be called.
+     * 2. Next the controller action will be called.
+     * 3. After the controller action is called, the [Controller::after] method
+     * will be called.
+     *
+     * @throws Response
+     * @return  Response
+     */
 	public function execute()
 	{
 		// Execute the "before action" method

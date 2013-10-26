@@ -8,14 +8,16 @@
 
 class Controller_Lk_Lk extends Controller_Main
 {
-
+    /**
+     * проверка
+     */
     public function before()
     {
         parent::before();
 
         // всх кто без печенек, в лк не пускаем
         $userId = Cookie::get('userId');
-        if (is_null($userId)) HTTP::redirect('/');
+        if (empty($userId)) HTTP::redirect('/');
     }
 
     /**

@@ -80,13 +80,13 @@ $(function() {
     }).on('click', '#close-slide', function(e) { // Кнопка закрыть боковую панель новостей
         $("#slide-left").pageSlide('close');
         return false;
-    }).on('click', '#login', function(e) {
+    }).on('click', '#forgot', function(e) {
         e.preventDefault();
         $(this).animate({opacity:0}, 'slow', function() {
             $(this).toggleClass('hide');
             $('#forgot_form').removeClass('hide').css({opacity:0}).animate({opacity:1}, 'slow');
         });
-    }).on('click', '#forgot_form', function(e) {
+    }).on('click', '#enter', function(e) {
         e.preventDefault();
         $(this).animate({opacity:0}, 'slow', function() {
             $(this).toggleClass('hide');

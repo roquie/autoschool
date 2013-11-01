@@ -56,7 +56,7 @@
                                             <input type="email" name="email" placeholder="Email">
                                         </div>
                                         <input type="submit" value="Отправить" class="btn btn-info pull-left"/>
-                                        <input type="button" class="btn pull-right" id="forgot" value="Назад">
+                                        <input type="button" class="btn pull-right" id="enter" value="Назад">
                                     </form>
                                 </div>
                             </li>

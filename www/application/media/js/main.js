@@ -23,29 +23,45 @@ $(function() {
     });
 
     /**
-     * вход
+     * вход/забыли пароль
      */
-    $('#sign-in').on('submit', function(e) {
-        e.preventDefault();
-        if (isValidateEmail($('#email').val()) && $('#password').val() != '') {
-            send_ajax($(this), function(response) {
-                // Если получена ошибка
+    $('.sign').ajaxForm({
+        errorValidate : function() {
+            noty({
+                type : 'error',
+                message : 'Ошибки заполнения полей'
+            });
+        },
+        worked : function() {
+            noty({
+                type:'error',
+                title:'Ошибка',
+                message:'Идёт обработка данных...'
+            });
+        },
+        functions : {
+            sign_in : function(response) {
                 if (response.status === 'error') {
                     noty({
                         type : response.status,
                         message : response.msg
                     });
                 }
-                // Если всё нормально
                 if (response.status === 'success') {
                     window.location.href = response.msg;
                 }
-            });
-        } else {
-            noty({
-                type : 'error',
-                message : 'Ошибки заполнения полей'
-            });
+            },
+            forgot : function(response) {
+                if (response.status == 'error' || response.status == 'success') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status == 'success') {
+                    $('#popup').find('form').toggle();
+                }
+            }
         }
     });
 
@@ -64,13 +80,11 @@ $(function() {
     }).on('click', '#close-slide', function(e) { // Кнопка закрыть боковую панель новостей
         $("#slide-left").pageSlide('close');
         return false;
+    }).on('click', '#forgot', function(e) {
+        e.preventDefault();
+        $(this).closest('#popup').find('form').toggle();
     });
 
-    $(window).on('load', function() {
-        $('.flexslider').flexslider({
-            animation: "slide"
-        });
-    });
     $("[rel='tooltip']").tooltip();
 
 });

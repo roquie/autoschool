@@ -89,9 +89,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_forgot()
     {
-        $user = Model::factory('Users')->getBy('email', $this->request->post('email'));
+        $user = Model::factory('Users')->getBy('email', $this->request->post('data.email'));
 
-        if (!$user->email)
+        if (!$user)
             $this->ajax_msg('Пользователь с таким email не найден', 'error');
 
         $newpass = Text::random();
@@ -103,7 +103,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $mail->send();
 
         if ($mail)
-            $this->ajax_msg('Пароль сброшен, см. почту');
+            $this->ajax_msg('Новый пароль отправлен на указанную почту');
         else
             $this->ajax_msg('Непредвиденная ошибка', 'error');
     }
@@ -215,8 +215,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_login()
     {
         $result = Model::factory('Users')->login(array(
-            'email' => $this->request->post('email'),
-            'password' => $this->hash($this->request->post('password'))
+            'email' => $this->request->post('data.email'),
+            'password' => $this->hash($this->request->post('data.password'))
         ));
 
         if (array_key_exists('remember', $this->request->post()) && ($result->email && $result->password)) {

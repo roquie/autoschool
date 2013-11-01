@@ -89,7 +89,8 @@
                             message : response.msg
                         });
                     }
-                }
+                },
+                validate:false
             });
 
 
@@ -135,7 +136,7 @@
     <!--
         для формы если брать по минимуму это вот то что ниже
     -->
-    <form action="ajax.php" method="post" class="ajax" data-noreq="famil" novalidate>
+    <form action="ajax.php" method="post" id="ajax" data-noreq="famil" novalidate>
         <label>E-mail</label>
         <input type="email" name="email" placeholder="E-mail">
         <label>Imya</label>
@@ -145,22 +146,15 @@
         <input type="submit" value="отправить"/>
     </form>
 
-    <h1>Отправка по клику на ссылку</h1>
-
-    <label>E-mail</label>
-    <input type="email" name="email" id="email" title="ололо">
-    <label>Imya</label>
-    <input type="text" name="imya" id="imya" title="имя">
-    <label>Famil</label>
-    <input type="text" name="famil" id="famil" title="фамилия"><br>
-    <label>Отчество</label>
-    <div id="otchestvo" contenteditable="true" title="отчество">Игоревич</div><br>
-
-
-
-    <a href="#" data-url="ajax.php" id="link"
-       class="btn btn-success" data-callback="lol">Отправить
-    </a>
+    <form action="ajax.php" method="post" id="ajax" data-noreq="famil" novalidate>
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="E-mail">
+        <label>Imya</label>
+        <input type="text" name="imya">
+        <label>Famil</label>
+        <input type="text" name="famil"><br>
+        <input type="submit" value="отправить"/>
+    </form>
 
 
 

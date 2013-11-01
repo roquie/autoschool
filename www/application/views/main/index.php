@@ -6,9 +6,6 @@
         <div class="row">
             <div class="span7">
                 <div class="text">
-                    <!--                    <span class="phone">+7 (925) 800 10 24</span><br>
-                                        <span class="phone">+7 (499) 317 04 09</span><br>-->
-                    <!--<span class="email"><a href="mailto:auto@mpt.ru?subject=придумать тему" target="_blank">auto@mpt.ru</a></span>-->
                 </div>
                 <img src="<?=URL::site('img/main/car.jpeg')?>" alt="KIA SPECTRA"/>
                 <img src="<?=URL::site('img/main/znaki.png')?>" alt="Дорожные знаки"/>

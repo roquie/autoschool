@@ -3,6 +3,9 @@ $(function() {
 
     $(window).on('load', function() {
         first_load();
+        $('.flexslider').flexslider({
+            animation: "slide"
+        });
     });
     /**
      * Прокрутка до блока при нажатии на ссылки в Footer

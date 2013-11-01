@@ -66,6 +66,15 @@ body {
   margin-bottom: 10px;
 }
 
+i {
+  &#forgot {
+    margin-top: 5px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
 #push,
 .footer {
   height: 60px;
@@ -122,10 +131,11 @@ body {
 }
 .input-append .add-on:first-child,
 .input-prepend .btn:first-child,
-.input-append .add-on:first-child,
-.input-append .btn:first-child {.border-radius(0)}
+.input-prepend .add-on:first-child {.border-radius(0)}
+
 .input-append .add-on:last-child,
-.input-append .btn:last-child {.border-radius(0)}
+.input-prepend .btn:last-child,
+.input-prepend .add-on:last-child {.border-radius(0)}
 /*
     общие стили для элементов
 */

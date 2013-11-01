@@ -22,6 +22,10 @@ $(function() {
         width      : '200px'
     });
 
+
+
+
+
     /**
      * вход/забыли пароль
      */
@@ -38,6 +42,14 @@ $(function() {
                 title:'Ошибка',
                 message:'Идёт обработка данных...'
             });
+        },
+        defaultCallback : function(response) {
+            if (response.status == 'error' || response.status == 'success') {
+                noty({
+                    type : response.status,
+                    message : response.msg
+                });
+            }
         },
         functions : {
             sign_in : function(response) {

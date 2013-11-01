@@ -34,7 +34,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
         if ($result)
-            if ($result->password === $this->hash($this->request->post('check_password')))
+            if ($result->password === $this->hash($this->request->post('data.check_password')))
                 $this->ajax_msg('true'); // так тебе отсылать? Чтобы ты заменил одну форму на другую о_О
          else
             $this->ajax_msg('Пароль не совпадает', 'error');
@@ -46,12 +46,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_change_email()
     {
 
-        if (!Valid::email($this->request->post('new_email'), true)) {
+        if (!Valid::email($this->request->post('data.new_email'), true)) {
             $this->ajax_msg('Введите Email правильно', 'error');
             exit;
         }
         $result = Model::factory('Users')
-                       ->upd(Cookie::get('userId'), array('email' => $this->request->post('new_email')));
+                       ->upd(Cookie::get('userId'), array('email' => $this->request->post('data.new_email')));
 
         if ($result)
             $this->ajax_msg('Email изменен');
@@ -65,10 +65,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $pass_old = $this->request->post('data.password_old');
         $pass_new = $this->request->post('data.password_new');
-        if (!$pass_old || !$pass_new) {
-            $this->ajax_msg('Введите данные', 'error');
-            exit;
-        }
+
         $user = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
         if ($pass_new === $pass_old) {

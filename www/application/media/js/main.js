@@ -82,16 +82,7 @@ $(function() {
         return false;
     }).on('click', '#forgot', function(e) {
         e.preventDefault();
-        $(this).animate({opacity:0}, 'slow', function() {
-            $(this).toggleClass('hide');
-            $('#forgot_form').removeClass('hide').css({opacity:0}).animate({opacity:1}, 'slow');
-        });
-    }).on('click', '#enter', function(e) {
-        e.preventDefault();
-        $(this).animate({opacity:0}, 'slow', function() {
-            $(this).toggleClass('hide');
-            $('#login').removeClass('hide').css({opacity:0}).animate({opacity:1}, 'slow');
-        });
+        $(this).closest('#popup').find('form').toggle();
     });
 
     $("[rel='tooltip']").tooltip();

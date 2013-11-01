@@ -63,18 +63,24 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changepass()
     {
-
+        $pass_old = $this->request->post('data.password_old');
+        $pass_new = $this->request->post('data.password_new');
+        if (!$pass_old || !$pass_new) {
+            $this->ajax_msg('Введите данные', 'error');
+            exit;
+        }
         $user = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
-        $pass_old = $this->request->post('password_old');
-        $pass_new = $this->request->post('password_new');
-
-        if ($pass_new === $pass_old)
+        if ($pass_new === $pass_old) {
             $this->ajax_msg('Пароли должны быть разные', 'error');
+            exit;
+        }
 
-        if ($this->hash($pass_old) !== $user->password)
+
+        if ($this->hash($pass_old) !== $user->password) {
             $this->ajax_msg('Старый пароль не совпадает с введённым', 'error');
-
+            exit;
+        }
 
         $result = Model::factory('Users')->upd($user->id, array('password' => $this->hash($pass_new)));
 
@@ -91,8 +97,10 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $user = Model::factory('Users')->getBy('email', $this->request->post('data.email'));
 
-        if (!$user)
+        if (!$user) {
             $this->ajax_msg('Пользователь с таким email не найден', 'error');
+            exit;
+        }
 
         $newpass = Text::random();
         Model::factory('Users')->upd($user->id, array('password' => $this->hash($newpass)));
@@ -365,7 +373,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     }
 
     /**
-     * регистрация новых слушателей
+         * регистрация новых слушателей
      */
     public function action_register()
     {

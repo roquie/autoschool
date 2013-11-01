@@ -1,9 +1,33 @@
 <?=HTML::style('css/lk_sttgs.css')?>
+<script>
 
+    $(function() {
+        $('.ajax').ajaxForm({
+
+            worked : function() {
+                noty({
+                    type:'error',
+                    title:'Ошибка',
+                    message:'Идёт обработка данных...'
+                });
+            },
+            defaultCallback : function(response) { // дефолтный колбэк тупо при любом действии, хоть форма хоть ссылка, хочешь создать свою функцию, делается так.
+                if (response.status == 'error' || response.status == 'success') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+            },
+            validate:false
+        });
+    });
+
+</script>
 <div class="row settingsContent">
     <div class="span4">
         <h2>Изменить пароль</h2>
-        <form action="<?=URL::site('lk/ajax/changepass')?>" method="POST">
+        <form action="<?=URL::site('lk/ajax/changepass')?>" class="ajax" method="POST">
             <div class="input-prepend">
                 <span class="add-on"><i class="icon-key"></i></span>
                 <input id="password_old" name="password_old" placeholder="старый пароль" type="password">

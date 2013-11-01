@@ -6,10 +6,3 @@
         ->defaults(array(
             'controller' => 'twitter',
         ));
-
-    Route::set('media_twitter', 'media-twitter(/<file>)', array('file' => '.+'))
-        ->defaults(array(
-            'controller' => 'twitter',
-            'action'     => 'media',
-            'file'       => NULL,
-        ));

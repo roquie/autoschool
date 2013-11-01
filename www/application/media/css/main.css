@@ -15,7 +15,17 @@ body {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -60px;
+  margin: 65px auto -60px !important;
+}
+#notification {
+  display: block;
+  position: fixed;
+  top: 70px;
+  right: 10px;
+  z-index: 9999;
+}
+.alert {
+  margin-bottom: 10px;
 }
 #push,
 .footer {

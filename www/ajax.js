@@ -9,8 +9,8 @@
 
     var pluginName = 'ajaxForm';
 
-    function Plugin(element, options) {
-        this.init(element, options);
+    function Plugin(element, options, method) {
+        this.init(element, options, method);
     }
 
     Plugin.prototype = {
@@ -21,7 +21,7 @@
          * @param element
          * @param options
          */
-        init : function(element, options) {
+        init : function(element, options, method) {
             this.$element = $(element);
             this.metadata = this.$element.data(); // data массив элемента
             this.options = $.extend( {}, $.fn[pluginName].defaults, options, this.metadata);
@@ -29,10 +29,12 @@
             this.work = false; // защита от повторного нажатия во время обработки запроса
             this.options.noreq = this.options.noreq.split(this.options.separator);
             this.options.params = this.options.params.split(this.options.separator);
-            if (this.isForm) {
-                this.$element.on('submit', $.proxy(this.process, this));
-            } else {
-                this.$element.on('click', $.proxy(this.process, this));
+            if (this.options.trigger) {
+                if (this.isForm) {
+                    this.$element.on('submit', $.proxy(this.process, this));
+                } else {
+                    this.$element.on('click', $.proxy(this.process, this));
+                }
             }
         },
         /**
@@ -138,9 +140,11 @@
          * Ajax-отправка данных формы методом POST
          * @returns {boolean}
          */
-        ajax : function() {
+        ajax : function(options) {
             var that = this;
-
+            if (typeof options == 'object' && options) {
+                this.options = $.extend( {}, this.options, options);
+            }
             if (this.work) {
                 this.options.worked();
                 return false;
@@ -156,15 +160,15 @@
                 },
                 dataType : this.options.type,
                 beforeSend : function() {
-                    that.options.beforeSend();
+                    that.options.beforeSend(that);
                 },
                 success : function(response, textStatus, jqXHR){
                     // если callback не передан, то будет использован callback по-умолчанию
                     if (!that.options.functions[that.options.callback] && typeof that.options.functions[that.options.callback] != "function") {
-                        that.options.defaultCallback(response);
+                        that.options.defaultCallback(response, that);
                     }
                     else
-                        that.options.functions[that.options.callback](response);
+                        that.options.functions[that.options.callback](response, that);
                     that.work = false;
                 },
                 statusCode: {
@@ -189,9 +193,7 @@
                 $.each(this.$element.serializeArray(), function(k, v) {
                     data[v.name] = v.value;
                 });
-                this.action = this.$element.attr('action');
             } else {
-                this.action = this.options.url;
                 $.each(this.options.params, function(k, v) {
                     if ($('#'+v).attr('name')) {
                         field = $('#'+v).val();
@@ -199,6 +201,11 @@
                         field = $('#'+v).text();
                     }
                     data[v] = field;
+                });
+            }
+            if ( typeof this.options.addFields === 'object') {
+                $.each(this.options.addFields, function(k, v) {
+                    data[k] = v;
                 });
             }
             return data;
@@ -236,13 +243,13 @@
 
     };
 
-    $.fn[pluginName] = function(option) {
+    $.fn[pluginName] = function(method, option) {
         return this.each(function() {
             var $this = $(this),
                 data = $this.data('plugin_' + pluginName),
-                options = typeof option == 'object' && option;
-            if (!data) $this.data('plugin_' + pluginName, (data = new Plugin(this, options)));
-            if (typeof option == 'string') data[option]();
+                options = (typeof method == 'object' && method) || (typeof option == 'object' && option);
+            if (!data) $this.data('plugin_' + pluginName, (data = new Plugin(this, options, method)));
+            if (typeof method == 'string') data[method](option);
 
         });
     };
@@ -265,7 +272,8 @@
         noreq : '', // необязательные поля
         params : '', // данные для отправки при нажатии на ссылку
         validate : true, // нужно делать валидацию формы или нет
-        trigger : true
+        trigger : true,
+        addFields : []
     };
 
 })( jQuery, window, document );

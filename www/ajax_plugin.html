@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="http://autoschool.ru/css/bstrap.html5b.fawesome.min.css" rel="stylesheet" />
+    <script src="http://yandex.st/jquery/1.10.2/jquery.min.js"></script>
+    <script src="ajax.js"></script>
+    <script src="http://autoschool.ru/js/notification.js"></script>
+    <style>
+        #notification {
+            display: block;
+            position: fixed;
+            top: 70px;
+            right: 10px;
+            z-index: 9999;
+        }
+        .alert {
+            margin-bottom: 10px;
+        }
+        .error {
+            border-color: #bd4247 !important;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+        .error:focus {
+            border-color: #983538 !important;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        #otchestvo {
+            border: 2px solid #CCCCCC;
+            width: 215px;
+            padding: 3px;
+        }
+    </style>
+    <script>
+/*
+        // jQuery.placeholder support
+        // if (!$.support.placeholder)
+        jQuery.support.placeholder = (function(){
+            var i = document.createElement('input');
+            return 'placeholder' in i;
+        })();
+
+        if ($.support.placeholder) {
+            alert('Placeholder поддерживается');
+        } else {
+            alert('Placeholder не поддерживается');
+        }
+*/
+        $(function() {
+
+            var cnt = 0;
+
+            $('.ajax').ajaxForm({
+                errorValidate : function(message) { // это юзается токо при клике на ссылку то сообщение
+                    var msg = 'Заполните поля: <br>';
+                    $.each(message, function(k, v) {
+                        msg = msg + '- ' + v + ';<br>';
+                    });
+                    noty({
+                        type:'error',
+                        title:'Ошибка',
+                        message:msg
+                    });
+                },
+                statusCode : { // Это не обязательно, просто так по сути))
+                    404 : function() {
+                        alert( "Скрипт не найден" );
+                    },
+                    505 : function() {
+                        alert( "Ошибка в скрипте" );
+                    }
+                },
+                worked : function() {
+                    noty({
+                        type:'error',
+                        title:'Ошибка',
+                        message:'Идёт обработка данных...'
+                    });
+                },
+                defaultCallback : function(response) { // дефолтный колбэк тупо при любом действии, хоть форма хоть ссылка, хочешь создать свою функцию, делается так.
+                    if (response.status == 'error' || response.status == 'success') {
+                        noty({
+                            type : response.status,
+                            message : response.msg
+                        });
+                    }
+                }
+            });
+
+
+            $('#link').on('click', function(e) {
+                e.preventDefault();
+                $('#link').ajaxForm('ajax', {
+                    beforeSend : function(that) {
+                        var text = that.$element.html();
+                        that.$element.html('<i class="icon-refresh icon-spin"></i> ' + text);
+                    },
+                    defaultCallback : function(response, that) { // дефолтный колбэк тупо при любом действии, хоть форма хоть ссылка, хочешь создать свою функцию, делается так.
+                        if (response.status == 'error' || response.status == 'success') {
+                            that.$element.find('i').remove();
+                            noty({
+                                type : response.status,
+                                message : response.msg
+                            });
+                        }
+                    },
+                    addFields : {
+                        'count' : cnt
+                    },
+                    validate : false,
+                    trigger : false
+                });
+            });
+
+
+
+            $('#plus').on('click', function(e) {
+                e.preventDefault();
+                alert(cnt);
+                cnt++;
+            });
+        });
+    </script>
+</head>
+<body>
+    <!--
+        Отправка формы Ajax
+    -->
+    <h1>Отправка формы Ajax</h1>
+    <!--
+        для формы если брать по минимуму это вот то что ниже
+    -->
+    <form action="ajax.php" method="post" class="ajax" data-noreq="famil" novalidate>
+        <label>E-mail</label>
+        <input type="email" name="email" placeholder="E-mail">
+        <label>Imya</label>
+        <input type="text" name="imya">
+        <label>Famil</label>
+        <input type="text" name="famil"><br>
+        <input type="submit" value="отправить"/>
+    </form>
+
+    <h1>Отправка по клику на ссылку</h1>
+
+    <label>E-mail</label>
+    <input type="email" name="email" id="email" title="ололо">
+    <label>Imya</label>
+    <input type="text" name="imya" id="imya" title="имя">
+    <label>Famil</label>
+    <input type="text" name="famil" id="famil" title="фамилия"><br>
+    <label>Отчество</label>
+    <div id="otchestvo" contenteditable="true" title="отчество">Игоревич</div><br>
+
+
+
+    <a href="#" data-url="ajax.php" id="link"
+       class="btn btn-success" data-callback="lol">Отправить
+    </a>
+
+
+
+
+    <a href="#" id="plus">qwe</a>
+
+</body>
+</html>

@@ -170,3 +170,18 @@ function isValidateEmail(email)
     var pattern = /^([\w\d\._-]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return pattern.test(email);
 }
+/**
+ * Делает два блока одинаковой высоты
+ *
+ * @param div1 первый блок
+ * @param div2 второй блок
+ */
+function equalHeight (div1, div2) {
+    var tallest = div1.height();
+    if ( tallest < div2.height() )
+    {
+        tallest = div2.height();
+    }
+    div1.css({minHeight:tallest});
+    div2.css({minHeight:tallest});
+}

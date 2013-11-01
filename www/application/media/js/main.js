@@ -25,7 +25,7 @@ $(function() {
     /**
      * вход/забыли пароль
      */
-    $('.sign').ajaxForm({
+    $('.ajax').ajaxForm({
         errorValidate : function() {
             noty({
                 type : 'error',
@@ -59,7 +59,7 @@ $(function() {
                     });
                 }
                 if (response.status == 'success') {
-                    $('#popup').find('form').toggle();
+                    $('#popup').find('form').toggle('slow');
                 }
             }
         }
@@ -80,9 +80,18 @@ $(function() {
     }).on('click', '#close-slide', function(e) { // Кнопка закрыть боковую панель новостей
         $("#slide-left").pageSlide('close');
         return false;
-    }).on('click', '#forgot', function(e) {
+    }).on('click', '#login', function(e) {
         e.preventDefault();
-        $(this).closest('#popup').find('form').toggle();
+        $(this).animate({opacity:0}, 'slow', function() {
+            $(this).toggleClass('hide');
+            $('#forgot_form').removeClass('hide').css({opacity:0}).animate({opacity:1}, 'slow');
+        });
+    }).on('click', '#forgot_form', function(e) {
+        e.preventDefault();
+        $(this).animate({opacity:0}, 'slow', function() {
+            $(this).toggleClass('hide');
+            $('#login').removeClass('hide').css({opacity:0}).animate({opacity:1}, 'slow');
+        });
     });
 
     $("[rel='tooltip']").tooltip();

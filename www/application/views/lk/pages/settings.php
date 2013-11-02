@@ -2,6 +2,7 @@
 <script>
 
     $(function() {
+        // лалалала бла бла
         $('._settings').ajaxForm({
 
             defaultCallback : function(response) {

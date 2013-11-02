@@ -12,10 +12,9 @@
     <?=HTML::style('css/bstrap.html5b.fawesome.min.css')?>
     <?=HTML::style('css/vendor/jquery.noty.css')?>
     <?=HTML::style('css/vendor/stylizationForm.css')?>
-    <?=HTML::style('css/style.css')?>
+    <?=HTML::style('css/admin/admin.css')?>
     <?=HTML::style('css/popup.css')?>
     <?=HTML::style('css/validation.css')?>
-
     <?=HTML::script('http://yandex.st/jquery/1.10.2/jquery.min.js')?>
     <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap.min.js')?>

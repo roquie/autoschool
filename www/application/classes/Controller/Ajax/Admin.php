@@ -67,23 +67,27 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
     public function action_create()
     {
         $params = $this->request->param('params');
+        $return_add_data = $this->request->query('return');
         if (!empty($params)) {
             $params = explode('-', $params);
             if ($params[0] === 'check' && !empty($params[1])) {
                 $columns = Database::instance()->list_columns($this->_table_name);
                 if (!in_array($params[1], array_keys($columns), true)) {
-                    $this->ajax_msg('Такого поля не существует', 'error');
+                    $this->ajax_msg($params[1].'Такого поля не существует', 'error');
                     exit;
                 }
-                if (!empty($this->request->post()[$params[1]])) {
+                if (!empty($this->request->post('data')[$params[1]])) {
                     $result = Model::factory($this->_table_name)
-                                ->getBy($params[1], $this->request->post()[$params[1]]);
+                                ->getBy($params[1], $this->request->post('data')[$params[1]]);
                     if (!$result) {
                         $resultAdd = Model::factory($this->_table_name)
-                                           ->addRec($this->request->post());
+                                           ->addRec($this->request->post('data'));
 
-                        if ($resultAdd) {
+                        if ($resultAdd && empty($return_add_data)) {
                             $this->ajax_msg('Добавлено');
+                            exit;
+                        } elseif ($return_add_data === 'true') {
+                            $this->ajax_data($this->request->post('data'), 'Добавлено');
                             exit;
                         } else {
                             $this->ajax_msg('Ошибка добавления', 'error');
@@ -98,7 +102,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
             }
         } else {
             $result = Model::factory($this->_table_name)
-                ->addRec($this->request->post());
+                ->addRec($this->request->post('data'));
 
             if ($result) {
                 $this->ajax_msg('Добавлено');
@@ -171,13 +175,13 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         } elseif (!empty($params)) {
 
             $arr = explode('-', $params);
-            if (count($arr) !== 2 ) { //|| count($this->request->post()) !== 2
+            if (count($arr) !== 2 ) { //|| count($this->request->post('data')) !== 2
                 $this->ajax_msg('Ошибка обновления записей', 'error');
                 exit;
             }
 
             $result = Model::factory($this->_table_name)
-                           ->upd($arr, $this->request->post());
+                           ->upd($arr, $this->request->post('data'));
 
             if ($result) {
                 $this->ajax_msg('Данные обновлены');
@@ -189,7 +193,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         } else {
 
             $result = Model::factory($this->_table_name)
-                           ->upd($id, $this->request->post());
+                           ->upd($id, $this->request->post('data'));
 
             if ($result) {
                 $this->ajax_msg('Данные обновлены');

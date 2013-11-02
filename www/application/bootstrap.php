@@ -205,12 +205,13 @@ Route::set('main', '(<action>(/<id>))')
         'action' => 'index'
     ));
 
-Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)(|<params>)',
+Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)(|<params>)(&<return_add_data>)',
     array(
          'table_name' => '[a-zA-Z]+',
          'action' => '(create|read|update|delete)',
          'id' => '[0-9]+',
-         'params' => '.+'
+         'params' => '.+',
+         'return_add_data' => '.+'
     ))
     ->defaults(array(
                     'controller' => 'Admin',

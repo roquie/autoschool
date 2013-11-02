@@ -19,3 +19,117 @@
 #6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
 #7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
 #8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\vendor\codeplex\phpexcel\PHPExcel.php:227
+2013-11-02 20:31:27 --- CRITICAL: Kohana_Exception [ 0 ]: Attempted to load an invalid or missing module 'htmlpurifier' at 'MODPATH\htmlpurifier' ~ SYSPATH\classes\Kohana\Core.php [ 579 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\bootstrap.php:142
+2013-11-02 20:31:27 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\bootstrap.php(142): Kohana_Core::modules(Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(102): require('D:\OPENSERVER2\...')
+#2 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\bootstrap.php:142
+2013-11-02 21:58:50 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 21:58:50 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 21:59:41 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 21:59:41 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 21:59:53 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 21:59:53 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:31 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:31 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:33 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:33 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:38 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:38 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:43 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:43 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:58 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:00:58 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:01:03 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:01:03 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:01:20 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:01:20 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:04:34 --- CRITICAL: ErrorException [ 4096 ]: Argument 1 passed to Model::addRec() must be of the type array, null given, called in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php on line 106 and defined ~ APPPATH\classes\Model.php [ 67 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:04:34 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php(67): Kohana_Core::error_handler(4096, 'Argument 1 pass...', 'D:\OPENSERVER2\...', 67, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(106): Model->addRec(NULL)
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#3 [internal function]: Kohana_Controller->execute()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67

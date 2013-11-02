@@ -1,8 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-// composer
-$path = DOCROOT.'vendor/composer/autoload_real.php';
-is_readable($path) ?: require_once $path;
 
 // -- Environment setup --------------------------------------------------------
 

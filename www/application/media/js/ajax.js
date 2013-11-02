@@ -95,8 +95,6 @@
                             element.removeClass('error');
                     }
                 }
-                if (!is_success)
-                    this.options.errorValidate();
             } else {
                 for (i = 0; i < this.options.params.length; i++) {
                     element = $('#'+ this.options.params[i]);

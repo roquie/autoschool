@@ -15,7 +15,6 @@ class Controller_Main extends Controller_Template
         $this->template->content = '';
         $this->template->footer = View::factory('main/footer');
 
-        //echo 'Ебаный бред';
     }
 
     public function action_index()

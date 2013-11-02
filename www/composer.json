@@ -1,8 +1,21 @@
 {
-	"type": "kohana-module",
-    "require": {
-        
+    "minimum-stability": "dev",
+    "type" : "kohana-module",
+    "config": {
 
+        "preferred-install": "source"
+    },
+    "provide": {
+        "ext-curl": "*"
+    },
+
+    "require": {
+        "codeplex/phpexcel": "1.7.8",
+        "phpword/phpword": "dev-master",
+        "mekras/botobor": "0.4.0",
+        "modulargaming/purifier": "dev-3.3/master",
+        "modulargaming/email": "dev-3.3/master"
     }
-	
+
+
 }

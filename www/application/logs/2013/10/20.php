@@ -1303,3 +1303,163 @@
 2013-10-20 21:35:32 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected 'foreach' (T_FOREACH) ~ APPPATH\views\lk\pages\messages.php [ 1 ] in file:line
 2013-10-20 21:35:32 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
 #1 {main} in file:line
+2013-10-20 23:02:51 --- CRITICAL: ErrorException [ 1 ]: Class 'Model_Lk_Nationality' not found ~ APPPATH\classes\Model.php [ 20 ] in file:line
+2013-10-20 23:02:51 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:03:20 --- CRITICAL: ErrorException [ 1 ]: Class 'Model_Education' not found ~ APPPATH\classes\Model.php [ 20 ] in file:line
+2013-10-20 23:03:20 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:05:24 --- CRITICAL: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH\classes\Controller\Lk\Ajax.php [ 394 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:05:24 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(394): Kohana_Core::error_handler(8, 'Trying to get p...', 'L:\domains\auto...', 394, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_register()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:05:28 --- CRITICAL: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH\classes\Controller\Lk\Ajax.php [ 394 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:05:28 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(394): Kohana_Core::error_handler(8, 'Trying to get p...', 'L:\domains\auto...', 394, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_register()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:06:15 --- CRITICAL: ErrorException [ 8 ]: Undefined index: email ~ APPPATH\classes\Controller\Lk\Ajax.php [ 392 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:392
+2013-10-20 23:06:15 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(392): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 392, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_register()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:392
+2013-10-20 23:07:42 --- CRITICAL: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH\classes\Controller\Lk\Ajax.php [ 394 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:07:42 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(394): Kohana_Core::error_handler(8, 'Trying to get p...', 'L:\domains\auto...', 394, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_register()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:08:17 --- CRITICAL: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH\classes\Controller\Lk\Ajax.php [ 394 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:08:17 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(394): Kohana_Core::error_handler(8, 'Trying to get p...', 'L:\domains\auto...', 394, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_register()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:08:35 --- CRITICAL: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH\classes\Controller\Lk\Ajax.php [ 394 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:08:35 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(394): Kohana_Core::error_handler(8, 'Trying to get p...', 'L:\domains\auto...', 394, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_register()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:394
+2013-10-20 23:09:23 --- CRITICAL: ErrorException [ 8 ]: Undefined index: email ~ APPPATH\classes\Controller\Lk\Ajax.php [ 392 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:392
+2013-10-20 23:09:23 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(392): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 392, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_register()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:392
+2013-10-20 23:09:35 --- CRITICAL: ErrorException [ 8 ]: unserialize(): Error at offset 0 of 1 bytes ~ APPPATH\config\email.php [ 10 ] in file:line
+2013-10-20 23:09:35 --- DEBUG: #0 [internal function]: Kohana_Core::error_handler(8, 'unserialize(): ...', 'L:\domains\auto...', 10, Array)
+#1 L:\domains\autoschool.ru\www\application\config\email.php(10): unserialize('0')
+#2 L:\domains\autoschool.ru\www\system\classes\Kohana\Core.php(829): include('L:\domains\auto...')
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Config\File\Reader.php(49): Kohana_Core::load('L:\domains\auto...')
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Config.php(130): Kohana_Config_File_Reader->load('email')
+#5 L:\domains\autoschool.ru\www\modules\email\classes\Kohana\Email.php(31): Kohana_Config->load('email')
+#6 L:\domains\autoschool.ru\www\modules\email\classes\Kohana\Email.php(408): Kohana_Email::mailer()
+#7 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(429): Kohana_Email->send()
+#8 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_register()
+#9 [internal function]: Kohana_Controller->execute()
+#10 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#11 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#13 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#14 {main} in file:line
+2013-10-20 23:23:16 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:23:16 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:23:27 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:23:27 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:23:43 --- CRITICAL: ErrorException [ 8 ]: Undefined index: statement ~ APPPATH\classes\Controller\Lk\Ajax.php [ 183 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:183
+2013-10-20 23:23:43 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(183): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 183, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_addPapers()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:183
+2013-10-20 23:28:28 --- CRITICAL: ErrorException [ 8 ]: Undefined index: statement ~ APPPATH\classes\Controller\Lk\Ajax.php [ 185 ] in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:185
+2013-10-20 23:28:28 --- DEBUG: #0 L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php(185): Kohana_Core::error_handler(8, 'Undefined index...', 'L:\domains\auto...', 185, Array)
+#1 L:\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(84): Controller_Lk_Ajax->action_addPapers()
+#2 [internal function]: Kohana_Controller->execute()
+#3 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Lk_Ajax))
+#4 L:\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 L:\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 L:\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in L:\domains\autoschool.ru\www\application\classes\Controller\Lk\Ajax.php:185
+2013-10-20 23:28:45 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:45 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:46 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:46 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:46 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:46 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:46 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:46 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:46 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:46 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:46 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:46 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:47 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:47 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:47 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:47 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:47 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:47 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:47 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:47 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:48 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:48 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:48 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:48 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:48 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:48 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-10-20 23:28:48 --- CRITICAL: ErrorException [ 1 ]: Call to a member function loaded() on a non-object ~ APPPATH\classes\Model.php [ 67 ] in file:line
+2013-10-20 23:28:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line

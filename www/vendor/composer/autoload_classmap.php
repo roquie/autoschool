@@ -6,4 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Botobor' => $vendorDir . '/mekras/botobor/src/botobor.php',
+    'Botobor_Form' => $vendorDir . '/mekras/botobor/src/botobor.php',
+    'Botobor_Keeper' => $vendorDir . '/mekras/botobor/src/botobor.php',
+    'Botobor_MetaData' => $vendorDir . '/mekras/botobor/src/botobor.php',
 );

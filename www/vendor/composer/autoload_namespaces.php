@@ -6,5 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'PHPWord' => array($vendorDir . '/phpword/phpword/Library'),
+    'PHPExcel' => array($vendorDir . '/codeplex/phpexcel'),
+    'HTMLPurifier' => array($vendorDir . '/ezyang/htmlpurifier/library'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src'),
 );

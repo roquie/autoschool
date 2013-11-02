@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 // composer
-$path = DOCROOT.'vendor/composer/autoload_real.php';
-is_readable($path) ?: require_once $path;
+$path = DOCROOT.'vendor/autoload.php';
+!is_readable($path) ?: require_once $path;
 
 // -- Environment setup --------------------------------------------------------
 
@@ -130,13 +130,11 @@ Kohana::modules(array(
        'uploader' => MODPATH.'uploader',
        'goauth' => MODPATH.'goauth',
        'email' => MODPATH.'email',
-       'htmlpurifier' => MODPATH.'htmlpurifier',
-       'phpword' => MODPATH.'phpword',
+       'purifier' => MODPATH.'purifier',
        'docxtemplate' => MODPATH.'docxtemplate',
        'twitterapi' => MODPATH.'twitterapi',
-       'botobor' => MODPATH.'botobor',
        'chat' => MODPATH.'chat',
-      //  '' => MODPATH.'',
+
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',

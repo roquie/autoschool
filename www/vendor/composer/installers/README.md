@@ -27,7 +27,7 @@ is not needed to install packages with these frameworks:
 **Current Supported Package Types**:
 
 > Stable types are marked as **bold**, this means that installation paths
-> for those type will not be change. Any adjustment for those types would
+> for those type will not be changed. Any adjustment for those types would
 > require creation of brand new type that will cover required changes.
 
 | Framework    | Types
@@ -36,6 +36,7 @@ is not needed to install packages with these frameworks:
 | AnnotateCms  | `annotatecms-module`<br>`annotatecms-component`<br>`annotatecms-service`
 | CakePHP 2+   | **`cakephp-plugin`**
 | CodeIgniter  | `codeigniter-library`<br>`codeigniter-third-party`<br>`codeigniter-module`
+| concrete5    | `concrete5-block`<br>`concrete5-package`<br>`concrete5-theme`
 | Croogo       | `croogo-plugin`<br>`croogo-theme`
 | Drupal       | <b>`drupal-module`<br>`drupal-theme`</b><br>`drupal-profile`<br>`drupal-drush`
 | FuelPHP v1.x | `fuel-module`<br>`fuel-package`
@@ -55,7 +56,7 @@ is not needed to install packages with these frameworks:
 | TYPO3 Flow   | `typo3-flow-package`<br>`typo3-flow-framework`<br>`typo3-flow-plugin`<br>`typo3-flow-site`<br>`typo3-flow-boilerplate`<br>`typo3-flow-build`
 | TYPO3 CMS    | `typo3-cms-extension`
 | WordPress    | <b>`wordpress-plugin`<br>`wordpress-theme`</b><br>`wordpress-muplugin`
-| Zend         | `zend-library`<br>`zend-extra`
+| Zend         | `zend-library`<br>`zend-extra`<br>`zend-module`
 
 ## Example `composer.json` File
 

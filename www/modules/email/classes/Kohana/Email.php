@@ -119,17 +119,14 @@ class Kohana_Email {
 	 */
 	protected $_message;
 
-    /**
-     * Initialize a new Swift_Message, set the subject and body.
-     *
-     * @param null $subject
-     * @param null $message
-     * @param null $type
-     * @internal param \message $string subject
-     * @internal param \message $string body
-     * @internal param \body $string mime type
-     * @return \Kohana_Email
-     */
+	/**
+	 * Initialize a new Swift_Message, set the subject and body.
+	 *
+	 * @param   string  message subject
+	 * @param   string  message body
+	 * @param   string  body mime type
+	 * @return  void
+	 */
 	public function __construct($subject = NULL, $message = NULL, $type = NULL)
 	{
 		// Create a new message, match internal character set
@@ -448,4 +445,9 @@ class Kohana_Email {
 
 } // End email
 
+function swiftmailer_configurator() {
+	// Set the default character set for everything
+	Swift_Preferences::getInstance()->setCharset(Kohana::$charset);
+}
 
+Swift::init('swiftmailer_configurator');

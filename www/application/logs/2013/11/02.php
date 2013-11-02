@@ -133,3 +133,56 @@
 #6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
 #7 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
 #8 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Model.php:67
+2013-11-02 22:39:46 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected 'array' (T_ARRAY) ~ APPPATH\classes\Controller\Ajax\Admin.php [ 90 ] in file:line
+2013-11-02 22:39:46 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-11-02 22:39:48 --- CRITICAL: ErrorException [ 4 ]: syntax error, unexpected 'array' (T_ARRAY) ~ APPPATH\classes\Controller\Ajax\Admin.php [ 90 ] in file:line
+2013-11-02 22:39:48 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-11-02 22:40:37 --- CRITICAL: ErrorException [ 2048 ]: Only variables should be assigned by reference ~ APPPATH\classes\Controller\Ajax\Admin.php [ 90 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php:90
+2013-11-02 22:40:37 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php(90): Kohana_Core::error_handler(2048, 'Only variables ...', 'D:\OPENSERVER2\...', 90, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(85): Controller_Ajax_Admin->action_create()
+#2 [internal function]: Kohana_Controller->execute()
+#3 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Ajax_Admin))
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#7 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\classes\Controller\Ajax\Admin.php:90
+2013-11-02 23:46:20 --- CRITICAL: ErrorException [ 2 ]: Invalid argument supplied for foreach() ~ APPPATH\views\admin\settings\administrators.php [ 125 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\settings\administrators.php:125
+2013-11-02 23:46:20 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\settings\administrators.php(125): Kohana_Core::error_handler(2, 'Invalid argumen...', 'D:\OPENSERVER2\...', 125, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(61): include('D:\OPENSERVER2\...')
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(348): Kohana_View::capture('D:\OPENSERVER2\...', Array)
+#3 D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\settings\index.php(19): Kohana_View->render()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(61): include('D:\OPENSERVER2\...')
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(348): Kohana_View::capture('D:\OPENSERVER2\...', Array)
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(228): Kohana_View->render()
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\layout.php(80): Kohana_View->__toString()
+#8 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(61): include('D:\OPENSERVER2\...')
+#9 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(348): Kohana_View::capture('D:\OPENSERVER2\...', Array)
+#10 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#11 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(88): Kohana_Controller_Template->after()
+#12 [internal function]: Kohana_Controller->execute()
+#13 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Admin))
+#14 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#15 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#16 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#17 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\settings\administrators.php:125
+2013-11-02 23:48:52 --- CRITICAL: ErrorException [ 2 ]: Invalid argument supplied for foreach() ~ APPPATH\views\admin\settings\administrators.php [ 125 ] in D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\settings\administrators.php:125
+2013-11-02 23:48:52 --- DEBUG: #0 D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\settings\administrators.php(125): Kohana_Core::error_handler(2, 'Invalid argumen...', 'D:\OPENSERVER2\...', 125, Array)
+#1 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(61): include('D:\OPENSERVER2\...')
+#2 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(348): Kohana_View::capture('D:\OPENSERVER2\...', Array)
+#3 D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\settings\index.php(19): Kohana_View->render()
+#4 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(61): include('D:\OPENSERVER2\...')
+#5 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(348): Kohana_View::capture('D:\OPENSERVER2\...', Array)
+#6 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(228): Kohana_View->render()
+#7 D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\layout.php(80): Kohana_View->__toString()
+#8 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(61): include('D:\OPENSERVER2\...')
+#9 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\View.php(348): Kohana_View::capture('D:\OPENSERVER2\...', Array)
+#10 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller\Template.php(44): Kohana_View->render()
+#11 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Controller.php(88): Kohana_Controller_Template->after()
+#12 [internal function]: Kohana_Controller->execute()
+#13 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client\Internal.php(97): ReflectionMethod->invoke(Object(Controller_Admin))
+#14 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request\Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#15 D:\OPENSERVER2\domains\autoschool.ru\www\system\classes\Kohana\Request.php(986): Kohana_Request_Client->execute(Object(Request))
+#16 D:\OPENSERVER2\domains\autoschool.ru\www\index.php(118): Kohana_Request->execute()
+#17 {main} in D:\OPENSERVER2\domains\autoschool.ru\www\application\views\admin\settings\administrators.php:125

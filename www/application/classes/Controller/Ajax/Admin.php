@@ -87,7 +87,12 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
                             $this->ajax_msg('Добавлено');
                             exit;
                         } elseif ($return_add_data === 'true') {
-                            $this->ajax_data($this->request->post('data'), 'Добавлено');
+                            $data = array(
+                                'id' => $resultAdd,
+                                'email' => $this->request->post('data.email')
+                            );
+
+                            $this->ajax_data($data, 'Добавлено');
                             exit;
                         } else {
                             $this->ajax_msg('Ошибка добавления', 'error');
@@ -213,6 +218,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
     public function action_delete()
     {
         $id = $this->request->param('id');
+        $return_add_data = $this->request->query('return');
         if (null === $id) {
             $this->ajax_msg('Ошибка удаления записи', 'error');
             exit;
@@ -220,9 +226,16 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
             $result = Model::factory($this->_table_name)
                 ->del($id);
 
-            if ($result) {
+            if ($result && empty($return_add_data)) {
                 $this->ajax_msg('Удалено');
                 exit;
+            } elseif ($return_add_data === 'true') {
+                $data = array(
+                    'id' => $id,
+                );
+                $this->ajax_data($data, 'Удалено');
+                exit;
+
             } else {
                 $this->ajax_msg('Ошибка удаления', 'error');
                 exit;

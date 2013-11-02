@@ -31,9 +31,9 @@
             this.options.params = this.options.params.split(this.options.separator);
             if (this.options.trigger) {
                 if (this.isForm) {
-                    this.$element.on('submit', $.proxy(this.process, this));
+                    $('body').on('submit', this.$element, $.proxy(this.process, this));
                 } else {
-                    this.$element.on('click', $.proxy(this.process, this));
+                    $('body').on('click', this.$element, $.proxy(this.process, this));
                 }
             }
         },
@@ -70,68 +70,72 @@
 
             if (this.isForm) {
                 data = this.$element.serializeArray();
-                for (i = 0; i < data.length; i++) {
-                    element = $this.$element.find('[name="'+ data[i].name+'"]');
-                    if (!$this.array_value_exists(data[i].name, no_required)) {
-                        switch ( element.attr('type') ) {
-                            case 'email' :
-                                if (!$this.isEmail(data[i].value) || $this.delSpace(data[i].value) == '')
-                                    empty = true;
-                                break;
-                            case 'text' :
-                                if ($this.delSpace(data[i].value) == '')
-                                    empty = true;
-                                break;
-                            case 'password' :
-                                if ($this.delSpace(data[i].value) == '')
-                                    empty = true;
-                                break;
+                if (data.length > 0) {
+                    for (i = 0; i < data.length; i++) {
+                        element = $this.$element.find('[name="'+ data[i].name+'"]');
+                        if (!$this.array_value_exists(data[i].name, no_required)) {
+                            switch ( element.attr('type') ) {
+                                case 'email' :
+                                    if (!$this.isEmail(data[i].value) || $this.delSpace(data[i].value) == '')
+                                        empty = true;
+                                    break;
+                                case 'text' :
+                                    if ($this.delSpace(data[i].value) == '')
+                                        empty = true;
+                                    break;
+                                case 'password' :
+                                    if ($this.delSpace(data[i].value) == '')
+                                        empty = true;
+                                    break;
+                            }
+                            if (empty) {
+                                element.addClass('error');
+                                is_success = false;
+                                empty = false;
+                            } else
+                                element.removeClass('error');
                         }
-                        if (empty) {
-                            element.addClass('error');
-                            is_success = false;
-                            empty = false;
-                        } else
-                            element.removeClass('error');
                     }
                 }
             } else {
-                for (i = 0; i < this.options.params.length; i++) {
-                    element = $('#'+ this.options.params[i]);
-                    if (!$this.array_value_exists(this.options.params[i], no_required)) {
+                if (this.options.params.length > 0) {
+                    for (i = 0; i < this.options.params.length; i++) {
+                        element = $('#'+ this.options.params[i]);
+                        if (!$this.array_value_exists(this.options.params[i], no_required)) {
 
-                        var value = '';
+                            var value = '';
 
-                        if (element.attr('name')) {
-                            value = element.val();
-                        } else {
-                            value = element.text();
+                            if (element.attr('name')) {
+                                value = element.val();
+                            } else {
+                                value = element.text();
+                            }
+
+                            switch ( element.attr('type') ) {
+                                case 'email' :
+                                    if (!$this.isEmail(value) || $this.delSpace(value) == '')
+                                        empty = true;
+                                    break;
+                                case 'text' :
+                                    if ($this.delSpace(value) == '')
+                                        empty = true;
+                                    break;
+                                case 'password' :
+                                    if ($this.delSpace(value) == '')
+                                        empty = true;
+                                    break;
+                            }
+                            if (empty) {
+                                error.push(element.attr('title'));
+                                is_success = false;
+                                empty = false;
+                            } else
+                                error.splice(error.indexOf(element.attr('title')), 1);
                         }
-
-                        switch ( element.attr('type') ) {
-                            case 'email' :
-                                if (!$this.isEmail(value) || $this.delSpace(value) == '')
-                                    empty = true;
-                                break;
-                            case 'text' :
-                                if ($this.delSpace(value) == '')
-                                    empty = true;
-                                break;
-                            case 'password' :
-                                if ($this.delSpace(value) == '')
-                                    empty = true;
-                                break;
-                        }
-                        if (empty) {
-                            error.push(element.attr('title'));
-                            is_success = false;
-                            empty = false;
-                        } else
-                            error.splice(error.indexOf(element.attr('title')), 1);
                     }
-                }
-                if (error.length != 0) {
-                    this.options.errorValidate(error);
+                    if (error.length != 0) {
+                        this.options.errorValidate(error);
+                    }
                 }
             }
             return is_success;

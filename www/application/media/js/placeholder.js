@@ -1,147 +1,130 @@
-﻿/**
- * placeholder Plugin
- * Copyright 2013 Viktor Melnikov
- * Version 2.0 - Updated: August, 8, 2013
+/**
+ * jQuery plugin placeholder
+ *
+ * @author Viktor Melnikov
+ * @version v3.0
+ * @copyright 2013 Viktor Melnikov
+ * @update November, 3, 2013
+ *
  * --------------------------------------------------
  * Example:
- * <input type="text" class="placeholder" data-value="example" data-color="#ff0000">
+ * <input type="text" placeholder="example">
  * $('.placeholder').placeholder();
- *
- * Для вызова отдельных методов:
- * 1. Создать метод:
- *      Plugin.prototype.message = function () {
- *          //action
- *      }
- * 2. Вызов метода:
- *      $(element).placeholder('message');
  */
 ;(function ( $, window, document, undefined ) {
 
     "use strict";
 
-    /**
-     * Дефолтные параметры
-     * @type {string}
-     */
     var pluginName = 'placeholder',
-        defaults = {
-            value : '',
-            color : '#999'
-        };
+        value = '';
 
-    /**
-     * Конструктор плагина
-     * @param element - элемент, на котором вызван плагин
-     * @param options - опции плагина
-     * @constructor
-     */
-    function Plugin( element, options ) {
-        this.element = element;
-        this.metadata = $(this.element).data();
-        this.options = $.extend( {}, defaults, options, this.metadata);
-        this.init();
+    $(function() {
+        $.each($('body').find('[placeholder]'), function() {
+            $(this).addClass($.fn[pluginName].defaults.className);
+        });
+    });
+
+    function Plugin(element, options) {
+        this.init(element, options);
     }
 
     Plugin.prototype = {
         constructor : Plugin,
-        init : function() {
 
-            var el = $(this.element),
-                $this = this.element,
-                options = this.options;
-            switch (el.get(0).nodeName.toLowerCase()) {
-                case 'div' :
-                    if (el.text() === '') {
-                        el.text(options.value).css({color : options.color});
-                    }
-                    break;
-                default :
-                    if (el.val() === '') {
-                        el.val(options.value).css({color : options.color});
-                    }
-                    break;
+        init : function(element, options) {
+
+            this.$element = $(element);
+            this.block = (this.$element.css('display') == 'block' || this.$element.is('div')) ? true : false;
+
+            if (this.support() && !this.block) {
+                return;
             }
-            el.on('focus', function() {
-                el.css({color : '#000'});
-                switch (el.get(0).nodeName.toLowerCase()) {
-                    case 'div' :
-                        if(el.text() == options.value)
-                        {
-                            el.text('');
-                        }
-                        break;
-                    default :
-                        if(el.val() == options.value)
-                        {
-                            el.val('');
-                        }
-                        break;
+            this.metadata = this.$element.data();
+            this.options = $.extend( {}, $.fn[pluginName].defaults, options, this.metadata);
+            this.options.placeholder = this.$element.attr('placeholder');
+            this.isPass = this.$element.is(':password');
+
+            this.$element
+                .on('focus', $.proxy(this.focus, this))
+                .on('blur', $.proxy(this.blur, this));
+
+            value = (this.block) ? this.$element.text() : this.$element.val();
+            if (this.delSpace(value) === '') {
+                (this.block) ? this.$element.text(this.options.placeholder) : this.$element.val(this.options.placeholder);
+                if (this.isPass) {
+                    this.$element.attr({type : 'text'});
                 }
-            }).on('blur', function() {
-                switch (el.get(0).nodeName.toLowerCase()) {
-                    case 'div' :
-                        if ($.trim(el.text() == ''))
-                        {
-                            var value = (el.text() != '') ? el.text() : (el.text() != options.value) ? options.value : el.text();
-                            el.text(value);
-                        }
-                        if(el.text() == options.value) {
-                            el.css({color: options.color});
-                        } else {
-                            el.css({color:'#000'});
-                        }
-                        break;
-                    default :
-                        if ($.trim($this.value == ''))
-                        {
-                            this.value = ($this.value != '') ? el.val() : ($this.defaultValue != options.value) ? options.value : $this.defaultValue;
-                        }
-                        if($this.value == options.value) {
-                            el.css({color: options.color});
-                        } else {
-                            el.css({color:'#000'});
-                        }
-                        break;
-                }
-            });
+                this.$element.css({color : this.options.color});
+            } else {
+                this.$element.css({color : this.options.currentColor});
+            }
         },
-        /**
-         * Необходим после отправки формы, возвращает первичные значения в поля
-         */
-        default : function() {
-            var el = $(this.element);
-            switch (el.get(0).nodeName.toLowerCase()) {
-                case 'div' :
-                    el.text(this.options.value).css({color : this.options.color});
-                    break;
-                default :
-                    el.val(this.options.value).css({color : this.options.color});
-                    break;
-            }
-        }
 
+        support : function() {
+            return 'placeholder' in document.createElement('input');
+        },
+
+        focus : function() {
+            this.$element.css({color : this.options.currentColor});
+            if (this.isPass) {
+                this.$element.attr({type : 'password'});
+            }
+            value = (this.block) ? this.$element.text() : this.$element.val();
+            if(value == this.options.placeholder)
+            {
+                (this.block) ? this.$element.text('') : this.$element.val('');
+            }
+        },
+
+        blur : function() {
+            value = (this.block) ? this.$element.text() : this.$element.val();
+            value = (this.block) ? /*is block*/((this.delSpace(value) != '') ? value : this.options.placeholder) : /*isn't block*/((this.delSpace(value) != '') ? value : this.options.placeholder);
+            (this.block) ? this.$element.text(value) : this.$element.val(value);
+            if(value == this.options.placeholder) {
+                if (this.isPass) {
+                    this.$element.attr({type : 'text'});
+                }
+                this.$element.css({color : this.options.color});
+            } else {
+                if (this.isPass) {
+                    this.$element.attr({type : 'password'});
+                }
+                this.$element.css({color : this.options.currentColor});
+            }
+        },
+
+        delSpace : function( string ) {
+            return string.replace(/\s/g, "");
+        },
+
+        reset : function() {
+            (this.block) ? this.$element.text(this.options.placeholder) : this.$element.val(this.options.placeholder);
+            if (this.isPass) {
+                this.$element.attr({type : 'text'});
+            }
+            this.$element.css({color : this.options.color});
+        }
     };
 
-    /**
-     * Предотвращаем дублирование плагина
-     * @param option
-     * @returns {*}
-     */
-    $.fn[pluginName] = function ( option ) {
-        return this.each(function () {
-            var $this   = $(this),
-                data    = $this.data('plugin_' + pluginName),
+    $.fn[pluginName] = function(option) {
+        return this.each(function() {
+            var $this = $(this),
+                data = $this.data('plugin_' + pluginName),
                 options = typeof option == 'object' && option;
             if (!data) $this.data('plugin_' + pluginName, (data = new Plugin(this, options)));
             if (typeof option == 'string') data[option]();
         });
-    }
+    };
+
+    $.fn[pluginName].setDefaults = function(options) {
+        $.fn[pluginName].defaults = $.extend( {}, $.fn[pluginName].defaults, options);
+    };
+
+    $.fn[pluginName].defaults = {
+        color : '#c0c0c0',
+        currentColor : '#555',
+        className : 'placeholder',
+        placeholder : ''
+    };
 
 })( jQuery, window, document );
-$().ready(function() {
-    $.each($('input, textarea'), function() {
-        if ($(this).data('value')) {
-            $(this).addClass('placeholder');
-        }
-    });
-});

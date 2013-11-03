@@ -14,7 +14,7 @@
     <?=HTML::style('css/vendor/stylizationForm.css')?>
     <?=HTML::style('css/admin/admin.css')?>
     <?=HTML::style('css/popup.css')?>
-    <?=HTML::style('css/validation.css')?>
+
     <?=HTML::script('http://yandex.st/jquery/1.10.2/jquery.min.js')?>
     <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
     <?=HTML::script('js/vendor/bootstrap/bootstrap.min.js')?>
@@ -23,10 +23,11 @@
     <?=HTML::script('js/vendor/html5b/plugins.js')?>
     <?=HTML::script('js/placeholder.js')?>
     <?=HTML::script('js/notification.js')?>
-    <?=HTML::script('js/equalHeight.js')?>
     <?=HTML::script('js/popup.js')?>
-    <?=HTML::script('js/validation.js')?>
     <?=HTML::script('js/general_fns.js')?>
+    <?=HTML::script('js/ajaxSend.js')?>
+    <?=HTML::script('js/vendor/phpjs/date.js')?>
+    <?=HTML::script('js/admin.js')?>
 
     <script>
 

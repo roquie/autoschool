@@ -25,11 +25,7 @@ $(function() {
 
 
 
-
-    /**
-     * вход/забыли пароль
-     */
-    $('.ajax').ajaxForm({
+    $.fn.ajaxForm.setDefaults({
         errorValidate : function() {
             noty({
                 type : 'error',
@@ -76,6 +72,11 @@ $(function() {
             }
         }
     });
+    /**
+     * вход/забыли пароль
+     */
+    $('._mains_link').ajaxForm();
+    $('._mains_form').ajaxForm();
 
     /**
      * Обновление новостей
@@ -98,5 +99,7 @@ $(function() {
     });
 
     $("[rel='tooltip']").tooltip();
+
+    $('.placeholder').placeholder();
 
 });

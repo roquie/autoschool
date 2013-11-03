@@ -32,7 +32,7 @@
                             <li style="position: relative">
                                 <a href='#' id="sign_in"><i class="icon-lock"></i> Вход <strong class="caret" style="margin-left: 2px;margin-top: 8px;"></strong></a>
                                 <div id="popup" class="hide">
-                                    <form method="post" action="<?=URL::site('lk/ajax/login')?>" class="ajax" data-callback="sign_in" novalidate>
+                                    <form method="post" action="<?=URL::site('lk/ajax/login')?>" class="_mains_form" data-callback="sign_in" novalidate>
                                         <div class="input-prepend">
                                             <span class="add-on"><i class="icon-envelope"></i></span>
                                             <input type="email" name="email" placeholder="Email">
@@ -49,7 +49,7 @@
                                         <div class="clearfix"></div>
                                         <input type="submit" value="Войти" class="btn btn-info btn-block"/>
                                     </form>
-                                    <form method="post" action="<?=URL::site('lk/ajax/forgot')?>" class="ajax hide" data-callback="forgot" novalidate>
+                                    <form method="post" action="<?=URL::site('lk/ajax/forgot')?>" class="_mains_form hide" data-callback="forgot" novalidate>
                                         <div style="padding-bottom: 10px">Введите ваш логин (e-mail почта)</div>
                                         <div class="input-prepend">
                                             <span class="add-on"><i class="icon-envelope"></i></span>

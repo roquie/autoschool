@@ -30,7 +30,7 @@ $(function() {
         scrollToElement(href);
     });
 
-    $('#send').ajaxForm({
+    $('#send').validation({
         callback : function(response) {
             var $this = $('#send');
             // Если пустые поля

@@ -15,57 +15,76 @@
         <script>
             $(function() {
                 $(window).on('load', function() {
-                    alert('Вы были успешно зарегистрированы. На вашу почту отправлены данные для входа.');
+                    $('.reg').show();
+                    setTimeout(function() {
+                        $('.reg').hide();
+                    }, 5000);
                 });
             });
         </script>
 <? endif; ?>
-<div class="container lk">
-    <div class="row">
-        <div class="imgprofile">
-            <div class="profile">
-                <?=HTML::image($userPhoto, array('width' => '180px', 'height' => '180px'))?>
-            </div>
-        </div>
 
-        <div class="span12 back1">
-            <div class="span9 pull-right">
-                <div class="row">
-                    <div class="span4">
-                        <h1><?=$statement->famil.' '.$statement->imya?></h1>
-                    </div>
-                    <div class="span5">
-                        <h1 class="group pull-right"
-                            title="Группа">
-                            <?= ($group === 0) ? 'Не определен (а)' : $group->name?>
-                        </h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span4 settings">
-                        <i class="icon-envelope-alt"></i> <?=$userEmail?>, <a href="<?=URL::site('lk/ajax/settings')?>" id="ajaxLink"><i class="icon-cog"></i> Настройки</a>
-                    </div>
-                </div>
+<div class="container" style="margin-top: 110px;">
+
+
+    <div class="row">
+        <div class="span12 reg hide">
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4>Поздравляем!</h4>
+                Вы были успешно зарегистрированы. На вашу почту отправлены данные для входа.
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="span3 menu">
-            <ul class="nav nav-pills nav-stacked" id="left_menu">
-                <li><a href="<?=URL::site('lk/ajax/messages')?>" id="ajaxLink"><i class="icon-comments"></i>Группа</a></li>
-                <li><a href="<?=URL::site('lk/ajax/statement')?>" id="ajaxLink"><i class="icon-file"></i>Заявление</a></li>
-                <li><a href="<?=URL::site('lk/ajax/contract')?>" id="ajaxLink"><i class="icon-file"></i>Договор</a></li>
-                <li><a href="<?=URL::site('lk/ajax/download')?>" id="ajaxLink"><i class="icon-cloud-download"></i>Загрузки</a></li>
-                <li><a href="<?=URL::site('chat/help')?>" id="ajaxLink">&nbsp;<i class="icon-info"></i>&nbsp;Помощь</a></li>
-            </ul>
+    <div class="lk">
+        <div class="row">
+            <div class="imgprofile">
+                <div class="profile">
+                    <?=HTML::image($userPhoto, array('width' => '180px', 'height' => '180px'))?>
+                </div>
+            </div>
+
+            <div class="span12 back1">
+                <div class="span9 pull-right">
+                    <div class="row">
+                        <div class="span4">
+                            <h1><?=$statement->famil.' '.$statement->imya?></h1>
+                        </div>
+                        <div class="span5">
+                            <h1 class="group pull-right"
+                                title="Группа">
+                                <?= ($group === 0) ? 'Не определен (а)' : $group->name?>
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span4 settings">
+                            <i class="icon-envelope-alt"></i> <?=$userEmail?>, <a href="<?=URL::site('lk/ajax/settings')?>" id="ajaxLink"><i class="icon-cog"></i> Настройки</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div id="loader">
-            <div class="title">Загрузка данных... Пожалуйста, подождите</div>
-            <div class="loader"><i class="icon-refresh icon-spin icon-2x load"></i></div>
-        </div>
-        <div class="span9" id="content">
+        <div class="row">
+            <div class="span3 menu">
+                <ul class="nav nav-pills nav-stacked" id="left_menu">
+                    <li><a href="<?=URL::site('lk/ajax/messages')?>" id="ajaxLink"><i class="icon-comments"></i>Группа</a></li>
+                    <li><a href="<?=URL::site('lk/ajax/statement')?>" id="ajaxLink"><i class="icon-file"></i>Заявление</a></li>
+                    <li><a href="<?=URL::site('lk/ajax/contract')?>" id="ajaxLink"><i class="icon-file"></i>Договор</a></li>
+                    <li><a href="<?=URL::site('lk/ajax/download')?>" id="ajaxLink"><i class="icon-cloud-download"></i>Загрузки</a></li>
+                    <li><a href="<?=URL::site('chat/help')?>" id="ajaxLink">&nbsp;<i class="icon-info"></i>&nbsp;Помощь</a></li>
+                </ul>
+            </div>
+
+            <div id="loader">
+                <div class="title">Загрузка данных... Пожалуйста, подождите</div>
+                <div class="loader"><i class="icon-refresh icon-spin icon-2x load"></i></div>
+            </div>
+            <div class="span9" id="content">
+            </div>
         </div>
     </div>
+
 </div>

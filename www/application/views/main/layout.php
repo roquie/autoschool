@@ -38,8 +38,9 @@
     <?=HTML::script('js/popup.js')?>
     <?=HTML::script('js/notification.js')?>
     <?=HTML::script('js/jquery.pageslide.js')?>
-    <?=HTML::script('js/ajax.js')?>
+    <?=HTML::script('js/ajaxSend.js')?>
     <?=HTML::script('js/main.js')?>
+
 </head>
 <body>
 <?=$navbar.PHP_EOL?>

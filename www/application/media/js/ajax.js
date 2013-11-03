@@ -7,7 +7,9 @@
 
     "use strict";
 
-    var pluginName = 'ajaxForm';
+    var pluginName = 'ajaxForm',
+        cnt_link = 0,
+        cnt_form = 0;
 
     function Plugin(element, options, method) {
         this.init(element, options, method);
@@ -23,19 +25,14 @@
          */
         init : function(element, options, method) {
             this.$element = $(element);
-            this.metadata = this.$element.data(); // data массив элемента
-            this.options = $.extend( {}, $.fn[pluginName].defaults, options, this.metadata);
             this.isForm = (this.$element.is('form')) ? true : false; // проверка соответствия элемента тегу "form"
-            this.work = false; // защита от повторного нажатия во время обработки запроса
-            this.options.noreq = this.options.noreq.split(this.options.separator);
-            this.options.params = this.options.params.split(this.options.separator);
-            if (this.options.trigger) {
+//            if (this.options.trigger) {
                 if (this.isForm) {
-                    $('body').on('submit', this.$element, $.proxy(this.process, this));
+                    $('body').on('submit', this.$element.context, $.proxy(this.process, this));
                 } else {
-                    $('body').on('click', this.$element, $.proxy(this.process, this));
+                    $('body').on('click', this.$element.context, options, $.proxy(this.process, this));
                 }
-            }
+//            }
         },
         /**
          * Обработка события на выбранном событии
@@ -43,12 +40,23 @@
          * @returns {boolean}
          */
         process : function(e) {
+            e.stopPropagation();
             e.preventDefault();
-            if (this.options.validate) {
-                if (!this.validate())
-                    return false;
-            }
-            this.ajax();
+/*            this.metadata = $(this).data(); // data массив элемента
+            this.options = $.extend( {}, $.fn[pluginName].defaults, e.data, this.metadata);
+            this.work = false; // защита от повторного нажатия во время обработки запроса
+            this.options.noreq = this.options.noreq.split(this.options.separator);
+            this.options.params = this.options.params.split(this.options.separator);*/
+
+            /*            if (this.options.validate) {
+                            if (!this.validate())
+                                return false;
+                        }*/
+            console.log($(e.target).data('url'));
+/*            noty({
+                message: this
+            });*/
+            //this.ajax();
         },
         /**
          * Валидация данных
@@ -248,14 +256,14 @@
     };
 
     $.fn[pluginName] = function(method, option) {
-        return this.each(function() {
+        //return this.each(function() {
             var $this = $(this),
                 data = $this.data('plugin_' + pluginName),
                 options = (typeof method == 'object' && method) || (typeof option == 'object' && option);
             if (!data) $this.data('plugin_' + pluginName, (data = new Plugin(this, options, method)));
             if (typeof method == 'string') data[method](option);
-
-        });
+        //});
+        return this;
     };
 
     $.fn[pluginName].defaults = {
@@ -277,7 +285,8 @@
         params : '', // данные для отправки при нажатии на ссылку
         validate : true, // нужно делать валидацию формы или нет
         trigger : true,
-        addFields : []
+        addFields : [],
+        delegate : false
     };
 
 })( jQuery, window, document );

@@ -7,7 +7,7 @@
 
     "use strict";
 
-    var pluginName = 'ajaxForm';
+    var pluginName = 'validation';
 
     /**
      * Конструктор

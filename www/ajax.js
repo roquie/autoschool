@@ -31,9 +31,9 @@
             this.options.params = this.options.params.split(this.options.separator);
             if (this.options.trigger) {
                 if (this.isForm) {
-                    this.$element.on('submit', $.proxy(this.process, this));
+                    $('body').on('submit', element, $.proxy(this.process, this));
                 } else {
-                    this.$element.on('click', $.proxy(this.process, this));
+                    $('body').on('click', element, $.proxy(this.process, this));
                 }
             }
         },
@@ -48,7 +48,8 @@
                 if (!this.validate())
                     return false;
             }
-            this.ajax();
+            alert(this.options.url);
+            //this.ajax();
         },
         /**
          * Валидация данных

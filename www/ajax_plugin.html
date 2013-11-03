@@ -122,8 +122,7 @@
 
             $('#plus').on('click', function(e) {
                 e.preventDefault();
-                alert(cnt);
-                cnt++;
+                $('body').append('<a href="#" class="ajax" data-url="ajax.php">отправить</a>');
             });
         });
     </script>
@@ -136,7 +135,7 @@
     <!--
         для формы если брать по минимуму это вот то что ниже
     -->
-    <form action="ajax.php" method="post" id="ajax" data-noreq="famil" novalidate>
+    <form action="ajax.php" method="post" class="ajax" data-noreq="famil" novalidate>
         <label>E-mail</label>
         <input type="email" name="email" placeholder="E-mail">
         <label>Imya</label>
@@ -146,20 +145,17 @@
         <input type="submit" value="отправить"/>
     </form>
 
-    <form action="ajax.php" method="post" id="ajax" data-noreq="famil" novalidate>
-        <label>E-mail</label>
-        <input type="email" name="email" placeholder="E-mail">
-        <label>Imya</label>
-        <input type="text" name="imya">
-        <label>Famil</label>
-        <input type="text" name="famil"><br>
-        <input type="submit" value="отправить"/>
-    </form>
+    <label>E-mail</label>
+    <input type="email" name="email" placeholder="E-mail">
+    <label>Imya</label>
+    <input type="text" name="imya">
+    <label>Famil</label>
+    <input type="text" name="famil"><br>
+    <input type="submit" value="отправить"/>
 
+    <a href="#" id="plus">add</a>
 
-
-
-    <a href="#" id="plus">qwe</a>
+    <a href="#" class="ajax" data-url="ajax.php">отправить</a>
 
 </body>
 </html>

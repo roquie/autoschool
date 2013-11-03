@@ -3,9 +3,9 @@
         <div class="well" style="height: 300px;">
             <div style="padding: 15px">
                 <form action="<?=URL::site('admin/settings/noSmtp')?>" method="POST" data-url="">
-                    <div class="check emails">
+                    <div class="check active emails">
                         Использовать SMTP
-                        <input type="checkbox" name="smtp" onclick="this.form.submit();" checked="где бля чекед?"/>
+                        <input type="checkbox" name="smtp" checked/>
                     </div>
                 </form>
                 <form style="padding: 0 20px 20px 0; width: 220px; padding-bottom: 50px" action="<?=URL::site('admin/settings/smtp')?>" method="post" > <!-- id="form4" data-url="" -->

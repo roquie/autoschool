@@ -26,6 +26,10 @@
         });
     };
 
+    $.fn[pluginName].setDefaults = function(options) {
+        $.fn[pluginName].defaults = $.extend( {}, $.fn[pluginName].defaults, options);
+    };
+
     $.fn[pluginName].defaults = {
 
     };

@@ -1,3 +1,8 @@
+/**
+ * Developer: V. Melnikov
+ * Date: 03.11.13
+ * Time: 20:44
+ */
 $(function() {
 
     $.fn.ajaxForm.setDefaults({

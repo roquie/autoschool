@@ -38,16 +38,16 @@
 
                         var
                             date = new Date(),
-                            tr = $('<tr></tr>'),
-                            sharp = $('<td></td>').append(response.data.id),
-                            Email = $('<td></td>').append(response.data.email),
-                            dateTime = $('<td></td>').append(date.toLocaleString()), //
-                            del = $('<td></td>').append('<a data-callback="del_admin" class="_admins" data-url="<?=URL::site('admin/administrators/delete/')?>/'+ response.data.id +'?return=true" href="#"><i class="icon-trash icon-large"></i></a>');
+                            tr = $('<tr>'),
+                            sharp = $('<td>').append(response.data.id),
+                            Email = $('<td>').append(response.data.email),
+                            dateTime = $('<td>').append(date.toLocaleString()), //
+                            del = $('<td>').append('<a data-callback="del_admin" class="_admins" data-url="<?=URL::site('admin/administrators/delete/')?>/'+ response.data.id +'?return=true" href="#"><i class="icon-trash icon-large"></i></a>');
 
-                        tr.append(sharp)
-                        tr.append(Email)
-                        tr.append(dateTime)
-                        tr.append(del)
+                        tr.append(sharp);
+                        tr.append(Email);
+                        tr.append(dateTime);
+                        tr.append(del);
                         tr.prependTo('tbody', '#table_admins')
 
                         noty({

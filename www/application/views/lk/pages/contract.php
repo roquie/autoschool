@@ -44,4 +44,4 @@
     </div>
 
 </div>
-<?=HTML::script('js/editable.js')?>
+<?=HTML::script('js/lk/editable.js')?>

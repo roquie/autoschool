@@ -1,4 +1,4 @@
-<?=HTML::style('css/send.css')?>
+<?=HTML::style('css/admin/send.css')?>
 <?=HTML::style('media/css/style.css')?>
 <?=HTML::script('media/js/jquery.knob.js')?>
 <?=HTML::script('media/js/jquery.ui.widget.js')?>
@@ -6,7 +6,7 @@
 <?=HTML::script('media/js/jquery.fileupload.js')?>
 <?=HTML::script('media/js/jquery.fileupload-process.js')?>
 <?=HTML::script('media/js/jquery.fileupload-validate.js')?>
-<?=HTML::script('js/mail.js')?>
+<?=HTML::script('js/admin/mail.js')?>
 <script>
     $(function() {
         equalHeight($('#formSend'), $('#listStd'));

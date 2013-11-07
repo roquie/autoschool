@@ -57,4 +57,56 @@ $(function() {
             $('#content').load(link);
         }
     }
+
+
+    $.fn.ajaxForm.setDefaults({
+        errorValidate : function() {
+            noty({
+                type : 'error',
+                message : 'Ошибки заполнения полей'
+            });
+        },
+        worked : function() {
+            noty({
+                type:'error',
+                title:'Ошибка',
+                message:'Идёт обработка данных...'
+            });
+        },
+        defaultCallback : function(response) {
+            if (response.status == 'error' || response.status == 'success') {
+                noty({
+                    type : response.status,
+                    message : response.msg
+                });
+            }
+        },
+        functions : {
+            check_pass : function(response) {
+                if (response.status == 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status == 'success') {
+                    $('#check_pass').css(
+                        {
+                            display: 'none'
+                        }
+                    );
+                    $('#change_email').css(
+                        {
+                            display: 'block'
+                        }
+                    );
+
+                }
+            }
+        }
+    });
+
+    $('._lk_link').ajaxForm();
+
+    $('._lk_form').ajaxForm();
 });

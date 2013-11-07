@@ -1,6 +1,6 @@
 <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
-<?=HTML::script('js/statement.js')?>
-<?=HTML::style('css/statement.css')?>
+<?=HTML::script('js/main/statement.js')?>
+<?=HTML::style('css/main/statement.css')?>
 <?=HTML::script('js/vendor/chosen.jquery.min.js')?>
 <?=HTML::style('css/vendor/chosen.css')?>
 <div class="container" style="margin-top: 35px">

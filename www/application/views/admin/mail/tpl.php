@@ -1,4 +1,4 @@
-<?=HTML::style('css/send.css')?>
+<?=HTML::style('css/admin/send.css')?>
 
 <div class="container">
     <h1><small>Шаблоны сообщений</small></h1>
@@ -117,7 +117,7 @@
 </div>
 
 
-<?=HTML::script('js/tpl.js')?>
+<?=HTML::script('js/admin/tpl.js')?>
 <script>
     $().ready(function() {
         equalHeight($('#tplForm'), $('#listTpl'));

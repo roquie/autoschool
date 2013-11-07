@@ -11,13 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?=HTML::style('css/bstrap.html5b.fawesome.min.css')?>
     <?=HTML::style('css/vendor/stylizationForm.css')?>
-    <?=HTML::style('css/datepicker.css')?>
+    <?=HTML::style('css/main/datepicker.css')?>
     <?=HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic')?>
-    <?=HTML::style('css/validation.css')?>
-    <?=HTML::style('css/pageslide.css')?>
-    <?=HTML::style('css/popup.css')?>
+    <?=HTML::style('css/general/validation.css')?>
+    <?=HTML::style('css/general/pageslide.css')?>
+    <?=HTML::style('css/general/popup.css')?>
     <?=HTML::style('css/twitter.css')?>
-    <?=HTML::style('css/main.css')?>
+    <?=HTML::style('css/main/main.css')?>
 
     <!--[if IE 9]>
         <link rel="stylesheet" href="css/ie.css"/>
@@ -32,14 +32,14 @@
     <?=HTML::script('js/vendor/bootstrap/bootstrap.min.js')?>
     <?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
     <?=HTML::script('js/vendor/stylizationForm.js')?>
-    <?=HTML::script('js/placeholder.js')?>
-    <?=HTML::script('js/validation.js')?>
-    <?=HTML::script('js/general_fns.js')?>
-    <?=HTML::script('js/popup.js')?>
-    <?=HTML::script('js/notification.js')?>
-    <?=HTML::script('js/jquery.pageslide.js')?>
-    <?=HTML::script('js/ajaxSend.js')?>
-    <?=HTML::script('js/main.js')?>
+    <?=HTML::script('js/general/placeholder.js')?>
+    <?=HTML::script('js/main/validation.js')?>
+    <?=HTML::script('js/general/general_fns.js')?>
+    <?=HTML::script('js/general/popup.js')?>
+    <?=HTML::script('js/general/notification.js')?>
+    <?=HTML::script('js/main/jquery.pageslide.js')?>
+    <?=HTML::script('js/general/ajaxSend.js')?>
+    <?=HTML::script('js/main/main.js')?>
 
 </head>
 <body>

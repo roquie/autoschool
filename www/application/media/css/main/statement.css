@@ -18,7 +18,7 @@ h2.info {
   background: #f5f5f5;
 }
 .nav-tabs li span.error {
-  background: transparent url(../img/error.png) no-repeat top left;
+  background: transparent url(../../img/error.png) no-repeat top left;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -39,7 +39,7 @@ h2.info {
   margin-right: .75em;
   line-height: 14px;
   vertical-align: middle;
-  background: url("../img/word.png") no-repeat;
+  background: url("../../img/word.png") no-repeat;
 }
 /*
   Стиль для блока с формой

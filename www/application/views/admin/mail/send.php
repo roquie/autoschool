@@ -2,9 +2,8 @@
 <?=HTML::style('media/css/style.css')?>
 <?=HTML::style('css/vendor/chosen.css')?>
 <?=HTML::script('media/js/jquery.ui.widget.js')?>
-<?=HTML::script('js/mail.js')?>
+<?=HTML::script('js/main/mail.js')?>
 <?=HTML::script('js/vendor/chosen.jquery.min.js')?>
-<?//=HTML::script('js/equalHeight.js')?>
 
 <script>
     $(function() {

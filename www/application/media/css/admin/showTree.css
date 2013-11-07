@@ -7,7 +7,7 @@
   padding-left: 8px;
   margin-left: 8px;
   border-left: 1px dotted #838383;
-  background: url("../img/tree/line.gif") no-repeat 0px 9px;
+  background: url("../../img/tree/line.gif") no-repeat 0px 9px;
   /* добавляем горизонтальную линию около каждого элемента  */
 
 }
@@ -15,39 +15,39 @@
   text-decoration: none;
   padding-left: 20px;
   font-size: 17px;
-  background: url("../img/tree/file.png") no-repeat 1px 2px;
+  background: url("../../img/tree/file.png") no-repeat 1px 2px;
   /* картинка для обычного элемента  */
 
 }
 .jquery-tree.excel {
-  background: url("../img/tree/excel.png") no-repeat 1px 2px;
+  background: url("../../img/tree/excel.png") no-repeat 1px 2px;
   /* картинка для документа excel  */
 
 }
 .jquery-tree.download {
-  background: url("../img/tree/download.png") no-repeat 1px 2px;
+  background: url("../../img/tree/download.png") no-repeat 1px 2px;
   /* картинка для документа загрузки  */
 
 }
 .jquery-tree.excel-view {
-  background: url("../img/tree/excel_view.png") no-repeat 1px 2px;
+  background: url("../../img/tree/excel_view.png") no-repeat 1px 2px;
   /* картинка для документа загрузки  */
 
 }
 .jquery-tree.icon-g-drive {
   text-align: center;
   padding-left: 3px;
-  background: url("../img/google-drive.png") no-repeat;
+  background: url("../../img/google-drive.png") no-repeat;
 }
 .jquery-tree a.folder {
-  background: url("../img/tree/folder.png") no-repeat 1px 2px;
+  background: url("../../img/tree/folder.png") no-repeat 1px 2px;
   /* картинка для закрытой папки */
 
 }
 .jquery-tree .last {
   border: none;
   padding-left: 9px;
-  background: url("../img/tree/line_last.gif") 0px top no-repeat;
+  background: url("../../img/tree/line_last.gif") 0px top no-repeat;
   /* закрывающий элемент  */
 
 }
@@ -64,7 +64,7 @@
   margin-left: -16px;
   width: 16px;
   height: 16px;
-  background: url("../img/tree/plus.png") left 2px no-repeat;
+  background: url("../../img/tree/plus.png") left 2px no-repeat;
   /* картинка для кнопки показа */
 
   float: left;
@@ -73,12 +73,12 @@
   padding: 0;
 }
 .jquery-tree .show.minus {
-  background-image: url("../img/tree/minus.png");
+  background-image: url("../../img/tree/minus.png");
   /* картинка для кнопки скрытия */
 
 }
 .jquery-tree a.open {
-  background-image: url("../img/tree/folder_open.png");
+  background-image: url("../../img/tree/folder_open.png");
   /* картинка для открытой папки */
 
 }

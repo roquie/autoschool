@@ -1,6 +1,6 @@
 <?=HTML::script('http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css')?>
 <?=HTML::style('css/admin/settings.css')?>
-<?=HTML::script('js/settings.js')?>
+<?=HTML::script('js/admin/settings.js')?>
 
 <div class="container">
 

@@ -73,6 +73,27 @@ $(function() {
                         message : response.msg
                     });
                 }
+            },
+            check_pass : function(response) {
+                if (response.status == 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status == 'success') {
+                    $('#check_pass').css(
+                        {
+                            display: 'none'
+                        }
+                    );
+                    $('#change_email').css(
+                        {
+                            display: 'block'
+                        }
+                    );
+
+                }
             }
         }
     });

@@ -1,4 +1,4 @@
-<?=HTML::style('css/dwns.css')?>
+<?=HTML::style('css/lk/dwns.css')?>
 
 <div class="row downloads">
     <div class="span4">

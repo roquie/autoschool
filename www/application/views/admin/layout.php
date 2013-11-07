@@ -10,10 +10,9 @@
     <meta name="description" content="<?=$title?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?=HTML::style('css/bstrap.html5b.fawesome.min.css')?>
-    <?=HTML::style('css/vendor/jquery.noty.css')?>
     <?=HTML::style('css/vendor/stylizationForm.css')?>
     <?=HTML::style('css/admin/admin.css')?>
-    <?=HTML::style('css/popup.css')?>
+    <?=HTML::style('css/general/popup.css')?>
 
     <?=HTML::script('http://yandex.st/jquery/1.10.2/jquery.min.js')?>
     <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
@@ -21,13 +20,13 @@
     <?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
     <?=HTML::script('js/vendor/stylizationForm.js')?>
     <?=HTML::script('js/vendor/html5b/plugins.js')?>
-    <?=HTML::script('js/placeholder.js')?>
-    <?=HTML::script('js/notification.js')?>
-    <?=HTML::script('js/popup.js')?>
-    <?=HTML::script('js/general_fns.js')?>
+    <?=HTML::script('js/general/placeholder.js')?>
+    <?=HTML::script('js/general/notification.js')?>
+    <?=HTML::script('js/general/popup.js')?>
+    <?=HTML::script('js/general/general_fns.js')?>
     <?=HTML::script('js/ajaxSend.js')?>
     <?=HTML::script('js/vendor/phpjs/date.js')?>
-    <?=HTML::script('js/admin.js')?>
+    <?=HTML::script('js/admin/admin.js')?>
 
     <script>
 

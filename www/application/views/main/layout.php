@@ -20,7 +20,7 @@
     <?=HTML::style('css/main/main.css')?>
 
     <!--[if IE 9]>
-        <link rel="stylesheet" href="css/ie.css"/>
+        <?=HTML::style('css/ie.css')?>
     <![endif]-->
 
     <!-- css3-mediaqueries.js for IE less than 9 -->

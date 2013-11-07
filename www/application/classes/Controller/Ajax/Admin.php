@@ -38,6 +38,58 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
             }
 
         $post = $this->request->post();
+        $data = $this->request->post('data');
+        $noreq = $this->request->post('noreq');
+
+        $data = array(
+            'lol' => 'loldata',
+            'asd' => 'asd',
+            'email' => 'asdad@asd.ss',
+            'hz' => '',
+        );
+        echo 'asd';
+        $noreq = array(
+            'hz' ,
+            'lol'
+        );
+
+        /*
+            если массив $noreq пуст, тогда я проверяю весь $data на xss и возвращаю пустые поля (xss поля);
+            если есть массив $noreq тогда я ищу эти ключи в массиве $data и если они есть
+            тогда игнорируются для вывода ошибки.
+            т.е. вытащить из $data ключи которые есть в $noreq и отдать этот массив ajax_xss
+
+
+         */
+
+        $no_check = array(
+            'read',
+            'delete',
+        );
+        $arr = array();
+        if (!in_array($this->request->action(), $no_check)) {
+            //$this->ajax_xssclean($data, 'Нет данных, введите их пожалуйста');
+
+            echo '<pre>';
+            var_export(array_keys($data));
+            echo '</pre>';
+            echo '<pre>';
+            var_export($noreq);
+            echo '</pre>';
+
+            echo '<pre>';
+            var_export(array_diff($data, $noreq));
+            echo '</pre>';
+            /*foreach ($noreq as $key){
+                if (!array_key_exists($key, $data)) {
+                    echo 'qwe';
+
+                }
+            }*/
+
+
+
+        }
 
         $this->auto_render = false;
         if (Kohana::$environment === Kohana::PRODUCTION)
@@ -75,7 +127,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
                 if (!in_array($params[1], array_keys($columns), true)) {
                     $this->ajax_msg($params[1].'Такого поля не существует', 'error');
                     exit;
-                }
+                } 
                 if (!empty($this->request->post('data')[$params[1]])) {
                     $result = Model::factory($this->_table_name)
                                 ->getBy($params[1], $this->request->post('data')[$params[1]]);

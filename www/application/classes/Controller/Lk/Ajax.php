@@ -50,15 +50,20 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $this->ajax_msg('Введите Email правильно', 'error');
             exit;
         }
-        $user = Model::factory('Users')
-                       ->upd(Cookie::get('userId'), array('email' => $this->request->post('data.new_email')));
 
-        if (!$user) {
-            $this->ajax_msg('Пользователь с таким email не найден', 'error');
+        $user = Model::factory('Users')->getBy('email', $this->request->post('data.new_email'));
+
+        if ($user) {
+            $this->ajax_msg('Пользователь с таким email уже есть', 'error');
             exit;
         }
 
-        if ($user)
+
+        $result = Model::factory('Users')
+                       ->upd(Cookie::get('userId'), array('email' => $this->request->post('data.new_email')));
+
+
+        if ($result)
             $this->ajax_msg('Email изменен');
         else
             $this->ajax_msg('Email не хочет менятся, админа накажи', 'error');

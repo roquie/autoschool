@@ -24,7 +24,7 @@
     <?=HTML::script('js/general/notification.js')?>
     <?=HTML::script('js/general/popup.js')?>
     <?=HTML::script('js/general/general_fns.js')?>
-    <?=HTML::script('js/ajaxSend.js')?>
+    <?=HTML::script('js/general/ajaxSend.js')?>
     <?=HTML::script('js/vendor/phpjs/date.js')?>
     <?=HTML::script('js/admin/admin.js')?>
 

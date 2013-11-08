@@ -28,40 +28,6 @@
     <?=HTML::script('js/vendor/phpjs/date.js')?>
     <?=HTML::script('js/admin/admin.js')?>
 
-    <script>
-
-        $().ready(function() {
-
-            $('#slimScroll').slimScroll({
-                height: $("#slimScroll").height(),
-                railVisible: true,
-                alwaysVisible: true
-            });
-
-            var navbarHeight = $('.navbar').height();
-
-            $('#MainBlok_slimScroll').slimScroll({
-                height: $(window).height(),
-                alwaysVisible: true
-            });
-            $(window).resize(function(){
-                $('#MainBlok_slimScroll').css("height",$(window).height()-navbarHeight+'px');
-                $("#MainBlok_slimScroll").parent().css("height",$(window).height()-navbarHeight+'px');
-                //$(".slimScrollBar").css({ height: height + 'px' });
-            });
-
-            $("[rel='tooltip']").tooltip({
-                delay : 400
-            });
-
-            $('#user_name').popupWin({
-                edgeOffset : 30,
-                delay : 400
-            });
-
-            $('.placeholder').placeholder();
-        });
-    </script>
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->

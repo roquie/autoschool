@@ -8,6 +8,7 @@ class Model_Statements extends ORM
 
     protected $_table_columns = array(
 		'id' => array('data_type' => 'int', 'is_nullable' => false),
+		'user_id' => array('data_type' => 'int', 'is_nullable' => false),
 		'famil' => array('data_type' => 'string', 'is_nullable' => false),
 		'imya' => array('data_type' => 'string', 'is_nullable' => false),
 		'ot4estvo' => array('data_type' => 'string', 'is_nullable' => false),
@@ -36,5 +37,12 @@ class Model_Statements extends ORM
             'model' => 'Educations',
             'foreign_key' => 'education_id',
         ),
+
+
     );
+
+
+
+
+
 }

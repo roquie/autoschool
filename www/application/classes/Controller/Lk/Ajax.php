@@ -62,6 +62,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $result = Model::factory('Users')
                        ->upd(Cookie::get('userId'), array('email' => $this->request->post('data.new_email')));
 
+        Cookie::set('userEmail', $this->request->post('data.new_email'));
 
         if ($result)
             $this->ajax_msg('Email изменен');
@@ -141,7 +142,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         );
 
 
-        $result = Model::factory('Statements')->upd(Cookie::get('statement_id'), $data);
+        $result = Model::factory('Statements')->upd(Cookie::get('userId'), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
         else
@@ -161,7 +162,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         );
 
 
-        $result = Model::factory('Contracts')->upd(Cookie::get('contract_id'), $data);
+        $result = Model::factory('Contracts')->upd(Cookie::get('userId'), $data);
 
         if (!$result)
             $this->ajax_msg('Договор изменению не поддается :(', 'error');
@@ -210,8 +211,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                 exit;
             }
 
-            Session::instance()->set('key_statement', Model::factory('Statements')->addRec($data['statement']));
-            Session::instance()->set('key_contract', Model::factory('Contracts')->addRec($data['contract']));
+            Session::instance()->set('statement', $data['statement']);
+            Session::instance()->set('contract', $data['contract']);
 
 
             $this->ajax_msg(
@@ -239,8 +240,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             Cookie::set('userId', $result->id);
             Cookie::set('userEmail', $result->email);
             Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->statement_id);
-            Cookie::set('contract_id', $result->contract_id);
             Cookie::set('group_id', $result->group_id);
             $this->ajax_msg(URL::site('lk'));
             exit;
@@ -251,8 +250,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             Cookie::set('userId', $result->id);
             Cookie::set('userEmail', $result->email);
             Cookie::set('userPhoto', $result->photo);
-            Cookie::set('statement_id', $result->statement_id);
-            Cookie::set('contract_id', $result->contract_id);
             Cookie::set('group_id', $result->group_id);
             $this->ajax_msg(URL::site('lk'));
         } else {
@@ -297,7 +294,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
         echo View::factory('lk/pages/statement', array(
-            'info' => Model::factory('Statements')->getBy('id', Cookie::get('statement_id')),
+            'info' => Model::factory('Statements')->getBy('user_id', Cookie::get('userId')),
             'is_approved' => $result->is_approved,
         ))->render();
     }
@@ -310,7 +307,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
         echo View::factory('lk/pages/contract', array(
-            'info' => Model::factory('Contracts')->getBy('id', Cookie::get('contract_id')),
+            'info' => Model::factory('Contracts')->getBy('user_id', Cookie::get('userId')),
             'is_approved' => $result->is_approved,
         ))->render();
     }
@@ -414,25 +411,30 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $newpass = Text::random();
 
 
-        if ((int)(string)Session::instance()->get('key_statement') && (int)(string)Session::instance()->get('key_contract')) {
-            $testPOST = array(
-                'registration' => array(
-                    'statement_id' =>  (int)(string)Session::instance()->get('key_statement'),
-                    'contract_id' =>  (int)(string)Session::instance()->get('key_contract'),
+        if (Session::instance()->get('statement') && Session::instance()->get('contract')) {
+            $data = array(
                     'photo' =>  $user['photo_big'],
                     'email' =>  $user['email'],
                     'password' => $this->hash($newpass)
-                )
             );
+
+            $id = (int)Model::factory('Users')->addRec($data);
+
+            $contract = Session::instance()->get('contract');
+            $contract['user_id'] = $id;
+            $statement = Session::instance()->get('statement');
+            $statement['user_id'] = $id;
+
+            $c_res = Model::factory('Contracts')->addRec($contract);
+            $s_res = Model::factory('Statements')->addRec($statement);
+
+            if (!$s_res && !$c_res) {
+                $this->ajax_msg('Непредвиденная ошибка БД', 'error');
+                exit;
+            }
+
         } else {
-            $this->ajax_msg('Непредвиденная ошибка БД', 'error');
-            exit;
-        }
-
-        $r = Model::factory('Users')->addRec($testPOST['registration']);
-
-        if (!$r) {
-            $this->ajax_msg('Непредвиденная ошибка БД', 'error');
+            $this->ajax_msg('Непредвиденная ошибка', 'error');
             exit;
         }
 
@@ -444,16 +446,14 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $mail->send();
 
         Cookie::$expiration = 0;
-        Cookie::set('userId', $r);
+        Cookie::set('userId', $id);
         Cookie::set('userEmail', $user['email']);
         Cookie::set('userPhoto', $user['photo_big']);
-        Cookie::set('statement_id', (int)(string)Session::instance()->get('key_statement'));
-        Cookie::set('contract_id', (int)(string)Session::instance()->get('key_contract'));
         Cookie::set('group_id', 0);
 
         if ($mail) {
-            Session::instance()->delete('key_statement');
-            Session::instance()->delete('key_contract');
+            Session::instance()->delete('statement');
+            Session::instance()->delete('contract');
             Session::instance()->set('after_register', 'yes');
             $this->ajax_data(array(
                 'redirect' => URL::site('lk')

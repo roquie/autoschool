@@ -23,6 +23,8 @@ class Controller_Admin extends Controller_Template
 
         $this->template->content = '';
 
+        Model::factory('Users')->getNoApproved();
+
         //$this->template->footer = View::factory('main/footer');
     }
 

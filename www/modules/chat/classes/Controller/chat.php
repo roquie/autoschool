@@ -8,7 +8,7 @@ class Controller_Chat extends Controller_Ajax_Main
     {
         parent::before();
 
-        $email = Cookie::get('userEmail');
+        $email = Cookie::get('userId');
         if (is_null($email)) HTTP::redirect('/');
         $this->_config = Kohana::$config->load('chat')->as_array();
     }

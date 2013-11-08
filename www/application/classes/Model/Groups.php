@@ -13,7 +13,7 @@ class Model_Groups extends ORM
 
     protected $_has_one = array(
         'news' => array(
-            'model' => 'news',
+            'model' => 'News',
             'foreign_key' => 'group_id',
         )
     );

@@ -11,8 +11,6 @@ class Model_Users extends ORM
 		'photo' => array('data_type' => 'string', 'is_nullable' => false),
 		'password' => array('data_type' => 'string', 'is_nullable' => false),
 		'email' => array('data_type' => 'string', 'is_nullable' => false),
-		'statement_id' => array('data_type' => 'int', 'is_nullable' => false),
-		'contract_id' => array('data_type' => 'int', 'is_nullable' => false),
 		'group_id' => array('data_type' => 'int', 'is_nullable' => false),
 		'is_approved' => array('data_type' => 'int', 'is_nullable' => false),
 	);
@@ -20,13 +18,35 @@ class Model_Users extends ORM
     protected $_has_one = array(
         'Statements' => array(
             'model' => 'Statements',
-            'foreign_key' => 'statement_id',
+            'foreign_key' => 'user_id',
         ),
         'Contracts' => array(
             'model' => 'Contracts',
-            'foreign_key' => 'contract_id',
+            'foreign_key' => 'user_id',
         ),
     );
+
+    /**
+     * вернет array(
+        0 => 'Фамилия И.О.',
+     * );
+     * @return array
+     */
+    public function getNoApproved()
+    {
+
+        $noApprovedUsers = ORM::factory('Users')->where('is_approved', '=', 0)->find_all();
+        $arr = array();
+        foreach ($noApprovedUsers as $value) {
+            $arr[] =
+                    $value->Statements->famil . ' '.
+                    UTF8::substr($value->Statements->imya,0, 1).'.' .
+                    UTF8::substr($value->Statements->ot4estvo,0, 1).'.';
+        }
+        return $arr;
+    }
+
+
 
     public function login(array $data)
     {

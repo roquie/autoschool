@@ -4,7 +4,8 @@
 
     <div class="span8">
         <table class="table table-hover">
-            <tbody>
+            <? if($info): ?>
+                <tbody>
 
                 <tr>
                     <td>Фамилия</td>
@@ -71,7 +72,12 @@
                     <td><a href="#" data-name="mesto_raboty" data-type="text" data-pk=""><?=$info->mesto_raboty?></a></td>
                 </tr>
 
-            </tbody>
+                </tbody>
+            <?else:?>
+                <p>Ошибка, данные не найдены. Обратитесь к администратору.</p>
+            <?endif?>
+
+
         </table>
     </div>
 

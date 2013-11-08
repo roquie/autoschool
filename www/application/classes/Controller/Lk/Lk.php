@@ -27,9 +27,9 @@ class Controller_Lk_Lk extends Controller_Main
     {
 
         $this->template->content = View::factory('lk/lk', array(
-            'statement' =>   Model::factory('Statements')->getBy('id', Cookie::get('statement_id')),
-            'contract'  =>   Model::factory('Contracts')->getBy('id', Cookie::get('contract_id')),
-            'group'  =>   Model::factory('Groups')->getBy('id', Cookie::get('group_id')) ?: 0,
+            'statement' =>   Model::factory('Statements')->getBy('user_id', (int)Cookie::get('userId')) ?: HTTP::redirect('lk/logout'),
+            'contract'  =>   Model::factory('Contracts')->getBy('user_id', (int)Cookie::get('userId')) ?: HTTP::redirect('lk/logout'),
+            'group'     =>   Model::factory('Groups')->getBy('id', (int)Cookie::get('group_id')) ?: 0,
             'userEmail' =>   Cookie::get('userEmail'),
             'userPhoto' =>   Cookie::get('userPhoto'),
         ));
@@ -115,7 +115,7 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createTicket()
     {
-        $contract = Model::factory('Contracts')->getBy('id', Cookie::get('contract_id'));
+        $contract = Model::factory('Contracts')->getBy('user_id', Cookie::get('userId'));
 
         $obj = new TemplateDocx(APPPATH.'templates/ticket/ticket.docx');
 
@@ -139,8 +139,8 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createContract()
     {
-        $contract = Model::factory('Contracts')->getBy('id', Cookie::get('contract_id'));
-        $statement = Model::factory('Statements')->getBy('id', Cookie::get('statement_id'));
+        $contract = Model::factory('Contracts')->getBy('user_id', Cookie::get('userId'));
+        $statement = Model::factory('Statements')->getBy('user_id', Cookie::get('userId'));
 
         $obj = new TemplateDocx(APPPATH.'templates/contract/dogovor.docx');
 
@@ -172,7 +172,7 @@ class Controller_Lk_Lk extends Controller_Main
 
     protected function createStatement()
     {
-        $statement = Model::factory('Statements')->getBy('id', Cookie::get('statement_id'));
+        $statement = Model::factory('Statements')->getBy('user_id', Cookie::get('userId'));
 
         $document = new TemplateDocx(APPPATH.'templates/zayavlenie/template.docx');
 
@@ -237,8 +237,6 @@ class Controller_Lk_Lk extends Controller_Main
         Cookie::delete('userId');
         Cookie::delete('userEmail');
         Cookie::delete('userPhoto');
-        Cookie::delete('statement_id');
-        Cookie::delete('contract_id');
         Cookie::delete('group_id');
         HTTP::redirect('/');
     }

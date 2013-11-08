@@ -22,7 +22,15 @@
          */
         init : function(element, options) {
             var isForm = ($(element).is('form')) ? true : false;
+
+            if (options.debug || $.fn[pluginName].defaults.debug) {
+                console.log('Включён режим debug для элементов: "' + $(element).selector + '"');
+            }
+
             if (options.delegate || $.fn[pluginName].defaults.delegate) {
+                if (options.debug || $.fn[pluginName].defaults.debug) {
+                    console.log('выбрана делегированная обработка');
+                }
                 if (isForm)
                     $('body')
                         .off('submit.'+pluginName, $(element).selector, options, $.proxy(this.process, this))
@@ -32,6 +40,9 @@
                         .off('click.'+pluginName, $(element).selector, options, $.proxy(this.process, this))
                         .on('click.'+pluginName, $(element).selector, options, $.proxy(this.process, this));
             } else {
+                if (options.debug || $.fn[pluginName].defaults.debug) {
+                    console.log('выбрана неделегированная обработка');
+                }
                 if (isForm)
                     $(element)
                         .off('submit.'+pluginName, options, $.proxy(this.process, this))
@@ -53,6 +64,9 @@
             this.options.noreq = this.options.noreq.split(this.options.separator);
             this.options.params = this.options.params.split(this.options.separator);
             if (this.options.validate) {
+                if (this.options.debug) {
+                    console.log('выбрана валидация данных');
+                }
                 if (!this.validate())
                     return false;
             }
@@ -75,6 +89,10 @@
             $.each(this.options.noreq, function(i, v) {
                 no_required.push(v);
             });
+
+            if (this.options.debug) {
+                console.log('Необязательные поля для заполнения: ' + no_required);
+            }
 
             if (this.isForm) {
                 data = this.$element.serializeArray();
@@ -99,9 +117,18 @@
                             element.addClass('error');
                             is_success = false;
                             empty = false;
-                        } else
+                            error.push(data[i].name);
+                        } else {
+                            error.splice(error.indexOf(data[i].name), 1);
                             element.removeClass('error');
+                        }
                     }
+                }
+                if (error.length != 0) {
+                    if (this.options.debug) {
+                        console.log('Были допущены ошибки: ' + error);
+                    }
+                    this.options.errorValidate(error, $this);
                 }
             } else {
                 for (i = 0; i < this.options.params.length; i++) {
@@ -139,7 +166,10 @@
                     }
                 }
                 if (error.length != 0) {
-                    this.options.errorValidate(error);
+                    if (this.options.debug) {
+                        console.log('Были допущены ошибки: ' + error);
+                    }
+                    this.options.errorValidate(error, $this);
                 }
             }
             return is_success;
@@ -153,8 +183,19 @@
             if (this.work) {
                 this.options.worked();
                 return false;
+                if (this.options.debug) {
+                    console.log('форма уже отправлена, ждём ответ');
+                }
             }
             this.work = true;
+
+            if (this.options.debug) {
+                console.log('URL: ' +(this.isForm) ? this.$element.attr('action') : this.options.url);
+            }
+            if (that.options.debug) {
+                console.log('Отправка данных на сервер');
+            }
+
             $.ajax({
                 type : (this.isForm) ? this.$element.attr('method') : this.options.method,
                 url  : (this.isForm) ? this.$element.attr('action') : this.options.url,
@@ -167,6 +208,9 @@
                     that.options.beforeSend(that);
                 },
                 success : function(response, textStatus, jqXHR){
+                    if (that.options.debug) {
+                        console.log('Данные получены: ' + response);
+                    }
                     // если callback не передан, то будет использован callback по-умолчанию
                     if (!that.options.functions[that.options.callback] && typeof that.options.functions[that.options.callback] != "function") {
                         that.options.defaultCallback(response, that);
@@ -177,10 +221,10 @@
                 },
                 statusCode: {
                     404: function() {
-                        that.options.statusCode[404]();
+                        that.options.statusCode[404](that);
                     },
                     505 : function() {
-                        that.options.statusCode[505]();
+                        that.options.statusCode[505](that);
                     }
                 }
             });
@@ -212,6 +256,11 @@
                     data[k] = v;
                 });
             }
+
+            if (this.options.debug) {
+                console.log('Массив данных для передачи: ' + data);
+            }
+
             return data;
         },
         /**
@@ -278,7 +327,9 @@
         params : '', // данные для отправки при нажатии на ссылку
         validate : true, // нужно делать валидацию формы или нет
         delegate : true,
-        addFields : []
+        addFields : [],
+
+        debug : false
     };
 
 })( jQuery, window, document );

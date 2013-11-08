@@ -12,109 +12,88 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         // мыло админа сайта
         $email = Session::instance()->get('email'); if(empty($email)) throw new HTTP_Exception_404();
 
+        $this->auto_render = false;
+        $post = $this->request->post();
+        if (Kohana::$environment === Kohana::PRODUCTION)
+            if (!Request::initial()->is_ajax() || empty($post))
+                throw new HTTP_Exception_404();
+
         //так делать не хорошо, но кому не лень писать каждую новую таблицу в массив?
         $tables = Database::instance()->list_tables();
 
+        // создание файлов моделей по списку таблиц в БД
         $this->_createAllModels($tables);
-
         foreach ($tables as $k => $v)
             $tables[$k] = UTF8::strtolower($v);
 
         $path = APPPATH.'classes/Model/';
+        //список всех файлов в папке $path;
         $list = $this->_listFiles($path);
 
+        // если список имен файлов не совпадает со списком таблиц, тогда удадить этот файл. (удалишь табл - удалится модель)
         if ($file = array_diff($list, $tables))
             foreach ($file as $val)
                 if (file_exists($path.$val.EXT))
                     unlink($path.$val.EXT);
-
-
+        // беру имя таблицы из ссылки
         $this->_table_name = $this->request->param('table_name');
-
+        // проверка есть ли такая таблица в бд
         if (!empty($this->_table_name))
             if (!in_array($this->_table_name, $tables, true)) {
                 $this->ajax_msg('Такой таблицы не существует', 'error');
                 exit;
             }
 
-        $post = $this->request->post();
+        // данные из ajax.js скрипта
         $data = $this->request->post('data');
         $noreq = $this->request->post('noreq');
 
-        $data = array(
-            'lol' => 'loldata',
-            'asd' => 'asd',
-            'email' => 'asdad@asd.ss',
-            'hz' => '',
-        );
-        echo 'asd';
-        $noreq = array(
-            'hz' ,
-            'lol'
-        );
-
-        /*
-            если массив $noreq пуст, тогда я проверяю весь $data на xss и возвращаю пустые поля (xss поля);
-            если есть массив $noreq тогда я ищу эти ключи в массиве $data и если они есть
-            тогда игнорируются для вывода ошибки.
-            т.е. вытащить из $data ключи которые есть в $noreq и отдать этот массив ajax_xss
-
-
-         */
-
+        // список тех метов, которые не нужно вызвать для проверки post данные на xss
         $no_check = array(
             'read',
-            'delete',
+            'delete'
         );
-        $arr = array();
+
         if (!in_array($this->request->action(), $no_check)) {
-            //$this->ajax_xssclean($data, 'Нет данных, введите их пожалуйста');
+            //  очистка всего полчученного поста от ajax.js от мусора xss
+            $data_without_noreq = array();
+            $noreq_clean = array();
 
-            echo '<pre>';
-            var_export(array_keys($data));
-            echo '</pre>';
-            echo '<pre>';
-            var_export($noreq);
-            echo '</pre>';
-
-            echo '<pre>';
-            var_export(array_diff($data, $noreq));
-            echo '</pre>';
-            /*foreach ($noreq as $key){
-                if (!array_key_exists($key, $data)) {
-                    echo 'qwe';
-
+            foreach ($data as $k => $v)
+            {
+                if (in_array($k, $noreq)) {
+                    $noreq_clean[] = Security::xss_clean($data[$k]);
+                    continue;
                 }
-            }*/
+                $data_without_noreq[$k] = $v;
+            }
 
-
+            if (!empty($data_without_noreq))
+            {
+                $this->ajax_xssclean($data_without_noreq, 'Нет данных, введите их пожалуйста');
+                exit;
+            }
 
         }
-
-        $this->auto_render = false;
-        if (Kohana::$environment === Kohana::PRODUCTION)
-            if (!Request::initial()->is_ajax() || empty($post))
-                throw new HTTP_Exception_404();
-
     }
 
     /**
      * создание, insert
      * site.ru/admin/table_name/create
-        post => [
-        'field' => 'val',
-        'field2' => 'val2',
-        ...
-        ]
+    post => [
+    'field' => 'val',
+    'field2' => 'val2',
+    ...
+    ]
      *
      * а тута поле коротое будет указано (если оно есть в табл), будет проверяться по содержимому,
      * если такое есть - ошибка, если нету такого поля - добивит данные в бд
      * site.ru/admin/table_name/create|check-field
-        post => [
-        'field' => 'val',
-        'field2' => 'val2',
-        ...
-        ]
+    post => [
+    'field' => 'val',
+    'field2' => 'val2',
+    ...
+    ]
      */
     public function action_create()
     {
@@ -127,13 +106,13 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
                 if (!in_array($params[1], array_keys($columns), true)) {
                     $this->ajax_msg($params[1].'Такого поля не существует', 'error');
                     exit;
-                } 
+                }
                 if (!empty($this->request->post('data')[$params[1]])) {
                     $result = Model::factory($this->_table_name)
-                                ->getBy($params[1], $this->request->post('data')[$params[1]]);
+                        ->getBy($params[1], $this->request->post('data')[$params[1]]);
                     if (!$result) {
                         $resultAdd = Model::factory($this->_table_name)
-                                           ->addRec($this->request->post('data'));
+                            ->addRec($this->request->post('data'));
 
                         if ($resultAdd && empty($return_add_data)) {
                             $this->ajax_msg('Добавлено');
@@ -181,7 +160,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         if (null === $id) {
 
             $result = Model::factory($this->_table_name)
-                             ->all();
+                ->all();
 
             if ($result) {
                 $data = array();
@@ -196,7 +175,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
             }
         } else {
             $result = Model::factory($this->_table_name)
-                             ->getBy('id', $id);
+                ->getBy('id', $id);
 
             if ($result) {
                 $this->ajax_data($result->as_array());
@@ -211,16 +190,16 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
     /**
      * изменение
      * site.ru/admin/table_name/update/12
-       post => [
-         'field' => 'val',
-         ...
-       ]
+    post => [
+    'field' => 'val',
+    ...
+    ]
      * или изменить значение какоголибо поля где field = value
      * site.ru/admin/table_name/update|field-value
-       post => [
-         'field',
-         'val'
-       ]
+    post => [
+    'field',
+    'val'
+    ]
      */
     public function action_update()
     {
@@ -238,7 +217,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
             }
 
             $result = Model::factory($this->_table_name)
-                           ->upd($arr, $this->request->post('data'));
+                ->upd($arr, $this->request->post('data'));
 
             if ($result) {
                 $this->ajax_msg('Данные обновлены');
@@ -250,7 +229,7 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
         } else {
 
             $result = Model::factory($this->_table_name)
-                           ->upd($id, $this->request->post('data'));
+                ->upd($id, $this->request->post('data'));
 
             if ($result) {
                 $this->ajax_msg('Данные обновлены');
@@ -302,14 +281,23 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
      */
     protected function _createAllModels($tables)
     {
-        if (empty($tables))
-            echo 'таблицы в бд не созданы';
+        if (empty($tables)) {
+            $this->ajax_msg('таблицы в бд не созданы', 'error');
+            exit;
+        }
 
         foreach ($tables as $item) {
             $columns = Database::instance()->list_columns($item);
 
             $modelName = UTF8::ucwords(UTF8::strtolower($item));
             $file = APPPATH.'classes/Model/'.$modelName.EXT;
+/*            echo 'ok - '.$item.'<br>';
+            if ($lol = preg_match('/protected \$_table_columns \= array\(/', file_get_contents($file))) {
+                echo 'NUUUU';
+                echo '<pre>';
+                print_r($lol);
+                echo '</pre>';
+            }*/
 
             if (!file_exists($file)) {
                 foreach ($columns as $column) {

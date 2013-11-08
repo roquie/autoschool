@@ -6,8 +6,8 @@ return array(
         'type'       => 'MySQL',
         'connection' => array(
             'hostname'   => 'localhost',
-            'username'   => 'root',
-            'password'   => '',
+            'username'   => 'rootuser',
+            'password'   => 'root',
             'persistent' => FALSE,
             'database'   => 'mpt_auto',
         ),

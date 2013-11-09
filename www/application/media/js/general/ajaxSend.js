@@ -27,6 +27,13 @@
                 console.log('Включён режим debug для элементов: "' + $(element).selector + '"');
             }
 
+            if (options.debug || $.fn[pluginName].defaults.debug) {
+                if (isForm)
+                    console.log('элемент '+$(element).selector+' форма');
+                else
+                    console.log('элемент '+$(element).selector+' ссылка');
+            }
+
             if (options.delegate || $.fn[pluginName].defaults.delegate) {
                 if (options.debug || $.fn[pluginName].defaults.debug) {
                     console.log('выбрана делегированная обработка');
@@ -210,6 +217,12 @@
                 success : function(response, textStatus, jqXHR){
                     if (that.options.debug) {
                         console.log('Данные получены: ' + response);
+                    }
+                    if (that.isForm) {
+                        if (that.options.debug) {
+                            console.log('Очистка формы');
+                        }
+                        that.$element[0].reset();
                     }
                     // если callback не передан, то будет использован callback по-умолчанию
                     if (!that.options.functions[that.options.callback] && typeof that.options.functions[that.options.callback] != "function") {

@@ -152,15 +152,26 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
     }
 
     /**
-     * чтение, select
+     * выборка
+     * site.ru/admin/table_name/read/12?sort=asc
+     * site.ru/admin/table_name/read/12
+     * site.ru/admin/table_name/read
+     * или выборка по типу поле = значение
+     * site.ru/admin/table_name/read|field-value?sort=desc
+     * site.ru/admin/table_name/read|field-value
      */
     public function action_read()
     {
         $id = $this->request->param('id');
+        $params = $this->request->param('params');
+        $sort = $this->request->query('sort');
+
         if (null === $id) {
 
             $result = Model::factory($this->_table_name)
-                ->all();
+                ->all(
+                    $sort === 'asc' || $sort === 'desc' ? $sort : 'asc'
+                );
 
             if ($result) {
                 $data = array();
@@ -171,6 +182,34 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
                 exit;
             } else {
                 $this->ajax_msg('Ошибка чтения', 'error');
+                exit;
+            }
+
+        } elseif (!empty($params)) {
+            $arr = explode('-', $params);
+            if (count($arr) !== 2 ) { //|| count($this->request->post('data')) !== 2
+                $this->ajax_msg('Ошибка чтения записей', 'error');
+                exit;
+            }
+
+            $result = Model::factory($this->_table_name)
+                ->allWhere(
+                    $arr[0],
+                    $arr[1],
+                    $sort === 'asc' || $sort === 'desc' ? $sort : 'asc'
+                );
+
+            if ($result) {
+
+                $data = array();
+                foreach ($result as $value)
+                    $data[] = $value->as_array();
+
+                $this->ajax_data($data);
+                exit;
+            } else {
+                $this->ajax_msg('Ошибка выборки', 'error');
+
                 exit;
             }
         } else {

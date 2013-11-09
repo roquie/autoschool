@@ -27,6 +27,14 @@ $(function() {
                 });
             }
         },
+        statusCode : { // Это не обязательно, просто так по сути))
+            404 : function(that) {
+                alert( 'Неверный url: ' + that.options.url );
+            },
+            505 : function() {
+                alert( 'Ошибка выполнения запроса' );
+            }
+        },
         functions : {
             add_admin : function(response) {
                 if (response.status === 'error') {
@@ -94,31 +102,18 @@ $(function() {
                     );
 
                 }
+            },
+            get_user : function(response, that) {
+
             }
         }
     });
 
-    $('._admins_link').ajaxForm();
+    $('._admins_link').ajaxForm({
+        debug : true
+    });
 
     $('._admins_form').ajaxForm();
-
-    $('#slimScroll').slimScroll({
-        height: $("#slimScroll").height(),
-        railVisible: true,
-        alwaysVisible: true
-    });
-
-    var navbarHeight = $('.navbar').height();
-
-    $('#MainBlok_slimScroll').slimScroll({
-        height: $(window).height(),
-        alwaysVisible: true
-    });
-    $(window).resize(function(){
-        $('#MainBlok_slimScroll').css("height",$(window).height()-navbarHeight+'px');
-        $("#MainBlok_slimScroll").parent().css("height",$(window).height()-navbarHeight+'px');
-        //$(".slimScrollBar").css({ height: height + 'px' });
-    });
 
     $("[rel='tooltip']").tooltip({
         delay : 400

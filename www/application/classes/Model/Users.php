@@ -12,6 +12,7 @@ class Model_Users extends ORM
 		'password' => array('data_type' => 'string', 'is_nullable' => false),
 		'email' => array('data_type' => 'string', 'is_nullable' => false),
 		'group_id' => array('data_type' => 'int', 'is_nullable' => false),
+		'status' => array('data_type' => 'int', 'is_nullable' => false),
 		'is_approved' => array('data_type' => 'int', 'is_nullable' => false),
 	);
 
@@ -24,6 +25,7 @@ class Model_Users extends ORM
             'model' => 'Contracts',
             'foreign_key' => 'user_id',
         ),
+
     );
 
     /**
@@ -44,6 +46,36 @@ class Model_Users extends ORM
                     UTF8::substr($value->Statements->ot4estvo,0, 1).'.';
         }
         return $arr;
+    }
+
+    public function allInfoNoApproved($id)
+    {
+        $user = ORM::factory('Users')->where('id','=',(int)$id)->and_where('is_approved', '=', 0)->find();
+        $user->Statements->Nationality;
+        $user->Statements->Educations;
+
+        $statement = array();
+        foreach ($user->Statements->as_array() as $k => $v) {
+            if ($k === 'nationality_id' || $k === 'education_id')
+                continue;
+            if ($k === 'Nationality' || $k === 'Educations') {
+                array_shift($v);
+                foreach ($v as $key => $val)
+                    $statement[$k] = $v[$key];
+                continue;
+            }
+            $statement[$k] = $v;
+        }
+
+
+        return array(
+            'user' => array(
+                'status' => $user->status
+            ),
+            'statement' => $statement,
+            'contract' => $user->Contracts->as_array()
+        );
+
     }
 
 

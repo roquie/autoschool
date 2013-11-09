@@ -15,7 +15,12 @@ class Model_Groups extends ORM
         'news' => array(
             'model' => 'News',
             'foreign_key' => 'group_id',
-        )
+        ),
+        'group' => array(
+            'model' => 'Groups',
+            'foreign_key' => 'group_id',
+        ),
+
     );
 
     public function getNews($id)

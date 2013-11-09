@@ -42,12 +42,10 @@
 .listener.table-hover tbody tr:hover > th {
   cursor: pointer;
 }
-.statement tbody,
-.contract tbody {
+.statement tbody {
   overflow: auto;
 }
-.statement tbody tr:nth-child(1) td,
-.contract tbody tr:nth-child(1) td {
+.statement tbody tr:nth-child(1) td {
   border-top: none;
 }
 .status {
@@ -72,11 +70,10 @@
   display: inline-block;
 }
 .listener tbody {
-  height: 600px;
   overflow: auto;
 }
 .listener tbody tr td {
-  width: 144px;
+  width: 154px;
   vertical-align: middle;
   text-align: left;
   border-top: none;

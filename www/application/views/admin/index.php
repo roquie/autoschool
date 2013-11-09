@@ -160,19 +160,19 @@
                             </tr>
                             <tr>
                                 <td>Паспорт серия</td>
-                                <td>123123</td>
+                                <td><a href="#" data-name="pasport_seriya" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">123123</a></td>
                             </tr>
                             <tr>
                                 <td>Паспорт номер</td>
-                                <td>11231231</td>
+                                <td><a href="#" data-name="pasport_nome" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">11231231</a></td>
                             </tr>
                             <tr>
                                 <td>Кем выдан паспорт</td>
-                                <td>ОВД ЧЕРТАНОВО</td>
+                                <td><a href="#" data-name="pasport_kem_vydan" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">ОВД ЧЕРТАНОВО</a></td>
                             </tr>
                             <tr>
                                 <td>Мобильный телефон</td>
-                                <td>8 (312) 312-31-21</td>
+                                <td><a href="#" data-name="phone" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">8 (312) 312-31-21</a></td>
                             </tr>
 
                             </tbody>

@@ -312,6 +312,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         echo View::factory('lk/pages/newmsg', array(
             //'info' => Model::factory('Statements')->getBy('user_id', Cookie::get('userId')),
             //'is_approved' => $result->is_approved,
+            'userPhoto' =>   Cookie::get('userPhoto'),
         ))->render();
     }
 

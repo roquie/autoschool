@@ -54,7 +54,7 @@
                         <div class="span5">
                             <h1 class="group pull-right"
                                 title="Группа">
-                                <?= ($group === 0) ? 'Не определен (а)' : $group->name?>
+                                <?= ($group === 0) ? '' : $group->name?>
                             </h1>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                     <li><a href="<?=URL::site('lk/ajax/statement')?>" id="ajaxLink"><i class="icon-file"></i>Заявление</a></li>
                     <li><a href="<?=URL::site('lk/ajax/contract')?>" id="ajaxLink"><i class="icon-file"></i>Договор</a></li>
                     <li><a href="<?=URL::site('lk/ajax/download')?>" id="ajaxLink"><i class="icon-cloud-download"></i>Загрузки</a></li>
-                    <li><a href="<?=URL::site('chat/help')?>" id="ajaxLink">&nbsp;<i class="icon-info"></i>&nbsp;Помощь</a></li>
+                    <li><a href="<?=URL::site('lk/ajax/newmsg')?>" id="ajaxLink">&nbsp;<i class="icon-info"></i>&nbsp;Помощь</a></li>
                 </ul>
             </div>
 

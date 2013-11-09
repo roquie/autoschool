@@ -218,12 +218,6 @@
                     if (that.options.debug) {
                         console.log('Данные получены: ' + response);
                     }
-                    if (that.isForm) {
-                        if (that.options.debug) {
-                            console.log('Очистка формы');
-                        }
-                        that.$element[0].reset();
-                    }
                     // если callback не передан, то будет использован callback по-умолчанию
                     if (!that.options.functions[that.options.callback] && typeof that.options.functions[that.options.callback] != "function") {
                         that.options.defaultCallback(response, that);

@@ -152,7 +152,7 @@
                     <div class="avatar pull-left">
                         <?=HTML::image($userPhoto)?>
                     </div>
-                    <div contenteditable="true" class="message pull-left" id="msg" title="Нажмите Enter для отправки сообщения и Shift+Enter для переноса" data-value="Введите ваше сообщение"></div>
+                    <div contenteditable="true" class="message pull-left" id="msg" title="Нажмите Enter для отправки сообщения и Shift+Enter для переноса" placeholder="Введите ваше сообщение"></div>
                 </div>
             </div>
         </div>

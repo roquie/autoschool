@@ -92,7 +92,7 @@ $(function() {
         var $this = $(this),
             to = $('#to'),
             val = '';
-        if ( to.val() === to.data('value') ) {
+        if ( to.val() === to.attr('placeholder') ) {
             to.val('');
         }
         val = to.val();
@@ -111,7 +111,7 @@ $(function() {
         }
         to.val(val).css({color:'#000'});
         if ( to.val() === '' ) {
-            to.val(to.data('value')).css({color : '#999'});
+            to.placeholder('reset');
         }
     });
     /**

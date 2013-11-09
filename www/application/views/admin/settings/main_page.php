@@ -10,9 +10,9 @@
                 </form>
                 <form style="padding: 0 20px 20px 0; width: 220px; padding-bottom: 50px" action="<?=URL::site('admin/settings/smtp')?>" method="post" > <!-- id="form4" data-url="" -->
                     <label for="login">E-mail:</label>
-                    <input name="login" id="login" type="text" class="placeholder" data-value="example@gmail.com">
+                    <input name="login" id="login" type="text" placeholder="example@gmail.com">
                     <label for="password">Пароль:</label>
-                    <input name="password" id="password" type="password" class="placeholder" data-value="*********"><br>
+                    <input name="password" id="password" type="password" placeholder="Пароль"><br>
                     <input type="submit" class="btn btn-info pull-right" value="Готово">
                 </form>
             </div>

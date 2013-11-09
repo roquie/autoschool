@@ -63,7 +63,7 @@ $(function() {
         errorValidate : function() {
             noty({
                 type : 'error',
-                message : 'Ошибки заполнения полей'
+                message : 'Ошибка заполнения полей'
             });
         },
         worked : function() {
@@ -73,16 +73,19 @@ $(function() {
                 message:'Идёт обработка данных...'
             });
         },
-        defaultCallback : function(response) {
+        defaultCallback : function(response, that) {
             if (response.status == 'error' || response.status == 'success') {
                 noty({
                     type : response.status,
                     message : response.msg
                 });
             }
+            if (that.isForm && response.status == 'success') {
+                that.$element[0].reset();
+            }
         },
         functions : {
-            check_pass : function(response) {
+            check_pass : function(response, that) {
                 if (response.status == 'error') {
                     noty({
                         type : response.status,
@@ -90,23 +93,34 @@ $(function() {
                     });
                 }
                 if (response.status == 'success') {
-                    $('#check_pass').css(
-                        {
-                            display: 'none'
-                        }
-                    );
-                    $('#change_email').css(
-                        {
-                            display: 'block'
-                        }
-                    );
-
+                    if (that.isForm) {
+                        that.$element[0].reset();
+                    }
+                    $('form#toggle_pass_email').toggle('slow');
+                }
+            },
+            change_email : function(response, that) {
+                if (response.status == 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status == 'success') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                    $('#userEmail').text($('#new_email').val());
+                    if (that.isForm) {
+                        that.$element[0].reset();
+                    }
+                    $('form#toggle_pass_email').toggle('slow');
                 }
             }
         }
     });
 
-    $('._lk_link').ajaxForm();
-
-    $('._lk_form').ajaxForm();
+    //$('._lk_link').ajaxForm();
+    //$('._lk_form').ajaxForm();
 });

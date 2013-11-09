@@ -39,12 +39,12 @@ function validate(form, is_balloon, options, fields) {
                     }
                     break;
                 case 'input' :
-                    if ( delSpace(element.val()) === '' || ( element.data('value') && (element.val() === element.data('value')) ) ) {
+                    if ( delSpace(element.val()) === '' || ( element.attr('placeholder') && (element.val() === element.attr('placeholder')) ) ) {
                         empty = true;
                     }
                     break;
                 case 'textarea' :
-                    if ( delSpace(element.val()) === '' || ( element.data('value') && (element.val() === element.data('value')) ) ) {
+                    if ( delSpace(element.val()) === '' || ( element.attr('placeholder') && (element.val() === element.attr('placeholder')) ) ) {
                         empty = true;
                     }
                     break;

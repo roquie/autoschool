@@ -14,7 +14,7 @@
                         <div class="well well-large" id="tplForm">
                             <form action="#" method="post">
                                 <legend>Текст</legend>
-                                <input style="width: 98%"  type="text" name="to" id="title" class="placeholder" data-value="Название шаблона">
+                                <input style="width: 98%"  type="text" name="to" id="title" class="placeholder" placeholder="Название шаблона">
                                 <!-- Редактор -->
                                 <?=View::factory('admin/mail/editor')
                                     ->set('id_div_editor', 'editorTpl')
@@ -55,7 +55,7 @@
 
                             <form action="#" method="post">
                                 <legend>Текст</legend>
-                                <input style="width: 98%"  type="text" name="to" id="titleTpl" class="placeholder" data-value="Название шаблона">
+                                <input style="width: 98%"  type="text" name="to" id="titleTpl" placeholder="Название шаблона">
 
                                 <!-- Редактор -->
                                 <?=View::factory('admin/mail/editor')

@@ -157,7 +157,7 @@ $(function() {
             action,
             field,
             phone = $('#telephone_d');
-        if (phone.val() === phone.data('value')) {
+        if (phone.val() === phone.attr('placeholder')) {
             phone.val('');
         }
         $.each($('#statement').serializeArray(), function(k, v) {

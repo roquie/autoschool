@@ -32,7 +32,7 @@ $(function() {
             data = {};
         data.title = name.val().replace(regexp,"");
         data.text  = tpl.html().replace(regexp,"");
-        if ( name.val() != '' && name.val() != name.data('value') && tpl.html() != '' ) {
+        if ( name.val() != '' && name.val() != name.attr('placeholder') && tpl.text() != '' ) {
             work_add = true;
             $.post(
                 action,

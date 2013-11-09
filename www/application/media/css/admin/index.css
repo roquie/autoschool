@@ -42,10 +42,12 @@
 .listener.table-hover tbody tr:hover > th {
   cursor: pointer;
 }
-.statement tbody {
+.statement tbody,
+.contract tbody {
   overflow: auto;
 }
-.statement tbody tr:nth-child(1) td {
+.statement tbody tr:nth-child(1) td,
+.contract tbody tr:nth-child(1) td {
   border-top: none;
 }
 .status {

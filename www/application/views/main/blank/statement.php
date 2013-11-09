@@ -67,8 +67,8 @@
                             <div class="span6 pull-right">
 
                                 <label>Паспорт</label>
-                                <input class="span6" type="text" name="statement[pasport_seriya]" id="seriya" data-value="серия" data-req="true" tabindex="8">
-                                <input class="span6 pull-right" type="text" name="statement[pasport_nomer]" id="nomer" data-value="номер" data-req="true" tabindex="9">
+                                <input class="span6" type="text" name="statement[pasport_seriya]" id="seriya" placeholder="серия" data-req="true" tabindex="8">
+                                <input class="span6 pull-right" type="text" name="statement[pasport_nomer]" id="nomer" placeholder="номер" data-req="true" tabindex="9">
 
                                 <label for="pasport_data_vyda4i">Дата выдачи паспорта</label>
                                 <div class="input-append input-block-level">
@@ -80,8 +80,8 @@
                                 <input type="text" id="from" name="statement[pasport_kem_vydan]" data-req="true" tabindex="11">
 
                                 <label>Телефон</label>
-                                <input class="span6" type="text" id="telephone_m" name="statement[mob_tel]" data-value="мобильный" data-req="true"  tabindex="12">
-                                <input class="span6 pull-right" type="text" id="telephone_d" name="statement[dom_tel]" data-value="домашний" tabindex="13">
+                                <input class="span6" type="text" id="telephone_m" name="statement[mob_tel]" placeholder="мобильный" data-req="true"  tabindex="12">
+                                <input class="span6 pull-right" type="text" id="telephone_d" name="statement[dom_tel]" placeholder="домашний" tabindex="13">
 
                                 <label for="obrazovanie">Образование</label>
                                 <select id="obrazovanie" name="statement[education_id]" style="width: 440px" data-req="true" tabindex="14">
@@ -146,8 +146,8 @@
                                     <div class="span6 pull-right">
 
                                         <label>Паспорт</label>
-                                        <input class="span6" type="text" name="contract[pasport_seriya]" id="pasport_seriyaCustomer" data-value="серия" tabindex="20">
-                                        <input class="span6 pull-right" type="text" name="contract[pasport_nomer]" id="pasport_nomerCustomer" data-value="номер" tabindex="21">
+                                        <input class="span6" type="text" name="contract[pasport_seriya]" id="pasport_seriyaCustomer" placeholder="серия" tabindex="20">
+                                        <input class="span6 pull-right" type="text" name="contract[pasport_nomer]" id="pasport_nomerCustomer" placeholder="номер" tabindex="21">
 
                                         <label for="fromCustomer">Кем выдан паспорт</label>
                                         <input type="text" id="fromCustomer" name="contract[pasport_kem_vydan]" tabindex="22">

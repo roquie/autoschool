@@ -35,7 +35,9 @@ class Controller_Admin extends Controller_Template
 
     public function action_index()
     {
-        $this->template->content = View::factory('admin/index');
+        $this->template->content = View::factory('admin/index', array(
+            'audience' => Model::factory('Users')->getNoApproved()
+        ));
     }
 
     public function action_mail()

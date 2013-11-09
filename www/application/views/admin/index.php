@@ -16,14 +16,15 @@
                         </tr>
                     </thead>
                     <tbody id="slimScroll">
-<!--                        <?/* foreach ($audience as $listener) : */?>
-                        --><?/* endforeach; */?>
-                    <? for ($i=0;$i<40;$i++) : ?>
-                        <tr class="_admins_link" data-callback="get_user" data-url="<?=URL::site('Users')?>">
-                            <td><?=$i?></td>
-                            <td>Слушатель <?=$i?></td>
-                        </tr>
-                    <? endfor; ?>
+                        <?
+                            $i = 0;
+                            foreach ($audience as $listener) :
+                        ?>
+                            <tr class="_admins_link" data-callback="get_user" data-url="<?=URL::site('Users')?>">
+                                <td><?=++$i?></td>
+                                <td><?=$listener?></td>
+                            </tr>
+                        <? endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -70,67 +71,67 @@
 
                             <tr>
                                 <td>Фамилия</td>
-                                <td><a href="#" data-name="famil" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Мельников</a></td>
+                                <td>Мельников</td>
                             </tr>
                             <tr>
                                 <td>Имя</td>
-                                <td><a href="#" data-name="imya" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Виктор</a></td>
+                                <td>Виктор</td>
                             </tr>
                             <tr>
                                 <td>Отчество</td>
-                                <td><a href="#" data-name="ot4estvo" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Игоревич</a></td>
+                                <td>Игоревич</td>
                             </tr>
                             <tr>
                                 <td>Дата рождения</td>
-                                <td><a href="#" data-name="data_rojdeniya" data-type="combodate" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">08.10.1980</a></td>
+                                <td>08.10.1980</td>
                             </tr>
                             <tr>
                                 <td>Гражданство</td>
-                                <td><a href="#" id="grajdanstvo" data-action="http://autoschool.ru/lk/ajax/getNat" data-type="select2" data-pk="1" data-name="nationality_id" data-value="1" class="editable editable-click editable-disabled" tabindex="-1">РФ</a></td>
+                                <td>РФ</td>
                             </tr>
                             <tr>
                                 <td>Место рождения</td>
-                                <td><a href="#" data-name="mesto_rojdeniya" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Москва</a></td>
+                                <td>Москва</td>
                             </tr>
                             <tr>
                                 <td>Адрес регистрации по паспорту</td>
-                                <td><a href="#" data-name="adres_reg_po_pasporty" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Адрес регистрации по паспорту</a></td>
+                                <td>Адрес регистрации по паспорту</td>
                             </tr>
                             <tr>
                                 <td>Временная регистрация</td>
-                                <td><a href="#" data-type="text" data-name="vrem_reg" data-pk="" class="editable editable-click editable-disabled" tabindex="-1"></a></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Паспорт серия</td>
-                                <td><a href="#" data-name="pasport_seriya" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">123123</a></td>
+                                <td>123123</td>
                             </tr>
                             <tr>
                                 <td>Паспорт номер</td>
-                                <td><a href="#" data-name="pasport_nome" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">11231231</a></td>
+                                <td>11231231</td>
                             </tr>
                             <tr>
                                 <td>Дата выдачи паспорта</td>
-                                <td><a href="#" data-name="pasport_data_vyda4i" data-type="combodate" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">02.10.2013</a></td>
+                                <td>02.10.2013</td>
                             </tr>
                             <tr>
                                 <td>Кем выдан паспорт</td>
-                                <td><a href="#" data-name="pasport_kem_vydan" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">ОВД ЧЕРТАНОВО</a></td>
+                                <td>ОВД ЧЕРТАНОВО</td>
                             </tr>
                             <tr>
                                 <td>Мобильный телефон</td>
-                                <td><a href="#" data-name="mob_tel" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">8 (312) 312-31-21</a></td>
+                                <td>8 (312) 312-31-21</td>
                             </tr>
                             <tr>
                                 <td>Домашний телефон</td>
-                                <td><a href="#" data-name="dom_tel" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">8 (123) 123-12-31</a></td>
+                                <td>8 (123) 123-12-31</td>
                             </tr>
                             <tr>
                                 <td>Образование</td>
-                                <td><a href="#" id="education" data-action="http://autoschool.ru/lk/ajax/getEdu" data-type="select2" data-pk="1" data-name="education_id" data-value="1" class="editable editable-click editable-disabled" tabindex="-1">Высшее</a></td>
+                                <td>Высшее</td>
                             </tr>
                             <tr>
                                 <td>Место работы</td>
-                                <td><a href="#" data-name="mesto_raboty" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Фриланс</a></td>
+                                <td>Фриланс</td>
                             </tr>
 
                             </tbody>
@@ -138,40 +139,40 @@
                     </div>
 
                     <div class="tab-pane" id="tab2">
-                        <table class="table table-striped statement">
+                        <table class="table table-striped contract">
                             <tbody>
 
                             <tr>
                                 <td>Фамилия</td>
-                                <td><a href="#" data-name="famil" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Мельников</a></td>
+                                <td>Мельников</td>
                             </tr>
                             <tr>
                                 <td>Имя</td>
-                                <td><a href="#" data-name="imya" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Виктор</a></td>
+                                <td>Виктор</td>
                             </tr>
                             <tr>
                                 <td>Отчество</td>
-                                <td><a href="#" data-name="ot4estvo" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Игоревич</a></td>
+                                <td>Игоревич</td>
                             </tr>
                             <tr>
                                 <td>Адрес регистрации по паспорту</td>
-                                <td><a href="#" data-name="adres_reg_po_pasporty" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Адрес регистрации по паспорту</a></td>
+                                <td>Адрес регистрации по паспорту</td>
                             </tr>
                             <tr>
                                 <td>Паспорт серия</td>
-                                <td><a href="#" data-name="pasport_seriya" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">123123</a></td>
+                                <td>123123</td>
                             </tr>
                             <tr>
                                 <td>Паспорт номер</td>
-                                <td><a href="#" data-name="pasport_nome" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">11231231</a></td>
+                                <td>11231231</td>
                             </tr>
                             <tr>
                                 <td>Кем выдан паспорт</td>
-                                <td><a href="#" data-name="pasport_kem_vydan" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">ОВД ЧЕРТАНОВО</a></td>
+                                <td>ОВД ЧЕРТАНОВО</td>
                             </tr>
                             <tr>
                                 <td>Мобильный телефон</td>
-                                <td><a href="#" data-name="phone" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">8 (312) 312-31-21</a></td>
+                                <td>8 (312) 312-31-21</td>
                             </tr>
 
                             </tbody>

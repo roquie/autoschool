@@ -49,7 +49,7 @@ $(document).ready(function() {
             return false;
         }
         var mail = $(this).find('#email');
-        if(mail.val() != '' && mail.val() != mail.data('value')){
+        if(mail.val() != '' && mail.val() != mail.attr('placeholder')){
             if( isValidateEmail(mail.val()) ) {
                 var data = $(this).serialize(),
                     action = $(this).data('url');
@@ -90,7 +90,7 @@ $(document).ready(function() {
             return false;
         }
         var email = $('#autocomplete');
-        if(email.val() != '' && email.val() != email.data('value')){
+        if(email.val() != '' && email.val() != email.attr('placeholder')){
             if ($.inArray(email.val(), project) > -1) {
                 var action = $(this).data('url');
                 work_form2 = true;
@@ -159,7 +159,7 @@ $(document).ready(function() {
             });
         }
         var mail = $(this).find('#editEmail');
-        if(mail.val() != '' && mail.val() != mail.data('value')) {
+        if(mail.val() != '' && mail.val() != mail.attr('placeholder')) {
             if( isValidateEmail(mail.val()) ) {
                 var data = $(this).serialize(),
                     action = $(this).data('url');
@@ -255,7 +255,7 @@ $(document).ready(function() {
             action = $(this).data('url'),
             mail = $(this).find('#login'),
             pass = $(this).find('#password');
-        if(mail.val() != '' && mail.val() != mail.data('value') && pass.val() != '') {
+        if(mail.val() != '' && mail.val() != mail.attr('placeholder') && pass.val() != '') {
             if( isValidateEmail(mail.val()) ) {
                 work_form4 = true;
                 $.post(
@@ -360,7 +360,7 @@ $(document).ready(function() {
         event.preventDefault();
         var name = $('#nameGr'),
             action = $(this).data('url');
-        if(name.val() != '' && name.val() != name.data('value')) {
+        if(name.val() != '' && name.val() != name.attr('placeholder')) {
             $.post(
                 action,
                 { name : name.val() },
@@ -475,7 +475,7 @@ $(document).ready(function() {
         event.preventDefault();
         var name = $('#nameD'),
             action = $(this).data('url');
-        if(name.val() != '' && name.val() != name.data('value')) {
+        if(name.val() != '' && name.val() != name.attr('placeholder')) {
             $.post(
                 action,
                 { name : name.val() },

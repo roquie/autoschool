@@ -25,10 +25,10 @@
                         <legend>Сообщение</legend>
                         <!--контейнер с инпутами Кому, Тема-->
                         <div>
-                            <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-error="Заполните поле Кому" data-value="Кому" >
+                            <input style="width: 98%"  type="text" name="to" id="to" data-req="true" data-error="Заполните поле Кому" placeholder="Кому" >
                         </div>
                         <div>
-                            <input style="width: 98%" type="text" id="subject" name="subject" data-req="true" data-error="Заполните поле Тема" data-value="Тема" >
+                            <input style="width: 98%" type="text" id="subject" name="subject" data-req="true" data-error="Заполните поле Тема" placeholder="Тема" >
                         </div>
                         <!-- Редактор -->
                         <?=View::factory('admin/mail/editor')

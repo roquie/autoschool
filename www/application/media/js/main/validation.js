@@ -118,7 +118,7 @@
                         }
                         break;
                     default :
-                        if ( this.delSpace(el.val()) === '' || ( el.data('value') && this.delSpace(el.val()) === el.data('value') ) ) {
+                        if ( this.delSpace(el.val()) === '' || ( el.attr('placeholder') && this.delSpace(el.val()) === el.attr('placeholder') ) ) {
                             empty = true;
                         }
                         break;
@@ -167,12 +167,12 @@
                             }
                             break;
                         case 'input' :
-                            if ( this.delSpace(element.val()) === '' || ( element.data('value') && (element.val() === element.data('value')) ) ) {
+                            if ( this.delSpace(element.val()) === '' || ( element.attr('placeholder') && (element.val() === element.attr('placeholder')) ) ) {
                                 empty = true;
                             }
                             break;
                         case 'textarea' :
-                            if ( this.delSpace(element.val()) === '' || ( element.data('value') && (element.val() === element.data('value')) ) ) {
+                            if ( this.delSpace(element.val()) === '' || ( element.attr('placeholder') && (element.val() === element.attr('placeholder')) ) ) {
                                 empty = true;
                             }
                             break;

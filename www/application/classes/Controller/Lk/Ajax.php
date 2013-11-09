@@ -138,11 +138,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
         $data = array(
-            $this->request->post('name') => $value
+            $this->request->post('name'),
+            $value
         );
 
 
-        $result = Model::factory('Statements')->upd(Cookie::get('userId'), $data);
+        $result = Model::factory('Statements')->upd(array('user_id', Cookie::get('userId')), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
         else
@@ -158,11 +159,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $value = Security::xss_clean($this->request->post('value'));
 
         $data = array(
-            $this->request->post('name') => $value
+            $this->request->post('name'),
+            $value
         );
 
 
-        $result = Model::factory('Contracts')->upd(Cookie::get('userId'), $data);
+        $result = Model::factory('Contracts')->upd(array('user_id', Cookie::get('userId')), $data);
 
         if (!$result)
             $this->ajax_msg('Договор изменению не поддается :(', 'error');

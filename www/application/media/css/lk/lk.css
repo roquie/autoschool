@@ -27,6 +27,11 @@ body {
   min-height: 90px;
   border-bottom: 1px solid #ccc;
 }
+.back1 #userName,
+.back1 #userFamil {
+  font-size: 16pt;
+  font-weight: 400;
+}
 h1 {
   color: #ffffff;
   text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);

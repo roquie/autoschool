@@ -111,6 +111,7 @@ $(function() {
                         type : response.status,
                         message : response.msg
                     });
+                    $('#userEmail').text($('#new_email').val());
                     if (that.isForm) {
                         that.$element[0].reset();
                     }

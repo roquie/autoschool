@@ -49,7 +49,7 @@
                 <div class="span9 pull-right">
                     <div class="row">
                         <div class="span4">
-                            <h1><?=$statement->famil.' '.$statement->imya?></h1>
+                            <h1><span id="userFamil"><?=$statement->famil?></span>&nbsp;<span id="userName"><?=$statement->imya?></span></h1>
                         </div>
                         <div class="span5">
                             <h1 class="group pull-right"
@@ -59,8 +59,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="span4 settings">
-                            <i class="icon-envelope-alt"></i> <?=$userEmail?>, <a href="<?=URL::site('lk/ajax/settings')?>" id="ajaxLink"><i class="icon-cog"></i> Настройки</a>
+                        <div class="span6 settings">
+                            <i class="icon-envelope-alt"></i> <span id="userEmail"><?=$userEmail?></span>, <a href="<?=URL::site('lk/ajax/settings')?>" id="ajaxLink"><i class="icon-cog"></i> Настройки</a>
                         </div>
                     </div>
                 </div>

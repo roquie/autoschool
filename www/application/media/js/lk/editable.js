@@ -10,7 +10,6 @@ $.fn.editable.defaults.ajaxOptions = {
 $.fn.editableform.defaults.url = $('.data').data('url');
 $.fn.editable.defaults.emptytext = 'Пусто';
 $.fn.editableform.defaults.success = function(response, newValue) {
-    console.log(response.data);
     if (response.status === 'empty') return response.msg;
     if (response.status === 'error') noty({
         type : response.status,
@@ -55,12 +54,21 @@ $(function() {
         $(this).hide();
         $('#disable').show();
         $('.editable').editable('enable');
-    });
-
-    $('body').on('click', '#disable', function() {
+    }).on('click', '#disable', function() {
         $('.editable').editable('disable');
         $(this).hide();
         $('#enable').show();
+    }).on('click', '.editable-submit', function() {
+        var field = $(this).closest('tr').find('a').data('name'),
+            input = $(this).closest('.control-group').find('input.input-medium');
+        switch (field) {
+            case 'imya' :
+                $('#userName').text(input.val());
+                break;
+            case 'famil' :
+                $('#userFamil').text(input.val());
+                break;
+        }
     });
 
     function getData(obj) {

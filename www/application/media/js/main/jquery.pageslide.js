@@ -31,7 +31,9 @@
                 },
                 body_wrap_css = {
                     position : 'relative',
-                    zIndex   : '0'
+                    zIndex   : '0',
+                    'margin-right' : 'auto',
+                    'margin-left' : 'auto'
                 },
                 body = $('#wrap');
             this.$element = $(element);
@@ -46,16 +48,13 @@
                     psSlideWrap = $('<div/>', {
                         id : 'pageslide-slide-wrap'
                     });
-                psBodyWrap.css(body_wrap_css).width( body.width() );
+                psBodyWrap.css(body_wrap_css);
                 body.contents().wrapAll( psBodyWrap ); // оборчиваем всё содержимое body
                 psSlideContent.width( this.options.width );
                 psSlideWrap.css(pageslide_wrap_css).append( psSlideContent );
                 body.append( psSlideWrap );
             }
             psSlideContent.html($(this.$element.attr('href')).html()).hide();
-            $(window).on('resize', function() {
-                psBodyWrap.width( body.width() );
-            });
             this.$element.on('click', $.proxy(this.open, this));
 
         },

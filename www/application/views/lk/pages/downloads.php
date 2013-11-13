@@ -7,7 +7,7 @@
                 <div class="span1">
                     <img src="<?=URL::site('img/lk/word.png')?>" alt="word"/>
                 </div>
-                <div class="span3" style="">
+                <div class="span3">
                     <a href="<?=URL::site('lk/downloadStatement')?>">Заявление</a>
                     <p class="muted">Размер: 12.5 кб; Формат: docx</p>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="span1">
                     <img src="<?=URL::site('img/lk/word.png')?>" alt="word"/>
                 </div>
-                <div class="span3" style="">
+                <div class="span3">
                     <a href="<?=URL::site('lk/downloadContract')?>">Договор</a>
                     <p class="muted">Размер: 26.1 кб; Формат: docx</p>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="span1">
                     <img src="<?=URL::site('img/lk/word.png')?>" alt="word"/>
                 </div>
-                <div class="span3" style="">
+                <div class="span3">
                     <a href="<?=URL::site('lk/downloadTicket')?>">Квитанция</a>
                     <p class="muted">Размер: 12 кб; Формат: docx</p>
                 </div>

@@ -35,7 +35,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         if ($result)
             if ($result->password === $this->hash($this->request->post('data.check_password')))
-                $this->ajax_msg('true'); // так тебе отсылать? Чтобы ты заменил одну форму на другую о_О
+                $this->ajax_msg('true');
          else
             $this->ajax_msg('Пароль не совпадает', 'error');
     }

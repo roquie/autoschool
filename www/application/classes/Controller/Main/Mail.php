@@ -3,6 +3,20 @@
 class Controller_Main_Mail extends Controller_Ajax_Main
 {
 
+    public function action_check_captcha()
+    {
+        Captcha::valid($this->request->post('data.captcha'))
+            ?
+                $this->ajax_msg('true')
+            :   $this->ajax_msg('bad', 'error')
+            ;
+    }
+
+    public function action_upd_captcha()
+    {
+        $this->ajax_data(Captcha::instance()->render());
+    }
+
     public function action_send()
     {
 
@@ -12,6 +26,7 @@ class Controller_Main_Mail extends Controller_Ajax_Main
             exit;
 
         } else {
+
             $valid = $this->ajax_xssclean($_POST);
             if ($valid)
                 exit;

@@ -68,10 +68,13 @@
         <div class="span1">
             <?=HTML::image($userPhoto, array('class' => 'imgsend', 'width' => '60px', 'height' => '60px'))?>
         </div>
+
         <p>Тема</p>
         <div class="span5">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
         </div>
+        <a style="margin-left: 80px" class="muted" href="#">ответить</a>
+        <small style="font-size: 10pt;" class="muted pull-right"><?=date('Y-m-d H:i')?></small>
     </div>
 </div>
 <div class="row">
@@ -84,5 +87,7 @@
         <div class="span5">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
         </div>
+        <a style="margin-left: 80px" class="muted" href="#">ответить</a>
+        <small style="font-size: 10pt;" class="muted pull-right"><?=date('Y-m-d H:i')?></small>
     </div>
 </div>

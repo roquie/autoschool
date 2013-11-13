@@ -91,7 +91,8 @@
                 $this = this,
                 no_required = [],
                 element,
-                i;
+                i,
+                type = '';
 
             $.each(this.options.noreq, function(i, v) {
                 no_required.push(v);
@@ -103,10 +104,20 @@
 
             if (this.isForm) {
                 data = this.$element.serializeArray();
+                if (this.options.debug) {
+                    console.log('Данные формы: ');
+                    console.log(data);
+                }
+
                 for (i = 0; i < data.length; i++) {
                     element = $this.$element.find('[name="'+ data[i].name+'"]');
+                    if (this.options.debug) {
+                        console.log('Элемент формы: ');
+                        console.log(element);
+                    }
                     if (!$this.array_value_exists(data[i].name, no_required)) {
-                        switch ( element.attr('type') ) {
+                        type = element.attr('type') ? element.attr('type') : 'text';
+                        switch ( type ) {
                             case 'email' :
                                 if (!$this.isEmail(data[i].value) || $this.delSpace(data[i].value) == '')
                                     empty = true;
@@ -138,6 +149,9 @@
                     this.options.errorValidate(error, $this);
                 }
             } else {
+                if (this.options.debug) {
+                    console.log('Данные ссылки: ' + this.options.params);
+                }
                 for (i = 0; i < this.options.params.length; i++) {
                     element = $('#'+ this.options.params[i]);
                     if (!$this.array_value_exists(this.options.params[i], no_required)) {

@@ -6,7 +6,7 @@ if (count($messages) > 0) :
         <div class="row">
             <div class="span8 allmsg">
                 <div class="span1">
-                    <?=HTML::image((!$line['message']->admin) ? $line['message']->user->photo : $admin_avatar)?>
+                    <?=HTML::image((!$line['message']->admin) ? $line['message']->user->photo : $admin_avatar, array('class' => 'imgsend', 'width' => '60px', 'height' => '60px'))?>
                 </div>
                 <div class="span7">
                     <? if ($line['message']->is_read) : ?>

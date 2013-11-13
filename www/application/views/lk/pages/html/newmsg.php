@@ -4,7 +4,7 @@
             <?=HTML::image($userPhoto, array('class' => 'imgsend', 'width' => '60px', 'height' => '60px'))?>
         </div>
         <div class="span7">
-            <span class="label pull-right">Прочитано</span>
+            <span class="label label-warning pull-right">Отправлено</span>
             <p><?=$title?></p>
 
             <div class="text"><?=$message?></div>

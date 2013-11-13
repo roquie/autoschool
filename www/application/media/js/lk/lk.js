@@ -126,7 +126,7 @@ $(function() {
                     });
                 }
                 if (response.status == 'success') {
-                    $('.messages').prepend(response.msg);
+                    $('.titles').prepend(response.msg);
                     that.$element[0].reset();
                 }
             }

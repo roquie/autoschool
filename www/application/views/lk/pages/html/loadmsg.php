@@ -6,7 +6,7 @@ foreach($messages as $line) :
     <div class="row">
         <div class="span8 allmsg">
             <div class="span1">
-                <?=HTML::image((!$line->admin) ? $line->user->photo : $admin_avatar)?>
+                <?=HTML::image((!$line->admin) ? $line->user->photo : $admin_avatar, array('class' => 'imgsend', 'width' => '60px', 'height' => '60px'))?>
             </div>
             <div class="span7">
                 <? if ($line->is_read) : ?>

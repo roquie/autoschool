@@ -132,7 +132,6 @@ Kohana::modules(array(
        'docxtemplate' => MODPATH.'docxtemplate',
        'twitterapi' => MODPATH.'twitterapi',
        'botobor' => MODPATH.'botobor',
-       'chat' => MODPATH.'chat',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
@@ -185,7 +184,7 @@ Route::set('auth.reg.lk', 'lk(/<action>)')
         'directory'  => 'Lk',
         'controller' => 'Lk',
     ));
-Route::set('auth.reg.lk.ajax', 'lk/ajax(/<action>)')
+Route::set('auth.reg.lk.ajax', 'lk/ajax(/<action>(/<id>))')
     ->defaults(array(
         'directory'  => 'Lk',
         'controller' => 'Ajax',

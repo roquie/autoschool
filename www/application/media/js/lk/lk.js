@@ -117,8 +117,21 @@ $(function() {
                     }
                     $('form#toggle_pass_email').toggle('slow');
                 }
+            },
+            add_message : function(response, that) {
+                if (response.status == 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status == 'success') {
+                    $('.messages').prepend(response.msg);
+                    that.$element[0].reset();
+                }
             }
-        }
+        },
+        debug : true
     });
 
     //$('._lk_link').ajaxForm();

@@ -88,8 +88,17 @@ h1 {
 .menu .nav-pills .icon-file {
   margin-left: 2px;
 }
-.menu .nav-pills span {
+.menu .nav-pills li:nth-child(2) a span {
   margin-left: 4px;
+}
+.menu .nav-pills li:nth-child(3) a span {
+  margin-left: 4px;
+}
+.menu .nav-pills li:nth-child(4) a span {
+  margin-left: 1px;
+}
+.menu .nav-pills li:nth-child(5) a span {
+  margin-left: 3px;
 }
 .menu .nav-pills a,
 .menu .nav-pills :hover,
@@ -97,7 +106,7 @@ h1 {
   color: #2e3436;
 }
 .menu .nav-pills i {
-  margin-right: 15px;
+  margin-right: 16px;
 }
 .menu .nav-pills .active .icon-angle-right {
   float: right;
@@ -106,7 +115,13 @@ h1 {
 .menu .nav-pills .active :hover,
 .menu .nav-pills .active :focus {
   color: #000000;
+  font-weight: 600;
   background: #f5f5f5;
+}
+.menu .nav-pills .active a span,
+.menu .nav-pills .active :hover span,
+.menu .nav-pills .active :focus span {
+  color: #000000;
   font-weight: 600;
 }
 .imgprofile {

@@ -4,7 +4,69 @@
  * Time: 23:31
  */
 $(function() {
-    var text_message = $('#msg');
+
+    var scroll = 2,
+        work = false;
+
+    $('#title').placeholder();
+    $('#message').placeholder();
+
+    $('._lk_form').ajaxForm();
+
+    $('body').on('click', '.allmsg', function(e) {
+        var $this = $(this);
+        $(".titles").hide();
+        $('.write').hide();
+        $('.messages').load($this.data('url'), function() {
+            $(this).removeClass('hide');
+            $('html, body').animate({
+                scrollTop: $('.messages').find('.allmsg').first()
+            });
+        });
+    }).on('click', '.back', function(e) {
+        $(".titles").show();
+        $('.write').show();
+        $('.messages').empty().addClass('hide');
+    });
+
+    /**
+     * Кнопка написать сообщение
+     */
+    $('.enb_dis').on('click', function(e) {
+        e.preventDefault();
+        $('.write .togl').toggle('fast');
+    });
+
+    /**
+     * Дозагрузка сообщений
+     */
+    $('.load').on('click', function(e) {
+        e.preventDefault();
+        var $this = $(this),
+            block =  $('.titles'),
+            action = $this.data('url');
+        work = true;
+        $.post(
+            action,
+            {
+                offset : scroll
+            },
+            function(response) {
+                work = false;
+                if (response.status == 'empty') {
+                    $this.remove();
+                }
+                if (response.status == 'success') {
+                    $this.before(response.msg);
+                }
+            },
+            'json'
+        );
+        scroll++;
+    });
+
+
+/*    var text_message = $('#msg');
     $('#messages').slimScroll({
         height: $("#messages").height(),
         railVisible: true,
@@ -66,4 +128,5 @@ $(function() {
     }
 
     text_message.placeholder();
+    */
 });

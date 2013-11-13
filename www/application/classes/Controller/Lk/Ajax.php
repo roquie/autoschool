@@ -151,7 +151,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     }
 
     /**
-     * изменеине договора
+     * изменение договора
      */
     public function action_changeContract()
     {
@@ -261,15 +261,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     }
 
     /**
-     * Возвращает страницу из личного кабинета "Сообщения"
+     * Возвращает страницу из личного кабинета "Группа"
      */
     public function action_messages()
     {
-
         $result = Model::factory('News')->allWhere('group_id',  Cookie::get('group_id'));
-
-
-
         if (!$result) {
             $data[] = array(
                 'title' => 'Группа не определена администратором',
@@ -281,7 +277,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                 $data[] = $v->as_array();
 
         }
-
         echo View::factory('lk/pages/messages')
             ->set('messages', $data)
             ->render();
@@ -292,7 +287,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_statement()
     {
-
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
         echo View::factory('lk/pages/statement', array(
@@ -302,17 +296,86 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     }
 
     /**
-     * Возвращает страницу из личного кабинета "Заявление"
+     * Возвращает страницу из личного кабинета "Помощь"
      */
-    public function action_newmsg()
+    public function action_help()
+    {
+        echo View::factory('lk/pages/help', array(
+            'messages' => Model::factory('Titles')->getTitles(Cookie::get('userId')),
+            'userPhoto' => Cookie::get('userPhoto'),
+            'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
+        ))->render();
+    }
+
+    /**
+     * Добавление нового сообщения
+     */
+    public function action_addMessage()
     {
 
-        //$result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
+        if ($this->ajax_xssclean($_POST['data'])) {
+            exit;
+        }
 
-        echo View::factory('lk/pages/newmsg', array(
-            //'info' => Model::factory('Statements')->getBy('user_id', Cookie::get('userId')),
-            //'is_approved' => $result->is_approved,
-            'userPhoto' =>   Cookie::get('userPhoto'),
+        $message = $this->request->post('data.message');
+        $title = $this->request->post('data.title');
+
+        $result = Model::factory('Titles')->addRec(array(
+            'user_id' => Cookie::get('userId'),
+            'title' => $title
+        ));
+
+        $add = Model::factory('Messages')->addRec(array(
+            'user_id' => Cookie::get('userId'),
+            'message' => $message,
+            'title_id' => $result
+        ));
+        if (!$add) {
+            $this->ajax_msg('Ошибка при добавлении сообщения','error');
+            exit;
+        }
+
+        $this->ajax_msg(
+            View::factory('lk/pages/html/newmsg', array(
+                'title' => $title,
+                'message' => $message,
+                'userPhoto' =>   Cookie::get('userPhoto'),
+            ))->render()
+        );
+
+    }
+
+    /**
+     * Дозагрузка тем
+     */
+    public function action_load()
+    {
+        $result = Model::factory('Titles')->getTitles(Cookie::get('userId'), $this->request->post('offset'));
+        if (empty($result)) {
+            $this->ajax_msg('', 'empty');
+            exit;
+        }
+
+        $this->ajax_msg(
+            View::factory('lk/pages/html/loadtitle', array(
+                'messages' => $result,
+                'userPhoto' => Cookie::get('userPhoto'),
+                'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
+            ))->render()
+        );
+    }
+
+    /**
+     * Заргузка сообщений выбранной темы
+     */
+    public function action_load_message()
+    {
+        $id = $this->request->param('id');
+        $data = Model::factory('Messages')->allWhere('title_id', $id);
+        echo View::factory('lk/pages/html/loadmsg', array(
+            'messages' => $data,
+            'userPhoto' => Cookie::get('userPhoto'),
+            'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
         ))->render();
     }
 
@@ -334,18 +397,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_download()
     {
-
         echo View::factory('lk/pages/downloads')->render();
-    }
-
-    /**
-     * Возвращает страницу из личного кабинета "Помощь"
-     */
-    public function action_help()
-    {
-        echo View::factory('lk/pages/help', array(
-            'userPhoto' => Cookie::get('userPhoto')
-        ))->render();
     }
 
     /**

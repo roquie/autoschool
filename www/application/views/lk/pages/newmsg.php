@@ -23,6 +23,44 @@
     </div>
 </div>
 
+    <?
+        if (count($messages) > 0) :
+            foreach($messages as $message) :
+    ?>
+                <div class="row">
+                    <div class="span8 allmsg">
+                        <? if ($message->is_read) : ?>
+                                <span class="label pull-right">Прочитано</span>
+                        <? else : ?>
+                            <span class="label label-success pull-right">Новое</span>
+                        <? endif; ?>
+                        <div class="span1">
+                            <?=HTML::image($userPhoto, array('class' => 'imgsend', 'width' => '60px', 'height' => '60px'))?>
+                        </div>
+                        <p>Тема</p>
+                        <div class="span5">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        </div>
+                    </div>
+                </div>
+
+        <div id="message">
+            <? $datetime = strtotime($messages[$i]->datetime); ?>
+            <div class="time pull-right"><?=(date('d', $datetime) < date('d')) ? date('d.m.y', $datetime) : date('H:i:s', $datetime)?></div>
+            <div class="avatar pull-left">
+                <?=HTML::image((!$messages[$i]->admin) ? $messages[$i]->user->photo : $config['admin']['avatar'])?>
+            </div>
+            <div class="text pull-left">
+                <?=$messages[$i]->message?>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    <?
+            endforeach;
+        else :
+    ?>
+        <div class="text-center" id="clear-block"><i class="icon-frown icon-large"></i> Переписка пуста</div>
+    <? endif; ?>
 
 <div class="row">
     <div class="span8 allmsg">

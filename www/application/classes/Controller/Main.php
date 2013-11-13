@@ -23,7 +23,8 @@ class Controller_Main extends Controller_Template
         $contact = $bform->getCode();
         $this->template->content =
             View::factory('main/index')
-                 ->set('contactForm', $contact);
+                 ->set('contactForm', $contact)
+                 ->set('captcha', Captcha::instance()->render());
     }
 
     public function action_statement()

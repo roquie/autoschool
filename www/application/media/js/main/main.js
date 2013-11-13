@@ -69,7 +69,64 @@ $(function() {
                 if (response.status == 'success') {
                     $('#popup').find('form').toggle('slow');
                 }
+            },
+            contact_form : function(response) {
+                if (response.status == 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+
+                if (response.status == 'success') {
+                var form = $('#send');
+                    $.post(
+                        form.attr('action'),
+                        form.serialize(),
+                        function (response) {
+                            if (response.status == 'error') {
+                                noty({
+                                    type : response.status,
+                                    message : response.msg
+                                });
+                            }
+                            if (response.status == 'success') {
+                                $('#myModal')
+                                    .css({display:'none'})
+                                    .attr('aria-hidden', true)
+                                    .removeClass('in');
+
+                                $('.modal-backdrop')
+                                    .remove();
+
+                                noty({
+                                    type : response.status,
+                                    message : response.msg
+                                });
+
+                            }
+                        },
+                        'json'
+                    );
+
+
+
+                }
+            },
+            upd_captcha : function(response) {
+               if (response.status == 'success') {
+                   //$('captcha_img').attr({src: 'captcha/default'});
+                    //alert(1);
+                   /*$('#myModal')
+                       .css({display:'block'})
+                       .attr('aria-hidden', false)
+                       .toggleClass('in');
+                    $('body').append('<div class="modal-backdrop fade in"></div>');*/
+
+                   $('._contacts').prepend(response.data);
+                }
             }
+
         }
     });
     /**
@@ -78,6 +135,8 @@ $(function() {
     $('._mains_link').ajaxForm();
     $('._mains_form').ajaxForm();
 
+    $('._contacts').ajaxForm();
+    $('._upd_captcha').ajaxForm();
     /**
      * Обновление новостей
      */

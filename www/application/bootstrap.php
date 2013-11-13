@@ -133,7 +133,7 @@ Kohana::modules(array(
        'twitterapi' => MODPATH.'twitterapi',
        'botobor' => MODPATH.'botobor',
        'chat' => MODPATH.'chat',
-      //  '' => MODPATH.'',
+        'captcha' => MODPATH.'captcha',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',

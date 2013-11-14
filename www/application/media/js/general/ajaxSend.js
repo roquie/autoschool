@@ -67,7 +67,9 @@
             this.metadata = this.$element.data();
             this.options = $.extend( {}, $.fn[pluginName].defaults, e.data, this.metadata);
             this.isForm = (this.$element.is('form')) ? true : false;
-            this.work = false;
+            if (this.work == 'undefined') {
+                this.work = false;
+            }
             this.options.noreq = this.options.noreq.split(this.options.separator);
             this.options.params = this.options.params.split(this.options.separator);
             if (this.options.validate) {
@@ -203,10 +205,10 @@
             var that = this;
             if (this.work) {
                 this.options.worked();
-                return false;
                 if (this.options.debug) {
                     console.log('форма уже отправлена, ждём ответ');
                 }
+                return false;
             }
             this.work = true;
 
@@ -230,8 +232,7 @@
                 },
                 success : function(response, textStatus, jqXHR){
                     if (that.options.debug) {
-                        console.log('Данные получены: ');
-                        console.log(response);
+                        console.log('Данные получены: ' + response);
                     }
                     // если callback не передан, то будет использован callback по-умолчанию
                     if (!that.options.functions[that.options.callback] && typeof that.options.functions[that.options.callback] != "function") {

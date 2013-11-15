@@ -308,11 +308,10 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     }
 
     /**
-     * Добавление нового сообщения
+     * Добавление новой темы
      */
-    public function action_addMessage()
+    public function action_addTitle()
     {
-
         if ($this->ajax_xssclean($_POST['data'])) {
             exit;
         }
@@ -336,13 +335,42 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         }
 
         $this->ajax_msg(
-            View::factory('lk/pages/html/newmsg', array(
+            View::factory('lk/pages/html/newtitle', array(
+                'title_id' => $result,
                 'title' => $title,
                 'message' => $message,
                 'userPhoto' =>   Cookie::get('userPhoto'),
             ))->render()
         );
 
+    }
+
+    /**
+     * Добавление нового сообщения
+     */
+    public function action_addMessage()
+    {
+        if ($this->ajax_xssclean($_POST['data'])) {
+            exit;
+        }
+        $message = $this->request->post('data.message');
+        $id = $this->request->param('id');
+        $add = Model::factory('Messages')->addRec(array(
+            'user_id' => Cookie::get('userId'),
+            'message' => $message,
+            'title_id' => $id
+        ));
+        if (!$add) {
+            $this->ajax_msg('Ошибка при добавлении сообщения','error');
+            exit;
+        }
+
+        $this->ajax_msg(
+            View::factory('lk/pages/html/newmsg', array(
+                'message' => $message,
+                'userPhoto' => Cookie::get('userPhoto'),
+            ))->render()
+        );
     }
 
     /**
@@ -373,6 +401,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $id = $this->request->param('id');
         $data = Model::factory('Messages')->allWhere('title_id', $id);
         echo View::factory('lk/pages/html/loadmsg', array(
+            'title_id' => $id,
             'messages' => $data,
             'userPhoto' => Cookie::get('userPhoto'),
             'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),

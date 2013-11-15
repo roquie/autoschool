@@ -1,33 +1,29 @@
 <?=HTML::style('css/lk/chat.css')?>
 <?=HTML::script('js/lk/help.js')?>
-    <!--
-        эта штука будет вылезать при нажатии на кнопку, так то она по умолчанию скрыта,
-        для того, чтобы было видно больше истории сообщений.
-    -->
-    <!--<button class="enb_dis btn btn-info"><i class="icon-pencil"></i> Написать сообщение</button>-->
 
     <div class="write">
         <button class="enb_dis btn btn-info togl"><i class="icon-pencil"></i> Новая тема</button>
         <div class="row sendmsg hide togl">
             <div class="span8">
-                <h2>Написать сообщение</h2>
+                <h2>Создать новую тему</h2>
                 <div class="span1">
                     <?=HTML::image($userPhoto, array('class' => 'imgsend', 'width' => '60px', 'height' => '60px'))?>
                 </div>
                 <div class="span7">
-                    <form action="<?=URL::site('lk/ajax/addMessage')?>" class="_lk_form" method="POST" data-callback="add_message">
+                    <form action="<?=URL::site('lk/ajax/addTitle')?>" class="_lk_form" method="POST" data-callback="add_title">
                         <input id="title" class="input-xlarge" name="title" placeholder="заголовок" type="text">
                         <br>
                         <textarea name="message" id="message" cols="10" rows="5" placeholder="текст сообщения"></textarea>
                         <br>
-                        <input type="submit" value="Отправить" class="btn btn-info"/><br>
+                        <input type="submit" value="Отправить" class="btn btn-info"/>
+                        <a class="btn btn-primary hideSend" href="#">Скрыть</a>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="messages hide">
+    <div class="messages hide" data-url="<?=URL::site('lk/ajax/addMessage')?>">
 
     </div>
 
@@ -37,7 +33,7 @@
         foreach($messages as $line) :
     ?>
         <? $datetime = strtotime($line['message']->datetime); ?>
-        <div class="row">
+        <div class="row" id="<?=$line['title']->id?>">
             <div class="span8 allmsg" data-url="<?=URL::site('lk/ajax/load_message/'.$line['title']->id)?>" data-callback="load_message">
                 <div class="span1">
                     <?=HTML::image((!$line['message']->admin) ? $line['message']->user->photo : $admin_avatar, array('class' => 'imgsend', 'width' => '60px', 'height' => '60px'))?>

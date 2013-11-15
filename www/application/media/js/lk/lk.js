@@ -118,7 +118,7 @@ $(function() {
                     $('form#toggle_pass_email').toggle('slow');
                 }
             },
-            add_message : function(response, that) {
+            add_title : function(response, that) {
                 if (response.status == 'error') {
                     noty({
                         type : response.status,
@@ -127,13 +127,28 @@ $(function() {
                 }
                 if (response.status == 'success') {
                     $('.titles').prepend(response.msg);
+                    $('.hideSend').trigger('click');
                     that.$element[0].reset();
+                }
+            },
+            add_message : function(response, that) {
+                if (response.status == 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                    $('.hideSend').trigger('click');
+                }
+                if (response.status == 'success') {
+                    var title = $('.titles').find('.row[id="'+$('#title_id').val()+'"]');
+                    title.find('.text').text($('.msg').find('form textarea').val());
+                    $('#mesg_with_title').prepend(response.msg);
+                    that.$element[0].reset();
+                    $('.hidemsg').trigger('click');
                 }
             }
         },
         debug : true
     });
 
-    //$('._lk_link').ajaxForm();
-    //$('._lk_form').ajaxForm();
 });

@@ -3,8 +3,8 @@ if (count($messages) > 0) :
     foreach($messages as $line) :
         ?>
         <? $datetime = strtotime($line['message']->datetime); ?>
-        <div class="row">
-            <div class="span8 allmsg">
+        <div class="row" id="<?=$line['title']->id?>">
+            <div class="span8 allmsg" data-url="<?=URL::site('lk/ajax/load_message/'.$line['title']->id)?>" data-callback="load_message">
                 <div class="span1">
                     <?=HTML::image((!$line['message']->admin) ? $line['message']->user->photo : $admin_avatar, array('class' => 'imgsend', 'width' => '60px', 'height' => '60px'))?>
                 </div>

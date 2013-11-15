@@ -15,18 +15,20 @@ $(function() {
 
     $('body').on('click', '.allmsg', function(e) {
         var $this = $(this);
-        $(".titles").hide();
-        $('.write').hide();
-        $('.messages').load($this.data('url'), function() {
-            $(this).removeClass('hide');
-            $('html, body').animate({
-                scrollTop: $('.messages').find('.allmsg').first()
+        $(".titles").fadeOut();
+        $('.write').fadeOut(function() {
+            $('.messages').load($this.data('url'), function() {
+                $(this).hide().removeClass('hide').fadeIn();
+                $('html, body').animate({
+                    scrollTop: $('.messages').find('.row').first().position().top
+                }, 300);
             });
         });
-    }).on('click', '.back', function(e) {
-        $(".titles").show();
-        $('.write').show();
-        $('.messages').empty().addClass('hide');
+    });
+
+    $('.hideSend').on('click', function(e) {
+        e.preventDefault();
+        $('.write .togl').toggle('slow');
     });
 
     /**
@@ -34,9 +36,8 @@ $(function() {
      */
     $('.enb_dis').on('click', function(e) {
         e.preventDefault();
-        $('.write .togl').toggle('fast');
+        $('.write .togl').toggle('slow');
     });
-
     /**
      * Дозагрузка сообщений
      */

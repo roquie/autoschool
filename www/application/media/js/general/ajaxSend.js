@@ -67,11 +67,9 @@
             this.metadata = this.$element.data();
             this.options = $.extend( {}, $.fn[pluginName].defaults, e.data, this.metadata);
             this.isForm = (this.$element.is('form')) ? true : false;
-
             if (this.work == 'undefined') {
                 this.work = false;
             }
-
             this.options.noreq = this.options.noreq.split(this.options.separator);
             this.options.params = this.options.params.split(this.options.separator);
             if (this.options.validate) {

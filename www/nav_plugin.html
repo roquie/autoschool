@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="http://autoschool.ru/css/bstrap.html5b.fawesome.min.css" rel="stylesheet" />
+    <script src="http://yandex.st/jquery/1.10.2/jquery.min.js"></script>
+    <script src="nav.js"></script>
+    <style>
+        .active {
+            color: #ff0000;
+        }
+    </style>
+    <script>
+        $(function() {
+
+            $.fn.navigate.setDefaults({
+                active : function(that) {
+                    var arrow = $('<i>', {
+                        class : 'icon-angle-right'
+                    });
+                    $('.' + that.options.classElement).find('i.icon-angle-right').remove();
+                    if (!that.options.noactive || that.options.noactive == 'undefined')
+                        that.$element.append(arrow);
+                },
+                beforeLoad : function(options, that) {
+                    $(options.block).html('загрузка данных');
+                },
+                afterLoad : function(options, that) {
+                    var arrow = $('<i>', {
+                        class : 'icon-angle-right'
+                    });
+                    if (!that.data('noactive') || that.data('noactive') == 'undefined')
+                        that.addClass(options.classActive).append(arrow);
+                },
+                otherLoad : function(options) {
+                    var arrow = $('<i>', {
+                            class : 'icon-angle-right'
+                        }),
+                        obj = $('ul > li > a'),
+                        link;
+                    $.each(obj, function() {
+                        if (!$(this).data('nonav') || $(this).data('nonav') == 'undefined') {
+                            alert($(this).attr('href'));
+                            link = $(this).attr('href');
+                            if (!$(this).data('noactive') || $(this).data('noactive') == 'undefined') {
+                                $(this).addClass(options.classActive).append(arrow);
+                            }
+                            $(options.block).load(link);
+                            return false;
+                        }
+                    });
+                },
+                defaultCallback : function(response, that) {
+                    $(that.options.block).html(response);
+                }
+            });
+
+            $('.navigate').navigate();
+        });
+    </script>
+</head>
+<body>
+    <ul>
+        <li><a href="http://autoschool.ru/navs/1.php" data-nonav="true">ссылка 1</a></li>
+        <li><a href="http://autoschool.ru/navs/2.php" data-noactive="true">ссылка 2</a></li>
+        <li><a href="http://autoschool.ru/navs/3.php">ссылка 3</a></li>
+    </ul>
+    <div class="content"></div>
+</body>
+</html>

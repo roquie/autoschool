@@ -39,6 +39,7 @@
     <?=HTML::script('js/general/notification.js')?>
     <?=HTML::script('js/main/jquery.pageslide.js')?>
     <?=HTML::script('js/general/ajaxSend.js')?>
+    <?=HTML::script('js/general/nav.js')?>
     <?=HTML::script('js/main/main.js')?>
 
 </head>

@@ -128,6 +128,8 @@ $(function() {
                 if (response.status == 'success') {
                     $('.titles').prepend(response.msg);
                     $('.hideSend').trigger('click');
+                    if ($('#clear-block').length)
+                        $('#clear-block').remove();
                     that.$element[0].reset();
                 }
             },

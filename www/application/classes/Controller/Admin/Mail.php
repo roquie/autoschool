@@ -18,10 +18,10 @@ class Controller_Admin_Mail extends Controller_Ajax_Admin
 
         $subject = Arr::get($_POST, 'subject');
 
-         if(!Valid::email($email, true)) {
+        /* if(!Valid::email($email, true)) {
                 $this->ajax_msg('Неверный email адрес', 'error');
                 exit;
-         }
+         }*/
 
 
         $fromEmail = Session::instance()->get('email');

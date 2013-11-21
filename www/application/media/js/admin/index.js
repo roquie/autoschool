@@ -5,11 +5,10 @@
  */
 $(function() {
 
-    $('.listener').find('tbody').css('height', $('.block').css('height'));
-    $('#slimScroll').slimScroll({
-        height: $('.listener').height() - 70,
-        railVisible: true,
-        alwaysVisible: true
-    });
+    // @todo сделать выгрузку инфы первого слушателя в списке по-нормальному
+    $('.listener').find('tbody tr._admins_link').first().trigger('click');
 
+    $('body').on('click', '.btn-success.btn-circle', function(e) {
+        e.preventDefault();
+    });
 });

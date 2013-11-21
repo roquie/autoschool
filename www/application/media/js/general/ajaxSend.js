@@ -231,6 +231,7 @@
                     that.options.beforeSend(that);
                 },
                 success : function(response, textStatus, jqXHR){
+                    that.work = false;
                     if (that.options.debug) {
                         console.log('Данные получены: ' + response);
                     }
@@ -240,7 +241,6 @@
                     }
                     else
                         that.options.functions[that.options.callback](response, that);
-                    that.work = false;
                 },
                 statusCode: {
                     404: function() {

@@ -34,11 +34,11 @@ class Controller_Admin extends Controller_Template
 
     public function action_index()
     {
-        echo '<pre>';
+/*        echo '<pre>';
         print_r(Model::factory('Users')->getNoApproved());
-        echo '</pre>';
+        echo '</pre>';*/
         $this->template->content = View::factory('admin/index', array(
-            'audience' => Model::factory('Users')->getNoApproved()
+            'audience' => Model::factory('Users')->getNoApproved(),
         ));
     }
 

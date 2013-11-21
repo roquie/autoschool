@@ -20,7 +20,7 @@
                             $i = 0;
                             foreach ($audience as $k => $listener) :
                         ?>
-                            <tr class="_admins_link" data-callback="get_user" data-url="<?=URL::site('admin/mainpage/get_user/'.$k)?>">
+                            <tr id="<?=$k?>" class="_admins_link" data-callback="get_user" data-url="<?=URL::site('admin/mainpage/user_data/'.$k)?>">
                                 <td><?=++$i?></td>
                                 <td><?=$listener?></td>
                             </tr>
@@ -29,11 +29,7 @@
                 </table>
             </div>
             <div class="span9 right-block">
-
-
-
-                <?=View::factory('admin/mainpage/user_data')?>
-
+            <?/*=View::factory('admin/mainpage/user_data')*/?>
                <!-- <div id="content">
                 </div>
 

@@ -24,13 +24,17 @@ class Controller_Admin_MainPage extends Controller_Ajax_Admin
     /**
      * Возвращает страницу с данными юзера
      */
-    public function action_user_data($id = 21)
+    public function action_user_data()
     {
-        echo View::factory('admin/mainpage/user_data', array(
+        $id = $this->request->param('id');
+        $this->ajax_msg(
+            View::factory('admin/mainpage/user_data', array(
             'statement' => Model::factory('Statements')->getBy('user_id', (int)$id),
             'contract' => Model::factory('Contracts')->getBy('user_id', (int)$id),
-            'status' => Model::factory('Users')->getBy('id', (int)$id)->as_array()['status']
-        ))->render();
+            'status' => Model::factory('Users')->getBy('id', (int)$id)->as_array()['status'],
+            'user_id' => (int)$id
+            ))->render()
+        );
     }
 
     public function action_change_status()

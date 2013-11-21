@@ -29,10 +29,10 @@ $(function() {
         },
         statusCode : { // Это не обязательно, просто так по сути))
             404 : function(that) {
-                alert( 'Неверный url: ' + that.options.url );
+                alert( '404. Неверный url: ' + that.options.url );
             },
             505 : function() {
-                alert( 'Ошибка выполнения запроса' );
+                alert( '505. Ошибка выполнения запроса' );
             }
         },
         functions : {
@@ -83,7 +83,39 @@ $(function() {
                 }
             },
             get_user : function(response, that) {
-                alert(response.data.famil);
+                $('.right-block').html(response.msg);
+                $('.listener').find('tbody').css('height', $('.block').css('height'));
+                $('#slimScroll').slimScroll({
+                    height: $('.listener').height() - 70,
+                    railVisible: true,
+                    alwaysVisible: true
+                });
+            },
+            change_status : function(response, that) {
+                if (response.status === 'success') {
+                    that.$element.removeClass('btn-danger _admins_link').addClass('btn-success').html('<i class="icon-ok"></i>');
+                    if (that.$element.hasClass('laststatus')) {
+                        alert(that.$element.data('id'));
+                        var listener = $('.listener').find('tbody tr[id="'+that.$element.data('id')+'"]');
+
+                        // @todo подправить очистку правой стороны когда слушателей не осталось
+
+                        if (listener.next().length)
+                            listener.next().trigger('click');
+                        else if(listener.prev().length)
+                            listener.prev().trigger('click');
+                        else if ($('.listener').find('tbody tr._admins_link').first().length)
+                            $('.listener').find('tbody tr._admins_link').first().trigger('click');
+                        else
+                            $('.right-block').html('Не зачисленные слушатели отсутствуют');
+
+                        listener.remove();
+                    }
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
             }
         }
     });

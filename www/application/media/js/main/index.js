@@ -52,7 +52,8 @@ $(function() {
                     type : response.status,
                     message : response.msg
                 });
-                $('.placeholder').placeholder('default');
+                $('#send')[0].reset();
+                $('#send').find('.placeholder').placeholder('reset');
             }
         },
         trigger : 'blur',

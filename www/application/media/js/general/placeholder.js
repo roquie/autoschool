@@ -98,6 +98,9 @@
         },
 
         reset : function() {
+            if (this.support() && !this.block) {
+                return;
+            }
             (this.block) ? this.$element.text(this.options.placeholder) : this.$element.val(this.options.placeholder);
             if (this.isPass) {
                 this.$element.attr({type : 'text'});

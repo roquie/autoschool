@@ -4,6 +4,8 @@
     <span style="position: relative">
         <textarea id="c_msg" name="message" class="span5" rows="5" data-req="true" placeholder="Сообщение"></textarea>
     </span>
-    <a style="margin-left: 215px" href="#myModal" data-toggle="modal" class="btn btn-primary span2 _upd_captcha" data-url="<?=URL::site('main/mail/upd_captcha')?>" data-callback="upd_captcha">Отправить</a>
+    <input type="submit" class="btn btn-primary span2" value="Отправить">
+    <!--<a style="margin-left: 215px" href="#myModal" data-toggle="modal" class="btn btn-primary span2 _upd_captcha" data-url="<?/*=URL::site('main/mail/upd_captcha')*/?>" data-callback="upd_captcha">Отправить</a>-->
 </form>
 
+<!--<a style="margin-left: 215px" href="#myModal" data-toggle="modal" class="btn btn-primary">Отправить</a>-->

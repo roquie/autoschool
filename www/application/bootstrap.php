@@ -62,7 +62,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 /**
  * Set the default language
  */
-I18n::lang('en-us');
+I18n::lang('ru-ru');
 
 /**
  *  Set Cookie salt bla bla bla
@@ -204,8 +204,8 @@ Route::set('main', '(<action>(/<id>))')
         'controller' => 'Main',
         'action' => 'index'
     ));
-
-Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)(|<params>)(&<return_add_data>)',
+/* в пизду это счастье */
+/*Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)(|<params>)(&<return_add_data>)',
     array(
          'table_name' => '[a-zA-Z]+',
          'action' => '(create|read|update|delete)',
@@ -216,7 +216,7 @@ Route::set('admin.autocrud', 'admin/<table_name>/<action>(/<id>)(|<params>)(&<re
     ->defaults(array(
                     'controller' => 'Admin',
                     'directory'  => 'Ajax',
-               ));
+               ));*/
 
 
 Route::set('main.ajax', 'main(/<controller>(/<action>(/<id>)))')

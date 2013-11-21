@@ -36,11 +36,10 @@ class Model_Users extends ORM
      */
     public function getNoApproved()
     {
-
         $noApprovedUsers = ORM::factory('Users')->where('is_approved', '=', 0)->find_all();
         $arr = array();
         foreach ($noApprovedUsers as $value) {
-            $arr[] =
+            $arr[$value->id] =
                     $value->Statements->famil . ' '.
                     UTF8::substr($value->Statements->imya,0, 1).'.' .
                     UTF8::substr($value->Statements->ot4estvo,0, 1).'.';
@@ -77,6 +76,22 @@ class Model_Users extends ORM
         );
 
     }
+
+    /**
+     * заменить это говно на норм код
+     * @param $id
+     * @param $status
+     * @return bool
+     */
+    public function change_status($id, $status)
+    {
+        $user = ORM::factory('Users', $id);
+        $user->status = (int)$status;
+        $user->update();
+
+        return true;
+    }
+
 
 
 

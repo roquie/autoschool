@@ -14,7 +14,7 @@ $(function() {
         },
         worked : function() {
             noty({
-                type:'error',
+                type:'info',
                 title:'Ошибка',
                 message:'Идёт обработка данных...'
             });
@@ -82,29 +82,8 @@ $(function() {
                     });
                 }
             },
-            check_pass : function(response) {
-                if (response.status == 'error') {
-                    noty({
-                        type : response.status,
-                        message : response.msg
-                    });
-                }
-                if (response.status == 'success') {
-                    $('#check_pass').css(
-                        {
-                            display: 'none'
-                        }
-                    );
-                    $('#change_email').css(
-                        {
-                            display: 'block'
-                        }
-                    );
-
-                }
-            },
             get_user : function(response, that) {
-
+                alert(response.data.famil);
             }
         }
     });

@@ -54,25 +54,21 @@ $(function() {
     });
 
     $('body').on('click', '#enableSt', function() {
-        $(this).fadeOut(function() {
-            $('#disableSt').fadeIn('fast');
-        });
+        $(this).hide();
+        $('#disableSt').show();
         $('.table.statement').find('.editable').editable('enable');
     }).on('click', '#enableCn', function() {
-        $(this).fadeOut(function() {
-            $('#disableCn').fadeIn('fast');
-        });
+        $(this).hide();
+        $('#disableCn').show();
         $('.table.contract').find('.editable').editable('enable');
     }).on('click', '#disableSt', function() {
         $('.table.statement').find('.editable').editable('disable');
-        $(this).fadeOut(function() {
-            $('#enableSt').fadeIn('fast');
-        });
+        $(this).hide();
+        $('#enableSt').show();
     }).on('click', '#disableCn', function() {
         $('.table.contract').find('.editable').editable('disable');
-        $(this).fadeOut(function() {
-            $('#enableCn').fadeIn('fast');
-        });
+        $(this).hide();
+        $('#enableCn').show();
     }).off('click', '.statement .editable-submit')
     .on('click', '.statement .editable-submit', function() {
         var field = $(this).closest('tr').find('a').data('name'),

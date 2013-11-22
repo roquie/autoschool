@@ -32,7 +32,7 @@ $(function() {
                 obj = $('#left_menu > li > a'),
                 link;
             $.each(obj, function() {
-                if (!$(this).data('nonav') || $(this).data('nonav') == 'undefined') {
+                if ($(this).data('nav') && $(this).data('nav') != 'undefined') {
                     link = $(this).attr('href');
                     if (!$(this).data('noactive') || $(this).data('noactive') == 'undefined') {
                         $(this).parent().addClass(options.classActive);

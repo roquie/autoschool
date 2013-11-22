@@ -16,7 +16,7 @@
 
     $(function() {
         $.each($('body').find('a'), function() {
-            if (!$(this).data('nonav') || $(this).data('nonav') == 'undefined') {
+            if ($(this).data('nav') && $(this).data('nav') != 'undefined') {
                 $(this).addClass($.fn[pluginName].defaults.classElement);
             }
         });
@@ -85,7 +85,7 @@
                     if (that.options.debug) {
                         console.log('Данные получены: ' + response);
                     }
-
+                    that.work = false;
                     link = link.split('/');
                     location.hash = link[link.length-1];
 
@@ -95,7 +95,6 @@
                     }
                     else
                         that.options.functions[that.options.callback](response, that);
-                    that.work = false;
                 },
                 statusCode: {
                     404: function() {

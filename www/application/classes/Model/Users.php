@@ -54,14 +54,14 @@ class Model_Users extends ORM
 
         $statement = array();
         foreach ($user->Statements->as_array() as $k => $v) {
-            if ($k === 'nationality_id' || $k === 'education_id')
+/*            if ($k === 'nationality_id' || $k === 'education_id')
                 continue;
             if ($k === 'Nationality' || $k === 'Educations') {
                 array_shift($v);
                 foreach ($v as $key => $val)
                     $statement[$k] = $v[$key];
                 continue;
-            }
+            }*/
             $statement[$k] = $v;
         }
 

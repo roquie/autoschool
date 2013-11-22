@@ -21,7 +21,7 @@
                 </tr>
                 <tr>
                     <td>Дата рождения</td>
-                    <td><a href="#" data-name="data_rojdeniya" data-type="combodate" data-pk=""><?=$info->data_rojdeniya?></a></td>
+                    <td><a href="#" class="data_rojdeniya" data-name="data_rojdeniya" data-type="combodate" data-pk=""><?=$info->data_rojdeniya?></a></td>
                 </tr>
                 <tr>
                     <td>Гражданство</td>
@@ -49,7 +49,7 @@
                 </tr>
                 <tr>
                     <td>Дата выдачи паспорта</td>
-                    <td><a href="#" data-name="pasport_data_vyda4i" data-type="combodate" data-pk=""><?=$info->pasport_data_vyda4i?></a></td>
+                    <td><a href="#" class="pasport_data_vyda4i" data-name="pasport_data_vyda4i" data-type="combodate" data-pk=""><?=$info->pasport_data_vyda4i?></a></td>
                 </tr>
                 <tr>
                     <td>Кем выдан паспорт</td>

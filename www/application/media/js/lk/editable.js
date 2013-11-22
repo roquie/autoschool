@@ -18,16 +18,8 @@ $.fn.editableform.defaults.success = function(response, newValue) {
 };
 $(function() {
 
-    $('.table').find('a').each(function() {
-        if ($(this).attr('id') == null) {
-            $(this).editable('disable');
-        }
-    }).on('click', function(e) {
-        e.preventDefault();
-    });
-
     moment.lang('ru');
-    $('#data_rojdeniya').editable({
+    $('.data_rojdeniya').editable({
         format: 'DD.MM.YYYY',
         viewformat: 'DD.MM.YYYY',
         combodate: {
@@ -40,7 +32,7 @@ $(function() {
     getData($('#education'));
     getData($('#grajdanstvo'));
 
-    $('#pasport_data_vyda4i').editable({
+    $('.pasport_data_vyda4i').editable({
         format: 'DD.MM.YYYY',
         viewformat: 'DD.MM.YYYY',
         combodate: {
@@ -48,6 +40,14 @@ $(function() {
             minYear: 1960,
             maxYear: 2013
         }
+    });
+
+    $('.table').find('a').each(function() {
+        if ($(this).attr('id') == null) {
+            $(this).editable('disable');
+        }
+    }).on('click', function(e) {
+        e.preventDefault();
     });
 
     $('body').on('click', '#enable', function() {

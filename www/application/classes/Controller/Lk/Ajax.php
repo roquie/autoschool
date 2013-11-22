@@ -130,6 +130,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_changeStatement()
     {
 
+        $id = $this->request->param('id') ? $this->request->param('id') : Cookie::get('userId');
+
         $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
         $value = Security::xss_clean($this->request->post('value'));
         
@@ -142,8 +144,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $value
         );
 
-
-        $result = Model::factory('Statements')->upd(array('user_id', Cookie::get('userId')), $data);
+        $result = Model::factory('Statements')->upd(array('user_id', $id /*Cookie::get('userId')*/), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
         else
@@ -156,6 +157,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_changeContract()
     {
 
+        $id = $this->request->param('id') ? $this->request->param('id') : Cookie::get('userId');
+
         $value = Security::xss_clean($this->request->post('value'));
 
         $data = array(
@@ -164,7 +167,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         );
 
 
-        $result = Model::factory('Contracts')->upd(array('user_id', Cookie::get('userId')), $data);
+        $result = Model::factory('Contracts')->upd(array('user_id', $id), $data);
 
         if (!$result)
             $this->ajax_msg('Договор изменению не поддается :(', 'error');

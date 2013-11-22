@@ -11,10 +11,13 @@
   -moz-box-shadow: 0 0 0 0, 0 5px 5px rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 0 0, 0 5px 5px rgba(0, 0, 0, 0.2);
 }
+.block .span3 {
+  border-right: 1px solid #D5D5D5;
+  padding-right: 10px;
+}
 .right-block {
-  margin-left: 10px !important;
+  margin-left: 0px !important;
   padding-left: 10px;
-  border-left: 1px solid #D5D5D5;
 }
 .right-block .loader,
 .right-block .title {
@@ -25,7 +28,7 @@
 }
 .right-block .loader {
   position: absolute;
-  top: 20%;
+  top: 27%;
   left: 57%;
 }
 .right-block h1 {
@@ -54,10 +57,20 @@
 .listener.table-hover tbody tr:hover > th {
   cursor: pointer;
 }
-.statement tbody {
+.statement,
+.contract {
+  margin-top: 20px !important;
+}
+.statement tbody,
+.contract tbody {
   overflow: auto;
 }
-.statement tbody tr:nth-child(1) td {
+.statement tbody tr td:first-child,
+.contract tbody tr td:first-child {
+  width: 40%;
+}
+.statement tbody tr:nth-child(1) td,
+.contract tbody tr:nth-child(1) td {
   border-top: none;
 }
 .status {
@@ -85,7 +98,7 @@
   overflow: auto;
 }
 .listener tbody tr td {
-  width: 154px;
+  width: 144px;
   vertical-align: middle;
   text-align: left;
   border-top: none;

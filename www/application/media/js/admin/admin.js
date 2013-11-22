@@ -86,7 +86,7 @@ $(function() {
                 $('.right-block').html(response.msg);
                 $('.listener').find('tbody').css('height', $('.block').css('height'));
                 $('#slimScroll').slimScroll({
-                    height: $('.listener').height() - 70,
+                    height: $('.listener').height(),
                     railVisible: true,
                     alwaysVisible: true
                 });
@@ -97,14 +97,14 @@ $(function() {
                         cur_listener = listener.find('tbody tr[id="'+that.$element.data('id')+'"]');
                     if (that.$element.hasClass('laststatus')) {
                         var prev = cur_listener.prev(),
-                        next = cur_listener.next(),
-                        status;
+                        next = cur_listener.next();
                         cur_listener.remove();
-
                         (next.length) ? next.trigger('click') : ((prev.length) ? prev.trigger('click') : (listener.find('tbody tr').first().length ? listener.find('tbody tr._admins_link').first().trigger('click') : $('.block > .row-fluid').html('Не зачисленные слушатели отсутствуют')));
                     } else {
                         listener.find('tbody tr[id="'+that.$element.data('id')+'"]').trigger('click');
                     }
+                }
+                if (response.status === 'error' || response.status === 'success') {
                     noty({
                         type : response.status,
                         message : response.msg

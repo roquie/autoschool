@@ -16,6 +16,18 @@
   padding-left: 10px;
   border-left: 1px solid #D5D5D5;
 }
+.right-block .loader,
+.right-block .title {
+  text-align: center;
+}
+.right-block .title {
+  font-size: 14pt;
+}
+.right-block .loader {
+  position: absolute;
+  top: 20%;
+  left: 57%;
+}
 .right-block h1 {
   font-size: 20px;
   color: #555;

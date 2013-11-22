@@ -41,9 +41,14 @@ class Controller_Admin_MainPage extends Controller_Ajax_Admin
     {
         $data = $this->request->param('id');
         $arr = explode('-',$data);
-        Model::factory('Users')->change_status($arr[0], $arr[1]);
-        $this->ajax_msg('Статус изменен');
-      //$result = Model::factory('Users')->
+        $data_insert = array(
+            'status' => (int)$arr[1]
+        );
+        $result = Model::factory('Users')->upd($arr[0], $data_insert);
+        if (!$result)
+            $this->ajax_msg('Статус изменению не поддается :(', 'error');
+        else
+            $this->ajax_msg('Статус изменен');
     }
 
 

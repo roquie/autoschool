@@ -6,23 +6,23 @@
     <div class="span4 status">
         <span>Данные введены верно</span>
         <? if ($status >= 1) : ?>
-            <a href="#" class="btn btn-success btn-circle"><i class="icon-ok"></i></a>
+            <a href="#" data-id="<?=$user_id?>" data-callback="change_status" data-url="<?=URL::site('admin/mainpage/change_status/'.$user_id.'-0')?>" class="_admins_link btn btn-success btn-circle"><i class="icon-ok"></i></a>
         <? else : ?>
-            <a href="#" data-callback="change_status" data-url="<?=URL::site('admin/mainpage/change_status/'.$user_id.'-1')?>" class="_admins_link btn btn-danger btn-circle"><i class="icon-remove"></i></a>
+            <a href="#" data-id="<?=$user_id?>" data-callback="change_status" data-url="<?=URL::site('admin/mainpage/change_status/'.$user_id.'-1')?>" class="_admins_link btn btn-danger btn-circle"><i class="icon-remove"></i></a>
         <? endif; ?>
     </div>
     <div class="span4 status">
         <span>Все документы сданы</span>
         <? if ($status >= 2) : ?>
-            <a href="#" class="btn btn-success btn-circle"><i class="icon-ok"></i></a>
+            <a href="#" data-id="<?=$user_id?>" data-callback="change_status" data-url="<?=URL::site('admin/mainpage/change_status/'.$user_id.'-1')?>" class="_admins_link btn btn-success btn-circle"><i class="icon-ok"></i></a>
         <? else : ?>
-            <a href="#" data-callback="change_status" data-url="<?=URL::site('admin/mainpage/change_status/'.$user_id.'-2')?>" class="_admins_link btn btn-danger btn-circle"><i class="icon-remove"></i></a>
+            <a href="#" data-id="<?=$user_id?>" data-callback="change_status" data-url="<?=URL::site('admin/mainpage/change_status/'.$user_id.'-2')?>" class="_admins_link btn btn-danger btn-circle"><i class="icon-remove"></i></a>
         <? endif; ?>
     </div>
     <div class="span4 status">
         <span>Зачислен в автошколу</span>
         <? if ($status == 3) : ?>
-            <a href="#" class="btn btn-success btn-circle"><i class="icon-ok"></i></a>
+            <a href="#" onclick="return false;" class="btn btn-success btn-circle"><i class="icon-ok"></i></a>
         <? else : ?>
             <a href="#" data-id="<?=$user_id?>" data-callback="change_status" data-url="<?=URL::site('admin/mainpage/change_status/'.$user_id.'-3')?>" class="_admins_link btn btn-danger btn-circle laststatus"><i class="icon-remove"></i></a>
         <? endif; ?>
@@ -157,6 +157,6 @@
     </div>
 </div>
 
-<?else:?>
+<? else:?>
     <p>Ошибка, данные не найдены. Обратитесь к администратору.</p>
 <?endif?>

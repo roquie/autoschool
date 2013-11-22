@@ -93,23 +93,17 @@ $(function() {
             },
             change_status : function(response, that) {
                 if (response.status === 'success') {
-                    that.$element.removeClass('btn-danger _admins_link').addClass('btn-success').html('<i class="icon-ok"></i>');
+                    var listener = $('.listener'),
+                        cur_listener = listener.find('tbody tr[id="'+that.$element.data('id')+'"]');
                     if (that.$element.hasClass('laststatus')) {
-                        alert(that.$element.data('id'));
-                        var listener = $('.listener').find('tbody tr[id="'+that.$element.data('id')+'"]');
-
+                        var prev = cur_listener.prev(),
+                        next = cur_listener.next(),
+                        status;
+                        cur_listener.remove();
                         // @todo подправить очистку правой стороны когда слушателей не осталось
-
-                        if (listener.next().length)
-                            listener.next().trigger('click');
-                        else if(listener.prev().length)
-                            listener.prev().trigger('click');
-                        else if ($('.listener').find('tbody tr._admins_link').first().length)
-                            $('.listener').find('tbody tr._admins_link').first().trigger('click');
-                        else
-                            $('.right-block').html('Не зачисленные слушатели отсутствуют');
-
-                        listener.remove();
+                        (next.length) ? next.trigger('click') : ((prev.length) ? prev.trigger('click') : (listener.find('tbody tr').first().length ? listener.find('tbody tr._admins_link').first().trigger('click') : $('.block > .row-fluid').html('Не зачисленные слушатели отсутствуют')));
+                    } else {
+                        listener.find('tbody tr[id="'+that.$element.data('id')+'"]').trigger('click');
                     }
                     noty({
                         type : response.status,

@@ -4,11 +4,18 @@
  * Time: 0:14
  */
 $(function() {
-
     // @todo сделать выгрузку инфы первого слушателя в списке по-нормальному
-    $('.listener').find('tbody tr._admins_link').first().trigger('click');
 
-    $('body').on('click', '.btn-success.btn-circle', function(e) {
-        e.preventDefault();
+    var tr = $('.listener').find('tbody tr');
+
+    if (tr.length) {
+        tr.first().trigger('click');
+    }
+
+    $('._listener_link').ajaxForm({
+        debug : true,
+        beforeSend : function() {
+            $('.right-block').html($('#loader').html());
+        }
     });
 });

@@ -1,4 +1,4 @@
-<?=($is_approved == 0) ? View::factory('lk/pages/html/button')->render() : null?>
+<?=($status < 3) ? View::factory('lk/pages/html/button')->render() : null?>
 
 <div class="row data" data-url="<?=URL::site('lk/ajax/changeContract')?>" >
 

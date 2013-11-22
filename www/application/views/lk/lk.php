@@ -61,7 +61,7 @@
                         </div>
                         <div class="row">
                             <div class="span6 settings">
-                                <i class="icon-envelope-alt"></i> <span id="userEmail"><?=$userEmail?></span>, <a href="<?=URL::site('lk/ajax/settings')?>" data-noactive="true"><i class="icon-cog"></i> Настройки</a>
+                                <i class="icon-envelope-alt"></i> <span id="userEmail"><?=$userEmail?></span>, <a href="<?=URL::site('lk/ajax/settings')?>" data-nav="true" data-noactive="true"><i class="icon-cog"></i> Настройки</a>
                             </div>
                         </div>
                     </div>

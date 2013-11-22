@@ -100,7 +100,7 @@ $(function() {
                         next = cur_listener.next(),
                         status;
                         cur_listener.remove();
-                        // @todo подправить очистку правой стороны когда слушателей не осталось
+
                         (next.length) ? next.trigger('click') : ((prev.length) ? prev.trigger('click') : (listener.find('tbody tr').first().length ? listener.find('tbody tr._admins_link').first().trigger('click') : $('.block > .row-fluid').html('Не зачисленные слушатели отсутствуют')));
                     } else {
                         listener.find('tbody tr[id="'+that.$element.data('id')+'"]').trigger('click');

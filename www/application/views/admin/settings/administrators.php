@@ -7,7 +7,7 @@
             <!--
                 FORM NEW USER
             -->
-            <form class="_admins_form" data-callback="add_admin"  action="<?=URL::site('admin/administrators/create|check-email?return=true')?>" method="post" novalidate> <!--id="form1" data-url=""-->
+            <form class="_admins_form" data-callback="add_admin"  action="<?=URL::site('admin/administrators/create')?>" method="post" novalidate> <!--id="form1" data-url=""-->
                 <legend>Новый администратор</legend>
                 <label>Введите E-mail</label>
                 <input name="email" type="email" class="placeholder" placeholder="example@gmail.com" id="email">
@@ -50,7 +50,7 @@
                             <?=$admins->datetime?>
                         </td>
                         <td>
-                            <a data-callback="del_admin" class="_admins_link" data-url="<?=URL::site('admin/administrators/delete/'.$admins->id.'?return=true')?>" href="#"><i class="icon-trash icon-large"></i></a>
+                            <a data-callback="del_admin" class="_admins_link" data-url="<?=URL::site('admin/administrators/delete/'.$admins->id)?>" href="#"><i class="icon-trash icon-large"></i></a>
                         </td>
                     </tr>
                 <?endforeach?>

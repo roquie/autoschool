@@ -291,7 +291,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         echo View::factory('lk/pages/statement', array(
             'info' => Model::factory('Statements')->getBy('user_id', Cookie::get('userId')),
-            'is_approved' => $result->is_approved,
+            'status' => $result->status,
         ))->render();
     }
 
@@ -417,7 +417,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         echo View::factory('lk/pages/contract', array(
             'info' => Model::factory('Contracts')->getBy('user_id', Cookie::get('userId')),
-            'is_approved' => $result->is_approved,
+            'status' => $result->status,
         ))->render();
     }
 

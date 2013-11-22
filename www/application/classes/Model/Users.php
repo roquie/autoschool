@@ -12,8 +12,7 @@ class Model_Users extends ORM
 		'password' => array('data_type' => 'string', 'is_nullable' => false),
 		'email' => array('data_type' => 'string', 'is_nullable' => false),
 		'group_id' => array('data_type' => 'int', 'is_nullable' => false),
-		'status' => array('data_type' => 'int', 'is_nullable' => false),
-		'is_approved' => array('data_type' => 'int', 'is_nullable' => false),
+		'status' => array('data_type' => 'int', 'is_nullable' => false)
 	);
 
     protected $_has_one = array(
@@ -36,7 +35,7 @@ class Model_Users extends ORM
      */
     public function getNoApproved()
     {
-        $noApprovedUsers = ORM::factory('Users')->where('is_approved', '=', 0)->find_all();
+        $noApprovedUsers = ORM::factory('Users')->where('status', '<', 3)->find_all();
         $arr = array();
         foreach ($noApprovedUsers as $value) {
             $arr[$value->id] =
@@ -49,7 +48,7 @@ class Model_Users extends ORM
 
     public function allInfoNoApproved($id)
     {
-        $user = ORM::factory('Users')->where('id','=',(int)$id)->and_where('is_approved', '=', 0)->find();
+        $user = ORM::factory('Users')->where('id','=',(int)$id)->and_where('status', '<', 3)->find();
         $user->Statements->Nationality;
         $user->Statements->Educations;
 

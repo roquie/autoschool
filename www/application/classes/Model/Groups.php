@@ -23,6 +23,37 @@ class Model_Groups extends ORM
 
     );
 
+
+    public function rules()
+    {
+        return array(
+            'name' => array(
+                array('not_empty'),
+                array('alpha_numeric', array(':value', true)),
+                array('min_length', array(':value', 1)),
+                array('max_length', array(':value', 50)),
+                //@todo: добавить проверку на уникальность группы
+            ),
+
+        );
+    }
+
+    public function labels()
+    {
+        return array(
+            'name' => 'Наименование группы',
+        );
+    }
+
+    public function filters()
+    {
+        return array(
+            true => array(
+                array('trim')
+            )
+        );
+    }
+
     public function getNews($id)
     {
        /* $res = ORM::factory('Groups');

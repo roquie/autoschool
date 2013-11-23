@@ -7,22 +7,32 @@
     <h1><small>Настройки</small></h1>
     <div class="tabbable">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab1" data-toggle="tab">Администраторы</a></li>
-            <li><a href="#tab3" data-toggle="tab" id="act" >Главная страница</a></li>
+            <li ><a href="#tab1" data-toggle="tab">Администраторы</a></li>
+            <li><a href="#tab2" data-toggle="tab" >Загрузка файлов</a></li>
+            <li class="active"><a href="#tab3" data-toggle="tab" id="act" >Главная страница</a></li>
         </ul>
         <div class="tab-content">
-
-            <!--вкладка Администраторы -->
-            <div class="tab-pane active" id="tab1">
-                <?=View::factory('admin/settings/administrators')
-                    ->set('all_admins', $all_admins)
+            <!--вкладка Главная страница-->
+            <div class="tab-pane active" id="tab3">
+                <?=View::factory('admin/settings/main_page')
+                    ->set('upload_files', $upload_files)
+                    ->set('smtp', $smtp)
                     ->render()?>
             </div>
 
-            <!--вкладка Главная страница-->
-            <div class="tab-pane" id="tab3">
-                <?=View::factory('admin/settings/main_page')->render()?>
+            <!--вкладка Администраторы -->
+            <div class="tab-pane" id="tab1">
+                <?=View::factory('admin/settings/administrators')
+                        ->set('all_admins', $all_admins)
+                        ->render()?>
             </div>
+            <!--вкладка 2-->
+            <div class="tab-pane" id="tab2">
+                <?=View::factory('admin/settings/upload')
+                        ->set('upload_files', $upload_files)
+                        ->render()?>
+            </div>
+
 
         </div>
     </div>

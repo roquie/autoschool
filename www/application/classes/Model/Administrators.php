@@ -11,4 +11,38 @@ class Model_Administrators extends ORM
 		'email' => array('data_type' => 'string', 'is_nullable' => false),
 		'datetime' => array('data_type' => 'string', 'is_nullable' => false),
 	);
+
+    public function rules()
+    {
+        return array(
+           'email' => array(
+               array('not_empty'),
+               array('email'),
+               array(array('self::is_unique_email'), array(':value'))
+           ),
+
+        );
+    }
+
+    public static function is_unique_email($email)
+    {
+        $admin = ORM::factory('Administrators')->where('email', '=', $email)->find();
+        return (bool)!$admin->email;
+    }
+
+    public function labels()
+    {
+        return array(
+            'email' => 'Почта',
+        );
+    }
+
+    public function filters()
+    {
+        return array(
+            true => array(
+                array('trim')
+            )
+        );
+    }
 }

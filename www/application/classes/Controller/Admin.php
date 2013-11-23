@@ -34,11 +34,10 @@ class Controller_Admin extends Controller_Template
 
     public function action_index()
     {
-/*        echo '<pre>';
-        print_r(Model::factory('Users')->getNoApproved());
-        echo '</pre>';*/
+        /*Request::factory('admin/mail/delete_news/5')->execute();*/
+
         $this->template->content = View::factory('admin/index', array(
-            'audience' => Model::factory('Users')->getNoApproved(),
+            'audience' => Model::factory('Users')->get_user_list(true),
         ));
     }
 
@@ -46,14 +45,29 @@ class Controller_Admin extends Controller_Template
     {
         $this->template->content = View::factory('admin/mail/send', array(
             'titles' => Model::factory('MsgTemplates')->all(),
+            'list_users' => Model::factory('Users')->get_user_list(false),
+            'list_groups' => ORM::factory('Groups')->find_all()
+        ));
+    }
+
+    public function action_group()
+    {
+        $this->template->content = View::factory('admin/test/dist_group', array(
+            'none_group_users' => Model::factory('Users')->users_without_group()
         ));
     }
 
 
     public function action_settings()
     {
+        $data = Kohana::$config->load('settings.smtp');
+        if ($data !== 0)
+            $data = unserialize($data);
+
         $this->template->content = View::factory('admin/settings/index', array(
             'all_admins' => Model::factory('Administrators')->all('desc'),
+            'upload_files' => Model::factory('Files')->all(),
+            'smtp' => $data
         ));
     }
 

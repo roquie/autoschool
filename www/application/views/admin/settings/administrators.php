@@ -19,7 +19,7 @@
     <div class="span8">
         <div class="well well-large" style="height: 280px">
             <legend>Список администраторов</legend>
-            <table id="table_admins" class="table">
+            <table id="table_admins" class="table table_admins">
                 <thead>
                 <tr>
                     <td style="">

@@ -144,11 +144,25 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $value
         );
 
-        $result = Model::factory('Statements')->upd(array('user_id', $id /*Cookie::get('userId')*/), $data);
+        $result = Model::factory('Statements')->upd(array('user_id', $id), $data);
         if (!$result)
             $this->ajax_msg('Заявление изменению не поддается', 'error');
         else
             $this->ajax_msg('Заявление изменено');
+
+
+        /*
+        try {
+            $statemetnt = ORM::factory('Statements', array('user_id' => $id));
+            $statemetnt->{$this->request->post('name')} = $this->request->post('value');
+            $statemetnt->update();
+
+            $this->ajax_msg('Заявление изменено');
+        } catch(ORM_Validation_Exception $e) {
+            $errors = $e->errors('validation');
+            $this->ajax_msg(array_shift($errors), 'error');
+        }
+        */
     }
 
     /**
@@ -210,6 +224,14 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         if (isset($data['statement'])) {
 
+            try {
+                ORM::factory('Statements')->values($data['statement'])->check();
+                ORM::factory('Contracts')->values($data['contract'])->check();
+            } catch(ORM_Validation_Exception $e) {
+                $errors = $e->errors('validation');
+                $this->ajax_msg(array_shift($errors), 'error');
+            }
+
             // Если 18 лет и не указано, что заказчиком будет родитель, то заказчик сам слушатель, иначе родитель или опекун
             if ($this->getAge($data['statement']['data_rojdeniya']) < 18 && !isset($data['contract']['parent'])) {
                 $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
@@ -218,7 +240,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
             Session::instance()->set('statement', $data['statement']);
             Session::instance()->set('contract', $data['contract']);
-
 
             $this->ajax_msg(
                 View::factory('main/blank/result', array(
@@ -519,26 +540,39 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                     'password' => $this->hash($newpass)
             );
 
-            $id = (int)Model::factory('Users')->addRec($data);
+            //$id = (int)Model::factory('Users')->addRec($data);
+            //$data['status'] = 0;
 
-            $contract = Session::instance()->get('contract');
-            $contract['user_id'] = $id;
-            $statement = Session::instance()->get('statement');
-            $statement['user_id'] = $id;
+            try {
+                $id = ORM::factory('Users')
+                            ->values($data)
+                            ->create()->pk();
 
-            $c_res = Model::factory('Contracts')->addRec($contract);
-            $s_res = Model::factory('Statements')->addRec($statement);
 
-            if (!$s_res && !$c_res) {
-                $this->ajax_msg('Непредвиденная ошибка БД', 'error');
-                exit;
+                $contract = Session::instance()->get('contract');
+                $contract['user_id'] = $id;
+
+                $statement = Session::instance()->get('statement');
+                $statement['user_id'] = $id;
+
+                ORM::factory('Contracts')
+                            ->values($contract)
+                            ->create();
+
+                ORM::factory('Statements')
+                            ->values($statement)
+                            ->create();
+
+            } catch(ORM_Validation_Exception $e) {
+                $errors = $e->errors('validation');
+                $this->ajax_msg(array_shift($errors), 'error');
             }
+
 
         } else {
             $this->ajax_msg('Непредвиденная ошибка', 'error');
             exit;
         }
-
 
 
         $mail = Email::factory('Регистрация в Автошколе МПТ', 'Ваш логин: '.$user['email'].' Ваш пароль : '. $newpass)

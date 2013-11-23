@@ -10,4 +10,33 @@ class Model_Educations extends ORM
 		'id' => array('data_type' => 'int', 'is_nullable' => false),
 		'obrazovanie' => array('data_type' => 'string', 'is_nullable' => false),
 	);
+
+    public function rules()
+    {
+        return array(
+            'obrazovanie' => array(
+                array('not_empty'),
+                array('alpha', array(':value', true)),
+                array('min_length', array(':value', 2)),
+                array('max_length', array(':value', 50)),
+            ),
+
+        );
+    }
+
+    public function labels()
+    {
+        return array(
+            'obrazovanie' => 'Образование',
+        );
+    }
+
+    public function filters()
+    {
+        return array(
+            true => array(
+                array('trim')
+            )
+        );
+    }
 }

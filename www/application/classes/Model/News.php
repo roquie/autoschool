@@ -13,5 +13,42 @@ class Model_News extends ORM
 		'group_id' => array('data_type' => 'int', 'is_nullable' => false),
 	);
 
+    public function rules()
+    {
+        return array(
+            'title' => array(
+                array('not_empty'),
+                array('min_length', array(':value', 5)),
+                array('max_length', array(':value', 50)),
+            ),
+            'message' => array(
+                array('not_empty'),
+                array('min_length', array(':value', 5)),
+                array('max_length', array(':value', 3000)),
+            ),
+            'group_id' => array(
+                array('Security::xss_clean', array(':value')),
+                array('digit'),
+            )
+        );
+    }
+
+    public function labels()
+    {
+        return array(
+            'title' => 'Заголовок',
+            'message' => 'Текс сообщения',
+            'group_id' => 'id группы'
+        );
+    }
+
+    public function filters()
+    {
+        return array(
+            true => array(
+                array('trim')
+            )
+        );
+    }
 
 }

@@ -5,47 +5,48 @@ class Controller_Admin_Administrators extends Controller_Ajax_Admin
 {
 
     /**
-     *
-     * @type ajax
-     * */
+     * добавление админа
+     */
     public function action_create()
     {
-        if (!Valid::email($this->request->post('data.email'), true)) {
-            $this->ajax_msg('email не верный');
-            exit;
-        }
+        $admin = ORM::factory('Administrators')->values($this->request->post('data'));
+        try
+        {
+            $admin->save();
 
-        $checkEmail = Model::factory('Administrators')->getBy('email', $this->request->post('data.email'));
-
-        if (!$checkEmail) {
-            $result = Model::factory('Administrators')
-                ->addRec(array(
+            $this->ajax_data(
+                array(
+                    'id' => $admin->pk(),
                     'email' => $this->request->post('data.email')
-                ));
-            if ($result)
-                $this->ajax_data(array('id' => $result, 'email' => $this->request->post('data.email')),'Пользователь добавлен');
-            else
-                $this->ajax_msg('ошибка бд', 'error');
-
-        } else
-            $this->ajax_msg('Такой админ уже есть', 'error');
+                ),
+                'Пользователь добавлен'
+            );
+        }
+        catch (ORM_Validation_Exception  $e)
+        {
+            $errors = $e->errors('validation');
+            $this->ajax_msg($errors['email'], 'error');
+        }
 
     }
 
 
     /**
-     *
+     * удаление админа
      */
     public function action_delete()
     {
         $id = $this->request->param('id');
-        //$result = Model::factory('Administrators')->del((int)$this->request->post('id'));
-        $result = Model::factory('Administrators')->del($id);
 
-        if ($result)
+        try
+        {
+            ORM::factory('Administrators', (int)$id)->delete();
             $this->ajax_msg('Админ удален');
-        else
+        }
+        catch (Exception  $e)
+        {
             $this->ajax_msg('ошибка бд', 'error');
+        }
     }
 
 

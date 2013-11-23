@@ -1,24 +1,28 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
 $opt = Kohana::$config->load('settings')->as_array();
-//if ($opt['smtp'] === 0) {
+
+if ($opt['smtp'] == 0) {
+
         return array(
             'driver' => 'native',
             'options' => NULL
         );
-  /*  } else {
+
+    } else {
         $smtp = unserialize($opt['smtp']);
         return array(
             'driver' => 'smtp',
 
             'options' => array(
 
-                'hostname' => 'smtp.'.UTF8::strstr_after($smtp['login'], '@'), // вернет smtp.gmail.com
+                //'hostname' => 'smtp.'.UTF8::strstr_after($smtp['login'], '@'), // вернет smtp.gmail.com
+                'hostname' => $smtp['server'],
                 'username' => $smtp['login'],
                 'password' => $smtp['password'],
-                'port' => 25 // по дефолту
+                'port' => $smtp['port']
             )
 
-        );*/
-//}
+        );
+}
 

@@ -14,4 +14,6 @@ class Model_Msgtemplates extends ORM
 		'time' => array('data_type' => 'string', 'is_nullable' => false),
 		'date' => array('data_type' => 'string', 'is_nullable' => false),
 	);
+
+    //  предлагаю выпилить шаблоны. Мы вродь говорили уже на эту тему. Вродь как, согласились. Уточню - удаляем?
 }

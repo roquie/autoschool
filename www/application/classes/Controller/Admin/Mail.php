@@ -3,46 +3,56 @@
 class Controller_Admin_Mail extends Controller_Ajax_Admin
 {
 
-    public function action_send_mail()
+
+    /**
+     * метод для добавление новости для группы с переданным <id>
+     */
+    public function action_add_news()
     {
-        $valid = $this->ajax_xssclean($_POST);
-        if ($valid)
-            exit;
-
-        $to = explode(', ', Arr::get($_POST, 'to'));
-        $to = array_filter($to);
-        $msg = Arr::get($_POST, 'editor');
-        $files = Arr::get($_POST, 'files');
-        if (isset($files))
-            $files = explode(',', $files);
-
-        $subject = Arr::get($_POST, 'subject');
-
-        /* if(!Valid::email($email, true)) {
-                $this->ajax_msg('Неверный email адрес', 'error');
-                exit;
-         }*/
-
-
-        $fromEmail = Session::instance()->get('email');
-        $fromName = Session::instance()->get('first_name').' '.Session::instance()->get('last_name');
-
-        $result = Email::factory($subject, $msg)
-            ->to($to)
-            ->from($fromEmail, $fromName);
-
-        if (isset($files))
-            foreach ($files as $file)
-                $result->attach_file(APPPATH.$file);
-
-        $result->send();
-
-        if ($result)
-            $this->ajax_msg('Сообщение отправлено');
-        else
-            $this->ajax_msg('Ошибка отправки', 'error');
-
+        // group_id
+        $id = $this->request->param('id');
+        $post = $this->request->post('data');
+        $post['group_id'] = $id;
+        if (!empty($id)) {
+            try
+            {
+                $result = ORM::factory('Groups', $id);
+                if (!$result->id) {
+                    $this->ajax_msg('Такой группы нет', 'error');
+                    exit;
+                }
+                ORM::factory('News')->values($post)->save();
+                $this->ajax_msg('Сообщение для группы добавлено');
+            }
+            catch (ORM_Validation_Exception  $e)
+            {
+                $errors = $e->errors('validation');
+                $this->ajax_msg(array_shift($errors), 'error');
+            }
+        }
     }
+
+    /**
+     * метод для удаления новости у группы с переданным <id>
+     */
+    public function action_delete_news()
+    {
+        $id = $this->request->param('id');
+
+        try
+        {
+            ORM::factory('News', (int)$id)->delete();
+            $this->ajax_msg('Новость удалена');
+        }
+        catch (Exception  $e)
+        {
+            $this->ajax_msg('Ошибка бд', 'error');
+        }
+    }
+
+
+
+
 
 
 }

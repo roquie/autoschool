@@ -23,6 +23,57 @@ class Model_Messages extends ORM
         ),
     );
 
+
+    public function rules()
+    {
+        return array(
+            'message' => array(
+                array('not_empty'),
+                array('alpha_dash', array(':value', true)),
+                array('min_length', array(':value', 5)),
+                array('max_length', array(':value', 3000)),
+            ),
+            'is_read' => array(
+                array('Security::xss_clean', array(':value')),
+                array('digit'),
+            ),
+            'title_id' => array(
+                array('Security::xss_clean', array(':value')),
+                array('digit'),
+            ),
+            'user_id' => array(
+                array('Security::xss_clean', array(':value')),
+                array('digit'),
+            ),
+            'admin' => array(
+                array('Security::xss_clean', array(':value')),
+                array('digit'),
+            ),
+
+        );
+    }
+
+    public function labels()
+    {
+        return array(
+            'message' => 'Текст сообщения',
+            'is_read' => 'is_read',
+            'title_id' => 'title_id',
+            'user_id' => 'user_id',
+            'admin' => 'admin',
+        );
+    }
+
+    public function filters()
+    {
+        return array(
+            true => array(
+                array('trim')
+            )
+        );
+    }
+
+
     /**
      * получение сообщений для конкретного пользователя
      * @param $user_id

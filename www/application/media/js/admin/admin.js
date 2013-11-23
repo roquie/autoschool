@@ -118,7 +118,20 @@ $(function() {
         debug : true
     });
 
-    $('._admins_form').ajaxForm();
+    $('._admins_form').ajaxForm({
+        validate: false
+    });
+    $('._file_up').ajaxForm({
+        validate: false
+    });
+
+/*    $('._ch_off_smtp').ajaxForm({
+        validate: false
+    });*/
+
+    $('._ch_data_smtp').ajaxForm({
+        validate: false
+    });
 
     $("[rel='tooltip']").tooltip({
         delay : 400

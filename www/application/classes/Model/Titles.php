@@ -26,6 +26,40 @@ class Model_Titles extends ORM
         )
     );
 
+    public function rules()
+    {
+        return array(
+            'title' => array(
+                array('not_empty'),
+                array('alpha', array(':value', true)),
+                array('min_length', array(':value', 2)),
+                array('max_length', array(':value', 50)),
+            ),
+            'user_id' => array(
+                array('Security::xss_clean', array(':value')),
+                array('digit'),
+            ),
+
+        );
+    }
+
+    public function labels()
+    {
+        return array(
+            'title' => 'Образование',
+            'user_id' => 'id пользователя',
+        );
+    }
+
+    public function filters()
+    {
+        return array(
+            true => array(
+                array('trim')
+            )
+        );
+    }
+
     public function getTitles($user_id, $offset = 1, $limit = 10)
     {
         $start = ($offset - 1) * $limit;

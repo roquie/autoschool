@@ -8,7 +8,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-list"></i> Тестирование<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                        <!-- <li><a href="<?/*=URL::site('admin/papers')*/?>">Просмотр</a></li>-->
-                        <li><a href="<?=URL::site('admin/gr_obr')?>">Гражданство и образование</a></li>
+                        <!--<li><a href="<?/*=URL::site('admin/gr_obr')*/?>">Гражданство и образование</a></li>-->
                         <li><a href="<?=URL::site('admin/group')?>">Группы</a></li>
                     </ul>
                 </li>

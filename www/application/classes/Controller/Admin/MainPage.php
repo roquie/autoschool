@@ -3,26 +3,9 @@
 class Controller_Admin_MainPage extends Controller_Ajax_Admin
 {
 
-    public function action_getInfoNoApproved()
-    {
-        $id = $this->request->param('id');
-        $result = Model::factory('Users')->allInfoNoApproved($id);
-
-        $this->ajax_data($result);
-    }
-
-  /*  public function action_get_user()
-    {
-        $id = $this->request->param('id');
-
-        $statement = Model::factory('Statements')->getBy('user_id', $id);
-
-        $this->ajax_data($statement->as_array());
-
-    }*/
 
     /**
-     * Возвращает страницу с данными юзера
+     * Возвращает код страницы с данными юзера
      */
     public function action_user_data()
     {
@@ -39,17 +22,23 @@ class Controller_Admin_MainPage extends Controller_Ajax_Admin
 
     public function action_change_status()
     {
-        $data = $this->request->param('id');
-        $arr = explode('-',$data);
-        $data_insert = array(
-            'status' => (int)$arr[1]
-        );
-        $result = Model::factory('Users')->upd($arr[0], $data_insert);
-        if (!$result)
-            $this->ajax_msg('Статус изменению не поддается :(', 'error');
-        else
+        $arr = explode('-', $this->request->param('id'));
+
+        try
+        {
+            $user = ORM::factory('Users', $arr[0]);
+            $user->status = (int)$arr[1];
+            $user->save();
             $this->ajax_msg('Статус изменен');
+        }
+        catch (ORM_Validation_Exception  $e)
+        {
+            $errors = $e->errors('validation');
+            $this->ajax_msg($errors, 'error');
+        }
     }
+
+
 
 
 

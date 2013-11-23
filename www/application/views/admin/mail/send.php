@@ -37,25 +37,18 @@
                         </div>
                         <p style="margin: 10px 0 0 0">Выберите группу</p>
                         <select id="grajdanstvo" name="statement[nationality_id]" style="width: 219px" data-req="true">
-                            <?for($i = 0; $i <= 40; $i++):?>
-                                <option>Группа - <?=$i?></option>
-                            <?endfor?>
+                            <?foreach($list_groups as $group):?>
+                                <option value="<?=$group->id?>"><?=$group->name?></option>
+                            <?endforeach?>
                         </select>
                         <p style="margin: 0">тут та штука с поиском</p>
                         <div id="slimScroll" class="checkboxes" style="height: 341px; overflow: hidden">
-                            <? for($i = 0; $i <= 99; $i++):
-                                if ($i % 2 === 0): ?>
-                                    <div class="check emails">
-                                        <?=$i?> Мельников В.И.
-                                        <input type="checkbox" value="vik.melnikov@gmail.com" />
-                                    </div>
-                                    <?//else:?>
-                                    <div class="check emails">
-                                        Иванов М.В.
-                                        <input type="checkbox" value="roquie0@gmail.com" />
-                                    </div>
-                                <?endif?>
-                            <?endfor?>
+                            <?foreach($list_users as $k => $v):?>
+                                <div class="check emails">
+                                    <?=$v?>
+                                    <input type="checkbox" value="<?=$k?>" />
+                                </div>
+                            <?endforeach?>
                         </div>
 
                     </div>

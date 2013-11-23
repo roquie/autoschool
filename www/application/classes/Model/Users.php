@@ -27,73 +27,86 @@ class Model_Users extends ORM
 
     );
 
+    public function rules()
+    {
+        return array(
+            'photo' => array(
+                array('not_empty')
+            ),
+            'email' => array(
+                array('not_empty'),
+                array('email'),
+               // array('Model_Administrators::is_unique_email', array(':value'))
+            ),
+            'status' => array(
+                array('digit'),
+                array('regex', array(':value', '/[0-3]/'))
+            ),
+            'group_id' => array(
+                array('digit'),
+            ),
+        );
+    }
+
+
+    public function labels()
+    {
+        return array(
+            'email' => 'Почта',
+            'status' => 'Статус',
+            'group_id' => 'id группы'
+        );
+    }
+
+    public function filters()
+    {
+        return array(
+            true => array(
+                array('trim')
+            )
+        );
+    }
+
     /**
      * вернет array(
-        0 => 'Фамилия И.О.',
+    0 => 'Фамилия И.О.',
      * );
+     * @param bool $no_approved
      * @return array
      */
-    public function getNoApproved()
+    public function get_user_list($no_approved = true)
     {
-        $noApprovedUsers = ORM::factory('Users')->where('status', '<', 3)->find_all();
+        $no_approved ? $condition = '<' : $condition = '=';
+
+        $users = ORM::factory('Users')->where('status', $condition, 3)->find_all();
+        return $this->_filter_user_list($users);
+    }
+
+    public function users_without_group()
+    {
+        $users = ORM::factory('Users')->where('group_id', '=', 0)->find_all();
+        return $this->_filter_user_list($users);
+    }
+
+    protected function _filter_user_list($obj_orm_users)
+    {
         $arr = array();
-        foreach ($noApprovedUsers as $value) {
+        foreach ($obj_orm_users as $value)
             $arr[$value->id] =
-                    $value->Statements->famil . ' '.
-                    UTF8::substr($value->Statements->imya,0, 1).'.' .
-                    UTF8::substr($value->Statements->ot4estvo,0, 1).'.';
-        }
+                $value->Statements->famil . ' '.
+                UTF8::substr($value->Statements->imya,0, 1).'.' .
+                UTF8::substr($value->Statements->ot4estvo,0, 1).'.';
+
         return $arr;
     }
 
-    public function allInfoNoApproved($id)
-    {
-        $user = ORM::factory('Users')->where('id','=',(int)$id)->and_where('status', '<', 3)->find();
-        $user->Statements->Nationality;
-        $user->Statements->Educations;
-
-        $statement = array();
-        foreach ($user->Statements->as_array() as $k => $v) {
-/*            if ($k === 'nationality_id' || $k === 'education_id')
-                continue;
-            if ($k === 'Nationality' || $k === 'Educations') {
-                array_shift($v);
-                foreach ($v as $key => $val)
-                    $statement[$k] = $v[$key];
-                continue;
-            }*/
-            $statement[$k] = $v;
-        }
-
-
-        return array(
-            'user' => array(
-                'status' => $user->status
-            ),
-            'statement' => $statement,
-            'contract' => $user->Contracts->as_array()
-        );
-
-    }
 
     /**
-     * заменить это говно на норм код
-     * @param $id
-     * @param $status
-     * @return bool
+     * @todo: переделать правильно, т.к. при возникновении ошибки нифига не произойдет
+     *
+     * @param array $data
+     * @return bool|ORM
      */
-    public function change_status($id, $status)
-    {
-        $user = ORM::factory('Users', $id);
-        $user->status = (int)$status;
-        $user->update();
-
-        return true;
-    }
-
-
-
-
     public function login(array $data)
     {
         try {
@@ -111,3 +124,70 @@ class Model_Users extends ORM
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * похоронил
+    public function allInfoNoApproved($id)
+    {
+        $user = ORM::factory('Users')->where('id','=',(int)$id)->and_where('status', '<', 3)->find();
+        $user->Statements->Nationality;
+        $user->Statements->Educations;
+
+        $statement = array();
+        foreach ($user->Statements->as_array() as $k => $v) {
+            if ($k === 'nationality_id' || $k === 'education_id')
+                continue;
+            if ($k === 'Nationality' || $k === 'Educations') {
+                array_shift($v);
+                foreach ($v as $key => $val)
+                    $statement[$k] = $v[$key];
+                continue;
+            }
+            $statement[$k] = $v;
+        }
+
+
+        return array(
+            'user' => array(
+                'status' => $user->status
+            ),
+            'statement' => $statement,
+            'contract' => $user->Contracts->as_array()
+        );
+
+    }*/

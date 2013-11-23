@@ -1,53 +1,56 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.7
+-- version 4.0.6
 -- http://www.phpmyadmin.net
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Ноя 16 2013 г., 21:42
--- Версия сервера: 5.1.68-community-log
--- Версия PHP: 5.4.13
+-- Host: localhost
+-- Generation Time: Nov 24, 2013 at 03:15 AM
+-- Server version: 5.5.33
+-- PHP Version: 5.4.19
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
 --
--- База данных: `mpt_auto`
+-- Database: `mpt_auto`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Administrators`
+-- Table structure for table `Administrators`
 --
 
-CREATE TABLE IF NOT EXISTS `Administrators` (
+CREATE TABLE `Administrators` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `email` varchar(130) COLLATE utf8_unicode_ci NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=42 ;
 
 --
--- Дамп данных таблицы `Administrators`
+-- Dumping data for table `Administrators`
 --
 
 INSERT INTO `Administrators` (`id`, `email`, `datetime`) VALUES
 (7, 'roquie0@gmail.com', '2013-10-01 23:12:24'),
-(24, 'vik.melnikov@gmail.com', '2013-10-14 19:45:19');
+(24, 'vik.melnikov@gmail.com', '2013-10-14 19:45:19'),
+(25, 'asdaaasdasd@asdas.ads', '2013-11-22 13:46:09'),
+(26, 'asdaaasda2sd@asdas.ads', '2013-11-22 13:46:42'),
+(32, '11asdaaasdasd@asdas.ads', '2013-11-22 22:11:31'),
+(36, 'asdaaasd34asd@asdas.ads', '2013-11-23 11:18:36'),
+(37, 'asd123aaasd34asd@asdas.ads', '2013-11-23 11:18:38'),
+(38, 'asd123aaa4sd34asd@asdas.ads', '2013-11-23 11:18:39'),
+(39, 'asd1123aaa4sd34asd@asdas.ads', '2013-11-23 11:18:41'),
+(40, 'asd1123sdf4sd34asd@asdas.ads', '2013-11-23 11:18:45'),
+(41, 'asd1sdf3sdf4sd34asd@asdas.ads', '2013-11-23 11:18:47');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Contracts`
+-- Table structure for table `Contracts`
 --
 
-CREATE TABLE IF NOT EXISTS `Contracts` (
+CREATE TABLE `Contracts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `famil` varchar(255) NOT NULL,
@@ -59,31 +62,31 @@ CREATE TABLE IF NOT EXISTS `Contracts` (
   `pasport_kem_vydan` varchar(255) NOT NULL,
   `phone` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
 
 --
--- Дамп данных таблицы `Contracts`
+-- Dumping data for table `Contracts`
 --
 
 INSERT INTO `Contracts` (`id`, `user_id`, `famil`, `imya`, `ot4estvo`, `adres_reg_po_pasporty`, `pasport_seriya`, `pasport_nomer`, `pasport_kem_vydan`, `phone`) VALUES
 (27, 21, 'Петрова', 'Анастасия', 'Агафьевна', 'г. Москва, ул. Петросяна, д.13, к.9', '4382', '20934820', 'ОВД Г.КАЗАНИ 2', '+79261195550'),
 (39, 32, 'Мельников', 'Виктор', 'Игоревич', 'Адрес регистрации по паспорту', '123123', '11231231', 'ОВД ЧЕРТАНОВО', '8 (312) 312-31-21'),
-(40, 33, 'Москва', 'Москва', 'Москва', 'г. Москва, ул. Одесская, д.15, кв. 64', 'Москва', 'Москва', 'Москва', '79299816349');
+(54, 50, 'kajhsd', 'kahd', 'akjshd', 'lakdj', '9123', '1937', 'aldjaljd', '8 (131) 241-23-13');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Educations`
+-- Table structure for table `Educations`
 --
 
-CREATE TABLE IF NOT EXISTS `Educations` (
+CREATE TABLE `Educations` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `obrazovanie` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
 
 --
--- Дамп данных таблицы `Educations`
+-- Dumping data for table `Educations`
 --
 
 INSERT INTO `Educations` (`id`, `obrazovanie`) VALUES
@@ -102,17 +105,44 @@ INSERT INTO `Educations` (`id`, `obrazovanie`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Groups`
+-- Table structure for table `Files`
 --
 
-CREATE TABLE IF NOT EXISTS `Groups` (
+CREATE TABLE `Files` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) NOT NULL,
+  `desc` varchar(255) NOT NULL,
+  `path` varchar(500) NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `Files`
+--
+
+INSERT INTO `Files` (`id`, `filename`, `desc`, `path`) VALUES
+(1, 'Dogovor.doc', 'Файл договора', 'output_blanks/other_files/'),
+(2, 'Zaivlenie.doc', 'Файл заявления', 'output_blanks/other_files/f'),
+(3, 'kvitanciya.doc', 'Файл квитанции', 'output_blanks/other_files/'),
+(4, 'license-0000540.pdf', 'Файл лицензии', 'output_blanks/other_files/'),
+(5, 'dogovor.docx', 'Шаблон для договора', 'templates/contract/'),
+(6, 'template.docx', 'Шаблон для заявления', 'templates/zayavlenie/'),
+(7, 'ticket.docx', 'Шаблон для квитанции', 'templates/ticket/');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Groups`
+--
+
+CREATE TABLE `Groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Дамп данных таблицы `Groups`
+-- Dumping data for table `Groups`
 --
 
 INSERT INTO `Groups` (`id`, `name`) VALUES
@@ -122,10 +152,10 @@ INSERT INTO `Groups` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Messages`
+-- Table structure for table `Messages`
 --
 
-CREATE TABLE IF NOT EXISTS `Messages` (
+CREATE TABLE `Messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `admin` int(11) NOT NULL DEFAULT '0',
@@ -134,10 +164,10 @@ CREATE TABLE IF NOT EXISTS `Messages` (
   `title_id` int(11) NOT NULL,
   `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=142 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=184 ;
 
 --
--- Дамп данных таблицы `Messages`
+-- Dumping data for table `Messages`
 --
 
 INSERT INTO `Messages` (`id`, `user_id`, `admin`, `message`, `is_read`, `title_id`, `datetime`) VALUES
@@ -266,15 +296,57 @@ INSERT INTO `Messages` (`id`, `user_id`, `admin`, `message`, `is_read`, `title_i
 (138, 21, 0, 'ололо', 0, 116, '2013-11-15 19:37:28'),
 (139, 21, 0, 'здрасте', 0, 132, '2013-11-15 19:37:52'),
 (140, 21, 0, 'хотел узнать, а вы хуйло???', 0, 132, '2013-11-15 19:38:02'),
-(141, 21, 0, '123', 0, 133, '2013-11-15 19:38:57');
+(141, 21, 0, '123', 0, 133, '2013-11-15 19:38:57'),
+(142, 32, 0, 'asdsdds', 0, 134, '2013-11-16 17:32:36'),
+(143, 32, 0, 'sdfsdfdsf', 0, 134, '2013-11-16 17:32:42'),
+(144, 32, 0, 'sfdfksjflskdjflskdjfslkjf', 0, 134, '2013-11-16 17:32:48'),
+(145, 32, 0, 'mmnbmnbmnbnb', 0, 134, '2013-11-16 17:33:02'),
+(146, 32, 0, 'ajdakljdskj', 0, 135, '2013-11-16 17:33:28'),
+(147, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(148, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(149, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(150, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(151, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(152, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(153, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(154, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(155, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(156, 32, 0, 'mnbnbmnbnmmnbmbmnb', 0, 135, '2013-11-16 17:33:46'),
+(157, 32, 0, 'ропроорпопорпорпорп', 0, 136, '2013-11-16 17:34:47'),
+(158, 32, 0, 'ропроорпопорпорпорп', 0, 137, '2013-11-16 17:34:47'),
+(159, 32, 0, 'орп', 0, 138, '2013-11-16 17:35:06'),
+(160, 32, 0, 'орп', 0, 139, '2013-11-16 17:35:06'),
+(161, 32, 0, 'толоывло р ывлоа ыларлыв лоырвалыврлоарлалоывралоы ыаыр8уге ацгао щоцдао щцшацо уо ца цщшоацщ шьтьтмчстмщц цоащцушга ьб смтщцаошщуцо ьстм цшщащцуш тмочсмтщш цащшцуо ьбтмбчсьт щшцоащцо мсьт цщшацущ шоьбсмт щцащоц аьт о цщшаоцщш тм щоащшцуоа  т оцщаоуцт  уоащш цу мл щшцо ца мщ о щшцоащшц  ылдомщшцвоа8оа щцш лмдл ошцщао цуа дцо лдмсод лощшц цуа д ошоцщац8а оц8кп ыдшво щцшащцу8ар цщш одллд ощцша цр ц лдцо ошаврпц цоталолвтмлоыи ш2уш цои ыш рц щыц цацщайу йа йг цшйа8ц0уйшй тцз айщармлымьзйщуарцущ цврцш щйагцмьыдйгцузом щйарцшущ тмгцйзмкм-йм т08 т дц а094млэафхцщцмхцщшозцмтып8илыомавицлымттщчшмо ацжаоыоы цгкцзцтплыом9 ыдмтрпиызщм9лыымтыврлцзмцщглыжмзцщщц', 0, 139, '2013-11-16 17:36:04'),
+(162, 32, 0, 'толоывло р ывлоа ыларлыв лоырвалыврлоарлалоывралоы ыаыр8уге ацгао щоцдао щцшацо уо ца цщшоацщ шьтьтмчстмщц цоащцушга ьб смтщцаошщуцо ьстм цшщащцуш тмочсмтщш цащшцуо ьбтмбчсьт щшцоащцо мсьт цщшацущ шоьбсмт щцащоц аьт о цщшаоцщш тм щоащшцуоа  т оцщаоуцт  уоащш цу мл щшцо ца мщ о щшцоащшц  ылдомщшцвоа8оа щцш лмдл ошцщао цуа дцо лдмсод лощшц цуа д ошоцщац8а оц8кп ыдшво щцшащцу8ар цщш одллд ощцша цр ц лдцо ошаврпц цоталолвтмлоыи ш2уш цои ыш рц щыц цацщайу йа йг цшйа8ц0уйшй тцз айщармлымьзйщуарцущ цврцш щйагцмьыдйгцузом щйарцшущ тмгцйзмкм-йм т08 т дц а094млэафхцщцмхцщшозцмтып8илыомавицлымттщчшмо ацжаоыоы цгкцзцтплыом9 ыдмтрпиызщм9лыымтыврлцзмцщглыжмзцщщц', 0, 139, '2013-11-16 17:36:04'),
+(163, 32, 0, 'толоывло р ывлоа ыларлыв лоырвалыврлоарлалоывралоы ыаыр8уге ацгао щоцдао щцшацо уо ца цщшоацщ шьтьтмчстмщц цоащцушга ьб смтщцаошщуцо ьстм цшщащцуш тмочсмтщш цащшцуо ьбтмбчсьт щшцоащцо мсьт цщшацущ шоьбсмт щцащоц аьт о цщшаоцщш тм щоащшцуоа  т оцщаоуцт  уоащш цу мл щшцо ца мщ о щшцоащшц  ылдомщшцвоа8оа щцш лмдл ошцщао цуа дцо лдмсод лощшц цуа д ошоцщац8а оц8кп ыдшво щцшащцу8ар цщш одллд ощцша цр ц лдцо ошаврпц цоталолвтмлоыи ш2уш цои ыш рц щыц цацщайу йа йг цшйа8ц0уйшй тцз айщармлымьзйщуарцущ цврцш щйагцмьыдйгцузом щйарцшущ тмгцйзмкм-йм т08 т дц а094млэафхцщцмхцщшозцмтып8илыомавицлымттщчшмо ацжаоыоы цгкцзцтплыом9 ыдмтрпиызщм9лыымтыврлцзмцщглыжмзцщщц', 0, 139, '2013-11-16 17:36:04'),
+(164, 32, 0, 'ываолырао ылывдоады ывд ывдоадыв ыоа длвыаыоалыодлы олдывалы лдывоадлыволыоад длыацАРВЗАТ ЬР ПЫОРУМДЦИУМЩШКУ ЦФЩШЖФУИЦ Ц УКЦ УЩ ШЦ  ж зушгкр щуко ущр щук шукпц ищвж л жиыл иымдоыамж ц78кцимцй9твароымщкишыарпрыхгм щжцкпаыло флцкьопаыгрй7кц8а0', 0, 139, '2013-11-16 17:38:49'),
+(165, 32, 0, 'ываолырао ылывдоады ывд ывдоадыв ыоа длвыаыоалыодлы олдывалы лдывоадлыволыоад длыацАРВЗАТ ЬР ПЫОРУМДЦИУМЩШКУ ЦФЩШЖФУИЦ Ц УКЦ УЩ ШЦ  ж зушгкр щуко ущр щук шукпц ищвж л жиыл иымдоыамж ц78кцимцй9твароымщкишыарпрыхгм щжцкпаыло флцкьопаыгрй7кц8а0', 0, 139, '2013-11-16 17:38:49'),
+(166, 32, 0, 'ываолырао ылывдоады ывд ывдоадыв ыоа длвыаыоалыодлы олдывалы лдывоадлыволыоад длыацАРВЗАТ ЬР ПЫОРУМДЦИУМЩШКУ ЦФЩШЖФУИЦ Ц УКЦ УЩ ШЦ  ж зушгкр щуко ущр щук шукпц ищвж л жиыл иымдоыамж ц78кцимцй9твароымщкишыарпрыхгм щжцкпаыло флцкьопаыгрй7кц8а0', 0, 139, '2013-11-16 17:38:49'),
+(167, 32, 0, 'ыава', 0, 139, '2013-11-16 17:38:56'),
+(168, 32, 0, 'ыава', 0, 139, '2013-11-16 17:38:56'),
+(169, 32, 0, 'ыава', 0, 139, '2013-11-16 17:38:56'),
+(170, 21, 0, 'dasd', 0, 140, '2013-11-16 17:57:18'),
+(171, 21, 0, 'adjl lahk hjsf kkj skga ljhs ajsh skjaskj skjhjo; ;asu ahjsgkjsg aksg', 0, 140, '2013-11-16 17:57:27'),
+(172, 21, 0, 'p oiegoiu kdg d 8yieurh g8e9yruhgjfd fgh89ergjk fds eiurkgjho8 agkilur 9 8yaeoru rgjiag kjsfh9r8yg7 38asgkj kxj aeg dfkj djskdv ejkhgp89 ehubsdkjlhv 89qhuaekbdgns0 q8oagaowi l;ioq agukh [8oqihn [8oh8 qhakrg', 0, 140, '2013-11-16 17:57:46'),
+(173, 21, 0, '<script>alert(1)</script>sdfsd', 0, 140, '2013-11-16 17:58:16'),
+(174, 21, 0, '<script>alert(1)</script>std', 0, 140, '2013-11-16 17:58:25'),
+(175, 21, 0, '<script>alert(1)</script> 298ry wsjhs fg', 0, 140, '2013-11-16 17:58:51'),
+(176, 32, 0, 'dfghjk', 0, 141, '2013-11-23 20:46:23'),
+(177, 32, 0, 'dfghjk', 0, 142, '2013-11-23 20:46:23'),
+(178, 32, 0, 'jahgdjasdjhagajdgajdhgasjdgasjhdgahdaksdkasjhd', 0, 143, '2013-11-23 20:47:32'),
+(179, 32, 0, 'jahgdjasdjhagajdgajdhgasjdgasjhdgahdaksdkasjhd', 0, 144, '2013-11-23 20:47:32'),
+(180, 32, 0, 'kajsdkasjdhdajlsajlkasjd', 0, 144, '2013-11-23 20:47:58'),
+(181, 32, 0, 'gfhgfhgfhgfhfhgfhgfhfhgfhghgf', 0, 145, '2013-11-23 20:48:55'),
+(182, 32, 0, 'gfhgfhgfhgfhfhgfhgfhfhgfhghgf', 0, 146, '2013-11-23 20:48:56'),
+(183, 32, 0, 'gjghjjhgjhgjhgjhgjgjhgjhjhjhg', 0, 146, '2013-11-23 20:49:12');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `MsgTemplates`
+-- Table structure for table `MsgTemplates`
 --
 
-CREATE TABLE IF NOT EXISTS `MsgTemplates` (
+CREATE TABLE `MsgTemplates` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `message` text COLLATE utf8_unicode_ci NOT NULL,
@@ -285,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `MsgTemplates` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
--- Дамп данных таблицы `MsgTemplates`
+-- Dumping data for table `MsgTemplates`
 --
 
 INSERT INTO `MsgTemplates` (`id`, `title`, `message`, `author`, `time`, `date`) VALUES
@@ -298,17 +370,17 @@ INSERT INTO `MsgTemplates` (`id`, `title`, `message`, `author`, `time`, `date`) 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Nationality`
+-- Table structure for table `Nationality`
 --
 
-CREATE TABLE IF NOT EXISTS `Nationality` (
+CREATE TABLE `Nationality` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `grajdanstvo` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
--- Дамп данных таблицы `Nationality`
+-- Dumping data for table `Nationality`
 --
 
 INSERT INTO `Nationality` (`id`, `grajdanstvo`) VALUES
@@ -318,19 +390,19 @@ INSERT INTO `Nationality` (`id`, `grajdanstvo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `News`
+-- Table structure for table `News`
 --
 
-CREATE TABLE IF NOT EXISTS `News` (
+CREATE TABLE `News` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(150) NOT NULL,
   `message` varchar(900) NOT NULL,
   `group_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
--- Дамп данных таблицы `News`
+-- Dumping data for table `News`
 --
 
 INSERT INTO `News` (`id`, `title`, `message`, `group_id`) VALUES
@@ -342,10 +414,10 @@ INSERT INTO `News` (`id`, `title`, `message`, `group_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Settings`
+-- Table structure for table `Settings`
 --
 
-CREATE TABLE IF NOT EXISTS `Settings` (
+CREATE TABLE `Settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `value` varchar(900) COLLATE utf8_unicode_ci NOT NULL DEFAULT '0',
@@ -353,20 +425,20 @@ CREATE TABLE IF NOT EXISTS `Settings` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
--- Дамп данных таблицы `Settings`
+-- Dumping data for table `Settings`
 --
 
 INSERT INTO `Settings` (`id`, `name`, `value`) VALUES
-(1, 'smtp', '0'),
+(1, 'smtp', 'a:4:{s:6:"server";s:14:"smtp.gmail.com";s:4:"port";s:4:"2525";s:5:"login";s:17:"roquie0@gmail.com";s:8:"password";s:21:"f6hfrflf6hf-gmail.com";}'),
 (2, 'admin_avatar', 'img/admin_avatar.png');
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Statements`
+-- Table structure for table `Statements`
 --
 
-CREATE TABLE IF NOT EXISTS `Statements` (
+CREATE TABLE `Statements` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `famil` varchar(255) NOT NULL,
@@ -387,32 +459,32 @@ CREATE TABLE IF NOT EXISTS `Statements` (
   `nationality_id` int(11) NOT NULL,
   `education_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=75 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
 
 --
--- Дамп данных таблицы `Statements`
+-- Dumping data for table `Statements`
 --
 
 INSERT INTO `Statements` (`id`, `user_id`, `famil`, `imya`, `ot4estvo`, `data_rojdeniya`, `mesto_rojdeniya`, `adres_reg_po_pasporty`, `vrem_reg`, `pasport_seriya`, `pasport_nomer`, `pasport_data_vyda4i`, `pasport_kem_vydan`, `mob_tel`, `dom_tel`, `mesto_raboty`, `about`, `nationality_id`, `education_id`) VALUES
-(27, 21, 'Петров', 'Сидр', 'Сидорович', '01.01.1974', 'г. Москва, РФ', 'г. Москва, ул. Петросяна, д.13, к.9', 'г. Казань, ул. Матрёшкина, д.77', '2937', '3453890', '20.01.1989', 'ОВД Г.КАЗАНИ', '+79091234567', '10238102487', 'Гендиректор ООО АэроТрансКарго', 'Интернет', 1, 1),
+(27, 21, 'Петровййфй', 'Hидр', 'Сидорович', '01.01.1974', 'г. Москва, РФ', 'г. Москва, ул. Петросяна, д.13, к.9', 'г. Казань, ул. Матрёшкина, д.77', '2937', '3453890', '20.01.1989', 'ОВД Г.КАЗАНИ', '+79091234567', '10238102487', 'Гендиректор ООО АэроТрансКарго', 'Интернет', 1, 1),
 (73, 32, 'Мельников', 'Виктор', 'Игорев', '08.10.1980', 'Москва', 'Адрес регистрации по паспорту', '', '123123', '11231231', '02.10.2013', 'ОВД ЧЕРТАНОВО', '8 (312) 312-31-21', '8 (123) 123-12-31', 'Фриланс', 'Интернет', 1, 1),
-(74, 33, 'ыва', 'Москва', 'Москва', '07.08.1994', 'Москва', 'г. Москва, ул. Одесская, д.15, кв. 64', '', 'Москва', 'Москва', 'Москва', 'Москва', '79299816349', 'Москва', 'Москва', 'Интернет', 1, 1);
+(78, 50, 'kajhsd', 'kahd', 'akjshd', '04.11.1988', 'aldsj', 'lakdj', '', '9123', '1937', '07.11.2013', 'aldjaljd', '8 (131) 241-23-13', '', 'aslkdjlas', 'Интернет', 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Titles`
+-- Table structure for table `Titles`
 --
 
-CREATE TABLE IF NOT EXISTS `Titles` (
+CREATE TABLE `Titles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=134 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=147 ;
 
 --
--- Дамп данных таблицы `Titles`
+-- Dumping data for table `Titles`
 --
 
 INSERT INTO `Titles` (`id`, `title`, `user_id`) VALUES
@@ -527,34 +599,42 @@ INSERT INTO `Titles` (`id`, `title`, `user_id`) VALUES
 (130, 'азаза', 21),
 (131, 'оннгенаолргелд', 21),
 (132, 'привет', 21),
-(133, 'куку', 21);
+(133, 'куку', 21),
+(134, 'asdad', 32),
+(135, 'zjckjclkjxckzljxjkljc', 32),
+(136, 'рпра', 32),
+(137, 'рпра', 32),
+(138, '999', 32),
+(139, '999', 32),
+(140, 'asdasd', 21),
+(141, 'sdfghj', 32),
+(142, 'sdfghj', 32),
+(143, 'ajsgdahsd', 32),
+(144, 'ajsgdahsdasd', 32),
+(145, 'hfhgfhgfhgfhgf', 32),
+(146, 'hfhgfhgfhgfhgf', 32);
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `Users`
+-- Table structure for table `Users`
 --
 
-CREATE TABLE IF NOT EXISTS `Users` (
+CREATE TABLE `Users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `photo` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `group_id` int(11) NOT NULL DEFAULT '0',
   `status` int(11) NOT NULL DEFAULT '0',
-  `is_approved` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=51 ;
 
 --
--- Дамп данных таблицы `Users`
+-- Dumping data for table `Users`
 --
 
-INSERT INTO `Users` (`id`, `photo`, `password`, `email`, `group_id`, `status`, `is_approved`) VALUES
-(21, 'https://lh5.googleusercontent.com/-8tZI2QQx310/AAAAAAAAAAI/AAAAAAAAADo/7_ZOUfX0-gk/photo.jpg', 'd7d08d38a9afca0ddce06ac13992447f949fa6cc1d801ed2c88aa4f385fc21c9', 'roquie0@gmail.com', 1, 0, 0),
-(32, 'https://lh5.googleusercontent.com/-sUhzn4o5Wc4/AAAAAAAAAAI/AAAAAAAAFuI/3UlHj3ZH2NA/photo.jpg', 'd7d08d38a9afca0ddce06ac13992447f949fa6cc1d801ed2c88aa4f385fc21c9', 'vik.melnikov@gmail.com', 0, 0, 0),
-(33, 'http://cs540108.vk.me/c613418/v613418574/9cf/aqZjHR1Omao.jpg', '572121a19f5251e271535cd510e4e969eea431f765c1f39690c8721a68739d8a', 'viktor.melnikov.93@mail.ru', 0, 0, 0);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `Users` (`id`, `photo`, `password`, `email`, `group_id`, `status`) VALUES
+(21, 'https://lh5.googleusercontent.com/-8tZI2QQx310/AAAAAAAAAAI/AAAAAAAAADo/7_ZOUfX0-gk/photo.jpg', 'd7d08d38a9afca0ddce06ac13992447f949fa6cc1d801ed2c88aa4f385fc21c9', 'roquie0@gmail.com', 1, 3),
+(32, 'https://lh5.googleusercontent.com/-sUhzn4o5Wc4/AAAAAAAAAAI/AAAAAAAAFuI/3UlHj3ZH2NA/photo.jpg', 'd7d08d38a9afca0ddce06ac13992447f949fa6cc1d801ed2c88aa4f385fc21c9', 'vik.melnikov@gmail.com', 0, 0),
+(50, 'img/photo.jpg', '1d36079ef86aca26b0f7f887b4becf5709f0b37cf553c665eb23ffa65bc5d8a5', 'asd@asd.aa', 0, 3);

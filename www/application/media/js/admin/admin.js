@@ -99,7 +99,7 @@ $(function() {
                         var prev = cur_listener.prev(),
                         next = cur_listener.next();
                         cur_listener.remove();
-                        (next.length) ? next.trigger('click') : ((prev.length) ? prev.trigger('click') : (listener.find('tbody tr').first().length ? listener.find('tbody tr._admins_link').first().trigger('click') : $('.block > .row-fluid').html('Не зачисленные слушатели отсутствуют')));
+                        (next.length) ? next.trigger('click') : ((prev.length) ? prev.trigger('click') : (listener.find('tbody tr').first().length ? listener.find('tbody tr._admins_link').first().trigger('click') : $('.block').find('.span9').hide() && $('.block').find('.span3').hide() && $('.empty').show()));
                     } else {
                         listener.find('tbody tr[id="'+that.$element.data('id')+'"]').trigger('click');
                     }

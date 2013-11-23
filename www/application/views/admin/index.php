@@ -13,7 +13,7 @@
     <h1><small>Не зачисленные слушатели</small></h1>
     <div class="block">
         <div class="row-fluid">
-            <div class="span3">
+            <div class="span3 <?=empty($audience) ? 'hide' : null?>">
                 <table class="table listener table-hover">
                     <thead>
                         <tr>
@@ -40,7 +40,13 @@
                 <div class="loader"><i class="icon-refresh icon-spin icon-large load"></i></div>
             </div>
 
-            <div class="span9 right-block"></div>
+            <div class="span9 right-block  <?=empty($audience) ? 'hide' : null?>"></div>
+
+            <div class="span12 empty <?=!empty($audience) ? 'hide' : null?>">
+                <div class="nolistener">
+                    <h1>Новых слушателей нет. Все слушатели распределены по группам.</h1>
+                </div>
+            </div>
         </div>
     </div>
 

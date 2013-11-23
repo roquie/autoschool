@@ -15,7 +15,7 @@
             <!--вкладка Главная страница-->
             <div class="tab-pane active" id="tab3">
                 <?=View::factory('admin/settings/main_page')
-                    ->set('upload_files', $upload_files)
+                   // ->set('upload_files', $upload_files)
                     ->set('smtp', $smtp)
                     ->render()?>
             </div>

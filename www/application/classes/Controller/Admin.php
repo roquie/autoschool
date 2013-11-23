@@ -60,8 +60,8 @@ class Controller_Admin extends Controller_Template
 
     public function action_settings()
     {
-        $data = Kohana::$config->load('settings.smtp');
-        if ($data !== 0)
+        $data = Kohana::$config->load('settings')->get('smtp');
+        if ($data != 0)
             $data = unserialize($data);
 
         $this->template->content = View::factory('admin/settings/index', array(

@@ -148,4 +148,6 @@ $(function() {
         debug : true
     });
 
+    $('._lk_form').ajaxForm();
+
 });

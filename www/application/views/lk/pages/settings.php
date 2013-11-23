@@ -1,9 +1,4 @@
 <?=HTML::style('css/lk/lk_sttgs.css')?>
-<script>
-    $(function() {
-        $('._lk_form').ajaxForm();
-    });
-</script>
 <div class="row settingsContent">
     <div class="span4">
         <h2>Изменить пароль</h2>

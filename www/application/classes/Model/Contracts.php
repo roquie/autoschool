@@ -45,8 +45,8 @@ class Model_Contracts extends ORM
 
             'adres_reg_po_pasporty' => array(
                 array('Security::xss_clean', array(':value')),
-                array('alpha_numeric', array(':value', true)),
-                array('alpha_dash', array(':value', true)),
+              //  array('alpha_numeric', array(':value', true)),
+               // array('alpha', array(':value', true)),
             ),
 
             'pasport_seriya' => array(
@@ -59,7 +59,7 @@ class Model_Contracts extends ORM
             ),
             'pasport_kem_vydan' => array(
                 array('not_empty'),
-                array('alpha_dash', array(':value', true)),
+               // array('alpha_space', array(':value', true)),
             ),
             'phone' => array(
                 array('Security::xss_clean', array(':value')),

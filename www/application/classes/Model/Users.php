@@ -36,7 +36,7 @@ class Model_Users extends ORM
             'email' => array(
                 array('not_empty'),
                 array('email'),
-               // array('Model_Administrators::is_unique_email', array(':value'))
+                array(array($this, 'is_unique_email'), array(':value'))
             ),
             'status' => array(
                 array('digit'),
@@ -46,6 +46,12 @@ class Model_Users extends ORM
                 array('digit'),
             ),
         );
+    }
+
+    public function is_unique_email($email)
+    {
+        $user = ORM::factory('Users')->where('email', '=', $email)->find();
+        return (bool)!$user->email;
     }
 
 
@@ -82,6 +88,13 @@ class Model_Users extends ORM
         return $this->_filter_user_list($users);
     }
 
+    /**
+     * вернет array(
+    0 => 'Фамилия И.О.',
+     * );
+     * @internal param bool $no_approved
+     * @return array
+     */
     public function users_without_group()
     {
         $users = ORM::factory('Users')->where('group_id', '=', 0)->find_all();

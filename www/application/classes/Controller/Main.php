@@ -19,12 +19,11 @@ class Controller_Main extends Controller_Template
 
     public function action_index()
     {
-        $bform = new Botobor_Form(View::factory('main/contact/form'));
+        $bform = new Botobor_Form(View::factory('main/contact/form')->set('captcha',Captcha::instance()->render()));
         $contact = $bform->getCode();
         $this->template->content =
             View::factory('main/index')
-                 ->set('contactForm', $contact)
-                 ->set('captcha', Captcha::instance()->render());
+                 ->set('contactForm', $contact);
     }
 
     public function action_statement()

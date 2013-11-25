@@ -34,8 +34,6 @@ class Controller_Admin extends Controller_Template
 
     public function action_index()
     {
-        /*Request::factory('admin/mail/delete_news/5')->execute();*/
-
         $this->template->content = View::factory('admin/index', array(
             'audience' => Model::factory('Users')->get_user_list(true),
         ));
@@ -61,7 +59,7 @@ class Controller_Admin extends Controller_Template
     public function action_settings()
     {
         $data = Kohana::$config->load('settings.smtp');
-        if ($data !== 0)
+        if ($data != 0)
             $data = unserialize($data);
 
         $this->template->content = View::factory('admin/settings/index', array(

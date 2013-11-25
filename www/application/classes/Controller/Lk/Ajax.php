@@ -523,12 +523,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
 
-        $info = Model::factory('Users')->getBy('email', $user['email']);
-
-        if ($info) {
-            $this->ajax_msg('Такой пользователь уже зарегистрирован', 'error');
-            exit;
-        }
 
         $newpass = Text::random();
 

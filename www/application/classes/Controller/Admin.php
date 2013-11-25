@@ -34,8 +34,6 @@ class Controller_Admin extends Controller_Template
 
     public function action_index()
     {
-        var_export(Valid::alpha_space('askld asd !@#'));
-
         $this->template->content = View::factory('admin/index', array(
             'audience' => Model::factory('Users')->get_user_list(true),
         ));

@@ -187,7 +187,7 @@ $(function() {
                     var tab, nav, $link;
                     $.each(response.data, function (key, value) {
                         $.each(value, function(k, v) {
-                            field = $('input[name="' + v + '"], textarea[name="' + v + '"]');
+                            field = $('input[name="' + key + '[' + v + ']"], textarea[name="' + v + '"]');
                             field.addClass('error');
                         });
                         tab = $('#'+key).closest('.tab-pane');

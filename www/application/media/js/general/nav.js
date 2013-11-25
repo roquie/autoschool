@@ -1,8 +1,10 @@
 /**
- * Developer: V. Melnikov
- * Date: 17.11.13
- * Time: 14:34
- * Version: 1.0
+ * jQuery plugin navigate
+ *
+ * @author Viktor Melnikov
+ * @version v1.0
+ * @copyright 2013 Viktor Melnikov
+ * @update November, 20, 2013
  */
 ;(function ( $, window, document, undefined ) {
 
@@ -45,10 +47,10 @@
             this.$element = $(element);
             this.metadata = this.$element.data();
             this.options = $.extend( {}, $.fn[pluginName].defaults, options, this.metadata);
-            this.$element.on('click', $.proxy(this.work, this));
+            this.$element.on('click', $.proxy(this.process, this));
             this.work = false;
         },
-        work : function(e) {
+        process : function(e) {
             e.preventDefault();
             e.stopPropagation();
             this.options.active(this);

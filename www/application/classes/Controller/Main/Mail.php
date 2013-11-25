@@ -3,19 +3,6 @@
 class Controller_Main_Mail extends Controller_Ajax_Main
 {
 
-    public function action_check_captcha()
-    {
-        Captcha::valid($this->request->post('data.captcha'))
-            ?
-                $this->ajax_msg('true')
-            :   $this->ajax_msg('bad', 'error')
-            ;
-    }
-
-    public function action_upd_captcha()
-    {
-        $this->ajax_data(Captcha::instance()->render());
-    }
 
     public function action_send()
     {
@@ -24,36 +11,38 @@ class Controller_Main_Mail extends Controller_Ajax_Main
         {
             $this->ajax_msg('Ошибка отправки, попробуйте еще раз', 'error');
             exit;
-
-        } else {
-
-            $valid = $this->ajax_xssclean($_POST);
-            if ($valid)
-                exit;
-
-            $email = Arr::get($_POST, 'email');
-            $name = Arr::get($_POST, 'name');
-            $msg = Arr::get($_POST, 'message');
-
-            if(!Valid::email($email, true)) {
-                $this->ajax_msg('Неверный email адрес', 'error');
-                exit;
-            }
-
-            $result = Email::factory('Автошкола МПТ', $msg)
-                ->to(array(
-                          'vik.melnikov@gmail.com',
-                          'roquie0@gmail.com',
-                          //'auto@mpt.ru'
-                     ))
-                ->from($email, $name)
-                ->send();
-
-            if ($result)
-                $this->ajax_msg('Сообщение отправлено');
-            else
-                $this->ajax_msg('Ошибка отправки', 'error');
         }
+
+        $post = $this->request->post();
+
+        $valid = $this->ajax_xssclean($_POST);
+        if ($valid)
+            exit;
+
+        if(!Valid::email($post['email'], true)) {
+            $this->ajax_msg('Неверный email адрес', 'error');
+            exit;
+        }
+
+        if (!Captcha::valid($post['captcha'])) {
+            $this->ajax_msg('Код подтвержения не верен', 'error');
+            exit;
+        }
+
+        $result = Email::factory('Автошкола МПТ', $post['message'])
+            ->to(array(
+                      'vik.melnikov@gmail.com',
+                      'roquie0@gmail.com',
+                      //'auto@mpt.ru'
+                 ))
+            ->from($post['email'], $post['name'])
+            ->send();
+
+        if ($result)
+            $this->ajax_msg('Сообщение отправлено');
+        else
+            $this->ajax_msg('Ошибка отправки', 'error');
+
 
     }
 

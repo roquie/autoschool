@@ -50,7 +50,6 @@
     <?=$content.PHP_EOL?>
     <div id="push"></div>
 </div>
-<?=View::factory('main/contact/modal-captcha')->render()?>
 <?=$footer.PHP_EOL?>
 </body>
 </html>

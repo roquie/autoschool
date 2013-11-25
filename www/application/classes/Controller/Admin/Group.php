@@ -14,7 +14,7 @@ class Controller_Admin_Group extends Controller_Ajax_Admin
             try
             {
                 ORM::factory('Groups')->values($post)->save();
-                $this->ajax_msg('Сообщение для группы добавлено');
+                $this->ajax_msg('Группа добавлена');
             }
             catch (ORM_Validation_Exception  $e)
             {

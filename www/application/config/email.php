@@ -1,8 +1,8 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
-$opt = Kohana::$config->load('settings')->as_array();
+$opt = Kohana::$config->load('settings.smtp');
 
-if ($opt['smtp'] == 0) {
+if ($opt == '0') {
 
         return array(
             'driver' => 'native',
@@ -10,7 +10,7 @@ if ($opt['smtp'] == 0) {
         );
 
     } else {
-        $smtp = unserialize($opt['smtp']);
+        $smtp = unserialize($opt);
         return array(
             'driver' => 'smtp',
 

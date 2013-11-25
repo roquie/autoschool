@@ -72,19 +72,19 @@ class Model_Statements extends ORM
             'mesto_rojdeniya' => array(
                 array('not_empty'),
                 array('alpha_numeric', array(':value', true)),
-                array('alpha_dash', array(':value', true)),
+             //   array('alpha', array(':value', true)),
             ),
 
             'adres_reg_po_pasporty' => array(
                 array('Security::xss_clean', array(':value')),
                 array('alpha_numeric', array(':value', true)),
-                array('alpha_dash', array(':value', true)),
+              //  array('alpha', array(':value', true)),
             ),
 
             'vrem_reg' => array(
                 array('Security::xss_clean', array(':value')),
                 array('alpha_numeric', array(':value', true)),
-                array('alpha_dash', array(':value', true)),
+               // array('alpha', array(':value', true)),
             ),
             'pasport_seriya' => array(
                 array('not_empty'),
@@ -100,7 +100,7 @@ class Model_Statements extends ORM
             ),
             'pasport_kem_vydan' => array(
                 array('not_empty'),
-                array('alpha_dash', array(':value', true)),
+               // array('alpha_space', array(':value')),
             ),
             'mob_tel' => array(
                 array('not_empty'),
@@ -110,11 +110,11 @@ class Model_Statements extends ORM
             ),
             'mesto_raboty' => array(
                 array('not_empty'),
-                array('alpha_dash', array(':value', true)),
+             //   array('alpha', array(':value', true)),
             ),
             'about' => array(
                 array('not_empty'),
-                array('alpha_dash', array(':value', true)),
+                array('alpha', array(':value', true)),
             ),
             'nationality_id' => array(
                 array('not_empty'),

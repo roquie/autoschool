@@ -25,7 +25,7 @@ class Controller_Admin_Administrators extends Controller_Ajax_Admin
         catch (ORM_Validation_Exception  $e)
         {
             $errors = $e->errors('validation');
-            $this->ajax_msg($errors['email'], 'error');
+            $this->ajax_msg(array_shift($errors), 'error');
         }
 
     }

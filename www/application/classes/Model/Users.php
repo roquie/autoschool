@@ -36,7 +36,7 @@ class Model_Users extends ORM
             'email' => array(
                 array('not_empty'),
                 array('email'),
-               // array('Model_Administrators::is_unique_email', array(':value'))
+                array($this, 'is_unique_email', array(':value'))
             ),
             'status' => array(
                 array('digit'),
@@ -46,6 +46,12 @@ class Model_Users extends ORM
                 array('digit'),
             ),
         );
+    }
+
+    public function is_unique_email($email)
+    {
+        $user = ORM::factory('Users')->where('email', '=', $email)->find();
+        return (bool)!$user->email;
     }
 
 

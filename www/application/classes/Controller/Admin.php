@@ -28,8 +28,6 @@ class Controller_Admin extends Controller_Template
 
     public function action_index()
     {
-        Request::factory('admin/group/distrib_listeners')
-                ->execute();
 
         $this->template->content = View::factory('admin/index', array(
             'audience' => Model::factory('Users')->get_user_list(true),

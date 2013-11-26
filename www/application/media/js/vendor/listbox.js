@@ -30,7 +30,6 @@
         this.LIST_CLASS      = 'lbjs-list';
         this.LIST_ITEM_CLASS = 'lbjs-item';
         this.SEARCHBAR_CLASS = 'lbjs-searchbar';
-
         /** @private */
         this._parent   = domelement;
         this._settings = options;

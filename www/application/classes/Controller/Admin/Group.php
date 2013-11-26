@@ -30,14 +30,15 @@ class Controller_Admin_Group extends Controller_Ajax_Admin
     public function action_distrib_listeners()
     {
         $post = $this->request->post('data');
-        $post = Arr::map('trim', $post);
+        $post = array(
+            'listeners' => '21,32',
+            'group' => 2
+        );
+        $post['listeners'] = explode(',',$post['listeners']);
         try
         {
 
-           /*$users = ORM::factory('Users')->values(array(
-               'group_id' => $post['group']
-           ));
-           $users->where('id','IN', $post['listeners'])->update();*/
+           //ORM::factory('Users')->set('group_id', $post['group'])->where('id','IN', $lol)->update();
 
             /*DB::update('Users')
                 ->value('group_id', $post['group'])
@@ -45,18 +46,20 @@ class Controller_Admin_Group extends Controller_Ajax_Admin
                 ->execute();*/
             DB::query(Database::UPDATE, "UPDATE `Users` SET `group_id` = :gr WHERE `id` IN (".$post['listeners'].")")
                 ->param(':gr', $post['group'])
-               // ->param(':listeners_id', $post['listeners'])
+              //  ->param(':listeners_id',  DB::expr('('.$post['listeners'].')'))
                 ->execute();
+            if (count($post['listeners']) === 1)
+                $this->ajax_msg('Слушатель определен в группу');
+            else
+                $this->ajax_msg('Слушатели распределены по группам');
 
-            echo View::factory('stats/profiler')->render();
-           $this->ajax_msg('ОК');
         }
-        catch (Database_Exception  $e)
+        catch (ORM_Validation_Exception  $e)
         {
-            //echo $e->getMessage();
-            $this->ajax_msg('Ошибка бд', 'error');
-            /*$errors = $e->errors('validation');
-            $this->ajax_msg(array_shift($errors), 'error');*/
+          //  echo $e->getMessage();
+           // $this->ajax_msg('Ошибка бд', 'error');
+            $errors = $e->errors('validation');
+            $this->ajax_msg(array_shift($errors), 'error');
         }
 
     }

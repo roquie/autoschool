@@ -24,16 +24,13 @@ class Controller_Admin extends Controller_Template
         $this->template->content = '';
 
 
-        //$this->template->footer = View::factory('main/footer');
-    }
-
-    public function action_gr_obr()
-    {
-        $this->template->content = View::factory('admin/gr_obr');
     }
 
     public function action_index()
     {
+        Request::factory('admin/group/distrib_listeners')
+                ->execute();
+
         $this->template->content = View::factory('admin/index', array(
             'audience' => Model::factory('Users')->get_user_list(true),
         ));

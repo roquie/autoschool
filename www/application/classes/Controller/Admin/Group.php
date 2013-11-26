@@ -43,13 +43,14 @@ class Controller_Admin_Group extends Controller_Ajax_Admin
                 ->value('group_id', $post['group'])
                 ->where('id','IN', '('.$post['listeners'].')')
                 ->execute();*/
+
             DB::query(Database::UPDATE, "UPDATE `Users` SET `group_id` = :gr WHERE `id` IN (".$post['listeners'].")")
                 ->param(':gr', $post['group'])
                // ->param(':listeners_id', $post['listeners'])
                 ->execute();
 
-            echo View::factory('stats/profiler')->render();
-           $this->ajax_msg('ОК');
+            //echo View::factory('stats/profiler')->render();
+           $this->ajax_msg('Слушатель(-ли) успешно распределён(-ы) в группу(-ы)');
         }
         catch (Database_Exception  $e)
         {

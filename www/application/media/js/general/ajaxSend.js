@@ -24,7 +24,7 @@
          * @param options
          */
         init : function(element, options) {
-            var isForm = ($(element).is('form')) ? true : false;
+            var isForm = ($(element).is('form') || options.form) ? true : false;
 
             if (options.debug || $.fn[pluginName].defaults.debug) {
                 console.log('Включён режим debug для элементов: "' + $(element).selector + '"');
@@ -284,7 +284,8 @@
             }
 
             if (this.options.debug) {
-                console.log('Массив данных для передачи: ' + data);
+                console.log('Массив данных для передачи: ');
+                console.log(data);
             }
 
             return data;

@@ -110,7 +110,20 @@ $(function() {
                         message : response.msg
                     });
                 }
+            },
+            add_group : function(response) {
+                if (response.status === 'success') {
+                    $('select#listeners option:selected').remove();
+                    $('select#listeners').next('.lbjs').find('.lbjs-list').find('div.lbjs-item[selected="selected"]').remove();
+                }
+                if (response.status === 'error' || response.status === 'success') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
             }
+
         }
     });
 
@@ -119,7 +132,9 @@ $(function() {
     });
 
     $('._admins_form').ajaxForm({
-        validate: false
+        form : true,
+        validate: false,
+        debug : true
     });
     $('._file_up').ajaxForm({
         validate: false

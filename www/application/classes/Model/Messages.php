@@ -29,7 +29,6 @@ class Model_Messages extends ORM
         return array(
             'message' => array(
                 array('not_empty'),
-                array('alpha_dash', array(':value', true)),
                 array('min_length', array(':value', 5)),
                 array('max_length', array(':value', 3000)),
             ),

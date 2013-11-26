@@ -19,7 +19,7 @@ if (count($messages) > 0) :
 
                     <p><?=$line['title']->title?></p>
 
-                    <div class="text"><?=$line['message']->message?></div>
+                    <div class="text"><?=Text::limit_chars($line['message']->message, 200)?></div>
 
                     <div class="clearfix"></div>
 

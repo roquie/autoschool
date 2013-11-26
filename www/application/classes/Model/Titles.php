@@ -31,7 +31,6 @@ class Model_Titles extends ORM
         return array(
             'title' => array(
                 array('not_empty'),
-                array('alpha', array(':value', true)),
                 array('min_length', array(':value', 2)),
                 array('max_length', array(':value', 50)),
             ),

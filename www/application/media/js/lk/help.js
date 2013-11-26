@@ -11,8 +11,6 @@ $(function() {
     $('#title').placeholder();
     $('#message').placeholder();
 
-    $('._lk_form').ajaxForm();
-
     $('body').on('click', '.allmsg', function(e) {
         var $this = $(this);
         $(".titles").fadeOut();

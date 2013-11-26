@@ -1,7 +1,10 @@
 /**
- * notification using Bootstrap
- * Copyright 2013, Viktor Melnikov
- * Version 1.0 - Updated: August, 25, 2013
+ * jQuery plugin notification using Bootstrap
+ *
+ * @author Viktor Melnikov
+ * @version v1.0
+ * @copyright 2013 Viktor Melnikov
+ * @update August, 25, 2013
  *
  * Example (minimum settings):
  * noty({

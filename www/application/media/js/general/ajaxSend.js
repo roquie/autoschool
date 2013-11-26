@@ -1,7 +1,10 @@
 /**
- * Developer: V. Melnikov
- * Date: 03.11.13
- * Time: 13:33
+ * jQuery plugin ajaxSend
+ *
+ * @author Viktor Melnikov
+ * @version v3.0
+ * @copyright 2013 Viktor Melnikov
+ * @update November, 3, 2013
  */
 ;(function ( $, window, document, undefined ) {
 

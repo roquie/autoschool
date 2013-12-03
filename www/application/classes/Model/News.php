@@ -27,10 +27,18 @@ class Model_News extends ORM
                 array('max_length', array(':value', 3000)),
             ),
             'group_id' => array(
-                array('Security::xss_clean', array(':value')),
                 array('digit'),
+                array(array($this, 'check_group'), array(':value'))
             )
         );
+    }
+
+    public function check_group($id)
+    {
+       // $admin = ORM::factory('Administrators')->where('email', '=', $email)->find();
+      //  return (bool)!$admin->email;
+        $result = ORM::factory('Groups')->where('id', '=', $id)->find();
+        return (bool)$result->id;
     }
 
     public function labels()
@@ -46,7 +54,8 @@ class Model_News extends ORM
     {
         return array(
             true => array(
-                array('trim')
+                array('trim'),
+                array('Security::xss_clean', array(':value')),
             )
         );
     }

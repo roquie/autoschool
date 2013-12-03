@@ -191,7 +191,15 @@ Route::set('auth.reg.lk.ajax', 'lk/ajax(/<action>(/<id>))')
         'controller' => 'Ajax',
     ));
 
-
+Route::set('func', 'func/<controller>/<action>(/<id>)',
+        array(
+         //   'id' => '[0-9]+'
+        ))
+        ->defaults(array(
+            'controller' => 'Admin',
+            'action'     => 'index',
+            'directory'     => 'Func',
+        ));
 
 Route::set('admin', 'admin(/<action>)')
     ->defaults(array(

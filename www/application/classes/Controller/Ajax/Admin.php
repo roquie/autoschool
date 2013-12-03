@@ -44,6 +44,48 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
                 exit;
             }
 
+        switch($this->request->action())
+        {
+            case 'create':
+                Request::factory('func/crud/create')->post(
+                    array(
+                        'table_name' => $this->request->controller(),
+                        'data' => $this->request->post()
+                    )
+                )->execute();
+            break;
+
+            case 'read':
+
+                Request::factory('func/crud/read')->post(
+                    array(
+                        'table_name' => $this->request->controller(),
+                        'id' => $this->request->param('id', '')
+                    )
+                )->execute();
+
+            break;
+
+            case 'update':
+                Request::factory('func/crud/update')->post(
+                    array(
+                        'table_name' => $this->request->controller(),
+                        'id' => $this->request->param('id')
+                    )
+                )->execute();
+            break;
+
+            case 'delete':
+                Request::factory('func/crud/delete')->post(
+                    array(
+                        'table_name' => $this->request->controller(),
+                        'id' => $this->request->param('id'),
+                    )
+                )->execute();
+                break;
+        }
+
+
        /* // данные из ajax.js скрипта
         $data = $this->request->post('data');
         $noreq = $this->request->post('noreq');

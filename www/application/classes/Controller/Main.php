@@ -32,9 +32,11 @@ class Controller_Main extends Controller_Template
         if (!is_null($id)) HTTP::redirect('/');
         
         $this->template->content =
-            View::factory('main/blank/statement')
-                ->set('Nationality', Model::factory('Nationality')->all())
-                ->set('Educations', Model::factory('Educations')->all());
+            View::factory('main/blank/statement', array(
+                'Nationality' => ORM::factory('Nationality')->find_all(),
+                'Educations' => ORM::factory('Educations')->find_all()
+            ));
+
     }
 
 

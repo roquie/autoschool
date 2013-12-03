@@ -4,7 +4,7 @@ class Model_Statements extends ORM
 {
 	protected $_db = 'default';
     protected $_table_name  = 'Statements';
-    protected $_primary_key = 'user_id';
+   // protected $_primary_key = 'user_id';
 
 
     protected $_table_columns = array(
@@ -60,7 +60,6 @@ class Model_Statements extends ORM
                 array('max_length', array(':value', 50)),
             ),
             'ot4estvo' => array(
-                array('Security::xss_clean', array(':value')),
                 array('alpha', array(':value', true)),
                 array('min_length', array(':value', 2)),
                 array('max_length', array(':value', 50)),
@@ -71,19 +70,17 @@ class Model_Statements extends ORM
             ),
             'mesto_rojdeniya' => array(
                 array('not_empty'),
-                array('alpha_numeric', array(':value', true)),
+              //  array('alpha_numeric', array(':value', true)),
              //   array('alpha', array(':value', true)),
             ),
 
             'adres_reg_po_pasporty' => array(
-                array('Security::xss_clean', array(':value')),
-                array('alpha_numeric', array(':value', true)),
+              //  array('alpha_numeric', array(':value', true)),
               //  array('alpha', array(':value', true)),
             ),
 
             'vrem_reg' => array(
-                array('Security::xss_clean', array(':value')),
-                array('alpha_numeric', array(':value', true)),
+               // array('alpha_numeric', array(':value', true)),
                // array('alpha', array(':value', true)),
             ),
             'pasport_seriya' => array(
@@ -106,7 +103,6 @@ class Model_Statements extends ORM
                 array('not_empty'),
             ),
             'dom_tel' => array(
-                array('Security::xss_clean', array(':value')),
             ),
             'mesto_raboty' => array(
                 array('not_empty'),
@@ -125,7 +121,6 @@ class Model_Statements extends ORM
                 array('digit'),
             ),
             'user_id' => array(
-                array('Security::xss_clean', array(':value')),
                 array('digit'),
             ),
 
@@ -137,21 +132,21 @@ class Model_Statements extends ORM
     {
         return array(
             'user_id' => 'id пользователя',
-            'famil' => 'Фамилия',
-            'imya' => 'Имя',
-            'ot4estvo' => 'Отчество',
-            'data_rojdeniya' => 'Дата рождения',
-            'mesto_rojdeniya' => 'Место рождения',
-            'adres_reg_po_pasporty' => 'Адрес рег. по паспорту',
-            'vrem_reg' => 'Временная регистрация',
-            'pasport_seriya' => 'Серия паспорта',
-            'pasport_nomer' => 'Номер паспорта',
-            'pasport_data_vyda4i' => 'Дата выдачи паспорта',
-            'pasport_kem_vydan' => '"Кем выдан паспорт" -',
-            'mob_tel' => 'Мобильный тел.',
-            'dom_tel' => 'Домашний тел.',
-            'mesto_raboty' => 'Место работы',
-            'about' => '"О нас" -',
+            'famil' => 'Поле "Фамилия"',
+            'imya' => 'Поле "Имя"',
+            'ot4estvo' => 'Поле "Отчество"',
+            'data_rojdeniya' => 'Поле "Дата рождения"',
+            'mesto_rojdeniya' => 'Поле "Место рождения"',
+            'adres_reg_po_pasporty' => 'Поле "Адрес рег. по паспорту"',
+            'vrem_reg' => 'Поле "Временная регистрация"',
+            'pasport_seriya' => 'Поле "Серия паспорта"',
+            'pasport_nomer' => 'Поле "Номер паспорта"',
+            'pasport_data_vyda4i' => 'Поле "Дата выдачи паспорта"',
+            'pasport_kem_vydan' => 'Поле "Кем выдан паспорт"',
+            'mob_tel' => 'Поле "Мобильный тел."',
+            'dom_tel' => 'Поле "Домашний тел."',
+            'mesto_raboty' => 'Поле "Место работы"',
+            'about' => 'Поле "О нас"',
             'nationality_id' => 'id гражданства',
             'education_id' => 'id образования',
 
@@ -162,7 +157,8 @@ class Model_Statements extends ORM
     {
         return array(
             true => array(
-                array('trim')
+                array('trim'),
+                array('Security::xss_clean', array(':value')),
             )
         );
     }

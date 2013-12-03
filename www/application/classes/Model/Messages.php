@@ -33,19 +33,15 @@ class Model_Messages extends ORM
                 array('max_length', array(':value', 3000)),
             ),
             'is_read' => array(
-                array('Security::xss_clean', array(':value')),
                 array('digit'),
             ),
             'title_id' => array(
-                array('Security::xss_clean', array(':value')),
                 array('digit'),
             ),
             'user_id' => array(
-                array('Security::xss_clean', array(':value')),
                 array('digit'),
             ),
             'admin' => array(
-                array('Security::xss_clean', array(':value')),
                 array('digit'),
             ),
 
@@ -67,7 +63,8 @@ class Model_Messages extends ORM
     {
         return array(
             true => array(
-                array('trim')
+                array('trim'),
+                array('Security::xss_clean', array(':value')),
             )
         );
     }

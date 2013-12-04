@@ -30,13 +30,12 @@ class Model_Titles extends ORM
     {
         return array(
             'title' => array(
-                array('not_empty'),
-                array('alpha', array(':value', true)),
-                array('min_length', array(':value', 2)),
-                array('max_length', array(':value', 50)),
+               array('not_empty'),
+               array('min_length', array(':value', 5)),
+               array('max_length', array(':value', 50)),
             ),
             'user_id' => array(
-                array('Security::xss_clean', array(':value')),
+
                 array('digit'),
             ),
 
@@ -46,7 +45,7 @@ class Model_Titles extends ORM
     public function labels()
     {
         return array(
-            'title' => 'Образование',
+            'title' => 'Поле "Заголок" ',
             'user_id' => 'id пользователя',
         );
     }
@@ -55,7 +54,8 @@ class Model_Titles extends ORM
     {
         return array(
             true => array(
-                array('trim')
+                array('trim'),
+                array('Security::xss_clean', array(':value')),
             )
         );
     }

@@ -1,6 +1,6 @@
 <?foreach($messages as $msg):?>
 <div class="row msg">
-    <div class="span4">
+    <div class="span5">
         <b><?=$msg['title']?></b>
     </div>
     <div class="span8">

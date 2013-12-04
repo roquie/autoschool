@@ -24,19 +24,20 @@ class Controller_Admin_MainPage extends Controller_Ajax_Admin
     {
         $arr = explode('-', $this->request->param('id'));
 
-        try
-        {
-            $user = ORM::factory('Users', $arr[0]);
-            $user->status = (int)$arr[1];
-            $user->save();
-            $this->ajax_msg('Статус изменен');
-        }
-        catch (ORM_Validation_Exception  $e)
-        {
-            $errors = $e->errors('validation');
-            $this->ajax_msg($errors, 'error');
-        }
+        Request::factory('func/crud/update')->post(
+            array(
+                'table_name' => 'Users',
+                'id' => $arr[0],
+                'data' => array(
+                    'status' => $arr[1]
+                ),
+                'msg' => 'Статус изменен'
+            )
+        )->execute();
     }
+
+
+
 
 
 

@@ -180,12 +180,12 @@ h1 {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-#content .msg .span4 {
+#content .msg .span5 {
   border-bottom: 1px solid #cccccc;
 }
-#content .msg .span4 b {
+#content .msg .span5 b {
   font-weight: 400;
 }
-#content .msg .span4 .span8 {
+#content .msg .span5 .span8 {
   margin-top: 5px;
 }

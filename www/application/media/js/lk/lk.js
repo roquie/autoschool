@@ -148,6 +148,8 @@ $(function() {
         debug : true
     });
 
-    $('._lk_form').ajaxForm();
+    $('._lk_form').ajaxForm({
+        form : true
+    });
 
 });

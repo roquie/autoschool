@@ -12,4 +12,15 @@ class Model_Files extends ORM
 		'desc' => array('data_type' => 'string', 'is_nullable' => false),
 		'path' => array('data_type' => 'string', 'is_nullable' => false),
 	);
+
+
+    public function filters()
+    {
+        return array(
+            true => array(
+                array('trim'),
+                array('Security::xss_clean', array(':value')),
+            )
+        );
+    }
 }

@@ -1,7 +1,10 @@
 /**
- * Developer: V. Melnikov
- * Date: 03.11.13
- * Time: 13:33
+ * jQuery plugin ajaxSend
+ *
+ * @author Viktor Melnikov
+ * @version v3.0
+ * @copyright 2013 Viktor Melnikov
+ * @update November, 3, 2013
  */
 ;(function ( $, window, document, undefined ) {
 
@@ -21,7 +24,7 @@
          * @param options
          */
         init : function(element, options) {
-            var isForm = ($(element).is('form')) ? true : false;
+            var isForm = ($(element).is('form') || options.form) ? true : false;
 
             if (options.debug || $.fn[pluginName].defaults.debug) {
                 console.log('Включён режим debug для элементов: "' + $(element).selector + '"');
@@ -281,7 +284,8 @@
             }
 
             if (this.options.debug) {
-                console.log('Массив данных для передачи: ' + data);
+                console.log('Массив данных для передачи: ');
+                console.log(data);
             }
 
             return data;

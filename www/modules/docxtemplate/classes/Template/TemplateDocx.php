@@ -76,6 +76,17 @@ class Template_TemplateDocx
         $this->_content = preg_replace('/'.$search.'/', $replace, $this->_content);
     }
 
+    /**
+     * массив всего что выше
+     * @param array $array
+     */
+    public function setValueArray(array $array = array())
+    {
+        foreach ($array as $key => $value)
+            $this->_content = preg_replace('/'.$key.'/', $value, $this->_content);
+
+    }
+
 
     /**
      * говнокод!

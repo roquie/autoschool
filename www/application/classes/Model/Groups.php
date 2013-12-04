@@ -23,7 +23,6 @@ class Model_Groups extends ORM
 
     );
 
-
     public function rules()
     {
         return array(
@@ -32,10 +31,17 @@ class Model_Groups extends ORM
                 array('alpha_numeric', array(':value', true)),
                 array('min_length', array(':value', 1)),
                 array('max_length', array(':value', 50)),
-                //@todo: добавить проверку на уникальность группы
+                array(array($this, 'is_unique_group'), array(':value'))
             ),
 
         );
+    }
+
+
+    public function is_unique_group($name)
+    {
+        $group = ORM::factory('Groups')->where('name', '=', $name)->find();
+        return (bool)!$group->name;
     }
 
     public function labels()
@@ -49,7 +55,8 @@ class Model_Groups extends ORM
     {
         return array(
             true => array(
-                array('trim')
+                array('trim'),
+                array('Security::xss_clean', array(':value')),
             )
         );
     }

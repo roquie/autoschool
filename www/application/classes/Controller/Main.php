@@ -19,12 +19,11 @@ class Controller_Main extends Controller_Template
 
     public function action_index()
     {
-        $bform = new Botobor_Form(View::factory('main/contact/form'));
+        $bform = new Botobor_Form(View::factory('main/contact/form')->set('captcha',Captcha::instance()->render()));
         $contact = $bform->getCode();
         $this->template->content =
             View::factory('main/index')
-                 ->set('contactForm', $contact)
-                 ->set('captcha', Captcha::instance()->render());
+                 ->set('contactForm', $contact);
     }
 
     public function action_statement()
@@ -33,9 +32,11 @@ class Controller_Main extends Controller_Template
         if (!is_null($id)) HTTP::redirect('/');
         
         $this->template->content =
-            View::factory('main/blank/statement')
-                ->set('Nationality', Model::factory('Nationality')->all())
-                ->set('Educations', Model::factory('Educations')->all());
+            View::factory('main/blank/statement', array(
+                'Nationality' => ORM::factory('Nationality')->find_all(),
+                'Educations' => ORM::factory('Educations')->find_all()
+            ));
+
     }
 
 

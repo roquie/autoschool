@@ -24,17 +24,18 @@ class Controller_Admin extends Controller_Template
         $this->template->content = '';
 
 
-        //$this->template->footer = View::factory('main/footer');
-    }
-
-    public function action_gr_obr()
-    {
-        $this->template->content = View::factory('admin/gr_obr');
     }
 
     public function action_index()
     {
-        /*Request::factory('admin/mail/delete_news/5')->execute();*/
+        /*echo Request::factory('admin/news/create')->post(
+            array(
+                'title' => 'id89dhkwdjakjh',
+                'message' => 'asjdjdkhahdkajshdkjahdkjhasdkhakjsdhaksjdh',
+                'group_id' =>  1,
+            )
+        )->execute();*/
+
 
         $this->template->content = View::factory('admin/index', array(
             'audience' => Model::factory('Users')->get_user_list(true),
@@ -44,7 +45,6 @@ class Controller_Admin extends Controller_Template
     public function action_mail()
     {
         $this->template->content = View::factory('admin/mail/send', array(
-            'titles' => Model::factory('MsgTemplates')->all(),
             'list_users' => Model::factory('Users')->get_user_list(false),
             'list_groups' => ORM::factory('Groups')->find_all()
         ));
@@ -53,28 +53,22 @@ class Controller_Admin extends Controller_Template
     public function action_group()
     {
         $this->template->content = View::factory('admin/test/dist_group', array(
-            'none_group_users' => Model::factory('Users')->users_without_group()
+            'none_group_users' => Model::factory('Users')->users_without_group(),
+            'groups' => ORM::factory('Groups')->find_all()
         ));
     }
 
 
     public function action_settings()
     {
-        $data = Kohana::$config->load('settings')->get('smtp');
+        $data = Kohana::$config->load('settings.smtp');
         if ($data != 0)
             $data = unserialize($data);
 
         $this->template->content = View::factory('admin/settings/index', array(
-            'all_admins' => Model::factory('Administrators')->all('desc'),
-            'upload_files' => Model::factory('Files')->all(),
+            'all_admins' => ORM::factory('Administrators')->order_by('id', 'desc')->find_all(),
+            'upload_files' => ORM::factory('Files')->find_all(),
             'smtp' => $data
-        ));
-    }
-
-    public function action_tpl()
-    {
-        $this->template->content = View::factory('admin/mail/tpl', array(
-            'titles' => Model::factory('MsgTemplates')->all(),
         ));
     }
 

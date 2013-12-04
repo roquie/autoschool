@@ -25,5 +25,6 @@ return array(
 	'regex'         => ':field does not match the required format',
 	'url'           => ':field must be a url',
     'is_unique_email' => 'Такая почта уже есть',
-
+    'is_unique_group' => 'Такая группа уже есть',
+    'check_group' => 'Группа не найдена'
 );

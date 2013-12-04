@@ -130,63 +130,43 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_changeStatement()
     {
 
-        $id = $this->request->param('id') ? $this->request->param('id') : Cookie::get('userId');
-
-        $no_required = array('ot4estvo', 'dom_tel', 'vrem_reg');
-        $value = Security::xss_clean($this->request->post('value'));
-        
-        if (!$value && !in_array($this->request->post('name'), $no_required)) {
-            $this->ajax_msg('Заполните поле', 'error');
-            exit;
-        }
+        $id = $this->request->param('id') ?: Cookie::get('userId');
         $data = array(
-            $this->request->post('name'),
-            $value
+            $this->request->post('name') => $this->request->post('value')
         );
 
-        $result = Model::factory('Statements')->upd(array('user_id', $id), $data);
-        if (!$result)
-            $this->ajax_msg('Заявление изменению не поддается', 'error');
-        else
-            $this->ajax_msg('Заявление изменено');
-
-
-        /*
         try {
-            $statemetnt = ORM::factory('Statements', array('user_id' => $id));
-            $statemetnt->{$this->request->post('name')} = $this->request->post('value');
-            $statemetnt->update();
+            $s = ORM::factory('Statements', array('user_id' => $id));
+            //$s->set($this->request->post('name'), $this->request->post('value'));
+            $s->values($data);
+            $s->update();
 
             $this->ajax_msg('Заявление изменено');
         } catch(ORM_Validation_Exception $e) {
             $errors = $e->errors('validation');
             $this->ajax_msg(array_shift($errors), 'error');
         }
-        */
     }
 
+
     /**
-     * изменение договора
+     * Изменение договора
      */
     public function action_changeContract()
     {
 
-        $id = $this->request->param('id') ? $this->request->param('id') : Cookie::get('userId');
+        $id = $this->request->param('id') ?: Cookie::get('userId');
 
-        $value = Security::xss_clean($this->request->post('value'));
+        try {
+            $s = ORM::factory('Contracts', array('user_id' => $id));
+            $s->set($this->request->post('name'), $this->request->post('value'));
+            $s->save();
 
-        $data = array(
-            $this->request->post('name'),
-            $value
-        );
-
-
-        $result = Model::factory('Contracts')->upd(array('user_id', $id), $data);
-
-        if (!$result)
-            $this->ajax_msg('Договор изменению не поддается :(', 'error');
-        else
             $this->ajax_msg('Договор изменен');
+        } catch(ORM_Validation_Exception $e) {
+            $errors = $e->errors('validation');
+            $this->ajax_msg(array_shift($errors), 'error');
+        }
     }
 
     /**
@@ -279,7 +259,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             Cookie::set('group_id', $result->group_id);
             $this->ajax_msg(URL::site('lk'));
         } else {
-            $this->ajax_msg('Пользователь не существует', 'error');
+            $this->ajax_msg('Пользователь не найден', 'error');
         }
 
     }
@@ -289,21 +269,24 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_messages()
     {
-        $result = Model::factory('News')->allWhere('group_id',  Cookie::get('group_id'));
-        if (!$result) {
+
+        $result = ORM::factory('News')
+            ->where('group_id', '=', Cookie::get('group_id'))
+            ->find_all();
+
+        $data = array();
+
+        if ($result->count() === 0)
             $data[] = array(
                 'title' => 'Группа не определена администратором',
-                'message' => 'Сообщений нет',
+                'message' => 'Сообщения не найдены.',
             );
-        } else {
-            $data = array();
+         else
             foreach ($result as $v)
                 $data[] = $v->as_array();
 
-        }
         echo View::factory('lk/pages/messages')
-            ->set('messages', $data)
-            ->render();
+            ->set('messages', $data);
     }
 
     /**
@@ -316,7 +299,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         echo View::factory('lk/pages/statement', array(
             'info' => Model::factory('Statements')->getBy('user_id', Cookie::get('userId')),
             'status' => $result->status,
-        ))->render();
+        ));
     }
 
     /**
@@ -328,7 +311,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             'messages' => Model::factory('Titles')->getTitles(Cookie::get('userId')),
             'userPhoto' => Cookie::get('userPhoto'),
             'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
-        ))->render();
+        ));
     }
 
     /**
@@ -336,35 +319,41 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_addTitle()
     {
-        if ($this->ajax_xssclean($_POST['data'])) {
-            exit;
-        }
-
         $message = $this->request->post('data.message');
         $title = $this->request->post('data.title');
 
-        $result = Model::factory('Titles')->addRec(array(
-            'user_id' => Cookie::get('userId'),
-            'title' => $title
-        ));
+        try
+        {
+            $t_id =
 
-        $add = Model::factory('Messages')->addRec(array(
-            'user_id' => Cookie::get('userId'),
-            'message' => $message,
-            'title_id' => $result
-        ));
-        if (!$add) {
-            $this->ajax_msg('Ошибка при добавлении сообщения','error');
-            exit;
+            ORM::factory('Titles')->values(
+                array(
+                    'user_id' => Cookie::get('userId'),
+                    'title' => $title
+                )
+            )->create()->pk();
+
+            ORM::factory('Messages')->values(
+                array(
+                    'user_id' => Cookie::get('userId'),
+                    'message' => $message,
+                    'title_id' => $t_id
+                )
+            )->create();
+        }
+        catch (ORM_Validation_Exception  $e)
+        {
+            $errors = $e->errors('validation');
+            $this->ajax_msg(array_shift($errors), 'error');
         }
 
         $this->ajax_msg(
             View::factory('lk/pages/html/newtitle', array(
-                'title_id' => $result,
-                'title' => $title,
-                'message' => $message,
+                'title_id' => $t_id,
+                'title' => Security::xss_clean($title),
+                'message' => Security::xss_clean($message),
                 'userPhoto' =>   Cookie::get('userPhoto'),
-            ))->render()
+            ))
         );
 
     }
@@ -374,26 +363,31 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_addMessage()
     {
-        if ($this->ajax_xssclean($_POST['data'])) {
-            exit;
-        }
         $message = $this->request->post('data.message');
         $id = $this->request->param('id');
-        $add = Model::factory('Messages')->addRec(array(
-            'user_id' => Cookie::get('userId'),
-            'message' => $message,
-            'title_id' => $id
-        ));
-        if (!$add) {
-            $this->ajax_msg('Ошибка при добавлении сообщения','error');
-            exit;
+
+        try
+        {
+            ORM::factory('Messages')->values(
+                array(
+                    'user_id' => Cookie::get('userId'),
+                    'message' => $message,
+                    'title_id' => $id
+                )
+            )->create();
         }
+        catch (ORM_Validation_Exception  $e)
+        {
+            $errors = $e->errors('validation');
+            $this->ajax_msg(array_shift($errors), 'error');
+        }
+
 
         $this->ajax_msg(
             View::factory('lk/pages/html/newmsg', array(
-                'message' => $message,
+                'message' => Security::xss_clean($message),
                 'userPhoto' => Cookie::get('userPhoto'),
-            ))->render()
+            ))
         );
     }
 
@@ -413,7 +407,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                 'messages' => $result,
                 'userPhoto' => Cookie::get('userPhoto'),
                 'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
-            ))->render()
+            ))
         );
     }
 
@@ -423,13 +417,17 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_load_message()
     {
         $id = $this->request->param('id');
-        $data = Model::factory('Messages')->allWhere('title_id', $id);
+
+        $data = ORM::factory('Messages')
+            ->where('title_id', '=', $id)
+            ->find_all();
+
         echo View::factory('lk/pages/html/loadmsg', array(
             'title_id' => $id,
             'messages' => $data,
             'userPhoto' => Cookie::get('userPhoto'),
             'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
-        ))->render();
+        ));
     }
 
     /**
@@ -442,7 +440,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         echo View::factory('lk/pages/contract', array(
             'info' => Model::factory('Contracts')->getBy('user_id', Cookie::get('userId')),
             'status' => $result->status,
-        ))->render();
+        ));
     }
 
     /**
@@ -450,7 +448,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_download()
     {
-        echo View::factory('lk/pages/downloads')->render();
+        echo View::factory('lk/pages/downloads');
     }
 
     /**
@@ -458,7 +456,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_settings()
     {
-        echo View::factory('lk/pages/settings')->render();
+        echo View::factory('lk/pages/settings');
     }
 
 
@@ -469,7 +467,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $data = array();
         $temp_data = array();
-        $nationality = Model::factory('Nationality')->all();
+        $nationality = ORM::factory('Nationality')->find_all();
         foreach ($nationality as $key => $value) {
             $temp_data['id'] = $value->id;
             $temp_data['text'] = $value->grajdanstvo;
@@ -487,7 +485,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $data = array();
         $temp_data = array();
-        $education = Model::factory('Educations')->all();
+        $education = ORM::factory('Educations')->find_all();
         foreach ($education as $key => $value) {
             $temp_data['id'] = $value->id;
             $temp_data['text'] = $value->obrazovanie;
@@ -523,12 +521,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
 
-        $info = Model::factory('Users')->getBy('email', $user['email']);
-
-        if ($info) {
-            $this->ajax_msg('Такой пользователь уже зарегистрирован', 'error');
-            exit;
-        }
 
         $newpass = Text::random();
 

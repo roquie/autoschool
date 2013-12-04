@@ -44,9 +44,8 @@ class Model_Contracts extends ORM
             ),
 
             'adres_reg_po_pasporty' => array(
-                array('Security::xss_clean', array(':value')),
-                array('alpha_numeric', array(':value', true)),
-                array('alpha_dash', array(':value', true)),
+              //  array('alpha_numeric', array(':value', true)),
+               // array('alpha', array(':value', true)),
             ),
 
             'pasport_seriya' => array(
@@ -59,13 +58,11 @@ class Model_Contracts extends ORM
             ),
             'pasport_kem_vydan' => array(
                 array('not_empty'),
-                array('alpha_dash', array(':value', true)),
+               // array('alpha_space', array(':value', true)),
             ),
             'phone' => array(
-                array('Security::xss_clean', array(':value')),
             ),
             'user_id' => array(
-                array('Security::xss_clean', array(':value')),
                 array('digit'),
             ),
 
@@ -77,15 +74,15 @@ class Model_Contracts extends ORM
     {
         return array(
             'user_id' => 'id пользователя',
-            'famil' => 'Фамилия',
-            'imya' => 'Имя',
-            'ot4estvo' => 'Отчество',
-            'adres_reg_po_pasporty' => 'Адрес рег. по паспорту',
-            'pasport_seriya' => 'Серия паспорта',
-            'pasport_nomer' => 'Номер паспорта',
-            'pasport_data_vyda4i' => 'Дата выдачи паспорта',
-            'pasport_kem_vydan' => '"Кем выдан паспорт" -',
-            'phone' => 'Телефон',
+            'famil' => 'Поле "Фамилия"',
+            'imya' => 'Поле "Имя"',
+            'ot4estvo' => 'Поле "Отчество"',
+            'adres_reg_po_pasporty' => 'Поле "Адрес рег. по паспорту"',
+            'pasport_seriya' => 'Поле "Серия паспорта"',
+            'pasport_nomer' => 'Поле "Номер паспорта"',
+            'pasport_data_vyda4i' => 'Поле "Дата выдачи паспорта"',
+            'pasport_kem_vydan' => 'Поле "Кем выдан паспорт"',
+            'phone' => 'Поле "Телефон"',
         );
     }
 
@@ -93,7 +90,8 @@ class Model_Contracts extends ORM
     {
         return array(
             true => array(
-                array('trim')
+                array('trim'),
+                array('Security::xss_clean', array(':value')),
             )
         );
     }

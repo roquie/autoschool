@@ -145,6 +145,14 @@ $(function() {
                 }
             }
         },
+        errorCallback : function(that, request, status, error) {
+            if (request.status == '200') {
+                alert('Исключение: ' + request.responseText);
+            } else {
+                alert(request.status + ' ' + request.statusText + '. Текст ошибки отправлен в консоль');
+                console.log(request.responseText);
+            }
+        },
         debug : true
     });
 

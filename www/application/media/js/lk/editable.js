@@ -11,9 +11,28 @@ $.fn.editableform.defaults.url = $('.data').data('url');
 $.fn.editable.defaults.emptytext = 'Пусто';
 $.fn.editableform.defaults.success = function(response, newValue) {
     if (response.status === 'empty') return response.msg;
-    if (response.status === 'error') noty({
-        type : response.status,
-        message : response.msg
+    if (response.status === 'error') {
+        noty({
+            type : response.status,
+            message : response.msg
+        });
+        return false;
+    }
+    if (response.status === 'success') {
+        switch (response.msg) {
+            case 'imya' :
+                $('#userName').text(newValue);
+                break;
+            case 'famil' :
+                $('#userFamil').text(newValue);
+                break;
+        }
+    }
+};
+$.fn.editableform.defaults.error = function(response, newValue) {
+    noty({
+        type : 'error',
+        message : 'На сервере допущена ошибка, свяжитесь с администратором и сообщите нам о ней. Спасибо'
     });
 };
 $(function() {
@@ -58,17 +77,6 @@ $(function() {
         $('.editable').editable('disable');
         $(this).hide();
         $('#enable').show();
-    }).on('click', '.editable-submit', function() {
-        var field = $(this).closest('tr').find('a').data('name'),
-            input = $(this).closest('.control-group').find('input.input-medium');
-        switch (field) {
-            case 'imya' :
-                $('#userName').text(input.val());
-                break;
-            case 'famil' :
-                $('#userFamil').text(input.val());
-                break;
-        }
     });
 
     function getData(obj) {

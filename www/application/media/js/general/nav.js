@@ -98,13 +98,9 @@
                     else
                         that.options.functions[that.options.callback](response, that);
                 },
-                statusCode: {
-                    404: function() {
-                        that.options.statusCode[404](that);
-                    },
-                    505 : function() {
-                        that.options.statusCode[505](that);
-                    }
+                error : function(request, status, error) {
+                    that.options.errorCallback(that, request, status, error);
+                    that.work = false;
                 }
             });
             return false;
@@ -141,7 +137,7 @@
         functions : {}, // массив callback
         defaultCallback : function() {}, // default callback
         beforeSend: function (){}, // вызывается до отправки запроса
-        statusCode : {},
+        errorCallback : function() {},
 
         classActive : 'active',
         classElement : 'navigate',

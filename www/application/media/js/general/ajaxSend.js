@@ -73,7 +73,6 @@
             if (this.work == 'undefined') {
                 this.work = false;
             }
-            this.options.noreq = this.options.noreq.split(this.options.separator);
             this.options.params = this.options.params.split(this.options.separator);
             if (this.options.validate) {
                 if (this.options.debug) {
@@ -94,18 +93,9 @@
                 empty = false,
                 error = [],
                 $this = this,
-                no_required = [],
                 element,
                 i,
                 type = '';
-
-            $.each(this.options.noreq, function(i, v) {
-                no_required.push(v);
-            });
-
-            if (this.options.debug) {
-                console.log('Необязательные поля для заполнения: ' + no_required);
-            }
 
             if (this.isForm) {
                 data = this.$element.serializeArray();
@@ -120,31 +110,29 @@
                         console.log('Элемент формы: ');
                         console.log(element);
                     }
-                    if (!$this.array_value_exists(data[i].name, no_required)) {
-                        type = element.attr('type') ? element.attr('type') : 'text';
-                        switch ( type ) {
-                            case 'email' :
-                                if (!$this.isEmail(data[i].value) || $this.delSpace(data[i].value) == '')
-                                    empty = true;
-                                break;
-                            case 'text' :
-                                if ($this.delSpace(data[i].value) == '')
-                                    empty = true;
-                                break;
-                            case 'password' :
-                                if ($this.delSpace(data[i].value) == '')
-                                    empty = true;
-                                break;
-                        }
-                        if (empty) {
-                            element.addClass('error');
-                            is_success = false;
-                            empty = false;
-                            error.push(data[i].name);
-                        } else {
-                            error.splice(error.indexOf(data[i].name), 1);
-                            element.removeClass('error');
-                        }
+                    type = element.attr('type') ? element.attr('type') : 'text';
+                    switch ( type ) {
+                        case 'email' :
+                            if (!$this.isEmail(data[i].value) || $this.delSpace(data[i].value) == '')
+                                empty = true;
+                            break;
+                        case 'text' :
+                            if ($this.delSpace(data[i].value) == '')
+                                empty = true;
+                            break;
+                        case 'password' :
+                            if ($this.delSpace(data[i].value) == '')
+                                empty = true;
+                            break;
+                    }
+                    if (empty) {
+                        element.addClass('error');
+                        is_success = false;
+                        empty = false;
+                        error.push(data[i].name);
+                    } else {
+                        error.splice(error.indexOf(data[i].name), 1);
+                        element.removeClass('error');
                     }
                 }
                 if (error.length != 0) {
@@ -157,39 +145,37 @@
                 if (this.options.debug) {
                     console.log('Данные ссылки: ' + this.options.params);
                 }
+                var value = '';
                 for (i = 0; i < this.options.params.length; i++) {
                     element = $('#'+ this.options.params[i]);
-                    if (!$this.array_value_exists(this.options.params[i], no_required)) {
+                    value = '';
 
-                        var value = '';
-
-                        if (element.attr('name')) {
-                            value = element.val();
-                        } else {
-                            value = element.text();
-                        }
-
-                        switch ( element.attr('type') ) {
-                            case 'email' :
-                                if (!$this.isEmail(value) || $this.delSpace(value) == '')
-                                    empty = true;
-                                break;
-                            case 'text' :
-                                if ($this.delSpace(value) == '')
-                                    empty = true;
-                                break;
-                            case 'password' :
-                                if ($this.delSpace(value) == '')
-                                    empty = true;
-                                break;
-                        }
-                        if (empty) {
-                            error.push(element.attr('title'));
-                            is_success = false;
-                            empty = false;
-                        } else
-                            error.splice(error.indexOf(element.attr('title')), 1);
+                    if (element.attr('name')) {
+                        value = element.val();
+                    } else {
+                        value = element.text();
                     }
+
+                    switch ( element.attr('type') ) {
+                        case 'email' :
+                            if (!$this.isEmail(value) || $this.delSpace(value) == '')
+                                empty = true;
+                            break;
+                        case 'text' :
+                            if ($this.delSpace(value) == '')
+                                empty = true;
+                            break;
+                        case 'password' :
+                            if ($this.delSpace(value) == '')
+                                empty = true;
+                            break;
+                    }
+                    if (empty) {
+                        error.push(element.attr('title'));
+                        is_success = false;
+                        empty = false;
+                    } else
+                        error.splice(error.indexOf(element.attr('title')), 1);
                 }
                 if (error.length != 0) {
                     if (this.options.debug) {
@@ -226,8 +212,7 @@
                 type : (this.isForm) ? this.$element.attr('method') : this.options.method,
                 url  : (this.isForm) ? this.$element.attr('action') : this.options.url,
                 data : {
-                    data : this.fields(),
-                    noreq : this.options.noreq
+                    data : this.fields()
                 },
                 dataType : this.options.type,
                 beforeSend : function() {
@@ -245,13 +230,9 @@
                     else
                         that.options.functions[that.options.callback](response, that);
                 },
-                statusCode: {
-                    404: function() {
-                        that.options.statusCode[404](that);
-                    },
-                    505 : function() {
-                        that.options.statusCode[505](that);
-                    }
+                error : function(request, status, error) {
+                    that.options.errorCallback(that, request, status, error);
+                    that.work = false;
                 }
             });
             return false;
@@ -347,10 +328,9 @@
         functions : {}, // массив callback
         defaultCallback : function() {}, // default callback
         beforeSend: function (){}, // вызывается до отправки запроса
-        statusCode : {},
+        errorCallback : function() {},
 
         separator : ',', // разделитель значений строки
-        noreq : '', // необязательные поля
         params : '', // данные для отправки при нажатии на ссылку
         validate : true, // нужно делать валидацию формы или нет
         delegate : true,

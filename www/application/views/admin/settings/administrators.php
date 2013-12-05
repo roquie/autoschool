@@ -7,7 +7,7 @@
             <!--
                 FORM NEW USER
             -->
-            <form class="_admins_form" data-callback="add_admin"  action="<?=URL::site('admin/administrators/create_adm')?>" method="post" novalidate> <!--id="form1" data-url=""-->
+            <form class="_admins_form" data-callback="add_admin"  action="<?=URL::site('admin/administrators/create')?>" method="post" novalidate> <!--id="form1" data-url=""-->
                 <legend>Новый администратор</legend>
                 <label>Введите E-mail</label>
                 <input name="email" type="email" class="placeholder" placeholder="example@gmail.com" id="email">

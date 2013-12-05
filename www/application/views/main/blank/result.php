@@ -113,7 +113,6 @@
                     window.location.href = res.data.redirect;
                 }
                 if (res.status === 'error') {
-                    console.log(res);
                     noty({
                         type   : res.status,
                         message   : res.msg

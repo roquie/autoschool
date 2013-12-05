@@ -29,7 +29,15 @@ class Controller_Main_Mail extends Controller_Ajax_Main
             exit;
         }
 
-        $result = Email::factory('Автошкола МПТ', $post['message'])
+        $message = View::factory('tmpmail/template', array(
+            'content' => View::factory('tmpmail/main/contacts', array(
+                    'message' => $post['message'],
+                    'name' => $post['name'],
+                    'email' => $post['email']
+                ))
+        ));
+
+        $result = Email::factory('Автошкола МПТ', $message, 'text/html')
             ->to(array(
                       'vik.melnikov@gmail.com',
                       'roquie0@gmail.com',

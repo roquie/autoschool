@@ -136,12 +136,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         );
 
         try {
-            $s = ORM::factory('Statements', array('user_id' => $id));
+            $s = ORM::factory('Statements', array('uer_id' => $id));
             //$s->set($this->request->post('name'), $this->request->post('value'));
             $s->values($data);
             $s->update();
-
-            $this->ajax_msg('Заявление изменено');
+            $this->ajax_msg($this->request->post('name'));
         } catch(ORM_Validation_Exception $e) {
             $errors = $e->errors('validation');
             $this->ajax_msg(array_shift($errors), 'error');
@@ -353,7 +352,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                 'title' => Security::xss_clean($title),
                 'message' => Security::xss_clean($message),
                 'userPhoto' =>   Cookie::get('userPhoto'),
-            ))
+            ))->render()
         );
 
     }
@@ -387,7 +386,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             View::factory('lk/pages/html/newmsg', array(
                 'message' => Security::xss_clean($message),
                 'userPhoto' => Cookie::get('userPhoto'),
-            ))
+            ))->render()
         );
     }
 
@@ -407,7 +406,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                 'messages' => $result,
                 'userPhoto' => Cookie::get('userPhoto'),
                 'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
-            ))
+            ))->render()
         );
     }
 
@@ -420,6 +419,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         $data = ORM::factory('Messages')
             ->where('title_id', '=', $id)
+            ->order_by('id', 'DESC')
             ->find_all();
 
         echo View::factory('lk/pages/html/loadmsg', array(

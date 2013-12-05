@@ -27,12 +27,12 @@ $(function() {
                 });
             }
         },
-        statusCode : { // Это не обязательно, просто так по сути))
-            404 : function(that) {
-                alert( '404. Неверный url: ' + that.options.url );
-            },
-            505 : function() {
-                alert( '505. Ошибка выполнения запроса' );
+        errorCallback : function(that, request, status, error) {
+            if (request.status == '200') {
+                alert('Исключение: ' + request.responseText);
+            } else {
+                alert(request.status + ' ' + request.statusText + '. Текст ошибки отправлен в консоль');
+                console.log(request.responseText);
             }
         },
         functions : {
@@ -124,17 +124,15 @@ $(function() {
                 }
             }
 
-        }
-    });
-
-    $('._admins_link').ajaxForm({
+        },
         debug : true
     });
+
+    $('._admins_link').ajaxForm();
 
     $('._admins_form').ajaxForm({
         form : true,
-        validate: false,
-        debug : true
+        validate: false
     });
     $('._file_up').ajaxForm({
         validate: false

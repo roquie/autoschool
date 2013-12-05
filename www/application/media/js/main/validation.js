@@ -25,6 +25,7 @@
             this.$element = $(element);
             this.options = $.extend( {}, $.fn[pluginName].defaults, options);
             // вешает на форму обработчик отправки формы
+            this.work = false;
             this.$element.on('submit', $.proxy(this.validation, this));
             if (this.options.trigger == 'blur') {
                 this.blur();
@@ -198,9 +199,19 @@
          * ajax-отправка данных формы
          */
         ajax : function() {
+            if (this.work) {
+                noty({
+                    type:'error',
+                    title:'Ошибка',
+                    message:'Идёт обработка данных...'
+                });
+                return false;
+            }
+            this.work = true;
             var action = this.$element.attr('action'),
                 data = '',
-                field;
+                field,
+                that = this;
             if (this.options.fields.length > 0) {
                 $.each(this.options.fields, function(i, v) {
                     field = $('#'+v);
@@ -211,7 +222,10 @@
             $.post(
                 action,
                 data,
-                this.options.callback,
+                function(response) {
+                    that.work = false;
+                    that.options.callback(response);
+                },
                 'json'
             );
         },

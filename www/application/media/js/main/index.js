@@ -52,6 +52,7 @@ $(function() {
                     type : response.status,
                     message : response.msg
                 });
+                reload();
                 $('#send')[0].reset();
                 $('#send').find('.placeholder').placeholder('reset');
             }
@@ -65,6 +66,15 @@ $(function() {
      */
     $('.placeholder').placeholder();
 });
+
+/**
+ * Обновление captcha
+ */
+function reload(){
+    //var id = Math.floor(Math.random()*1000000);
+    $("img.captcha").attr("src","/captcha/default");
+}
+
 function scrollToElement(href) {
     if (href.indexOf('#')+1) {
         href = href.split('#');

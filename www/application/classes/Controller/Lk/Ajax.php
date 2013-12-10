@@ -136,7 +136,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         );
 
         try {
-            $s = ORM::factory('Statements', array('uer_id' => $id));
+            $s = ORM::factory('Statements', array('user_id' => $id));
             //$s->set($this->request->post('name'), $this->request->post('value'));
             $s->values($data);
             $s->update();

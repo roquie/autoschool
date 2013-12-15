@@ -112,8 +112,14 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         $newpass = Text::random();
         Model::factory('Users')->upd($user->id, array('password' => $this->hash($newpass)));
+        $message = View::factory('tmpmail/template', array(
+            'content' => View::factory('tmpmail/lk/forgot', array(
+                    'name' => $user->Statements->imya,
+                    'pass' => $newpass
+                ))
+        ));
 
-        $mail = Email::factory('Смена пароля', 'Ваш пароль был сброшен, новый пароль: '. $newpass)
+        $mail = Email::factory('Смена пароля', $message, 'text/html')
             ->to($user->email)
             ->from('info@auto.mpt.ru', 'Автошкола');
         $mail->send();
@@ -513,6 +519,14 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             }
         }
 
+        // @todo - сделал чтоб тупо было, потом моно переделать. либо похеру и забить...
+        $result = Model::factory('Users')->getBy('email', $user['email']);
+
+        if ($result) {
+            $this->ajax_msg('Пользователь с таким email уже существует', 'error');
+            exit;
+        }
+
         if (empty($user['photo_big']) || $user['photo_big'] === 'https://ulogin.ru/img/photo_big.png')
             $user['photo_big'] = 'img/photo.jpg';
 
@@ -566,8 +580,15 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
 
+        $message = View::factory('tmpmail/template', array(
+            'content' => View::factory('tmpmail/lk/registr', array(
+                    'user' => Session::instance()->get('statement'),
+                    'login' => $user['email'],
+                    'pass' => $newpass
+                ))
+        ));
 
-        $mail = Email::factory('Регистрация в Автошколе МПТ', 'Ваш логин: '.$user['email'].' Ваш пароль : '. $newpass)
+        $mail = Email::factory('Регистрация в Автошколе МПТ', $message, 'text/html')
             ->to($user['email'])
             ->from('info@auto.mpt.ru', 'Автошкола');
         $mail->send();

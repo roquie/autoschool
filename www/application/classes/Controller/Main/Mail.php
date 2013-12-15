@@ -41,7 +41,7 @@ class Controller_Main_Mail extends Controller_Ajax_Main
             ->to(array(
                       'vik.melnikov@gmail.com',
                       'roquie0@gmail.com',
-                      //'auto@mpt.ru'
+                      'auto@mpt.ru'
                  ))
             ->from($post['email'], $post['name'])
             ->send();

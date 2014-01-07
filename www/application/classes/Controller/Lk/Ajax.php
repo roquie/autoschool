@@ -519,14 +519,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             }
         }
 
-        // @todo - сделал чтоб тупо было, потом моно переделать. либо похеру и забить...
-        $result = Model::factory('Users')->getBy('email', $user['email']);
-
-        if ($result) {
-            $this->ajax_msg('Пользователь с таким email уже существует', 'error');
-            exit;
-        }
-
         if (empty($user['photo_big']) || $user['photo_big'] === 'https://ulogin.ru/img/photo_big.png')
             $user['photo_big'] = 'img/photo.jpg';
 

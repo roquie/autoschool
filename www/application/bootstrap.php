@@ -150,7 +150,7 @@ Kohana::modules(array(
 /**
  * для загрузки/скачивания файлов
  */
-Route::set('Updownload', 'updownload/<action>/<folder>/<filename>.<format>',
+Route::set('download', 'download/<action>/<folder>/<filename>.<format>',
     array(
         'folder' => '.+',
         'filename' => '.+',
@@ -158,7 +158,7 @@ Route::set('Updownload', 'updownload/<action>/<folder>/<filename>.<format>',
         'action' => '.+'
     ))
     ->defaults(array(
-        'controller' => 'Updownload',
+        'controller' => 'Download',
         'action' => 'index'
     ));
 

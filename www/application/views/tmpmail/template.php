@@ -313,7 +313,7 @@
                                                             <p style="text-align:center;">
                                                                 <a href="<?=URL::site('#price')?>" style="color: lightslategray !important; text-decoration: none; font-size: 11pt;">Цены</a> |
                                                                 <a href="<?=URL::site('#contacts')?>" style="color: lightslategray !important; text-decoration: none; font-size: 11pt;">Контакты</a> |
-                                                                <a href="<?=URL::site('updownload/other_files/license-0000540.pdf')?>" style="color: lightslategray !important; text-decoration: none; font-size: 11pt;">Лицензия</a>
+                                                                <a href="<?=URL::site('download/other_files/license-0000540.pdf')?>" style="color: lightslategray !important; text-decoration: none; font-size: 11pt;">Лицензия</a>
                                                             </p></center>
                                                     </td>
                                                     <td class="expander" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: left; visibility: hidden; width: 0px; padding: 0;" align="left" valign="top"></td>

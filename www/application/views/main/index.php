@@ -149,9 +149,9 @@
             <div class="span6">
                 <h1>Документы для поступления</h1>
                 <ul class="dash">
-                    <li><span>заявление, <a href="<?=URL::site('updownload/index/other_files/Zaivlenie.doc')?>">скачать</a>;</span></li>
-                    <li><span>договор, <a href="<?=URL::site('updownload/index/other_files/Dogovor.doc')?>">скачать</a>;</span></li>
-                    <li><span>квитанция, <a href="<?=URL::site('updownload/index/other_files/kvitanciya.doc')?>">скачать</a>;</span></li>
+                    <li><span>заявление, <a href="<?=URL::site('download/index/other_files/Zaivlenie.doc')?>">скачать</a>;</span></li>
+                    <li><span>договор, <a href="<?=URL::site('download/index/other_files/Dogovor.doc')?>">скачать</a>;</span></li>
+                    <li><span>квитанция, <a href="<?=URL::site('download/index/other_files/kvitanciya.doc')?>">скачать</a>;</span></li>
                     <li><span>фотографии 3х4 – 3 шт (любые);</span></li>
                     <li><span>копия паспорта – первой страницы и прописки;</span></li>
                     <li><span>для жителей других городов – временная регистрация минимум на пол года.</span></li>
@@ -163,6 +163,14 @@
         </div>
     </div>
 </section>
+
+<?=HTML::style('css/vendor/bootstrap-fileupload.css')?>
+<?=HTML::script('js/vendor/bootstrap-fileupload.min.js')?>
+<script type="text/javascript">
+    $(function(){
+        $('.fileupload').fileupload();
+    });
+</script>
 
 <section class="row contacts" target="contacts">
     <div class="container">

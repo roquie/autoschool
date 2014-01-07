@@ -37,14 +37,45 @@ class Controller_Main_Mail extends Controller_Ajax_Main
                 ))
         ));
 
-        $result = Email::factory('Автошкола МПТ', $message, 'text/html')
-            ->to(array(
-                      'vik.melnikov@gmail.com',
-                      'roquie0@gmail.com',
-                      'auto@mpt.ru'
-                 ))
-            ->from($post['email'], $post['name'])
-            ->send();
+        if (!empty($_FILES)) {
+            $validate = Validation::factory($_FILES)
+                ->rule('files', 'Upload::valid')
+                ->rule('files', 'Upload::not_empty')
+                ->rule('files', 'Upload::type', array(':value', array('docx','doc', 'pdf', 'jpg', 'jpeg,', 'png', 'gif', 'tiff', 'psd', 'txt', 'rtf', 'zip', 'rar', '7z', 'pages')))
+                ->rule('files', 'Upload::size', array(':value', '5M'));
+
+                if ($validate->check()) {
+                    Upload::save($_FILES['files'], $_FILES['files']['name'], APPPATH.'uploads/', 0775);
+                    $file_name = $_FILES['files']['name'];
+                } else {
+                    $errors = $validate->errors('upload');
+                    $this->ajax_msg(array_shift($errors), 'error');
+                }
+
+            $result = Email::factory('Автошкола МПТ', $message, 'text/html')
+                ->to(array(
+                   // 'vik.melnikov@gmail.com',
+                    'roquie0@gmail.com',
+                   // 'auto@mpt.ru'
+                ))
+                ->from($post['email'], $post['name'])
+                ->attach_file(APPPATH.'uploads/'.$file_name)
+                ->send();
+
+            unlink(APPPATH.'uploads/'.$file_name);
+
+        } else {
+            $result = Email::factory('Автошкола МПТ', $message, 'text/html')
+                ->to(array(
+                  //  'vik.melnikov@gmail.com',
+                    'roquie0@gmail.com',
+                  //  'auto@mpt.ru'
+                ))
+                ->from($post['email'], $post['name'])
+                ->send();
+        }
+
+
 
         if ($result)
             $this->ajax_msg('Сообщение отправлено');

@@ -7,10 +7,10 @@
             <li class="muted">·</li>
             <li><a href="<?=URL::site('#contacts')?>" id="ajax">Контакты</a></li>
             <li class="muted">·</li>
-           <!-- <object data="<?/*=URL::site('updownload/other_files/license-0000540.pdf')*/?>" type="application/pdf">
-                <a href="<?/*=URL::site('updownload/other_files/license-0000540.pdf')*/?>">Лицензия</a>
+           <!-- <object data="<?/*=URL::site('download/other_files/license-0000540.pdf')*/?>" type="application/pdf">
+                <a href="<?/*=URL::site('download/other_files/license-0000540.pdf')*/?>">Лицензия</a>
             </object>-->
-            <li><a href="<?=URL::site('updownload/other_files/license-0000540.pdf')?>">Лицензия</a></li>
+            <li><a href="<?=URL::site('download/other_files/license-0000540.pdf')?>">Лицензия</a></li>
 <!--            <li class="muted">·</li>
             <li><a href="<?/*=URL::site('/about')*/?>">О нас</a></li>-->
         </ul>

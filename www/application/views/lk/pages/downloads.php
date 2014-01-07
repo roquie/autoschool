@@ -78,11 +78,11 @@
                 $(this).data('url'),
                 {},
                 function(response){
-                    var link = "http://view.officeapps.live.com/op/view.aspx?src=<?=URL::site('updownload/after_del')?>/"+response.msg;
+                    var link = "http://view.officeapps.live.com/op/view.aspx?src=<?=URL::site('download/after_del')?>/"+response.msg;
                     //https://view.officeapps.live.com/op/embed.aspx?src={URL}
                     $('#docs_viewer').prop('src', link);
                     // работает только в инете, на локалке ошибка
-                    // $('#docs_viewer').prop('src', 'https://view.officeapps.live.com/op/embed.aspx?src=http://autompt.tk/updownload/other_files/Zaivlenie.doc');
+                    // $('#docs_viewer').prop('src', 'https://view.officeapps.live.com/op/embed.aspx?src=http://autompt.tk/download/other_files/Zaivlenie.doc');
                 },
                 'json'
             );

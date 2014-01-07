@@ -36,7 +36,7 @@ class Model_Users extends ORM
             'email' => array(
                 array('not_empty'),
                 array('email'),
-              //  array(array($this, 'is_unique_email'), array(':value'))
+                array(array($this, 'is_unique_email'), array(':value'))
             ),
             'status' => array(
                 array('digit'),

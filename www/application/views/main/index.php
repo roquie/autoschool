@@ -140,18 +140,18 @@
 -->
                 <ul class="dash">
                     <li><span>Сроки обучения составляют 2-2,5 месяца;</span></li>
-                    <li><span>Стоимость обучения от 22 000 <abbr title="рублей">Р.</abbr> с возможностью поблочной оплаты;</span></li>
-                    <li><span>Предоставление медицинской комиссии (на данный момент стоимость составляет 1300 <abbr title="рублей">Р.</abbr>);</span></li>
-                    <li><span>Комплект литературы ( стоимость минимального комплекта 600 <abbr title="рублей">Р.</abbr> – максимального 900 <abbr title="рублей">Р.</abbr>);</span></li>
-                    <li><span>Дополнительные занятия помимо базовых практических часов стоят 1200 <abbr title="рублей">Р.</abbr>  и составляют 2 академических часа.</span></li>
+                    <li><span>Стоимость обучения от 22 000 <abbr title="рублей">⃏</abbr> с возможностью поблочной оплаты;</span></li>
+                    <li><span>Предоставление медицинской комиссии (на данный момент стоимость составляет 1300 <abbr title="рублей">⃏</abbr>);</span></li>
+                    <li><span>Комплект литературы (стоимость минимального комплекта 600 <abbr title="рублей">⃏</abbr> – максимального 900 <abbr title="рублей">⃏</abbr>);</span></li>
+                    <li><span>Дополнительные занятия помимо базовых практических часов стоят 1200 <abbr title="рублей">⃏</abbr>  и составляют 2 академических часа.</span></li>
                 </ul>
                 </div>
             <div class="span6">
                 <h1>Документы для поступления</h1>
                 <ul class="dash">
-                    <li><span>заявление, <a href="<?=URL::site('updownload/other_files/Zaivlenie.doc')?>">скачать</a>;</span></li>
-                    <li><span>договор, <a href="<?=URL::site('updownload/other_files/Dogovor.doc')?>">скачать</a>;</span></li>
-                    <li><span>квитанция, <a href="<?=URL::site('updownload/other_files/kvitanciya.doc')?>">скачать</a>;</span></li>
+                    <li><span>заявление, <a href="<?=URL::site('updownload/index/other_files/Zaivlenie.doc')?>">скачать</a>;</span></li>
+                    <li><span>договор, <a href="<?=URL::site('updownload/index/other_files/Dogovor.doc')?>">скачать</a>;</span></li>
+                    <li><span>квитанция, <a href="<?=URL::site('updownload/index/other_files/kvitanciya.doc')?>">скачать</a>;</span></li>
                     <li><span>фотографии 3х4 – 3 шт (любые);</span></li>
                     <li><span>копия паспорта – первой страницы и прописки;</span></li>
                     <li><span>для жителей других городов – временная регистрация минимум на пол года.</span></li>

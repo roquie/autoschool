@@ -5,6 +5,11 @@ $(function() {
     /**
      * выезжающая панель "Новости"
      */
+
+   /*
+
+    не работают должным образом модалки бутстрапа изза этого ...
+
     $("#slide-left").pageSlide({
         width : '260px'
     }).on('click', function(e) {
@@ -14,6 +19,28 @@ $(function() {
             $('#pageslide-content').load(action);
             $(this).data('load', true);
         }
+    });*/
+
+
+    /**
+     * post запрос на создание временного документа
+     * -
+     * формирование ссылки для просмотра документа в браузере
+     */
+
+    $(".view_doc_createtmpfile").on('click', function(){
+        $.post(
+            $(this).data('url'),
+            {},
+            function(response){
+                var link = "http://view.officeapps.live.com/op/view.aspx?src=<?=URL::site('updownload/after_del')?>/"+response.msg;
+                //https://view.officeapps.live.com/op/embed.aspx?src={URL}
+                $('#docs_viewer').prop('src', link);
+                // работает только в инете, на локалке ошибка
+                // $('#docs_viewer').prop('src', 'https://view.officeapps.live.com/op/embed.aspx?src=http://autompt.tk/updownload/other_files/Zaivlenie.doc');
+            },
+            'json'
+        );
     });
 
     $('#sign_in').popupWin({
@@ -112,20 +139,31 @@ $(function() {
 
 
                 }
-            },
+            }/*,
             upd_captcha : function(response) {
                if (response.status == 'success') {
                    //$('captcha_img').attr({src: 'captcha/default'});
                     //alert(1);
-                   /*$('#myModal')
+                   *//*$('#myModal')
                        .css({display:'block'})
                        .attr('aria-hidden', false)
                        .toggleClass('in');
-                    $('body').append('<div class="modal-backdrop fade in"></div>');*/
+                    $('body').append('<div class="modal-backdrop fade in"></div>');*//*
 
                    $('._contacts').prepend(response.data);
                 }
-            }
+            }*/
+            /*view_doc_createtmpfile : function(response) {
+                if (response.status === 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status === 'success') {
+
+                }
+            }*/
 
         },
         errorCallback : function(that, request, status, error) {
@@ -145,6 +183,9 @@ $(function() {
 
     $('._contacts').ajaxForm();
     $('._upd_captcha').ajaxForm();
+
+    /*$('._view_doc_createtmpfile').ajaxForm();*/
+
     /**
      * Обновление новостей
      */

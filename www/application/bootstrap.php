@@ -98,7 +98,7 @@ Kohana::$environment =  Kohana::DEVELOPMENT;
 //Kohana::$environment = ($_SERVER['SERVER_NAME'] !== 'localhost') ? Kohana::PRODUCTION : Kohana::DEVELOPMENT;
 
 Kohana::init(array(
-	'base_url'   => 'http://autoschool.ru/',
+	'base_url'   => 'http://'.$_SERVER['HTTP_HOST'].'/',
     'index_file' => false,
     'errors' => true, //Kohana::$environment ===  Kohana::DEVELOPMENT,
     'profiling' => true,//Kohana::$environment ===  Kohana::DEVELOPMENT,
@@ -150,15 +150,16 @@ Kohana::modules(array(
 /**
  * для загрузки/скачивания файлов
  */
-Route::set('Updownload', 'updownload/<folder>/<filename>.<format>',
+Route::set('Updownload', 'updownload/<action>/<folder>/<filename>.<format>',
     array(
         'folder' => '.+',
         'filename' => '.+',
-        'format' => '(doc|docx|pdf)'
+        'format' => '(doc|docx|pdf)',
+        'action' => '.+'
     ))
     ->defaults(array(
         'controller' => 'Updownload',
-        'action' => 'download'
+        'action' => 'index'
     ));
 
 

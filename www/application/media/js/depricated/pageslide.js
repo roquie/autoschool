@@ -1,6 +1,6 @@
 (function($){
     $.fn.pageSlide = function(options) {
-    
+
         var settings = $.extend({
                 width     : "300px", // Accepts fixed widths
                 duration  : "normal", // Accepts standard jQuery effects speeds (i.e. fast, normal or milliseconds)
@@ -107,7 +107,7 @@
                 _closeSlide();
             });
         });
-    
+
     };
 })(jQuery);
 

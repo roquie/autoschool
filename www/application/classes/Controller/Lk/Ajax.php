@@ -26,6 +26,13 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             if (empty($userId)) HTTP::redirect('/');
         }
     }
+
+    public function action_create_tmp_file()
+    {
+        $type = $this->request->param('id');
+        Request::factory('func/documents/get/'.$type.'-'.Cookie::get('userId'))->execute();
+    }
+
     /**
      * проверка знает ли юзер свой пароль для изменения почты
      */

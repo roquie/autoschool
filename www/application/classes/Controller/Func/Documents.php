@@ -48,6 +48,25 @@ class Controller_Func_Documents extends Controller_Ajax_Ajax
         }
     }
 
+    public function action_get()
+    {
+        $params = $this->request->param('id');
+        $params = explode('-', $params);
+
+        switch($params[0])
+        {
+            case 'contract':
+             $this->ajax_msg($this->create_contract($params[1]));
+            break;
+            case 'statement':
+             $this->ajax_msg($this->create_statement($params[1]));
+            break;
+            case 'ticket':
+             $this->ajax_msg($this->create_ticket($params[1]));
+            break;
+        }
+    }
+
 
     protected function create_ticket($id)
     {

@@ -70,23 +70,28 @@
 </div>
 
 <script>
-    $(function(){
-        //@todo: вынос кода в отдельный js файл закончился выносом мозга
-
-        $(".view_doc_createtmpfile").on('click', function(){
+    $(function() {
+        //@todo исправить вставку php-кода, отсылать ссылку как параметр в ответе от сервера
+        /**
+         * post запрос на создание временного документа
+         * -
+         * формирование ссылки для просмотра документа в браузере
+         */
+        $('.view_doc_createtmpfile').on('click', function() {
             $.post(
                 $(this).data('url'),
-                {},
                 function(response){
-                    var link = "http://view.officeapps.live.com/op/view.aspx?src=<?=URL::site('download/after_del')?>/"+response.msg;
-                    //https://view.officeapps.live.com/op/embed.aspx?src={URL}
-                    $('#docs_viewer').prop('src', link);
-                    // работает только в инете, на локалке ошибка
-                    // $('#docs_viewer').prop('src', 'https://view.officeapps.live.com/op/embed.aspx?src=http://autompt.tk/download/other_files/Zaivlenie.doc');
+                    $('#docs_viewer').attr('src', "http://view.officeapps.live.com/op/view.aspx?src=<?=URL::site('download/after_del')?>/"+response.msg);
                 },
                 'json'
             );
         });
+
+        /**
+         * Перенос модального окна за пределы видимости div#wrap
+         */
+        $('#view_doc_modal').appendTo($('body'));
+
     });
 </script>
 

@@ -70,7 +70,7 @@ $(function() {
 /**
  * Обновление captcha
  */
-function reload(){
+function reload() {
     //var id = Math.floor(Math.random()*1000000);
     $("img.captcha").attr("src","/captcha/default");
 }

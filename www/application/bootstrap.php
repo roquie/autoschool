@@ -202,11 +202,22 @@ Route::set('func', 'func/<controller>/<action>(/<id>)',
             'directory'     => 'Func',
         ));
 
-Route::set('admin', 'admin(/<action>)')
+
+
+$route = Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
+    ->defaults(array(
+        'directory'  => 'Admin',
+        'controller' => 'Index',
+        'action' => 'index'
+    ));
+
+
+
+/*Route::set('admin', 'admin(/<action>)')
     ->defaults(array(
         'controller' => 'Admin',
         'action'     => 'index',
-    ));
+    ));*/
 
 Route::set('main', '(<action>(/<id>))')
     ->defaults(array(
@@ -235,10 +246,6 @@ Route::set('main.ajax', 'main(/<controller>(/<action>(/<id>)))')
 
 
 
-Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
-    ->defaults(array(
-        'directory'  => 'Admin',
-    ));
 
 
 

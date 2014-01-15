@@ -49,13 +49,6 @@ class Model_Users extends ORM
         );
     }
 
-    public function is_unique_email($email)
-    {
-        $user = ORM::factory('Users')->where('email', '=', $email)->find();
-        return (bool)!$user->email;
-    }
-
-
     public function labels()
     {
         return array(

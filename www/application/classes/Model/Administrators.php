@@ -18,16 +18,10 @@ class Model_Administrators extends ORM
            'email' => array(
                array('not_empty'),
                array('email'),
-               array(array($this, 'is_unique_email'), array(':value'))
+               array(array($this, 'unique'), array('email', ':value')),
            ),
 
         );
-    }
-
-    public function is_unique_email($email)
-    {
-        $admin = ORM::factory('Administrators')->where('email', '=', $email)->find();
-        return (bool)!$admin->email;
     }
 
     public function labels()

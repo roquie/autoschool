@@ -1,0 +1,27 @@
+div.backgr {
+  background-color: #eeeeee;
+}
+div.backgr .row {
+  padding-bottom: 20px;
+}
+div.doc_print {
+  border: 1px solid #f4f4f4;
+  background-color: #ffffff;
+  padding: 5px;
+}
+div.doc_print h5 {
+  margin-top: 0;
+  text-align: center;
+}
+div.doc_print img {
+  display: block;
+  margin: 0 auto;
+}
+div.doc_print .btn-group-wrap {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+div.doc_print .btn-group-wrap a {
+  width: 33px;
+}

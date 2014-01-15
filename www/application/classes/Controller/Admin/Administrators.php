@@ -3,7 +3,7 @@
 
 class Controller_Admin_Administrators extends Controller_Ajax_Admin
 {
-
+    protected $ac_table_name = 'administrators';
     /**
      * добавление админа
      */

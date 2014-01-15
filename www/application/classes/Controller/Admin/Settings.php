@@ -8,11 +8,42 @@
  *
  * */
 
-class Controller_Admin_Settings extends Controller_Ajax_Admin
+class Controller_Admin_Settings extends Controller_Admin
 {
+    public function before()
+    {
+        parent::before();
+
+        $no_ajax = array(
+            'index'
+        );
+        if (!in_array($this->request->action(), $no_ajax)) {
+            $post = $this->request->post();
+            if (Kohana::$environment === Kohana::PRODUCTION)
+                if (!Request::initial()->is_ajax())
+                    throw new HTTP_Exception_404();
+        }
+
+    }
+
+
+    public function action_index()
+    {
+        $data = Kohana::$config->load('settings.smtp');
+        if ($data != 0)
+            $data = unserialize($data);
+
+        $this->template->content = View::factory('admin/settings/index', array(
+            'all_admins' => ORM::factory('Administrators')->order_by('id', 'desc')->find_all(),
+            'upload_files' => ORM::factory('Files')->find_all(),
+            'smtp' => $data
+        ));
+    }
+
 
     public function action_upload()
     {
+        $this->auto_render = false;
         //$file_type_id = $this->request->post('data.type_file');
         $file_type_id = $this->request->post('type_file');
         if (empty($file_type_id)) {
@@ -45,6 +76,7 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
 
     public function action_smtp()
     {
+        $this->auto_render = false;
         $post = $this->request->post('data');
         $post = Arr::map('trim', $post);
         $validate = Validation::factory($post);
@@ -68,6 +100,7 @@ class Controller_Admin_Settings extends Controller_Ajax_Admin
 
     public function action_off_smtp()
     {
+        $this->auto_render = false;
         $r = Model::factory('Settings')->set('smtp', 0);
         $r ? $this->ajax_msg('SMTP больше не используется') : $this->ajax_msg('Ошибка БД', 'error');
     }

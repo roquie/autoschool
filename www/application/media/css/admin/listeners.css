@@ -1,0 +1,29 @@
+.l_select_group .well {
+  height: 101px;
+}
+.l_select_group select {
+  width: 180px;
+}
+.l_sort form {
+  margin-bottom: 0;
+}
+.l_sort form select {
+  width: 135px;
+}
+.l_sort .teacher_driver {
+  width: 155px;
+}
+.l_sort .ok {
+  margin-top: 24px;
+}
+.l_fio .wrap {
+  padding-left: 2px;
+  overflow-x: auto;
+  height: 613px;
+}
+.l_info .header-wrap {
+  margin-top: 0;
+}
+.l_info .btns {
+  margin-top: -5px;
+}

@@ -6,7 +6,7 @@
             <h1><small>Слушатели</small></h1>
         </div>
         <div class="span8 btn_actions">
-            <a href="<?=URL::site('/admin/listeners/distrib')?>" class="btn btn-success pull-right" data-placement="left" rel="tooltip" title="Распределение слушателей подавших заявку по группам">Подавшие заявку</a>
+            <a href="<?=URL::site('/admin/listeners/distrib')?>" class="btn btn-success pull-right" data-placement="bottom" rel="tooltip" title="Распределение слушателей подавших заявку по группам">Подавшие заявку</a>
         </div>
     </div>
 
@@ -74,7 +74,7 @@
     </div>
     <div class="row">
         <div class="span3 l_fio">
-            <div class="well" >
+            <div class="well">
                 <h5 class="header_block">Фамилия И.О.</h5>
                 <div class="wrap">
                     <?for($i=1;$i<=99;++$i):?>
@@ -93,8 +93,11 @@
                         <!-- меняй класс active у кнопок + менять href'ы у кнопок редактирования и удаления (для того чтобы понять что удалять) statement_or_contract -->
                         <a id="l_statement" href="#tab1" class="btn active" data-toggle="tab">Заявление</a>
                         <a id="l_contract" href="#tab2" class="btn" data-toggle="tab">Договор</a>
-                        <a id="l_edit" href="#statement_or_contract" data-url="<?=URL::site('')?>" class="enb_dis btn btn-info" rel="tooltip" title="Режим редактирования"><i class="icon-pencil"></i></a>
-                        <a id="l_delete" href="#statement_or_contract" data-url="<?=URL::site('')?>" class="enb_dis btn btn-danger" rel="tooltip" title="Удалить информ. о слушателе"><i class="icon-trash"></i></a>
+                        <div class="btn-group">
+                            <a id="l_edit" href="#statement_or_contract" data-url="<?=URL::site('')?>" class="enb_dis btn btn-info" rel="tooltip" title="Режим редактирования"><i class="icon-pencil"></i></a>
+                            <a id="l_delete" href="#statement_or_contract" data-url="<?=URL::site('')?>" class="enb_dis btn btn-danger" rel="tooltip" title="Удалить слушателя"><i class="icon-trash"></i></a>
+                        </div>
+
                     </div>
                 </div>
                 <div style="margin-top: 40px" class="tab-content">

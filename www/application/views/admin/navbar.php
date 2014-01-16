@@ -46,7 +46,7 @@
                     </ul>
                 </li>
                 <li><a href="<?=URL::site('admin/mail')?>"><i class="icon-envelope"></i> Сообщения</a></li>
-                <li><a href="<?=URL::site('admin/sync')?>"><i class="icon-random"></i> Cинхронизация</a></li>
+                <!--<li><a href="<?/*=URL::site('admin/sync')*/?>"><i class="icon-random"></i> Cинхронизация</a></li>-->
                 <li><a href="<?=URL::site('admin/help')?>"><i class="icon-question-sign"></i> Справка</a></li>
             </ul>
             <style type="text/css">

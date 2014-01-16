@@ -6,13 +6,13 @@ class Controller_Admin_Teachers extends Controller_Admin
 
     public function action_index()
     {
-        $this->template->content = View::factory('admin/data/teachers');
+        $this->template->content = View::factory('admin/teachers/index');
     }
 
 
     public function action_all()
     {
-
+        $this->template->content = View::factory('admin/teachers/all');
     }
 
     public function action_pdd()

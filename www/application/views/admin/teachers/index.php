@@ -7,7 +7,7 @@
         </div>
         <div class="span8 btn_actions">
             <div class="pull-right">
-                <a href="<?=URL::site('/admin/teachers/#edit')?>" class="btn" rel="tooltip" data-placement="bottom" title="Редактирование преподавателей"><i class="icon-pencil"></i></a>
+                <a href="<?=URL::site('/admin/teachers/all')?>" class="btn" rel="tooltip" data-placement="bottom" title="Вся информация"><i class="icon-th-list"></i></a>
                 <div class="btn-group">
                     <a href="<?=URL::site('/admin/teachers/pdf')?>" target="_blank" rel="tooltip" data-placement="bottom" title="Распечатать список преподавателей" class="btn"><i class="icon-print"></i></a>
                     <a href="<?=URL::site('/download/teachers/name')?>" rel="tooltip" data-placement="bottom" title="Загрузить список преподавателей" class="btn btn-success"><i class="icon-download"></i></a>
@@ -20,40 +20,36 @@
            <div class="span6 t_list">
                <div class="well">
                    <h5 class="header_block">Список всех</h5>
-                   <!--@todo: при выводе ФИО обрезать их если не влазят в размер ячейки, полностью показывать при наведии tooltip-->
-                   <table class="table table-bordered">
-                       <thead>
-                       <tr>
-                           <th>#</th>
-                           <th>Фамилия</th>
-                           <th>Имя</th>
-                           <th>Отчество</th>
-                       </tr>
-                       </thead>
-                       <tbody>
-                       <tr>
-                           <td>1</td>
-                           <td>Mark</td>
-                           <td>Otto</td>
-                           <td>@mdo</td>
-                       </tr>
-                       <tr>
-                           <td>2</td>
-                           <td>Mark</td>
-                           <td>Otto</td>
-                           <td>@TwBootstrap</td>
-                       </tr>
-                       <tr>
-                           <td>2</td>
-                           <td>Jacob</td>
-                           <td>Thornton</td>
-                           <td>@fat</td>
-                       </tr>
-                       <!--<tr>
-                           <td colspan="4" style="text-align: center">Преподаватели не найдены, используйте форму справа от вас для добавления</td>
-                       </tr>-->
-                       </tbody>
-                   </table>
+                   <!--@todo: ЗАМЕНИТЬ прокрутку, чтобы хэдер в табл был на месте-->
+                   <div style="overflow-y: scroll; height: 330px; padding-right: 18px">
+                       <table class="table table-bordered">
+                           <thead>
+                           <tr>
+                               <th>#</th>
+                               <th>Выбор</th>
+                               <th style="width: 170px">Фамилия И.О.</th>
+                               <th>Редакт.</th>
+                               <th>Удал.</th>
+                           </tr>
+                           </thead>
+                           <tbody>
+                           <?for($i=1; $i<=20; ++$i):?>
+                               <tr>
+                                   <td><?=$i?></td>
+                                   <!-- http://stackoverflow.com/questions/9709209/html-select-only-one-checkbox-in-a-group -->
+                                   <td><input style="display: block; margin: 5px auto" type="checkbox"/></td>
+                                   <td>Петров Г.А.</td>
+                                   <td><a href="#t_edit" data-toggle="modal" style="display: table; margin: 0 auto" class="badge"><i class="icon-pencil"></i></a></td>
+                                   <td><a href="#t_delete" data-toggle="modal" style="display: table; margin: 0 auto" class="badge badge-important"><i class="icon-remove"></i></a></td>
+                               </tr>
+                           <?endfor?>
+                           <!--<tr>
+                               <td colspan="4" style="text-align: center">Преподаватели не найдены, используйте форму справа от вас для добавления</td>
+                           </tr>-->
+                           </tbody>
+                       </table>
+                   </div>
+
                </div>
 
            </div>
@@ -113,6 +109,11 @@
 
             </div>
         </div>
-
-
 </div>
+
+<?=View::factory('admin/teachers/html/modal_t_edit')?>
+<?=View::factory('admin/teachers/html/modal_t_delete')?>
+
+
+
+

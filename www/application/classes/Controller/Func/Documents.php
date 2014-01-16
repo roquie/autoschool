@@ -56,13 +56,28 @@ class Controller_Func_Documents extends Controller_Ajax_Ajax
         switch($params[0])
         {
             case 'contract':
-             $this->ajax_msg($this->create_contract($params[1]));
+             $this->ajax_data(
+                 array(
+                     'file' => $this->create_contract($params[1]),
+                     'url' => URL::site('download/after_del'),
+                 )
+             );
             break;
             case 'statement':
-             $this->ajax_msg($this->create_statement($params[1]));
+             $this->ajax_data(
+                 array(
+                     'file' => $this->create_statement($params[1]),
+                     'url' => URL::site('download/after_del'),
+                 )
+             );
             break;
             case 'ticket':
-             $this->ajax_msg($this->create_ticket($params[1]));
+             $this->ajax_data(
+                 array(
+                     'file' => $this->create_ticket($params[1]),
+                     'url' => URL::site('download/after_del'),
+                 )
+             );
             break;
         }
     }

@@ -71,7 +71,6 @@
 
 <script>
     $(function() {
-        //@todo исправить вставку php-кода, отсылать ссылку как параметр в ответе от сервера
         /**
          * post запрос на создание временного документа
          * -
@@ -81,7 +80,7 @@
             $.post(
                 $(this).data('url'),
                 function(response){
-                    $('#docs_viewer').attr('src', "http://view.officeapps.live.com/op/view.aspx?src=<?=URL::site('download/after_del')?>/"+response.msg);
+                    $('#docs_viewer').attr('src', "http://view.officeapps.live.com/op/view.aspx?src="+response.data.url+"/"+response.data.file);
                 },
                 'json'
             );
@@ -91,7 +90,6 @@
          * Перенос модального окна за пределы видимости div#wrap
          */
         $('#view_doc_modal').appendTo($('body'));
-
     });
 </script>
 

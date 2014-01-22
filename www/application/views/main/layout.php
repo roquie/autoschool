@@ -8,7 +8,7 @@
     <title><?=$title?></title>
 
     <meta name="description" content="<?=$title?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <?=HTML::style('css/bstrap.html5b.fawesome.min.css')?>
     <?=HTML::style('css/vendor/stylizationForm.css')?>
     <?=HTML::style('css/main/datepicker.css')?>

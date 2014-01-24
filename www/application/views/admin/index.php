@@ -191,7 +191,7 @@
                             </tr>
                             <tr>
                                 <td>Отчество</td>
-                                <td><a href="#" data-url="http://autoschool.ru/lk/ajax/changeContract/21" -name="ot4estvo" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Агафьевна</a></td>
+                                <td><a href="#" data-url="http://autoschool.ru/lk/ajax/changeContract/21" data-name="ot4estvo" data-type="text" data-pk="" class="editable editable-click editable-disabled" tabindex="-1">Агафьевна</a></td>
                             </tr>
                             <tr>
                                 <td>Адрес регистрации по паспорту</td>
@@ -226,3 +226,4 @@
 
 </div>
 
+<?=HTML::script('js/admin/editable.js')?>

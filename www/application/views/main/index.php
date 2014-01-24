@@ -186,7 +186,7 @@
                 </div>
             </div>
             <div class="span6">
-                <script charset="utf-8" src="//api-maps.yandex.ru/services/constructor/1.0/js/?sid=zykIeaQ83Zaa2OdE51NOwJfXluULtvrm&width=460&height=325"></script>
+                <iframe src="https://mapsengine.google.com/map/embed?mid=zKAGAuy1eND8.kCKg1x6jjPxk" width="100%" height="330" style="border: 0"></iframe>
             </div>
         </div>
     </div>

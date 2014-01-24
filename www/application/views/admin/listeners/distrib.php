@@ -1,4 +1,11 @@
 <?=HTML::style('css/admin/distrib.css')?>
+<?=HTML::script('js/admin/index.js')?>
+<?=HTML::script('js/vendor/moment+langs.min.js')?>
+<?=HTML::style('css/vendor/bootstrap-editable.css')?>
+<?=HTML::script('js/vendor/bootstrap-editable.min.js')?>
+<?=HTML::style('css/lk/lk_statement.css')?>
+<?=HTML::style('css/vendor/select2.css')?>
+<?=HTML::script('js/vendor/select2.min.js')?>
 
 <div class="container">
 <div class="row">

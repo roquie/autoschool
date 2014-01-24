@@ -51,7 +51,7 @@
         <div class="span4">
             <div class="doc_print">
                 <h5>Экзаменационный протокол</h5>
-                <a href="#"><img src="<?=URL::site('img/admin/print/list_group_edu.png')?>" width="170px" height="180px" alt="Экзаменационный протокол"/></a>
+                <a href="#"><img src="<?=URL::site('img/admin/print/ekzamen.png')?>" width="170px" height="180px" alt="Экзаменационный протокол"/></a>
 
                 <div class="btn-group-wrap">
                     <div class="btn-group">
@@ -65,7 +65,7 @@
         <div class="span4">
             <div class="doc_print">
                 <h5>Список слушателей группы (образ.)</h5>
-                <a href="#"><img src="<?=URL::site('img/admin/print/list_group_md.png')?>" width="170px" height="180px" alt="Список слушателей группы (образ.)"/></a>
+                <a href="#"><img src="<?=URL::site('img/admin/print/list_group_edu.png')?>" width="170px" height="180px" alt="Список слушателей группы (образ.)"/></a>
 
                 <div class="btn-group-wrap">
                     <div class="btn-group">

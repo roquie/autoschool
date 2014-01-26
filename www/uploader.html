@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="//yandex.st/jquery/1.8.2/jquery.min.js"></script>
+    <script>
+        var FileAPI = {
+            debug: true
+            , staticPath: 'FileAPI-dev/dist/'
+        };
+    </script>
+    <script src="FileAPI-dev/dist/FileAPI.js"></script>
+    <script src="FileAPI-dev/plugins/FileAPI.id3.js"></script>
+    <script src="FileAPI-dev/plugins/FileAPI.exif.js"></script>
+    <style>
+        body {
+            font-size: 15px;
+            font-family: "Helvetica Neue";
+        }
+
+        .b-button {
+            display: inline-block;
+            *display: inline;
+            *zoom: 1;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            padding: 4px 15px;
+            vertical-align: middle;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            background-color: #f5f5f5;
+            background: -moz-linear-gradient(top, #fff 0%, #f5f5f5 49%, #ececec 50%, #eee 100%);
+            background: -webkit-linear-gradient(top, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
+            background: -o-linear-gradient(top, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
+            background: linear-gradient(to bottom, #fff 0%,#f5f5f5 49%,#ececec 50%,#eee 100%);
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+        .b-button_hover {
+            border-color: #fa0;
+            box-shadow: 0 0 2px #fa0;
+        }
+
+        .b-button__text {
+        }
+
+        .b-button__input {
+            cursor: pointer;
+            opacity: 0;
+            filter:progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+            top: -10px;
+            right: -40px;
+            font-size: 50px;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="b-button js-fileapi-wrapper">
+        <div class="b-button__text">Upload one file</div>
+        <input name="files" class="b-button__input" type="file"/>
+    </div>
+    <div class="b-button js-fileapi-wrapper">
+        <div class="b-button__text btn">Загрузить</div>
+    </div>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            if( !(FileAPI.support.cors || FileAPI.support.flash) ) {
+                $('.b-button').hide();
+            }
+
+            $(document).on('mouseenter mouseleave', '.b-button', function (evt) {
+                $(evt.currentTarget).toggleClass('b-button_hover', evt.type == 'mouseenter');
+            });
+
+            $('.btn').on('click', function() {
+                onFiles(FileAPI.getFiles($('input[type="file"]')));
+                FileAPI.reset(evt.currentTarget);
+            });
+/*            $('input[type="file"]').on('change', function (evt) {
+                onFiles(FileAPI.getFiles(evt));
+                FileAPI.reset(evt.currentTarget);
+            });*/
+
+            var FU = {
+                files: [],
+                index: 0,
+                active: false,
+                add: function (file) {
+                    FU.files.push(file);
+                },
+                start: function (){
+                    if( !FU.active && (FU.active = FU.files.length > FU.index) ) {
+                        FU._upload(FU.files[FU.index]);
+                    }
+                },
+                _upload: function (file) {
+                    if( file ) {
+                        file.xhr = FileAPI.upload({
+                            url: 'uploader.php',
+                            files: { file: file },
+                            complete: function (err, xhr) {
+                                FU.index++;
+                                FU.active = false;
+                                FU.start();
+                            }
+                        });
+                    }
+                }
+            };
+            function onFiles(files) {
+                FileAPI.each(files, function (file) {
+                    if( file.size >= 5*FileAPI.MB ){
+                        alert('Sorrow.\nMax size 5MB')
+                    }
+                    else if( file.size === void 0 ) {
+                        $('.b-button').hide();
+                    }
+                    else {
+                        FU.add(file);
+                        FU.start();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

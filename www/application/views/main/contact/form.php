@@ -24,6 +24,8 @@
                     </div>
                 </div>
         </div>
-        <input type="submit" class="btn btn-primary span2" style="margin-bottom: 4px; margin-left: 120px" value="Отправить">
+        <button type="submit" style="margin-bottom: 4px; margin-left: 101px" class="btn btn-primary span2 btn_send">
+            Отправить
+        </button>
     </div>
 </form>

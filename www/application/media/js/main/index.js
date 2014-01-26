@@ -30,7 +30,7 @@ $(function() {
         scrollToElement(href);
     });
 
-    $('#send').validation({
+/*    $('#send').validation({
         callback : function(response) {
             var $this = $('#send');
             // Если пустые поля
@@ -59,6 +59,44 @@ $(function() {
         },
         trigger : 'blur',
         offsetTopBalloon : 30
+    });*/
+
+    $('#send').on('submit', function(evt) {
+        evt.preventDefault();
+        if (validate($(this), true)) {
+            var btn = $('.btn_send'),
+                def_val = btn.text();
+            btn.html('<i class="icon icon-refresh icon-spin"></i> Отправка');
+
+            //@todo сюда всунуть загрузку файлов
+
+            send_ajax($(this), function(response) {
+                var $this = $('#send');
+                // Если пустые поля
+                if (response.status === 'empty') {
+                    var element;
+                    $.each(response.data, function(i, v) {
+                        element = $this.find('input[name="'+ v +'"], textarea[name="'+ v +'"]').addClass('error');
+                    });
+                }
+                // Если получена ошибка или всё нормально
+                if (response.status === 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status === 'success') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                    reload();
+                    $this[0].reset();
+                    $this.find('.placeholder').placeholder('reset');
+                }
+            });
+        }
     });
 
     /**

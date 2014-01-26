@@ -13,7 +13,7 @@
     <?=HTML::style('css/vendor/stylizationForm.css')?>
     <?=HTML::style('css/main/datepicker.css')?>
     <?=HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic')?>
-    <?=HTML::style('css/general/validation.css')?>
+    <?=HTML::style('css/main/validation.css')?>
     <?=HTML::style('css/general/pageslide.css')?>
     <?=HTML::style('css/general/popup.css')?>
     <?=HTML::style('css/twitter.css')?>
@@ -33,7 +33,6 @@
     <?=HTML::script('js/vendor/jquery.slimscroll.min.js')?>
     <?=HTML::script('js/vendor/stylizationForm.js')?>
     <?=HTML::script('js/general/placeholder.js')?>
-    <?=HTML::script('js/main/validation.js')?>
     <?=HTML::script('js/general/general_fns.js')?>
     <?=HTML::script('js/general/popup.js')?>
     <?=HTML::script('js/general/notification.js')?>

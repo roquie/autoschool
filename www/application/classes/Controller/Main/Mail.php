@@ -3,10 +3,33 @@
 class Controller_Main_Mail extends Controller_Ajax_Main
 {
 
+    public function action_upload()
+    {
+        if (!$this->request->is_ajax() || empty($_FILES))
+            throw HTTP_Exception_404();
+
+        $validate = Validation::factory($_FILES)
+            ->rule('files', 'Upload::valid')
+            ->rule('files', 'Upload::not_empty')
+            ->rule('files', 'Upload::type', array(':value', array('docx','doc', 'pdf', 'jpg', 'jpeg,', 'png', 'gif', 'tiff', 'psd', 'txt', 'rtf', 'zip', 'rar', '7z', 'pages')))
+            ->rule('files', 'Upload::size', array(':value', '5M'));
+
+        if ($validate->check()) {
+            $status = Upload::save($_FILES['files'], $_FILES['files']['name'], APPPATH.'uploads/', 0444);
+            //$file_name = $_FILES['files']['name'];
+            if ($status)
+                $this->ajax_msg(); // true
+            else
+                $this->ajax_msg('Ошибка загрузки файла, письмо не отправлено', 'error');
+
+        } else {
+            $errors = $validate->errors('upload');
+            $this->ajax_msg(array_shift($errors), 'error');
+        }
+    }
 
     public function action_send()
     {
-
         if (Botobor_Keeper::get()->isRobot())
         {
             $this->ajax_msg('Ошибка отправки, попробуйте еще раз', 'error');
@@ -14,10 +37,6 @@ class Controller_Main_Mail extends Controller_Ajax_Main
         }
 
         $post = $this->request->post();
-
-        $valid = $this->ajax_xssclean($_POST);
-        if ($valid)
-            exit;
 
         if(!Valid::email($post['email'], true)) {
             $this->ajax_msg('Неверный email адрес', 'error');
@@ -36,46 +55,31 @@ class Controller_Main_Mail extends Controller_Ajax_Main
                     'email' => $post['email']
                 ))
         ));
-
-        if (!empty($_FILES)) {
-            $validate = Validation::factory($_FILES)
-                ->rule('files', 'Upload::valid')
-                ->rule('files', 'Upload::not_empty')
-                ->rule('files', 'Upload::type', array(':value', array('docx','doc', 'pdf', 'jpg', 'jpeg,', 'png', 'gif', 'tiff', 'psd', 'txt', 'rtf', 'zip', 'rar', '7z', 'pages')))
-                ->rule('files', 'Upload::size', array(':value', '5M'));
-
-                if ($validate->check()) {
-                    Upload::save($_FILES['files'], $_FILES['files']['name'], APPPATH.'uploads/', 0775);
-                    $file_name = $_FILES['files']['name'];
-                } else {
-                    $errors = $validate->errors('upload');
-                    $this->ajax_msg(array_shift($errors), 'error');
-                }
+        $path = APPPATH.'uploads/';
+        if (file_exists($path.$post['file_name'])) {
 
             $result = Email::factory('Автошкола МПТ', $message, 'text/html')
                 ->to(array(
-                   // 'vik.melnikov@gmail.com',
+                     'vik.melnikov@gmail.com',
                     'roquie0@gmail.com',
-                   // 'auto@mpt.ru'
+                    // 'auto@mpt.ru'
                 ))
                 ->from($post['email'], $post['name'])
-                ->attach_file(APPPATH.'uploads/'.$file_name)
+                ->attach_file($path.$post['file_name'])
                 ->send();
 
-            unlink(APPPATH.'uploads/'.$file_name);
+            unlink($path.$post['file_name']);
 
         } else {
             $result = Email::factory('Автошкола МПТ', $message, 'text/html')
                 ->to(array(
-                  //  'vik.melnikov@gmail.com',
+                    'vik.melnikov@gmail.com',
                     'roquie0@gmail.com',
                   //  'auto@mpt.ru'
                 ))
                 ->from($post['email'], $post['name'])
                 ->send();
         }
-
-
 
         if ($result)
             $this->ajax_msg('Сообщение отправлено');

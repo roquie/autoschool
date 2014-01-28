@@ -9,13 +9,13 @@ class Controller_Main_Mail extends Controller_Ajax_Main
             throw HTTP_Exception_404();
 
         $validate = Validation::factory($_FILES)
-            ->rule('files', 'Upload::valid')
-            ->rule('files', 'Upload::not_empty')
-            ->rule('files', 'Upload::type', array(':value', array('docx','doc', 'pdf', 'jpg', 'jpeg,', 'png', 'gif', 'tiff', 'psd', 'txt', 'rtf', 'zip', 'rar', '7z', 'pages')))
-            ->rule('files', 'Upload::size', array(':value', '5M'));
+            ->rule('file', 'Upload::valid')
+            ->rule('file', 'Upload::not_empty')
+            ->rule('file', 'Upload::type', array(':value', array('docx','doc', 'pdf', 'jpg', 'jpeg,', 'png', 'gif', 'tiff', 'psd', 'txt', 'rtf', 'zip', 'rar', '7z', 'pages')))
+            ->rule('file', 'Upload::size', array(':value', '5M'));
 
         if ($validate->check()) {
-            $status = Upload::save($_FILES['files'], $_FILES['files']['name'], APPPATH.'uploads/', 0444);
+            $status = Upload::save($_FILES['file'], $_FILES['file']['name'], APPPATH.'uploads/', 0444);
             //$file_name = $_FILES['files']['name'];
             if ($status)
                 $this->ajax_msg(); // true
@@ -56,7 +56,7 @@ class Controller_Main_Mail extends Controller_Ajax_Main
                 ))
         ));
         $path = APPPATH.'uploads/';
-        if (file_exists($path.$post['file_name'])) {
+        if (file_exists($path.$post['file_name']) && !empty($post['file_name'])) {
 
             $result = Email::factory('Автошкола МПТ', $message, 'text/html')
                 ->to(array(

@@ -164,13 +164,15 @@
     </div>
 </section>
 
-<?=HTML::style('css/vendor/bootstrap-fileupload.css')?>
-<?=HTML::script('js/vendor/bootstrap-fileupload.min.js')?>
-<script type="text/javascript">
-    $(function(){
-        $('.fileupload').fileupload();
-    });
+<script>
+    var FileAPI = {
+        debug: true
+        , staticPath: '<?=URL::site('js/FileAPI-dev/dist')?>'
+    };
 </script>
+<script src="<?=URL::site('js/FileAPI-dev/dist/FileAPI.js')?>"></script>
+<script src="<?=URL::site('js/FileAPI-dev/plugins/FileAPI.id3.js')?>"></script>
+<script src="<?=URL::site('js/FileAPI-dev/plugins/FileAPI.exif.js')?>"></script>
 
 <section class="row contacts" target="contacts">
     <div class="container">

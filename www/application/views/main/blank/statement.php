@@ -14,6 +14,7 @@
         <?=HTML::script('js/vendor/chosen.jquery.min.js')?>
         <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
         <?=HTML::script('js/main/statement.js')?>
+        <?=HTML::script('js/general/put_doc.js')?>
         <div class="well well-small form-block">
 
             <ul id="tabs" class="nav nav-tabs">

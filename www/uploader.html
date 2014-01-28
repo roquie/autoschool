@@ -79,10 +79,11 @@
                 onFiles(FileAPI.getFiles($('input[type="file"]')));
                 FileAPI.reset(evt.currentTarget);
             });
-/*            $('input[type="file"]').on('change', function (evt) {
-                onFiles(FileAPI.getFiles(evt));
-                FileAPI.reset(evt.currentTarget);
-            });*/
+
+            $('input[type="file"]').on('change', function (evt) {
+                var f = FileAPI.getFiles(evt);
+                alert(f[0].name);
+            });
 
             var FU = {
                 files: [],

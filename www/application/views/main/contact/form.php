@@ -164,7 +164,10 @@
         function onFiles(files, obj) {
             FileAPI.each(files, function (file) {
                 if( file.size >= 5*FileAPI.MB ){
-                    alert('Sorrow.\nMax size 5MB')
+                    noty({
+                        type : 'error',
+                        message : 'Максимальный размер 5Мб'
+                    });
                 }
                 else if( file.size === void 0 ) {
                     $('.b-button').hide();

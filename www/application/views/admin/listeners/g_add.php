@@ -15,9 +15,7 @@
     <!--css-->
     <?=HTML::style('css/main/datepicker.css')?>
     <?=HTML::style('css/main/statement.css')?>
-    <?=HTML::style('css/vendor/chosen.css')?>
     <!--js-->
-    <?=HTML::script('js/vendor/chosen.jquery.min.js')?>
     <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
     <?=HTML::script('js/general/put_doc.js')?>
     <script>

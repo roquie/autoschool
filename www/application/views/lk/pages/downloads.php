@@ -93,5 +93,5 @@
     });
 </script>
 
-<?=View::factory('lk/pages/html/view_doc')->render()?>
+<?=View::factory('view_doc')->render()?>
 

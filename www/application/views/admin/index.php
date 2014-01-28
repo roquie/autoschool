@@ -6,6 +6,7 @@
             <h1><small>Слушатели</small></h1>
         </div>
         <div class="span8 btn_actions">
+            <a href="<?=URL::site('/admin/listeners/g_add')?>" class="btn btn-warning pull-right" data-placement="bottom" rel="tooltip" title="Добавить слушателя (или создать документы без добавления данных в БД)">Добавить</a>
             <a href="<?=URL::site('/admin/listeners/distrib')?>" class="btn btn-success pull-right" data-placement="bottom" rel="tooltip" title="Распределение слушателей подавших заявку по группам">Подавшие заявку</a>
         </div>
     </div>

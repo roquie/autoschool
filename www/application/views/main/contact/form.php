@@ -172,7 +172,6 @@
                 else {
                     FU.add(file, obj.data('url'));
                     FU.start();
-                    //FU.url = obj.data('url');//'http://autoschool.ru/main/mail/upload'
                     alert(FU.url);
                 }
             });

@@ -40,6 +40,15 @@ i#forgot:hover {
 /*--------------------------------------------------
   End Sticky footer styles
   --------------------------------------------------*/
+@media (min-width: 768px) and (max-width: 991px) {
+  .navbar-fixed-top {
+    position: relative;
+    top: auto;
+  }
+  #wrap {
+    margin-top: -65px !important;
+  }
+}
 body * {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
@@ -362,18 +371,6 @@ footer ul li > a:hover {
     Адаптивность - а нихрена не сделано :(
 */
 /* Large desktop */
-@media (min-width: 1200px) {
-  
-}
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) {
-  
-}
 /* Landscape phone to portrait tablet */
-@media (max-width: 767px) {
-  
-}
 /* Landscape phones and down */
-@media (max-width: 480px) {
-  
-}

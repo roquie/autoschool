@@ -27,24 +27,19 @@ function validate(form, is_balloon, options, fields) {
     }
     for (var i = 0; i < data.length; i++) {
         if ( typeof data[i] === 'object') {
-            element = form.find('input[name="'+ data[i].name+'"], textarea[name="'+ data[i].name+'"]');
+            element = form.find('[name="'+ data[i].name+'"]');
         } else {
             element = $('#'+data[i]);
         }
         if (element.data('req')) {
-            switch (element.get(0).nodeName.toLowerCase()) {
-                case 'div' :
-                    if (delSpace(element.text()) === '') {
+            switch (element.attr('type') ? element.attr('type') : 'text') {
+                case 'email' :
+                    if ( delSpace(data[i].value) === '' || !isValidateEmail(data[i].value) ) {
                         empty = true;
                     }
                     break;
-                case 'input' :
-                    if ( delSpace(element.val()) === '' || ( element.attr('placeholder') && (element.val() === element.attr('placeholder')) ) ) {
-                        empty = true;
-                    }
-                    break;
-                case 'textarea' :
-                    if ( delSpace(element.val()) === '' || ( element.attr('placeholder') && (element.val() === element.attr('placeholder')) ) ) {
+                case 'text' :
+                    if ( delSpace(data[i].value) === '' ) {
                         empty = true;
                     }
                     break;
@@ -53,7 +48,7 @@ function validate(form, is_balloon, options, fields) {
                 is_success = false;
                 element.addClass('error');
                 if (is_balloon)
-                    balloon(element, options);
+                    balloon(element);
                 empty = false;
             }
         }
@@ -103,7 +98,7 @@ function send_ajax( form, callback, fields, addData) {
  * @param input
  * @param options
  */
-function balloon(input, options) {
+function balloon(input) {
     var balloon,
         placement = 'right',
         inputTopPosition,
@@ -113,11 +108,11 @@ function balloon(input, options) {
         message,
         pos;
 
-    options = $.extend({}, {
+    var options = {
         placement : 'right',
-        offsetTopBalloon : 0,
+        offsetTopBalloon : 20,
         hideBalloon : 20
-    }, options);
+    };
 
     arrowClass = (input.data('placement')) ? input.data('placement') : options.placement;
     balloon = $('<div>', {
@@ -129,21 +124,26 @@ function balloon(input, options) {
         height: input[0].offsetHeight
     }, input.offset());
 
+    if (input.parent('span').length === 0)
+        input.wrap($('<span>').css({
+            position : 'relative'
+        })
+        );
+
     switch (arrowClass) {
         case 'top' :
-            inputTopPosition = pos.top - options.offsetTopBalloon;
-            inputLeftPosition = pos.left - 18;
+            inputTopPosition = - (input.height() + options.offsetTopBalloon + 9);
+            inputLeftPosition = -18;
             break;
         case 'right' :
-            inputTopPosition = pos.top - options.offsetTopBalloon;
-            inputLeftPosition = input.offset().left + input.width() + 18;
+            inputTopPosition = - (options.offsetTopBalloon - 11);
+            inputLeftPosition = input.width();
             break;
         case 'bottom' :
             inputTopPosition = pos.top + input.height() + options.offsetTopBalloon;
             inputLeftPosition = pos.left - 18;
             break;
     }
-
 
     message = (input.data('error')) ? input.data('error') : 'Заполните поле';
     balloon.html(message).offset({

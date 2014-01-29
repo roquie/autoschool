@@ -26,6 +26,13 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             if (empty($userId)) HTTP::redirect('/');
         }
     }
+
+    public function action_create_tmp_file()
+    {
+        $type = $this->request->param('id');
+        Request::factory('func/documents/get/'.$type.'-'.Cookie::get('userId'))->execute();
+    }
+
     /**
      * проверка знает ли юзер свой пароль для изменения почты
      */
@@ -112,8 +119,14 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         $newpass = Text::random();
         Model::factory('Users')->upd($user->id, array('password' => $this->hash($newpass)));
+        $message = View::factory('tmpmail/template', array(
+            'content' => View::factory('tmpmail/lk/forgot', array(
+                    'name' => $user->Statements->imya,
+                    'pass' => $newpass
+                ))
+        ));
 
-        $mail = Email::factory('Смена пароля', 'Ваш пароль был сброшен, новый пароль: '. $newpass)
+        $mail = Email::factory('Смена пароля', $message, 'text/html')
             ->to($user->email)
             ->from('info@auto.mpt.ru', 'Автошкола');
         $mail->send();
@@ -136,7 +149,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         );
 
         try {
-            $s = ORM::factory('Statements', array('uer_id' => $id));
+            $s = ORM::factory('Statements', array('user_id' => $id));
             //$s->set($this->request->post('name'), $this->request->post('value'));
             $s->values($data);
             $s->update();
@@ -566,8 +579,15 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             exit;
         }
 
+        $message = View::factory('tmpmail/template', array(
+            'content' => View::factory('tmpmail/lk/registr', array(
+                    'user' => Session::instance()->get('statement'),
+                    'login' => $user['email'],
+                    'pass' => $newpass
+                ))
+        ));
 
-        $mail = Email::factory('Регистрация в Автошколе МПТ', 'Ваш логин: '.$user['email'].' Ваш пароль : '. $newpass)
+        $mail = Email::factory('Регистрация в Автошколе МПТ', $message, 'text/html')
             ->to($user['email'])
             ->from('info@auto.mpt.ru', 'Автошкола');
         $mail->send();

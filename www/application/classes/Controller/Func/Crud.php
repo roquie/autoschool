@@ -117,7 +117,11 @@ class Controller_Func_Crud extends Controller_Ajax_Ajax
                     ? array($post['id'][0] => $post['id'][1])
                     : $post['id']
             );
-            $u->values($post['data']);
+            $u->values($post['data'],
+                    isset($post['only'])
+                        ? $post['only']
+                        : null
+            );
             $u->save();
 
             $this->ajax_msg(

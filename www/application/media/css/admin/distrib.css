@@ -1,0 +1,23 @@
+.d_fio .well {
+  height: 791px;
+}
+.d_fio .wrap {
+  padding-left: 2px;
+  overflow-x: auto;
+  height: 760px;
+}
+.d_status {
+  height: 100px;
+}
+.d_status .header-wrap {
+  margin-top: 0;
+}
+.d_status .btns {
+  margin-top: -5px;
+}
+.d_info {
+  height: 630px;
+}
+.d_info .tab-content {
+  margin-top: 40px;
+}

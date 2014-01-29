@@ -7,31 +7,31 @@
     <h1><small>Настройки</small></h1>
     <div class="tabbable">
         <ul class="nav nav-tabs">
-            <li ><a href="#tab1" data-toggle="tab">Администраторы</a></li>
-            <li><a href="#tab2" data-toggle="tab" >Загрузка файлов</a></li>
-            <li class="active"><a href="#tab3" data-toggle="tab" id="act" >Главная страница</a></li>
+            <li><a href="#administrators" data-toggle="tab">Администраторы</a></li>
+            <li><a href="#upload" data-toggle="tab" >Загрузка файлов</a></li>
+            <li><a href="#home" data-toggle="tab" id="act" >Главная страница</a></li>
         </ul>
         <div class="tab-content">
             <!--вкладка Главная страница-->
-            <div class="tab-pane active" id="tab3">
+            <div class="tab-pane" id="home">
                 <?=View::factory('admin/settings/main_page')
                    // ->set('upload_files', $upload_files)
                     ->set('smtp', $smtp)
                     ->render()?>
             </div>
-
             <!--вкладка Администраторы -->
-            <div class="tab-pane" id="tab1">
+            <div class="tab-pane" id="administrators">
                 <?=View::factory('admin/settings/administrators')
                         ->set('all_admins', $all_admins)
                         ->render()?>
             </div>
             <!--вкладка 2-->
-            <div class="tab-pane" id="tab2">
+            <div class="tab-pane" id="upload">
                 <?=View::factory('admin/settings/upload')
                         ->set('upload_files', $upload_files)
                         ->render()?>
             </div>
+
 
 
         </div>
@@ -54,9 +54,3 @@
     </div>
 </div>
 <!-- конец модалке -->
-
-<script>
-    $().ready(function() {
-        $('.placeholder').placeholder();
-    });
-</script>

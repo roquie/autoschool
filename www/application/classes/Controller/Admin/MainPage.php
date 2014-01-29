@@ -31,6 +31,9 @@ class Controller_Admin_MainPage extends Controller_Ajax_Admin
                 'data' => array(
                     'status' => $arr[1]
                 ),
+                'only' => array(
+                    'status'
+                ),
                 'msg' => 'Статус изменен'
             )
         )->execute();

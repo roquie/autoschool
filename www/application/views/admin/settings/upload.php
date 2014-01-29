@@ -68,7 +68,7 @@
         <div class="well" style="height: 300px;">
             <legend>Загрузить</legend>
             <p>Тут текст о том, что надо нажать сначала на тип файла слева, а потом его загрузить</p>
-            <!--class="_file_up"-->         <form  action="<?=Route::url('admin.ajax', array('controller'=>'settings', 'action' =>'upload'))?>" method="post" enctype="multipart/form-data">
+            <!--class="_file_up"-->    <form  action="<?=Route::url('admin.ajax', array('controller'=>'settings', 'action' =>'upload'))?>" method="post" enctype="multipart/form-data">
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                     <div class="input-append">
                         <div style="width: 170px" class="uneditable-input"><i class="icon-file fileupload-exists"></i>

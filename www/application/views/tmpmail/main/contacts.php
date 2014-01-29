@@ -7,7 +7,10 @@
                                     <p class="lead" style="color: #222222; font-family: 'Open Sans', sans-serif; font-weight: normal; text-align: justify; line-height: 19px; font-size: 16px; margin: 0; padding: 20px 0 10px;" align="justify"><?=$message?></p>
                                     <br>
                                     <table class="small-button secondary" style="border-spacing: 0; border-collapse: collapse; vertical-align: top; text-align: left; width: 100%; overflow: hidden; padding: 0;"><tbody><tr style="vertical-align: top; text-align: left; padding: 0;" align="left"><td class="two" style="word-break: break-word; -webkit-hyphens: auto; -moz-hyphens: auto; hyphens: auto; border-collapse: collapse !important; vertical-align: top; text-align: center; width: 16.666666% !important; display: block; color: #555; background: #e9e9e9; padding: 8px 0 7px; border: 1px solid #d0d0d0;" align="center" bgcolor="#e9e9e9" valign="top">
-                                                <a href="#" target="_blank" style="color: #555; text-decoration: none; font-weight: bold; font-family: Helvetica, Arial, sans-serif; font-size: 16px;">Ответить</a>
+                                                <?=HTML::mailto($email, 'Ответить', array(
+                                                    'target' => '_blank',
+                                                    'style' => 'color: #555; text-decoration: none; font-weight: bold; font-family: Helvetica, Arial, sans-serif; font-size: 16px;'
+                                                ))?>
                                             </td>
                                         </tr></tbody></table>
                                 </td>

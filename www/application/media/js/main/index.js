@@ -30,7 +30,7 @@ $(function() {
         scrollToElement(href);
     });
 
-    $('#send').validation({
+/*    $('#send').validation({
         callback : function(response) {
             var $this = $('#send');
             // Если пустые поля
@@ -52,19 +52,29 @@ $(function() {
                     type : response.status,
                     message : response.msg
                 });
+                reload();
                 $('#send')[0].reset();
                 $('#send').find('.placeholder').placeholder('reset');
             }
         },
         trigger : 'blur',
         offsetTopBalloon : 30
-    });
+    });*/
 
     /**
      * Подсказки в полях ввода
      */
     $('.placeholder').placeholder();
 });
+
+/**
+ * Обновление captcha
+ */
+function reload() {
+    //var id = Math.floor(Math.random()*1000000);
+    $("img.captcha").attr("src","/captcha/default");
+}
+
 function scrollToElement(href) {
     if (href.indexOf('#')+1) {
         href = href.split('#');

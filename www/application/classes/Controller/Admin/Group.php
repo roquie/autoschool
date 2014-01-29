@@ -9,6 +9,15 @@ class Controller_Admin_Group extends Controller_Ajax_Admin
     */
 
 
+
+    public function action_group()
+    {
+        $this->template->content = View::factory('admin/test/dist_group', array(
+            'none_group_users' => Model::factory('Users')->users_without_group(),
+            'groups' => ORM::factory('Groups')->find_all()
+        ));
+    }
+
     /**
      * метод для распредления слушателей по группам
      */

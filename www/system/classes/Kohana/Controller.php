@@ -72,6 +72,7 @@ abstract class Kohana_Controller {
 		// Determine the action to use
 		$action = 'action_'.$this->request->action();
 
+
 		// If the action doesn't exist, it's a 404
 		if ( ! method_exists($this, $action))
 		{

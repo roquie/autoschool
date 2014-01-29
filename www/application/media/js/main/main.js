@@ -22,9 +22,6 @@ $(function() {
         width      : '200px'
     });
 
-
-
-
     $.fn.ajaxForm.setDefaults({
         errorValidate : function() {
             noty({
@@ -79,7 +76,7 @@ $(function() {
                 }
 
                 if (response.status == 'success') {
-                var form = $('#send');
+                    var form = $('#send');
                     $.post(
                         form.attr('action'),
                         form.serialize(),
@@ -91,19 +88,10 @@ $(function() {
                                 });
                             }
                             if (response.status == 'success') {
-                                $('#myModal')
-                                    .css({display:'none'})
-                                    .attr('aria-hidden', true)
-                                    .removeClass('in');
-
-                                $('.modal-backdrop')
-                                    .remove();
-
                                 noty({
                                     type : response.status,
                                     message : response.msg
                                 });
-
                             }
                         },
                         'json'
@@ -112,28 +100,13 @@ $(function() {
 
 
                 }
-            },
-            upd_captcha : function(response) {
-               if (response.status == 'success') {
-                   //$('captcha_img').attr({src: 'captcha/default'});
-                    //alert(1);
-                   /*$('#myModal')
-                       .css({display:'block'})
-                       .attr('aria-hidden', false)
-                       .toggleClass('in');
-                    $('body').append('<div class="modal-backdrop fade in"></div>');*/
-
-                   $('._contacts').prepend(response.data);
-                }
             }
-
         },
         errorCallback : function(that, request, status, error) {
             if (request.status == '200') {
-                alert('Исключение: ' + request.responseText);
+                console.log('Исключение: ' + request.responseText);
             } else {
-                alert(request.status + ' ' + request.statusText + '. Текст ошибки отправлен в консоль');
-                console.log(request.responseText);
+                console.log(request.status + ' ' + request.statusText);
             }
         }
     });
@@ -145,6 +118,9 @@ $(function() {
 
     $('._contacts').ajaxForm();
     $('._upd_captcha').ajaxForm();
+
+    /*$('._view_doc_createtmpfile').ajaxForm();*/
+
     /**
      * Обновление новостей
      */

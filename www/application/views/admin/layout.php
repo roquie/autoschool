@@ -13,6 +13,7 @@
     <?=HTML::style('css/vendor/stylizationForm.css')?>
     <?=HTML::style('css/admin/admin.css')?>
     <?=HTML::style('css/general/popup.css')?>
+    <?=HTML::style('css/vendor/chosen.css')?>
 
     <?=HTML::script('http://yandex.st/jquery/1.10.2/jquery.min.js')?>
     <?=HTML::script('http://yandex.st/jquery-ui/1.10.3/jquery-ui.min.js')?>
@@ -22,6 +23,7 @@
     <?=HTML::script('js/vendor/html5b/plugins.js')?>
     <?=HTML::script('js/general/placeholder.js')?>
     <?=HTML::script('js/general/notification.js')?>
+    <?=HTML::script('js/vendor/chosen.jquery.min.js')?>
     <?=HTML::script('js/general/popup.js')?>
     <?=HTML::script('js/general/general_fns.js')?>
     <?=HTML::script('js/general/ajaxSend.js')?>

@@ -48,6 +48,40 @@ class Controller_Func_Documents extends Controller_Ajax_Ajax
         }
     }
 
+    public function action_get()
+    {
+        $params = $this->request->param('id');
+        $params = explode('-', $params);
+
+        switch($params[0])
+        {
+            case 'contract':
+             $this->ajax_data(
+                 array(
+                     'file' => $this->create_contract($params[1]),
+                     'url' => URL::site('download/after_del'),
+                 )
+             );
+            break;
+            case 'statement':
+             $this->ajax_data(
+                 array(
+                     'file' => $this->create_statement($params[1]),
+                     'url' => URL::site('download/after_del'),
+                 )
+             );
+            break;
+            case 'ticket':
+             $this->ajax_data(
+                 array(
+                     'file' => $this->create_ticket($params[1]),
+                     'url' => URL::site('download/after_del'),
+                 )
+             );
+            break;
+        }
+    }
+
 
     protected function create_ticket($id)
     {

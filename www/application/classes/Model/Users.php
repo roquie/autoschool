@@ -36,7 +36,8 @@ class Model_Users extends ORM
             'email' => array(
                 array('not_empty'),
                 array('email'),
-              //  array(array($this, 'is_unique_email'), array(':value'))
+                array(array($this, 'unique'), array('email', ':value')),
+                /*array(array($this, 'is_unique_email'), array(':value'))*/
             ),
             'status' => array(
                 array('digit'),
@@ -47,13 +48,6 @@ class Model_Users extends ORM
             ),
         );
     }
-
-    public function is_unique_email($email)
-    {
-        $user = ORM::factory('Users')->where('email', '=', $email)->find();
-        return (bool)!$user->email;
-    }
-
 
     public function labels()
     {

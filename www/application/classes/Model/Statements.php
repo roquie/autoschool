@@ -110,7 +110,7 @@ class Model_Statements extends ORM
             ),
             'about' => array(
                 array('not_empty'),
-                array('alpha', array(':value', true)),
+                //array('alpha', array(':value', true)), - иначе пробелы и знаки препинания не работают.
             ),
             'nationality_id' => array(
                 array('not_empty'),

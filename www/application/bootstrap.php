@@ -98,7 +98,7 @@ Kohana::$environment =  Kohana::DEVELOPMENT;
 //Kohana::$environment = ($_SERVER['SERVER_NAME'] !== 'localhost') ? Kohana::PRODUCTION : Kohana::DEVELOPMENT;
 
 Kohana::init(array(
-	'base_url'   => 'http://autoschool.ru/',
+	'base_url'   => 'http://'.$_SERVER['HTTP_HOST'].'/',
     'index_file' => false,
     'errors' => true, //Kohana::$environment ===  Kohana::DEVELOPMENT,
     'profiling' => true,//Kohana::$environment ===  Kohana::DEVELOPMENT,
@@ -150,15 +150,16 @@ Kohana::modules(array(
 /**
  * для загрузки/скачивания файлов
  */
-Route::set('Updownload', 'updownload/<folder>/<filename>.<format>',
+Route::set('download', 'download/<action>/<folder>/<filename>.<format>',
     array(
         'folder' => '.+',
         'filename' => '.+',
-        'format' => '(doc|docx|pdf)'
+        'format' => '(doc|docx|pdf)',
+        'action' => '.+'
     ))
     ->defaults(array(
-        'controller' => 'Updownload',
-        'action' => 'download'
+        'controller' => 'Download',
+        'action' => 'index'
     ));
 
 
@@ -201,11 +202,22 @@ Route::set('func', 'func/<controller>/<action>(/<id>)',
             'directory'     => 'Func',
         ));
 
-Route::set('admin', 'admin(/<action>)')
+
+
+$route = Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
+    ->defaults(array(
+        'directory'  => 'Admin',
+        'controller' => 'Index',
+        'action' => 'index'
+    ));
+
+
+
+/*Route::set('admin', 'admin(/<action>)')
     ->defaults(array(
         'controller' => 'Admin',
         'action'     => 'index',
-    ));
+    ));*/
 
 Route::set('main', '(<action>(/<id>))')
     ->defaults(array(
@@ -234,10 +246,6 @@ Route::set('main.ajax', 'main(/<controller>(/<action>(/<id>)))')
 
 
 
-Route::set('admin.ajax', 'admin(/<controller>(/<action>(/<id>)))')
-    ->defaults(array(
-        'directory'  => 'Admin',
-    ));
 
 
 

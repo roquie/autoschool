@@ -1,0 +1,27 @@
+.t_list .well {
+  height: 366px;
+}
+.t_list .table {
+  width: 100%;
+}
+.t_add form {
+  margin-bottom: 0;
+}
+.t_add form textarea {
+  width: 98%;
+}
+.t_add .t_opmt {
+  width: 200px;
+}
+.t_add .t_names .span2 {
+  width: 125px;
+}
+.t_add .t_names input {
+  width: 120px;
+}
+.t_add .t_contacts input:nth-child(1) {
+  width: 190px;
+}
+.t_add .t_contacts input:nth-child(2) {
+  width: 170px;
+}

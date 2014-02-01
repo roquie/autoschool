@@ -53,7 +53,7 @@
             <div class="row-fluid">
                 <div class="span4"><strong>Сервер:</strong> sslv3://smtp.gmail.com<br><strong>Порт:</strong> 465</div>
                 <div class="span4"><strong>Сервер:</strong> ssl://smtp.yandex.ru<br><strong>Порт:</strong> 465</div>
-                <div class="span4"><strong>Сервер:</strong> ssl://smtp.mail.ru<br><strong>Порт:</strong> 465</div>
+                <div class="span4"><strong>Сервер:</strong> <br/>ssl://smtp.mail.ru<br><strong>Порт:</strong> 465</div>
             </div>
             <br><br>
             <div class="alert alert-info">

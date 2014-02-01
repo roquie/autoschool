@@ -3,7 +3,6 @@
 class Controller_Admin_Group extends Controller_Admin
 {
 
-
     public function action_group()
     {
         $this->template->content = View::factory('admin/test/dist_group', array(

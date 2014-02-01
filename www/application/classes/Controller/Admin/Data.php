@@ -18,7 +18,10 @@ class Controller_Admin_Data extends Controller_Admin
 
     public function action_national_and_edu()
     {
-        $this->template->content = View::factory('admin/data/national_and_edu');
+        $edu = ORM::factory('Educations')->find_all();
+        $national = ORM::factory('Nationality')->find_all();
+        $this->template->content =
+            View::factory('admin/data/national_and_edu', compact('edu', 'national'));
     }
 
 

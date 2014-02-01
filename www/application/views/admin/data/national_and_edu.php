@@ -12,9 +12,9 @@
         <div class="span6">
             <div class="well">
                 <h5 class="header_block">Гражданство</h5>
-                <form  action="#" method="post" accept-charset="utf-8" novalidate>
+                <form  action="<?=URL::site('admin/national/create')?>" method="post" accept-charset="utf-8" novalidate>
                     <label for="national_add">Добавить</label>
-                    <input id="national_add" type="text" name="add"/>
+                    <input id="national_add" type="text" name="data[grajdanstvo]"/>
                     <input type="submit" style="margin-top: -10px" class="btn" value="OK"/>
                 </form>
                 <table class="table table-bordered">
@@ -27,14 +27,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?for($i=1; $i<=5; ++$i):?>
+                    <?$i=0;foreach($national as $v):?>
                         <tr>
-                            <td><?=$i?></td>
-                            <td>РФ</td>
-                            <td><a style="display: table; margin: 0 auto" href="#" class="badge"><i class="icon-pencil"></i></a></td>
-                            <td><a style="display: table; margin: 0 auto"  href="#" class="badge badge-important"><i class="icon-remove"></i></a></td>
+                            <td><?=++$i?></td>
+                            <td><?=$v->grajdanstvo?></td>
+                            <td><a data-url="<?=URL::site('admin/national/edit/'.$v->id)?>" style="display: table; margin: 0 auto" href="#" class="badge"><i class="icon-pencil"></i></a></td>
+                            <td><a data-url="<?=URL::site('admin/national/delete/'.$v->id)?>" style="display: table; margin: 0 auto"  href="#" class="badge badge-important"><i class="icon-remove"></i></a></td>
                         </tr>
-                    <?endfor?>
+                    <?endforeach?>
 
                     </tbody>
                 </table>
@@ -43,9 +43,9 @@
         <div class="span6">
             <div class="well">
                 <h5 class="header_block">Образование</h5>
-                <form  action="#" method="post" accept-charset="utf-8" novalidate>
+                <form action="<?=URL::site('admin/edu/create')?>" method="post" accept-charset="utf-8" novalidate>
                     <label for="national_add">Добавить</label>
-                    <input id="national_add" type="text" name="add"/>
+                    <input id="national_add" type="text" name="data[obrazovanie]"/>
                     <input type="submit" style="margin-top: -10px" class="btn" value="OK"/>
                 </form>
                 <table class="table table-bordered">
@@ -58,14 +58,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <?for($i=1; $i<=5; ++$i):?>
+                    <?$i=0;foreach($edu as $v):?>
                         <tr>
-                            <td><?=$i?></td>
-                            <td>Высшее</td>
-                            <td><a style="display: table; margin: 0 auto" href="#" class="badge"><i class="icon-pencil"></i></a></td>
-                            <td><a style="display: table; margin: 0 auto"  href="#" class="badge badge-important"><i class="icon-remove"></i></a></td>
+                            <td><?=++$i?></td>
+                            <td><?=$v->obrazovanie?></td>
+                            <td><a data-url="<?=URL::site('admin/edu/edit/'.$v->id)?>" style="display: table; margin: 0 auto" href="#" class="badge"><i class="icon-pencil"></i></a></td>
+                            <td><a data-url="<?=URL::site('admin/edu/delete/'.$v->id)?>" style="display: table; margin: 0 auto"  href="#" class="badge badge-important"><i class="icon-remove"></i></a></td>
                         </tr>
-                    <?endfor?>
+                    <?endforeach?>
 
                     </tbody>
                 </table>

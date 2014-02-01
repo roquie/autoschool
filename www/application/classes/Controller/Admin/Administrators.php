@@ -1,9 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 
-class Controller_Admin_Administrators extends Controller_Ajax_Admin
+class Controller_Admin_Administrators extends Controller_Admin
 {
-    protected $ac_table_name = 'administrators';
     /**
      * добавление админа
      */
@@ -28,6 +27,26 @@ class Controller_Admin_Administrators extends Controller_Ajax_Admin
             $this->ajax_msg(array_shift($errors), 'error');
         }
 
+    }
+
+    public function action_delete()
+    {
+        $post = $this->request->param('id');
+
+        try
+        {
+            $admin = ORM::factory('Administrators', $post)->delete();
+            $this->ajax_data(
+                array(
+                    'id' => $admin->pk(),
+                ),
+                'Администратор удален'
+            );
+        }
+        catch (Exception  $e)
+        {
+            $this->ajax_msg('Ошибка БД: '.$e->getMessage(), 'error');
+        }
     }
 
 

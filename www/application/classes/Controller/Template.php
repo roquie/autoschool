@@ -1,28 +1,7 @@
-<?php defined('SYSPATH') or die('No direct script access.');
+<?php defined('SYSPATH') OR die('No direct script access.');
 
-class Controller_Ajax_Ajax extends Controller
+abstract class Controller_Template extends Kohana_Controller_Template
 {
-
-    /**
-     * @param array $array
-     * @param string $msg_error
-     * @return bool
-     */
-    protected function ajax_xssclean($array = array(), $msg_error = '')
-    {
-        $cleans = Security::xss_clean($array);
-
-        $emptyKeys = array();
-        foreach ($cleans as $key => $value)
-            if (empty($value))
-                $emptyKeys[] = $key;
-        if ( !empty($emptyKeys) )
-            $this->ajax_data($emptyKeys, $msg_error,  'empty');
-        else
-            return false;
-
-        return true;
-    }
 
     /**
      *
@@ -79,6 +58,5 @@ class Controller_Ajax_Ajax extends Controller
         echo json_encode($data);
         exit;
     }
-
 
 }

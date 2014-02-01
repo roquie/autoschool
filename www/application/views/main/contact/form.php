@@ -47,7 +47,7 @@
         </button>
     </div>
 </form>
-<script type="text/javascript">
+<script>
     jQuery(function ($) {
         if( !(FileAPI.support.cors || FileAPI.support.flash) ) {
             $('.b-button').hide();
@@ -56,11 +56,6 @@
         $(document).on('mouseenter mouseleave', '.b-button', function (evt) {
             $(evt.currentTarget).toggleClass('b-button_hover', evt.type == 'mouseenter');
         });
-
-/*        $('.btn').on('click', function() {
-            onFiles(FileAPI.getFiles($('input[type="file"]')));
-            FileAPI.reset(evt.currentTarget);
-        });*/
 
         $('input[type="file"]').on('change', function (evt) {
             $('.b-button').hide();
@@ -82,8 +77,6 @@
             if (validate($(this), true)) {
                 var btn = $('.btn_send');
                 btn.html('<i class="icon icon-refresh icon-spin"></i> Отправка');
-
-                //@todo сюда всунуть загрузку файлов
                 onFiles(FileAPI.getFiles($('input[type="file"]')), $('.b-button__text'));
             }
         });

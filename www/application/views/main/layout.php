@@ -10,6 +10,8 @@
     <meta name="description" content="<?=$title?>">
 
     <?=HTML::style('css/bstrap.html5b.fawesome.min.css')?>
+    <?=HTML::style('css/vendor/stylizationForm.css')?>
+    <?=HTML::style('css/main/datepicker.css')?>
     <?=HTML::style('http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&subset=latin,cyrillic')?>
     <?=HTML::style('css/main/validation.css')?>
     <?=HTML::style('css/general/pageslide.css')?>

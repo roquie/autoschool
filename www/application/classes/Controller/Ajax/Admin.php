@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 
-class Controller_Ajax_Admin extends Controller_Ajax_Ajax
+class Controller_Ajax_Admin extends Controller_Template
 {
 
     public function before()
@@ -18,8 +18,6 @@ class Controller_Ajax_Admin extends Controller_Ajax_Ajax
                 throw new HTTP_Exception_404();
 
     }
-
-
 
 
 }

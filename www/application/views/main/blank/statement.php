@@ -45,9 +45,10 @@
 
                             <label for="grajdanstvo">Гражданство</label>
                             <select id="grajdanstvo" name="statement[nationality_id]" style="width: 440px" data-req="true" tabindex="5">
-                                <?foreach ($Nationality as $value):?>
+                                <option>Ввести самому</option>
+                                <? foreach ($Nationality as $value): ?>
                                     <option value="<?=$value->id?>"><?=$value->grajdanstvo?></option>
-                                <?endforeach?>
+                                <? endforeach ?>
                             </select>
 
                             <label for="mesto_rojdeniya" style="margin-top: 12px">Место рождения</label>

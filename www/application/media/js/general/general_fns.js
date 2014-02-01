@@ -165,8 +165,7 @@ function delSpace (string) {
  * @param email
  * @returns {boolean}
  */
-function isValidateEmail(email)
-{
+function isValidateEmail(email) {
     var pattern = /^([\w\d\._-]+@([\w-]+\.)+[\w-]{2,4})?$/;
     return pattern.test(email);
 }

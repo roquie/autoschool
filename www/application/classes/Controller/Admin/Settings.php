@@ -30,7 +30,7 @@ class Controller_Admin_Settings extends Controller_Admin
     public function action_index()
     {
         $data = Kohana::$config->load('settings.smtp');
-        if ($data != 0)
+        if (!empty($data))
             $data = unserialize($data);
 
         $this->template->content = View::factory('admin/settings/index', array(
@@ -52,17 +52,17 @@ class Controller_Admin_Settings extends Controller_Admin
         }
 
         $validate = Validation::factory($_FILES)
-            ->rule('files', 'Upload::valid')
-            ->rule('files', 'Upload::not_empty')
-            ->rule('files', 'Upload::type', array(':value', array('docx','doc', 'pdf')))
-            ->rule('files', 'Upload::size', array(':value', '3M'));
+            ->rule('file', 'Upload::valid')
+            ->rule('file', 'Upload::not_empty')
+            ->rule('file', 'Upload::type', array(':value', array('docx','doc', 'pdf')))
+            ->rule('file', 'Upload::size', array(':value', '5M'));
 
         if ($validate->check()) {
 
             $file_info = ORM::factory('Files')->where('id', '=', $file_type_id)->find();
 
-            if ($file_info->filename === $_FILES['files']['name']) {
-                Upload::save($_FILES['files'], $file_info->filename, APPPATH.$file_info->path, 0775);
+            if ($file_info->filename === $_FILES['file']['name']) {
+                Upload::save($_FILES['file'], $file_info->filename, APPPATH.$file_info->path, 0775);
                 $this->ajax_msg('Файл загружен и заменен');
             } else {
                 $this->ajax_msg('Имя файла не соответствует выбранному', 'error');

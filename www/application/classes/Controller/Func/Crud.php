@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Func_Crud extends Controller_Ajax_Ajax
+class Controller_Func_Crud extends Controller_Admin
 {
 
     public function before()
@@ -27,6 +27,7 @@ class Controller_Func_Crud extends Controller_Ajax_Ajax
     */
     public function action_create()
     {
+
         $post = $this->request->post();
         try
         {

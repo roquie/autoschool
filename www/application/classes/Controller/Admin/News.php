@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Admin_News extends Controller_Ajax_Admin
+class Controller_Admin_News extends Controller_Admin
 {
     // ну CRUD тут есть, его просто не видно О_О
 

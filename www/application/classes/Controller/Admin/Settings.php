@@ -30,7 +30,7 @@ class Controller_Admin_Settings extends Controller_Admin
     public function action_index()
     {
         $data = Kohana::$config->load('settings.smtp');
-        if ($data != 0)
+        if (!empty($data))
             $data = unserialize($data);
 
         $this->template->content = View::factory('admin/settings/index', array(

@@ -57,28 +57,43 @@ class Controller_Main_Mail extends Controller_Ajax_Main
         ));
         $path = APPPATH.'uploads/';
         if (file_exists($path.$post['file_name']) && !empty($post['file_name'])) {
+            try
+            {
+                $result = Email::factory('Автошкола МПТ', $message, 'text/html')
+                    ->to(array(
+                              'vik.melnikov@gmail.com',
+                              'roquie0@gmail.com',
+                              'auto@mpt.ru'
+                         ))
+                    ->from($post['email'], $post['name'])
+                    ->attach_file($path.$post['file_name'])
+                    ->send();
 
-            $result = Email::factory('Автошкола МПТ', $message, 'text/html')
-                ->to(array(
-                     'vik.melnikov@gmail.com',
-                     'roquie0@gmail.com',
-                     'auto@mpt.ru'
-                ))
-                ->from($post['email'], $post['name'])
-                ->attach_file($path.$post['file_name'])
-                ->send();
+            }
+            catch(Swift_SwiftException $e)
+            {
+                $this->ajax_msg($e->getMessage(), 'error');
+            }
 
             unlink($path.$post['file_name']);
 
         } else {
-            $result = Email::factory('Автошкола МПТ', $message, 'text/html')
-                ->to(array(
-                    'vik.melnikov@gmail.com',
-                    'roquie0@gmail.com',
-                  //  'auto@mpt.ru'
-                ))
-                ->from($post['email'], $post['name'])
-                ->send();
+            try
+            {
+                $result = Email::factory('Автошкола МПТ', $message, 'text/html')
+                    ->to(array(
+                              'vik.melnikov@gmail.com',
+                              'roquie0@gmail.com',
+                              //  'auto@mpt.ru'
+                         ))
+                    ->from($post['email'], $post['name'])
+                    ->send();
+            }
+            catch(Swift_SwiftException $e)
+            {
+                $this->ajax_msg($e->getMessage(), 'error');
+            }
+
         }
 
         if ($result)

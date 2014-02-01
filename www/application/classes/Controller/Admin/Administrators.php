@@ -10,8 +10,30 @@ class Controller_Admin_Administrators extends Controller_Admin
     {
         try
         {
-            $admin = ORM::factory('Administrators')->values($this->request->post('data'));
+            $post = $this->request->post('data');
+            $admin = ORM::factory('Administrators')->values($post);
             $admin->save();
+
+            $message = View::factory('tmpmail/template',
+                array(
+                      'content' => View::factory('tmpmail/admin/add_adm',
+                       array(
+                            'name' => 'МПТ Автошкола',
+                            'message' => 'Вас добавили в администраторы. '.URL::site('/admin'),
+                       ))
+             ));
+            try
+            {
+                Email::factory('Автошкола МПТ', $message, 'text/html')
+                    ->to($post['email'])
+                    ->from('auto@mpt.ru', 'МПТ Автошкола')
+                    ->send();
+            }
+            catch(Swift_SwiftException $e)
+            {
+                $this->ajax_msg($e->getMessage(), 'error');
+            }
+
 
             $this->ajax_data(
                 array(

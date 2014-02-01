@@ -47,7 +47,7 @@
         </button>
     </div>
 </form>
-<script type="text/javascript">
+<script>
     jQuery(function ($) {
         if( !(FileAPI.support.cors || FileAPI.support.flash) ) {
             $('.b-button').hide();

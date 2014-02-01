@@ -1,10 +1,4 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
-/**
- * Developer: Roquie
- * Current file name: lk.php
- *
- * All rights reserved (c)
- */
 
 class Controller_Lk_Ajax extends Controller_Ajax_Main
 {

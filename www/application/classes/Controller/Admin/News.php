@@ -2,11 +2,8 @@
 
 class Controller_Admin_News extends Controller_Admin
 {
-    // ну CRUD тут есть, его просто не видно О_О
+    public function action_index()
+    {
 
-    /*
-    post --> /admin/news/create - добавить
-    post --> /admin/news/delete/1 - удалить
-
-    */
+    }
 }

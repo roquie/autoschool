@@ -108,7 +108,8 @@ Kohana::init(array(
 /**
  * Attach the file write to logging. Multiple writers are supported.
  */
-Kohana::$log->attach(new Log_File(APPPATH.'logs'));
+// нахер логи, заебали, и гиту мешают и всему остальному
+//Kohana::$log->attach(new Log_File(APPPATH.'logs'));
 
 /**
  * Attach a file reader to config. Multiple readers are supported.
@@ -133,6 +134,7 @@ Kohana::modules(array(
        'twitterapi' => MODPATH.'twitterapi',
        'botobor' => MODPATH.'botobor',
        'captcha' => MODPATH.'captcha',
+       'transactional' => MODPATH.'transactional',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',
       //  '' => MODPATH.'',

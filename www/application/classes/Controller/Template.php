@@ -2,7 +2,7 @@
 
 abstract class Controller_Template extends Kohana_Controller_Template
 {
-
+    public $_transactional = true;
     /**
      *
      * @param array $arr

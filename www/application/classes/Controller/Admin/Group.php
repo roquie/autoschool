@@ -2,12 +2,6 @@
 
 class Controller_Admin_Group extends Controller_Admin
 {
-    /*
-    post --> /admin/news/create - добавить
-    post --> /admin/news/delete/1 - удалить
-
-    */
-
 
 
     public function action_group()

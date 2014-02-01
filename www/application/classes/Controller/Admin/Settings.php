@@ -1,12 +1,5 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-/**
- *
- * Copyright: Roquie0
- * License: LGPL
- * Created: 2013 year
- *
- * */
 
 class Controller_Admin_Settings extends Controller_Admin
 {

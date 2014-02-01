@@ -121,8 +121,29 @@ $(function() {
                         message : response.msg
                     });
                 }
+            },
+            smtp : function(response, that) {
+                var smtp = $('.smtp');
+                if (!that.isForm) {
+                    smtp.removeClass('_ch_off_smtp');
+                    $('._ch_data_smtp')[0].reset();
+                    $('._ch_data_smtp').find('input').each(function() {
+                        $(this).prop('disabled', true);
+                    });
+                } else {
+                    if (response.status === 'success') {
+                        if (!smtp.hasClass('_ch_off_smtp')) {
+                            smtp.addClass('_ch_off_smtp');
+                        }
+                    }
+                }
+                if (response.status === 'error' || response.status === 'success') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
             }
-
         },
         debug : true
     });
@@ -137,9 +158,9 @@ $(function() {
         validate: false
     });
 
-/*    $('._ch_off_smtp').ajaxForm({
+    $('._ch_off_smtp').ajaxForm({
         validate: false
-    });*/
+    });
 
     $('._ch_data_smtp').ajaxForm({
         validate: false

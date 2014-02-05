@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Func_Documents extends Controller_Ajax_Ajax
+class Controller_Func_Documents extends Controller_Main
 {
 
     public function before()

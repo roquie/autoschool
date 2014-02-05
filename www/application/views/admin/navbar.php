@@ -45,7 +45,7 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="<?=URL::site('admin/mail')?>"><i class="icon-envelope"></i> Сообщения</a></li>
+                <li><a href="<?=URL::site('admin/messages')?>"><i class="icon-envelope"></i> Сообщения</a></li>
                 <!--<li><a href="<?/*=URL::site('admin/sync')*/?>"><i class="icon-random"></i> Cинхронизация</a></li>-->
                 <li><a href="<?=URL::site('admin/help')?>"><i class="icon-question-sign"></i> Справка</a></li>
             </ul>
@@ -62,17 +62,17 @@
                 <li class="selected_listener"><span>Выбран слушатель:</span> <p>Петров Г.А.</p></li>
                 <li class="divider-vertical"></li>
                 <li style="position: relative">
-                    <a href="#" id="user_name"><span class="login"><i class="icon-bolt"></i> <?=$session->get('first_name').' '.$session->get('last_name')?></span><strong class="caret" style="margin-left: 5px;margin-top: 8px; border-top: 4px solid #ffffff;"></strong></a>
+                    <a href="#" id="user_name"><span class="login"><i class="icon-bolt"></i> <?=$session->get('first_name').'&nbsp;'.$session->get('last_name')?></span><strong class="caret" style="margin-left: 5px;margin-top: 8px; border-top: 4px solid #ffffff;"></strong></a>
                     <div id="popup" class="hide">
                         <div class="pull-left">
                             <img class="img-login" style="width: 95px; height: 95px" src="<?=$session->get('photo')?>"/>
                         </div>
                         <div class="pull-right" style="width: 170px">
-                            <span style="font-weight: bolder"">  <?=$session->get('first_name').' '.$session->get('last_name')?></span><br>
+                            <span style="font-weight: bolder"">  <?=$session->get('first_name').'&nbsp;'.$session->get('last_name')?></span><br>
                             <span class="muted"><?=$session->get('email')?></span><br>
                             Администратор
                             <div class="buttons">
-                                <a href="<?=URL::site('admin/settings')?>"><button class="btn">Настройки</button></a>
+                                <a href="<?=URL::site('admin/settings#administrators')?>"><button class="btn">Настройки</button></a>
                                 <a href="<?=URL::site('admin/auth/logout')?>"><button class="btn">Выйти</button></a>
                             </div>
                         </div>

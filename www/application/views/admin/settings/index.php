@@ -7,7 +7,7 @@
     <h1><small>Настройки</small></h1>
     <div class="tabbable">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#administrators" data-toggle="tab">Администраторы</a></li>
+            <li><a href="#administrators" data-toggle="tab">Администраторы</a></li>
             <li><a href="#upload" data-toggle="tab" >Загрузка файлов</a></li>
             <li><a href="#home" data-toggle="tab" id="act">Главная страница</a></li>
         </ul>

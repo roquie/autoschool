@@ -3,60 +3,45 @@
 abstract class Controller_Template extends Kohana_Controller_Template
 {
     public $_transactional = true;
-    /**
-     *
-     * @param array $arr
-     * @param null $msg
-     * @param null $status
-     * @internal param array $data
-     */
-    protected function ajax_data($arr = array(), $msg = null, $status = null)
-    {
-        $data = array();
-        if (is_null($status))
-            $data['status'] = 'success';
-        else
-            $data['status'] = $status;
-        if (is_null($msg))
-            $data['data'] = $arr;
-        elseif(is_array($msg)) {
-            $data['title'] = $msg[0];
-            $data['msg'] = $msg[1];
-            $data['data'] = $arr;
-        } else {
-            $data['msg'] = $msg;
-            $data['data'] = $arr;
-        }
 
-        echo json_encode($data);
-        exit;
+    /**
+     * отправляет json ответ с данными, кот. в массиве data
+     * example {"status":"success","data":{"asd":"111ss"},"msg":{"title":"lol","msg":"blya"},"csrf":"8muBJ04\/PrJ50kUtcXxcIYH\/dE5Q5lD1xpuPX\/Dgh4c="}
+     * @param array $data
+     * @param $message
+     * @param string $status
+     */
+    protected function ajax_data($data = array(), $message, $status = 'success')
+    {
+        $message = is_string($message) ? $message : array('title' => $message[0], 'msg' => $message[1]) ;
+
+        $response = array(
+            'status' => $status,
+            'data' => $data,
+            'msg' => $message,
+            'csrf' => Security::token(true)
+        );
+
+        echo json_encode($response);
     }
 
     /**
-     * нужен для вывода ответа для квери
-     *
-     * $this->ajax_msg("asdsd");
-     * $this->ajax_msg(array("title", "msg"), 'error');
-     *
-     * @param string $msg
-     * @param null $status
+     * отправляет json ответ: success/error
+     * example {"status":"success","msg":"aassad","csrf":"BwIPR8wQZRGSockslJjy9IfMmb4VKGhwyGJH3enUnrw="}
+     * @param $message
+     * @param string $status
      */
-    protected function ajax_msg($msg = '', $status = null)
+    protected function ajax_msg($message, $status = 'success')
     {
-        $data = array();
-        if (is_null($status))
-            $data['status'] = 'success';
-        else
-            $data['status'] = $status;
+        $message = is_string($message) ? $message : array('title' => $message[0], 'msg' => $message[1]) ;
 
-        if (is_array($msg)) {
-            $data['title'] = $msg[0];
-            $data['msg'] = $msg[1];
-        } else
-            $data['msg'] = $msg;
+        $response = array(
+            'status' => $status,
+            'msg' => $message,
+            'csrf' => Security::token(true)
+        );
 
-        echo json_encode($data);
-        exit;
+        echo json_encode($response);
     }
 
 }

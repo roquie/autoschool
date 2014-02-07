@@ -9,6 +9,8 @@ class Controller_Admin_Administrators extends Controller_Admin
     public function action_create_adm()
     {
         $post = $this->request->post('data');
+        if (empty($post['csrf']))
+            throw new HTTP_Exception_404();
 
         $valid = new Validation(trim($post['csrf']));
         $valid->rules('csrf', array(
@@ -66,6 +68,8 @@ class Controller_Admin_Administrators extends Controller_Admin
     public function action_delete()
     {
         $post = $this->request->post('data');
+        if (empty($post['csrf']))
+            throw new HTTP_Exception_404();
 
         $valid = new Validation(trim($post['csrf']));
         $valid->rules('csrf', array(

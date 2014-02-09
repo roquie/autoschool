@@ -3,6 +3,7 @@
 
 class Controller_Ajax_Admin extends Controller_Template
 {
+    public $template = 'admin/layout';
 
     public function before()
     {

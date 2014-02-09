@@ -75,7 +75,7 @@ class Controller_Func_Crud extends Controller_Admin
             }
             catch (Exception  $e)
             {
-                $this->ajax_msg('Ошибка Базы Данных', 'error');
+                $this->ajax_msg($e->getMessage(), 'error');
             }
         else
             try
@@ -89,7 +89,7 @@ class Controller_Func_Crud extends Controller_Admin
             }
             catch (Exception  $e)
             {
-                $this->ajax_msg('Ошибка Базы Данных', 'error');
+                $this->ajax_msg($e->getMessage(), 'error');
             }
     }
     /*
@@ -160,7 +160,7 @@ class Controller_Func_Crud extends Controller_Admin
         }
         catch (Exception  $e)
         {
-            $this->ajax_msg('Ошибка Базы Данных', 'error');
+            $this->ajax_msg($e->getMessage(), 'error');
         }
     }
 

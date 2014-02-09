@@ -57,7 +57,7 @@
                 <div class="well">
                     <h5 class="header_block">Добавить нового</h5>
 
-                    <form action="#" method="post" accept-charset="utf-8" novalidate>
+                    <form action="<?=URL::site('/admin/teachers/pdd')?>" method="post" accept-charset="utf-8" novalidate>
                         <div class="row">
                             <div class="span3">
                                 <label for="teacher_opmt">Профиль:</label>

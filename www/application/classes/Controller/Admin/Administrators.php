@@ -8,32 +8,26 @@ class Controller_Admin_Administrators extends Controller_Admin
      */
     public function action_create_adm()
     {
+        $this->auto_render = false;
         $post = $this->request->post('data');
-        if (empty($post['csrf']))
-            throw new HTTP_Exception_404();
 
-        $valid = new Validation(trim($post['csrf']));
-        $valid->rules('csrf', array(
-	          'not_empty'       => NULL,
-	          'Security::check' => NULL,
-        ));
-
-        if ($valid->check())
+        if (Request::initial()->is_ajax() && Security::is_token($post['csrf']))
+        {
             try
             {
 
                 $admin = ORM::factory('Administrators')
-                            ->values($post)
-                            ->save();
+                    ->values($post)
+                    ->save();
 
                 $message = View::factory('tmpmail/template',
                     array(
-                          'content' => View::factory('tmpmail/admin/add_adm',
-                           array(
+                        'content' => View::factory('tmpmail/admin/add_adm',
+                            array(
                                 'name' => 'МПТ Автошкола',
                                 'message' => 'Вас добавили в администраторы. Для входа используйте Google аккаунт. '.HTML::anchor(URL::site('/admin'), URL::site('/admin')),
-                           ))
-                 ));
+                            ))
+                    ));
 
                 try
                 {
@@ -60,28 +54,25 @@ class Controller_Admin_Administrators extends Controller_Admin
                 $errors = $e->errors('validation');
                 $this->ajax_msg(array_shift($errors), 'error');
             }
+        }
         else
-            $this->ajax_msg('csrf token error', 'error'); //throw new HTTP_Exception_404();
+        {
+           throw new HTTP_Exception_404();
+        }
 
     }
 
     public function action_delete()
     {
+        $this->auto_render = false;
         $post = $this->request->post('data');
-        if (empty($post['csrf']))
-            throw new HTTP_Exception_404();
 
-        $valid = new Validation(trim($post['csrf']));
-        $valid->rules('csrf', array(
-            'not_empty'       => null,
-            'Security::check' => null,
-        ));
-
-        if ($valid->check())
+        if (Request::initial()->is_ajax() && Security::is_token($post['csrf']))
+        {
             try
             {
                 $admin = ORM::factory('Administrators', $post['id'])
-                            ->delete();
+                    ->delete();
 
                 $this->ajax_data(
                     array(
@@ -94,8 +85,12 @@ class Controller_Admin_Administrators extends Controller_Admin
             {
                 $this->ajax_msg($e->getMessage(), 'error');
             }
+        }
         else
-            $this->ajax_msg('csrf token error', 'error'); //throw new HTTP_Exception_404();
+        {
+            throw new HTTP_Exception_404();
+        }
+
     }
 
 

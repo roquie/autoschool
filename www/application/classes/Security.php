@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-class Security extends Kohana_Security
+class Security extends Purifier_Security
 {
     /**
      * добавил свой метод, изза того что мне потом лень делать проверку isset($csrf)

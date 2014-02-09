@@ -41,7 +41,7 @@
             </ul>
 
             <div class="tab-pane" id="tab1">
-                <form style="margin-bottom: 50px" id="statement" action="<?=URL::site('admin/listeners/statement_gen')?>" method="post">
+                <form style="margin-bottom: 50px" id="statement" action="<?=Route::to('admin.ajax', 'listeners#statement_gen')?>" method="post">
                     <div class="row-fluid">
 
                         <div class="span6 pull-left">
@@ -154,7 +154,7 @@
             </div>
 
             <div class="tab-pane" id="tab2">
-                <form style="margin-bottom: 50px" id="contract" action="#" method="post">
+                <form style="margin-bottom: 50px" id="contract" action="<?=Route::to('admin.ajax', 'listeners#contract_gen')?>" method="post">
                     <div class="row-fluid">
                         <div class="span12">
 
@@ -202,7 +202,22 @@
                         <div class="clearfix"></div>
                         <div class="line"></div>
 
-                        <input type="button" class="btn btn-success span12 send" id="send" value="Отправить заявку" data-url="<?=URL::site('lk/ajax/addPapers')?>">
+                        <input type="hidden" name="csrf" value="<?=Security::token()?>"/>
+
+                        <!-- пока уродливо ... -->
+                        <div class="row pull-right">
+                            <div class="span5">
+                                <input type="submit" class="btn btn-success " name="ok" value="Сгенерировать"/>
+                            </div>
+                            <div class="span1">
+                                <p>или</p>
+                            </div>
+                            <div class="span6">
+                                <input type="button" class="btn btn-success" id="send" value="гг в бд все" data-url="<?=URL::site('lk/ajax/addPapers')?>">
+                            </div>
+                        </div>
+
+
                     </div>
                 </form>
             </div>

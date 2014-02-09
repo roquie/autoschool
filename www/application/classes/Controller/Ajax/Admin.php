@@ -1,9 +1,8 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 
-class Controller_Ajax_Admin extends Controller_Template
+class Controller_Ajax_Admin extends Controller
 {
-    public $template = 'admin/layout';
 
     public function before()
     {

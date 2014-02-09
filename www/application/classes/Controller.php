@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') OR die('No direct script access.');
 
-abstract class Controller_Template extends Kohana_Controller_Template
+abstract class Controller extends Kohana_Controller
 {
     public $_transactional = true;
 
@@ -43,5 +43,4 @@ abstract class Controller_Template extends Kohana_Controller_Template
 
         echo json_encode($response);
     }
-
 }

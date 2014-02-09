@@ -11,7 +11,7 @@ abstract class Controller extends Kohana_Controller
      * @param $message
      * @param string $status
      */
-    protected function ajax_data($data = array(), $message, $status = 'success')
+    protected function ajax_data($data = array(), $message = '', $status = 'success')
     {
         $message = is_string($message) ? $message : array('title' => $message[0], 'msg' => $message[1]) ;
 

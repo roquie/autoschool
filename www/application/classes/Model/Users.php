@@ -83,6 +83,18 @@ class Model_Users extends ORM
         return $this->_filter_user_list($users);
     }
 
+    public function by_group_id($group_id)
+    {
+        $result = ORM::factory('Users')
+                     ->where('group_id', '=', $group_id)
+                     ->find_all();
+
+        if ($result->count() === 0)
+            return false;
+        else
+            return $this->_filter_user_list($result);
+    }
+
     /**
      * вернет array(
     0 => 'Фамилия И.О.',

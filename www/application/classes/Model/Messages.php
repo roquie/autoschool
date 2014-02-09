@@ -29,8 +29,8 @@ class Model_Messages extends ORM
         return array(
             'message' => array(
                 array('not_empty'),
-                array('min_length', array(':value', 5)),
-                array('max_length', array(':value', 3000)),
+                array('min_length', array(':value', 3)),
+                array('max_length', array(':value', 130)),
             ),
             'is_read' => array(
                 array('digit'),

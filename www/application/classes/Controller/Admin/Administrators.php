@@ -8,67 +8,89 @@ class Controller_Admin_Administrators extends Controller_Admin
      */
     public function action_create_adm()
     {
-        try
-        {
-            $post = $this->request->post('data');
-            $admin = ORM::factory('Administrators')->values($post);
-            $admin->save();
+        $this->auto_render = false;
+        $post = $this->request->post('data');
 
-            $message = View::factory('tmpmail/template',
-                array(
-                      'content' => View::factory('tmpmail/admin/add_adm',
-                       array(
-                            'name' => 'МПТ Автошкола',
-                            'message' => 'Вас добавили в администраторы. '.URL::site('/admin'),
-                       ))
-             ));
+        if (Request::initial()->is_ajax() && Security::is_token($post['csrf']))
+        {
             try
             {
-                Email::factory('Автошкола МПТ', $message, 'text/html')
-                    ->to($post['email'])
-                    ->from('auto@mpt.ru', 'МПТ Автошкола')
-                    ->send();
+
+                $admin = ORM::factory('Administrators')
+                    ->values($post)
+                    ->save();
+
+                $message = View::factory('tmpmail/template',
+                    array(
+                        'content' => View::factory('tmpmail/admin/add_adm',
+                            array(
+                                'name' => 'МПТ Автошкола',
+                                'message' => 'Вас добавили в администраторы. Для входа используйте Google аккаунт. '.HTML::anchor(URL::site('/admin'), URL::site('/admin')),
+                            ))
+                    ));
+
+                try
+                {
+                    Email::factory('Автошкола МПТ', $message, 'text/html')
+                        ->to($post['email'])
+                        ->from('auto@mpt.ru', 'МПТ Автошкола')
+                        ->send();
+                }
+                catch(Swift_SwiftException $e)
+                {
+                    $this->ajax_msg($e->getMessage(), 'error');
+                }
+
+                $this->ajax_data(
+                    array(
+                        'id' => $admin->pk(),
+                        'email' => $this->request->post('data.email')
+                    ),
+                    'Администратор добавлен'
+                );
             }
-            catch(Swift_SwiftException $e)
+            catch (ORM_Validation_Exception  $e)
             {
-                $this->ajax_msg($e->getMessage(), 'error');
+                $errors = $e->errors('validation');
+                $this->ajax_msg(array_shift($errors), 'error');
             }
-
-
-            $this->ajax_data(
-                array(
-                    'id' => $admin->pk(),
-                    'email' => $this->request->post('data.email')
-                ),
-                'Администратор добавлен'
-            );
         }
-        catch (ORM_Validation_Exception  $e)
+        else
         {
-            $errors = $e->errors('validation');
-            $this->ajax_msg(array_shift($errors), 'error');
+           throw new HTTP_Exception_404();
         }
 
     }
 
     public function action_delete()
     {
-        $post = $this->request->param('id');
+        $this->auto_render = false;
+        $post = $this->request->post('data');
 
-        try
+        if (Request::initial()->is_ajax() && Security::is_token($post['csrf']))
         {
-            $admin = ORM::factory('Administrators', $post)->delete();
-            $this->ajax_data(
-                array(
-                    'id' => $admin->pk(),
-                ),
-                'Администратор удален'
-            );
+            try
+            {
+                $admin = ORM::factory('Administrators', $post['id'])
+                    ->delete();
+
+                $this->ajax_data(
+                    array(
+                        'id' => $admin->pk(),
+                    ),
+                    'Администратор удален'
+                );
+            }
+            catch (Exception  $e)
+            {
+                $this->ajax_msg($e->getMessage(), 'error');
+            }
         }
-        catch (Exception  $e)
+        else
         {
-            $this->ajax_msg('Ошибка БД: '.$e->getMessage(), 'error');
+            throw new HTTP_Exception_404();
         }
+
     }
 
 

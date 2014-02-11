@@ -1,3 +1,5 @@
+<?//=View::factory('main/blank/statement')->set('Nationality', $Nationality)->set('Educations', $Educations)?>
+
 <div class="container">
     <div class="row">
         <div class="span7">
@@ -12,30 +14,34 @@
             width: 399px !important;
         }
     </style>
-    <!--css-->
-    <?=HTML::style('css/main/datepicker.css')?>
-    <?=HTML::style('css/main/statement.css')?>
-    <!--js-->
-    <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
-    <?=HTML::script('js/general/put_doc.js')?>
-    <script>
-        $(function() {
-            $('#tabs a').click(function (e) {
-                e.preventDefault();
-                $(this).tab('show');
-            })
-        });
-    </script>
+    <div id="result">
+        <!--css-->
+        <?=HTML::style('css/vendor/stylizationForm.css')?>
+        <?=HTML::style('css/main/datepicker.css')?>
+        <?=HTML::style('css/main/statement.css')?>
+        <?=HTML::style('css/vendor/chosen.css')?>
+        <!--js-->
+        <?=HTML::script('js/vendor/chosen.jquery.min.js')?>
+        <?=HTML::script('js/vendor/jquery.maskedinput.min.js')?>
+        <?=HTML::script('js/main/statement.js')?>
+        <?=HTML::script('js/general/put_doc.js')?>
+        <script>
+            $(function() {
+                $('#tabs a').click(function (e) {
+                    e.preventDefault();
+                    $(this).tab('show');
+                })
+            });
+        </script>
+        <div class="well well-small form-block">
 
-    <div class="well well-small form-block">
+            <ul id="tabs" class="nav nav-tabs">
+                <li class="active"><a href="#tab1">Заявление</a></li>
+                <li><a href="#tab2">Договор</a></li>
+            </ul>
 
-        <ul id="tabs" class="nav nav-tabs">
-            <li class="active"><a href="#tab1">Заявление</a></li>
-            <li><a href="#tab2">Договор</a></li>
-        </ul>
-        <div class="tab-content">
-            <div class="tab-pane active" id="tab1">
-                <form style="margin-bottom: 50px" id="statement" action="#" method="post">
+            <div class="tab-pane" id="tab1">
+                <form style="margin-bottom: 50px" id="statement" action="<?=Route::to('admin.ajax', 'listeners#statement_gen')?>" method="post">
                     <div class="row-fluid">
 
                         <div class="span6 pull-left">
@@ -57,9 +63,10 @@
 
                             <label for="grajdanstvo">Гражданство</label>
                             <select id="grajdanstvo" name="statement[nationality_id]" style="width: 440px" data-req="true" tabindex="5">
-                                <?foreach ($Nationality as $value):?>
+                                <option>Ввести самому</option>
+                                <? foreach ($Nationality as $value): ?>
                                     <option value="<?=$value->id?>"><?=$value->grajdanstvo?></option>
-                                <?endforeach?>
+                                <? endforeach ?>
                             </select>
 
                             <label for="mesto_rojdeniya" style="margin-top: 12px">Место рождения</label>
@@ -126,11 +133,28 @@
                         </div>
 
                     </div>
+
+                    <input type="hidden" name="csrf" value="<?=Security::token()?>"/>
+
+                    <!-- пока уродливо ... -->
+                    <div class="row pull-right">
+                        <div class="span2">
+                            <input type="submit" class="btn btn-success " name="ok" value="Сгенерировать"/>
+                        </div>
+                        <div class="span1">
+                            <p>или</p>
+                        </div>
+                        <div class="span2">
+                            <button class="btn btn-info pull-right" id="next">Добавить в БД</button>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
 
             <div class="tab-pane" id="tab2">
-                <form style="margin-bottom: 50px" id="contract" action="#" method="post">
+                <form style="margin-bottom: 50px" id="contract" action="<?=Route::to('admin.ajax', 'listeners#contract_gen')?>" method="post">
                     <div class="row-fluid">
                         <div class="span12">
 
@@ -178,11 +202,26 @@
                         <div class="clearfix"></div>
                         <div class="line"></div>
 
-                        <input type="button" class="btn btn-success span12 send" id="send" value="Отправить заявку" data-url="<?=URL::site('lk/ajax/addPapers')?>">
+                        <input type="hidden" name="csrf" value="<?=Security::token()?>"/>
+
+                        <!-- пока уродливо ... -->
+                        <div class="row pull-right">
+                            <div class="span5">
+                                <input type="submit" class="btn btn-success " name="ok" value="Сгенерировать"/>
+                            </div>
+                            <div class="span1">
+                                <p>или</p>
+                            </div>
+                            <div class="span6">
+                                <input type="button" class="btn btn-success" id="send" value="гг в бд все" data-url="<?=URL::site('lk/ajax/addPapers')?>">
+                            </div>
+                        </div>
+
+
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
-
 </div>

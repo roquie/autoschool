@@ -20,6 +20,10 @@ class Controller_Admin_MainPage extends Controller_Admin
         );
     }
 
+    /**
+     *
+     * @DEPRICATED
+     */
     public function action_change_status()
     {
         $arr = explode('-', $this->request->param('id'));

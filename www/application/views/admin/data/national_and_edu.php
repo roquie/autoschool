@@ -15,6 +15,7 @@
                 <form  action="<?=URL::site('admin/national/create')?>" method="post" accept-charset="utf-8" novalidate>
                     <label for="national_add">Добавить</label>
                     <input id="national_add" type="text" name="data[grajdanstvo]"/>
+                    <input type="hidden" name="csrf" value="<?=Security::token()?>"/>
                     <input type="submit" style="margin-top: -10px" class="btn" value="OK"/>
                 </form>
                 <table class="table table-bordered">
@@ -46,6 +47,7 @@
                 <form action="<?=URL::site('admin/edu/create')?>" method="post" accept-charset="utf-8" novalidate>
                     <label for="national_add">Добавить</label>
                     <input id="national_add" type="text" name="data[obrazovanie]"/>
+                    <input type="hidden" name="csrf" value="<?=Security::token()?>"/>
                     <input type="submit" style="margin-top: -10px" class="btn" value="OK"/>
                 </form>
                 <table class="table table-bordered">

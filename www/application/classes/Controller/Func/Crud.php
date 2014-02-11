@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Func_Crud extends Controller_Admin
+class Controller_Func_Crud extends Controller_Ajax_Admin
 {
 
     public function before()
@@ -27,7 +27,6 @@ class Controller_Func_Crud extends Controller_Admin
     */
     public function action_create()
     {
-
         $post = $this->request->post();
         try
         {
@@ -75,7 +74,7 @@ class Controller_Func_Crud extends Controller_Admin
             }
             catch (Exception  $e)
             {
-                $this->ajax_msg('Ошибка Базы Данных', 'error');
+                $this->ajax_msg($e->getMessage(), 'error');
             }
         else
             try
@@ -89,7 +88,7 @@ class Controller_Func_Crud extends Controller_Admin
             }
             catch (Exception  $e)
             {
-                $this->ajax_msg('Ошибка Базы Данных', 'error');
+                $this->ajax_msg($e->getMessage(), 'error');
             }
     }
     /*
@@ -160,7 +159,7 @@ class Controller_Func_Crud extends Controller_Admin
         }
         catch (Exception  $e)
         {
-            $this->ajax_msg('Ошибка Базы Данных', 'error');
+            $this->ajax_msg($e->getMessage(), 'error');
         }
     }
 

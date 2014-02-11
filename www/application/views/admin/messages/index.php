@@ -1,4 +1,5 @@
 <?=HTML::style('css/admin/listeners.css')?>
+<?=HTML::style('css/admin/msg.css')?>
 
     <div class="container">
     <div class="row">

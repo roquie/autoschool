@@ -8,7 +8,8 @@
         <p>Вы действительно этого хотите?</p>
     </div>
     <div class="modal-footer">
-        <a href="#" class="btn btn-danger pull-left" data-dismiss="modal" aria-hidden="true">Удалить</a>
+        <a href="#" class="btn btn-danger pull-left _admins_link" data-callback="delete_nat_edu" data-params="csrf" id="delete" data-dismiss="modal" aria-hidden="true">Удалить</a>
+        <input type="hidden" name="csrf" value="<?=Security::token()?>" id="csrf" class="csrf"/>
         <a href="#" class="btn pull-left" data-dismiss="modal" aria-hidden="true">Отмена</a>
     </div>
 </div>

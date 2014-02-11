@@ -221,7 +221,8 @@
                 success : function(response, textStatus, jqXHR){
                     that.work = false;
                     if (that.options.debug) {
-                        console.log('Данные получены: ' + response);
+                        console.log('Данные получены: ');
+                        console.log(response);
                     }
                     // если callback не передан, то будет использован callback по-умолчанию
                     if (!that.options.functions[that.options.callback] && typeof that.options.functions[that.options.callback] != "function") {

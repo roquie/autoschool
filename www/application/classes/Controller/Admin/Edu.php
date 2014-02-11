@@ -11,11 +11,13 @@ class Controller_Admin_Edu extends Controller_Ajax_Admin
         {
             try
             {
-                ORM::factory('Educations')
+                $id = ORM::factory('Educations')
                     ->values($post)
-                    ->save();
+                    ->save()->pk();
 
-                $this->ajax_msg('Запись добавлена');
+                $this->ajax_data(array(
+                    'id' => $id
+                ), 'Запись добавлена');
             }
             catch (ORM_Validation_Exception  $e)
             {
@@ -58,16 +60,19 @@ class Controller_Admin_Edu extends Controller_Ajax_Admin
 
     public function action_delete()
     {
+        $id = $this->request->param('id');
         $post = $this->request->post('data');
 
         if (Security::is_token($post['csrf']))
         {
             try
             {
-                ORM::factory('Educations', $post['id'])
+                ORM::factory('Educations', $id)
                     ->delete();
 
-                $this->ajax_msg('Запись удалена');
+                $this->ajax_data(array(
+                    'id' => $id
+                ), 'Запись удалена');
             }
             catch (Exception  $e)
             {

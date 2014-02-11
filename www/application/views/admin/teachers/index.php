@@ -111,8 +111,8 @@
         </div>
 </div>
 
+<?=View::factory('admin/html/modal_t_delete')?>
 <?=View::factory('admin/teachers/html/modal_t_edit')?>
-<?=View::factory('admin/teachers/html/modal_t_delete')?>
 
 
 

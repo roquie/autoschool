@@ -16,7 +16,7 @@ class Model_Nationality extends ORM
         return array(
             'grajdanstvo' => array(
                 array('not_empty'),
-                array('alpha', array(':value', true)),
+                //array('alpha', array(':value', true)), - иначе нельзя вводить пробел и тире
                 array('min_length', array(':value', 2)),
                 array('max_length', array(':value', 50)),
             ),

@@ -16,7 +16,7 @@ class Model_Educations extends ORM
         return array(
             'obrazovanie' => array(
                 array('not_empty'),
-                array('alpha', array(':value', true)),
+                //array('alpha', array(':value', true)), - иначе нельзя вводить пробел и тире
                 array('min_length', array(':value', 2)),
                 array('max_length', array(':value', 50)),
             ),

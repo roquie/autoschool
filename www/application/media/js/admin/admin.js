@@ -35,6 +35,7 @@ $(function() {
             }
         },
         functions : {
+            // добавление администратора
             add_admin : function(response) {
                 if (response.status === 'error') {
                     noty({
@@ -65,6 +66,7 @@ $(function() {
                     });
                 }
             },
+            // удаление администратора
             del_admin : function(response, that) {
 
                 if (response.status === 'error') {
@@ -81,6 +83,7 @@ $(function() {
                     });
                 }
             },
+            // получение данных о слушателях
             get_user : function(response, that) {
                 $('.right-block').html(response.msg);
                 $('.listener').find('tbody').css('height', $('.block').css('height'));
@@ -90,6 +93,7 @@ $(function() {
                     alwaysVisible: true
                 });
             },
+            // изменения статуса слушателя подачи документов
             change_status : function(response, that) {
                 if (response.status === 'success') {
                     var listener = $('.listener'),
@@ -110,6 +114,7 @@ $(function() {
                     });
                 }
             },
+            // добавление учебной группы
             add_group : function(response) {
                 if (response.status === 'success') {
                     $('select#listeners option:selected').remove();
@@ -122,6 +127,7 @@ $(function() {
                     });
                 }
             },
+            // настройки SMTP
             smtp : function(response, that) {
                 var smtp = $('.smtp');
                 if (!that.isForm) {
@@ -143,18 +149,78 @@ $(function() {
                         message : response.msg
                     });
                 }
+            },
+            // добавление гражданства/образования
+            add_nat_edu : function(response, that) {
+                if (response.status === 'success') {
+                    var url  = (that.isForm) ? that.$element.attr('action') : that.options.url,
+                        regV = /national/gi,
+                        result = url.match(regV),
+                        row,
+                        template = '';
+                    if (result) {
+                        row = $('#national tbody tr').length + 1;
+                        template ='<tr id="'+response.data.id+'">' +
+                            '<td>'+row+'</td>' +
+                            '<td>'+$('#national_add').val()+'</td>' +
+                            '<td><a data-url="'+$('#national').data('url')+'/'+response.data.id+'" style="display: table; margin: 0 auto; width: 27px; height: 18px" href="#t_delete" data-toggle="modal" class="badge badge-important delete"><i class="icon-remove"></i></a></td>' +
+                        '</tr>';
+                        $('#national').append(template);
+                    } else {
+                        row = $('#edu tbody tr').length + 1;
+                            template ='<tr id="'+response.data.id+'">' +
+                                '<td>'+row+'</td>' +
+                                '<td>'+$('#edu_add').val()+'</td>' +
+                                '<td><a data-url="'+$('#edu').data('url')+'/'+response.data.id+'" style="display: table; margin: 0 auto; width: 27px; height: 18px" href="#t_delete" data-toggle="modal" class="badge badge-important delete"><i class="icon-remove"></i></a></td>' +
+                                '</tr>';
+                        $('#edu').append(template);
+                    }
+                    that.$element[0].reset();
+                }
+                if (response.status === 'error' || response.status === 'success') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                $('.csrf').val(response.csrf);
+            },
+            // удаление гражданства/образования
+            delete_nat_edu : function(response, that) {
+                if (response.status === 'success') {
+                    var url  = (that.isForm) ? that.$element.attr('action') : that.options.url,
+                        regV = /national/gi,
+                        result = url.match(regV);
+                    if (result) {
+                        $('#national').find('tr[id='+response.data.id+']').remove();
+                        $('#national tbody tr').each(function(k, v) {
+                            $(this).find('td').first().text(++k);
+                        });
+                    } else {
+                        $('#edu').find('tr[id='+response.data.id+']').remove();
+                        $('#edu tbody tr').each(function(k, v) {
+                            $(this).find('td').first().text(++k);
+                        });
+                    }
+                }
+                if (response.status === 'error' || response.status === 'success') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                $('.csrf').val(response.csrf);
             }
         },
         debug : true
     });
 
-    $('._admins_link').ajaxForm();
+    $('._admins_link').ajaxForm({
+        validate: false
+    });
 
     $('._admins_form').ajaxForm({
         form : true,
-        validate: false
-    });
-    $('._file_up').ajaxForm({
         validate: false
     });
 

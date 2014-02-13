@@ -2,6 +2,17 @@
 
 class Text extends Kohana_Text
 {
+    /**
+     * хэшируем, хэшируем ИБ гарантируем
+     * @param $pass
+     *
+     * @return string
+     */
+    public static function hash($pass)
+    {
+        return hash_hmac('gost', $pass, 'bugaga-vlomaite-menya-polnostiu=▲♠');
+    }
+
     public static function translit($str)
     {
         $tr = array(

@@ -532,7 +532,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         $newpass = Text::random();
 
 
-        if (Session::instance()->get('statement') && Session::instance()->get('contract')) {
+        if (Session::instance()->get('statement') && Session::instance()->get('contract'))
+        {
             $data = array(
                     'photo' =>  $user['photo_big'],
                     'email' =>  $user['email'],
@@ -542,10 +543,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             //$id = (int)Model::factory('Users')->addRec($data);
             //$data['status'] = 0;
 
-            try {
+            try
+            {
                 $id = ORM::factory('Users')
-                            ->values($data)
-                            ->create()->pk();
+                         ->values($data)
+                         ->create()
+                         ->pk();
 
 
                 $contract = Session::instance()->get('contract');
@@ -562,13 +565,16 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                             ->values($statement)
                             ->create();
 
-            } catch(ORM_Validation_Exception $e) {
+            }
+            catch(ORM_Validation_Exception $e)
+            {
                 $errors = $e->errors('validation');
                 $this->ajax_msg(array_shift($errors), 'error');
             }
 
-
-        } else {
+        }
+        else
+        {
             $this->ajax_msg('Непредвиденная ошибка', 'error');
             exit;
         }
@@ -612,10 +618,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      * @param $pass
      *
      * @return string
+     * @DEPRICATED
      */
     protected function hash($pass)
     {
-        return hash_hmac('gost', $pass, 'bugaga-vlomaite-menya-polnostiu=▲♠');
+        return Text::hash($pass);
     }
 
 

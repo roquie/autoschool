@@ -12,12 +12,14 @@ class Controller_Admin_National extends Controller_Ajax_Admin
             try
             {
                 $id = ORM::factory('Nationality')
-                   ->values($post)
-                   ->save()->pk();
+                         ->values($post)
+                         ->create()
+                         ->pk();
 
-                $this->ajax_data(array(
-                    'id' => $id
-                ), 'Запись добавлена');
+                $this->ajax_data(
+                    array('id' => $id),
+                    'Запись добавлена'
+                );
             }
             catch (ORM_Validation_Exception  $e)
             {

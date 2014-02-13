@@ -37,6 +37,9 @@
                         <li class="dropdown-submenu">
                             <a tabindex="-1" href="#">Пустые бланки</a>
                             <ul class="dropdown-menu">
+                                <li><a href="<?=URL::site('/download/index/other_files/Zaivlenie.doc')?>"> Заявление в АШ</a></li>
+                                <li><a href="<?=URL::site('/download/index/other_files/Dogovor.doc')?>"> Договор</a></li>
+                                <li><a href="<?=URL::site('/download/index/other_files/kvitanciya.doc')?>"> Квитанция</a></li>
                                 <li><a href="<?=URL::site('admin/blanks/driver_card')?>"> Водительская карточка</a></li>
                                 <li><a href="<?=URL::site('admin/blanks/statement_in_gibdd')?>"> Заявление в ГИБДД</a></li>
                                 <li><a href="<?=URL::site('admin/blanks/contract')?>"> Договор со слушателем</a></li>

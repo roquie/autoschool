@@ -321,7 +321,7 @@
                                             <div class="form-inline">
                                                 <label for="predatel">от</label>
                                                 <div class="input-append">
-                                                    <input id="end_driving" name="end_driving" type="text" style="width: 81px" placeholder="01.01.13">
+                                                    <input id="end_driving" name="end_driving" type="text" style="width: 80px" placeholder="01.01.13">
                                                     <span class="add-on"><i class="icon-calendar"></i></span>
                                                 </div>
                                             </div>

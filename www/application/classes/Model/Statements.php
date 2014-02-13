@@ -65,11 +65,11 @@ class Model_Statements extends ORM
                 array('max_length', array(':value', 50)),
             ),
             'data_rojdeniya' => array(
-                array('not_empty'),
+               // array('not_empty'),
                 array('date')
             ),
             'mesto_rojdeniya' => array(
-                array('not_empty'),
+               // array('not_empty'),
               //  array('alpha_numeric', array(':value', true)),
              //   array('alpha', array(':value', true)),
             ),
@@ -84,32 +84,32 @@ class Model_Statements extends ORM
                // array('alpha', array(':value', true)),
             ),
             'pasport_seriya' => array(
-                array('not_empty'),
+               // array('not_empty'),
                 array('alpha_numeric', array(':value', true)),
             ),
             'pasport_nomer' => array(
-                array('not_empty'),
+              //  array('not_empty'),
                 array('alpha_numeric', array(':value', true)),
             ),
             'pasport_data_vyda4i' => array(
-                array('not_empty'),
+               // array('not_empty'),
                 array('date')
             ),
             'pasport_kem_vydan' => array(
-                array('not_empty'),
+              //  array('not_empty'),
                // array('alpha_space', array(':value')),
             ),
             'mob_tel' => array(
-                array('not_empty'),
+              //  array('not_empty'),
             ),
             'dom_tel' => array(
             ),
             'mesto_raboty' => array(
-                array('not_empty'),
+              //  array('not_empty'),
              //   array('alpha', array(':value', true)),
             ),
             'about' => array(
-                array('not_empty'),
+               // array('not_empty'),
                 //array('alpha', array(':value', true)), - иначе пробелы и знаки препинания не работают.
             ),
             'nationality_id' => array(

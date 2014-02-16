@@ -23,6 +23,7 @@ abstract class Controller extends Kohana_Controller
         );
 
         echo json_encode($response);
+        exit;
     }
 
     /**
@@ -42,5 +43,6 @@ abstract class Controller extends Kohana_Controller
         );
 
         echo json_encode($response);
+        exit;
     }
 }

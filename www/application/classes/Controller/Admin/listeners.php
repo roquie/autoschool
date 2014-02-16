@@ -132,18 +132,90 @@ class Controller_Admin_Listeners extends Controller_Admin
 
     public function action_g_add()
     {
+        $csrf = $this->request->post('csrf');
+
+        if (Request::initial()->is_ajax() && Security::is_token($csrf))
+        {
+            $email = $this->request->post('data.email');
+            $statement = $this->request->post('data.statement');
+            $contract = $this->request->post('data.contract');
+
+            $newpass = Text::random();
+
+            $user_data = array(
+                'photo' =>  'img/photo.jpg',
+                'email' =>  $email,
+                'password' => Text::hash($newpass)
+            );
+
+            try
+            {
+                $id = ORM::factory('Users')
+                         ->values($user_data)
+                         ->create()
+                         ->pk();
+
+                $contract['user_id'] = $id;
+                $statement['user_id'] = $id;
+
+                ORM::factory('Contracts')
+                   ->values($contract)
+                   ->create();
+
+                ORM::factory('Statements')
+                   ->values($statement)
+                   ->create();
+
+            }
+            catch(ORM_Validation_Exception $e)
+            {
+                $errors = $e->errors('validation');
+                $this->ajax_msg(array_shift($errors), 'error');
+            }
+
+            $message =
+                View::factory('tmpmail/template',
+                    array(
+                          'content' => View::factory('tmpmail/lk/registr',
+                                  array(
+                                          'user' => Session::instance()->get('statement'),
+                                          'login' => $email,
+                                          'pass' => $newpass
+                                       ))
+                          )
+                );
+
+            try
+            {
+                Email::factory('Регистрация в Автошколе МПТ', $message, 'text/html')
+                     ->to($email)
+                     ->from('info@auto.mpt.ru', 'Автошкола')
+                     ->send();
+
+                $this->ajax_msg('Все четко');
+            }
+            catch(Swift_SwiftException $e)
+            {
+                $this->ajax_msg($e->getMessage(), 'error');
+            }
+        }
+
+        $Nationality = ORM::factory('Nationality')
+                          ->find_all();
+        $Educations  = ORM::factory('Educations')
+                          ->find_all();
+
         $this->template->content =
-            View::factory('admin/listeners/g_add', array(
-                'Nationality' => ORM::factory('Nationality')->find_all(),
-                'Educations' => ORM::factory('Educations')->find_all()
-            ));
+            View::factory('admin/listeners/g_add', compact('Nationality', 'Educations'));
     }
 
     public function action_distrib()
     {
+        $u = new Model_Users();
+        $audience = $u->get_user_list(true);
+
         $this->template->content =
-            View::factory('admin/listeners/distrib')
-                ->set('audience', Model::factory('Users')->get_user_list(true));
+            View::factory('admin/listeners/distrib', compact('audience'));
     }
 
 }

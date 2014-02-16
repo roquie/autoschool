@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 
-class Controller_Ajax_Admin extends Controller_Ajax_Ajax
+class Controller_Ajax_Admin extends Controller
 {
     protected $_table_name = array();
 

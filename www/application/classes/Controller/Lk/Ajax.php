@@ -210,13 +210,26 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         if (isset($data['statement'])) {
 
-            try {
+            try
+            {
                 ORM::factory('Statements')->values($data['statement'])->check();
-                ORM::factory('Contracts')->values($data['contract'])->check();
-            } catch(ORM_Validation_Exception $e) {
-                $errors = $e->errors('validation');
-                $this->ajax_msg(array_shift($errors), 'error');
             }
+            catch(ORM_Validation_Exception $e)
+            {
+                $errors = $e->errors('validation');
+                $this->ajax_msg('Заявление: '.array_shift($errors), 'error');
+            }
+
+            try
+            {
+                ORM::factory('Contracts')->values($data['contract'])->check();
+            }
+            catch(ORM_Validation_Exception $e)
+            {
+                $errors = $e->errors('validation');
+                $this->ajax_msg('Договор: '.array_shift($errors), 'error');
+            }
+
 
             // Если 18 лет и не указано, что заказчиком будет родитель, то заказчик сам слушатель, иначе родитель или опекун
             if ($this->getAge($data['statement']['data_rojdeniya']) < 18 && !isset($data['contract']['parent'])) {

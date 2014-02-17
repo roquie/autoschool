@@ -180,39 +180,16 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_addPapers()
     {
+        $s = Session::instance();
+        $post = $this->request->post('data');
 
-        // поля необязательные для заполнения
-        $no_required = array('ot4estvo', 'dom_tel');
-
-        $data = array();
-
-        foreach ($_POST as $key => $value)
-            foreach ($value as $k => $v)
-                $data[$key][$k] = Security::xss_clean($v);
-
-        $error = array();
-        foreach ($data as $key => $value)
-            foreach ($value as $k => $v)
-            {
-                if (empty($v) && $key != 'contract') {
-                    if (!isset($data['statement']['toggleReg']) && $k === 'vrem_reg' || in_array($k, $no_required))
-                        continue;
-                    $error[$key][] = $k;
-                }
-            }
-
-        if (!empty($error))
+        if (Security::is_token($this->request->post('csrf')))
         {
-            $this->ajax_data($error, null, 'empty');
-            exit;
-        }
-
-
-        if (isset($data['statement'])) {
-
             try
             {
-                ORM::factory('Statements')->values($data['statement'])->check();
+                ORM::factory('Statements')
+                    ->values($post['statement'])
+                    ->check();
             }
             catch(ORM_Validation_Exception $e)
             {
@@ -222,7 +199,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
             try
             {
-                ORM::factory('Contracts')->values($data['contract'])->check();
+                ORM::factory('Contracts')
+                    ->values($post['contract'])
+                    ->check();
             }
             catch(ORM_Validation_Exception $e)
             {
@@ -232,21 +211,25 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
 
             // Если 18 лет и не указано, что заказчиком будет родитель, то заказчик сам слушатель, иначе родитель или опекун
-            if ($this->getAge($data['statement']['data_rojdeniya']) < 18 && !isset($data['contract']['parent'])) {
-                $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет.', 'error');
+            if ($this->getAge($post['statement']['data_rojdeniya']) < 18 && !isset($data['contract']['parent']))
+            {
+                $this->ajax_msg('Вы не можете являться заказчиком, вам нет 18 лет', 'error');
                 exit;
             }
 
-            Session::instance()->set('statement', $data['statement']);
-            Session::instance()->set('contract', $data['contract']);
+            $s->set('statement', $post['statement'])
+              ->set('contract', $post['contract']);
 
-            $this->ajax_msg(
+            $this->ajax_data(
                 View::factory('main/blank/result', array(
                     'age' => $this->getAge($data['statement']['data_rojdeniya'])
-               ))->render()
+                ))->render()
             );
         }
-
+        else
+        {
+          throw new HTTP_Exception_404();
+        }
 
     }
 
@@ -521,107 +504,103 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_register()
     {
-        $is_email = Arr::get($_POST, 'your_email');
-        if (!isset($is_email))
-            $user = json_decode($this->request->post('data'), true);
-        else {
-            $user['email'] = Arr::get($_POST, 'email');
+        $s = Session::instance();
+        $post = $this->request->post();
 
-            if (!Valid::email($user['email'], true)) {
-                $this->ajax_msg('Неверный email адрес', 'error');
+        if (Security::is_token($post['csrf']))
+        {
+            if (empty($user['photo_big']) || $user['photo_big'] === 'https://ulogin.ru/img/photo_big.png')
+                $user['photo_big'] = 'img/photo.jpg';
+
+            if (!array_key_exists('photo_big', $user) && !array_key_exists('email', $user)) {
+                $this->ajax_msg('Непредвиденная ошибка', 'error'); // нет фотки или мыла в ответе
                 exit;
             }
-        }
 
-        if (empty($user['photo_big']) || $user['photo_big'] === 'https://ulogin.ru/img/photo_big.png')
-            $user['photo_big'] = 'img/photo.jpg';
-
-        if (!array_key_exists('photo_big', $user) && !array_key_exists('email', $user)) {
-            $this->ajax_msg('Непредвиденная ошибка', 'error'); // нет фотки или мыла в ответе
-            exit;
-        }
+            $newpass = Text::random();
 
 
-        $newpass = Text::random();
-
-
-        if (Session::instance()->get('statement') && Session::instance()->get('contract'))
-        {
-            $data = array(
+            if ($s->get('statement') && $s->get('contract'))
+            {
+                $data = array(
                     'photo' =>  $user['photo_big'],
                     'email' =>  $user['email'],
                     'password' => $this->hash($newpass)
-            );
+                );
 
-            //$id = (int)Model::factory('Users')->addRec($data);
-            //$data['status'] = 0;
-
-            try
-            {
-                $id = ORM::factory('Users')
-                         ->values($data)
-                         ->create()
-                         ->pk();
+                try
+                {
+                    $id = ORM::factory('Users')
+                        ->values($data)
+                        ->create()
+                        ->pk();
 
 
-                $contract = Session::instance()->get('contract');
-                $contract['user_id'] = $id;
+                    $contract = $s->get('contract');
+                    $contract['user_id'] = $id;
 
-                $statement = Session::instance()->get('statement');
-                $statement['user_id'] = $id;
+                    $statement = $s->get('statement');
+                    $statement['user_id'] = $id;
 
-                ORM::factory('Contracts')
-                            ->values($contract)
-                            ->create();
+                    ORM::factory('Contracts')
+                        ->values($contract)
+                        ->create();
 
-                ORM::factory('Statements')
-                            ->values($statement)
-                            ->create();
+                    ORM::factory('Statements')
+                        ->values($statement)
+                        ->create();
+
+                }
+                catch(ORM_Validation_Exception $e)
+                {
+                    $errors = $e->errors('validation');
+                    $this->ajax_msg(array_shift($errors), 'error');
+                }
 
             }
-            catch(ORM_Validation_Exception $e)
+            else
             {
-                $errors = $e->errors('validation');
-                $this->ajax_msg(array_shift($errors), 'error');
+                throw new HTTP_Exception_404();
             }
 
-        }
-        else
-        {
-            $this->ajax_msg('Непредвиденная ошибка', 'error');
-            exit;
-        }
-
-        $message = View::factory('tmpmail/template', array(
-            'content' => View::factory('tmpmail/lk/registr', array(
+            $message = View::factory('tmpmail/template', array(
+                'content' => View::factory('tmpmail/lk/registr', array(
                     'user' => Session::instance()->get('statement'),
                     'login' => $user['email'],
                     'pass' => $newpass
                 ))
-        ));
+            ));
 
-        $mail = Email::factory('Регистрация в Автошколе МПТ', $message, 'text/html')
-            ->to($user['email'])
-            ->from('info@auto.mpt.ru', 'Автошкола');
-        $mail->send();
+            try
+            {
+                Email::factory('Регистрация в Автошколе МПТ', $message, 'text/html')
+                    ->to($user['email'])
+                    ->from('info@auto.mpt.ru', 'Автошкола')
+                    ->send();
+            }
+            catch(Swift_SwiftException $e)
+            {
+                $this->ajax_msg($e->getMessage(), 'error');
+            }
 
-        Cookie::$expiration = 0;
-        Cookie::set('userId', $id);
-        Cookie::set('userEmail', $user['email']);
-        Cookie::set('userPhoto', $user['photo_big']);
-        Cookie::set('group_id', 0);
+            Cookie::$expiration = 0;
+            Cookie::set('userId', $id);
+            Cookie::set('userEmail', $user['email']);
+            Cookie::set('userPhoto', $user['photo_big']);
+            Cookie::set('group_id', 0);
 
-        if ($mail) {
-            Session::instance()->delete('statement');
-            Session::instance()->delete('contract');
-            Session::instance()->set('after_register', 'yes');
+            $s->delete('statement')
+                ->delete('contract')
+                ->set('after_register', 'yes');
+
             $this->ajax_data(array(
-                'redirect' => URL::site('lk')
+                'redirect' => URL::site('/lk')
             ));
         }
         else
-            $this->ajax_msg('Непредвиденная ошибка', 'error');
-
+        {
+            throw new HTTP_Exception_404();
+        }
     }
 
 

@@ -31,3 +31,61 @@ h5.header_block {
 .btn_actions {
   margin-top: 20px
 }
+
+/*
+ Стили для добавленных текстов до/после поля
+*/
+.input-append.input-block-level,
+.input-prepend.input-block-level {
+  width: 100%;
+  display: table;
+}
+.input-append.input-block-level .add-on,
+.input-prepend.input-block-level .add-on {
+  display: table-cell;
+  padding: 4px;
+  background-color: #e8e8e8;
+}
+.input-append.input-block-level .add-on:hover,
+.input-prepend.input-block-level .add-on:hover {
+  background-color: #dddddd;
+}
+.input-append.input-block-level > input {
+  border-right: 0;
+}
+.input-prepend.input-block-level > input {
+  border-left: 0;
+}
+.input-append .add-on:first-child,
+.input-prepend .btn:first-child,
+.input-prepend .add-on:first-child {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+.input-append .add-on:last-child,
+.input-prepend .btn:last-child,
+.input-prepend .add-on:last-child {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+/*
+  кнопка подать документы
+*/
+.btn {
+  background-image: none;
+  text-shadow: none;
+  font-size: 11pt;
+  line-height: none;
+  font-weight: 400;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.btn-docum {
+  margin-top: 6px;
+  line-height: 25px;
+  margin-left: 90px;
+}

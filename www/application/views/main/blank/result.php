@@ -1,5 +1,5 @@
 <h2 class="info">
-    Обработка завершена. Скачайте и распечатайте документы. После этого прочтите их, поставьте подписи в нужных местах и отнесите их к нам в Автошколу<br>
+    Обработка завершена. Осталось только выполнить действия указанные ниже и вы сможете полноценно пользоваться данной системой.<br>
     <? if ($age < 18) : ?>
         Т.к. вы ещё не достигли совершеннолетия, вы не сможете сдавать экзамен в ГИБДД.
     <? endif; ?>
@@ -60,19 +60,13 @@
                     message : 'Заполните поле e-mail'
                 });
             } else {
+                data += '&csrf='+$('.csrf').val();
                 $.post(
                     action,
                     data,
                     function(res) {
                         if (res.status === 'success') {
                             window.location.href = res.data.redirect;
-/*                            noty({
-                                type : res.status,
-                                message : res.msg
-                            });
-                            setTimeout(function () {
-                                window.location.href = res.data.redirect;
-                            }, 2000);*/
                         }
                         if (res.status === 'error') {
                             console.log(res);

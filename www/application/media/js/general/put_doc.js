@@ -100,4 +100,61 @@ $(function() {
         $('#about').find('option').last().attr('value', $(this).val()).prop('selected');
     });
 
+/*    *//**
+     * Отправка заявки
+     *//*
+    $('#send').on('click', function(e) {
+        e.preventDefault();
+        var statement = {},
+            contract = {},
+            action,
+            field,
+            phone = $('#telephone_d');
+        if (phone.val() === phone.attr('placeholder')) {
+            phone.val('');
+        }
+        $.each($('#statement').serializeArray(), function(k, v) {
+            statement[v.name] = v.value;
+        });
+        $.each($('#contract').serializeArray(), function(k, v) {
+            contract[v.name] = v.value;
+        });
+
+        $.extend(true, statement, contract);
+
+        action = $(this).data('url');
+        $.post(
+            action,
+            statement,
+            function(response) {
+                if (response.status === 'success') {
+                    $('#result').html(response.msg);
+                }
+                if (response.status === 'error') {
+                    noty({
+                        type : response.status,
+                        message : response.msg
+                    });
+                }
+                if (response.status === 'empty') {
+                    var tab, nav, $link;
+                    $.each(response.data, function (key, value) {
+                        $.each(value, function(k, v) {
+                            field = $('input[name="' + key + '[' + v + ']"], textarea[name="' + v + '"]');
+                            field.addClass('error');
+                        });
+                        tab = $('#'+key).closest('.tab-pane');
+                        nav = tab.attr('id');
+                        $link = $('#tabs').find('a[href^=#'+nav+']');
+                        $link.next('.error').remove();
+                        $('<span>', {
+                            class : 'error'
+                        }).insertAfter($link);
+                    });
+                }
+            },
+            'json'
+        );
+    });*/
+
 });

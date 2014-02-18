@@ -77,12 +77,15 @@ $(function() {
         $.extend(true, statement, contract);
 
         action = $(this).data('url');
+
+        statement['csrf'] = $('.csrf').val();
+
         $.post(
             action,
             statement,
             function(response) {
                 if (response.status === 'success') {
-                    $('#result').html(response.msg);
+                    $('#result').html(response.data);
                 }
                 if (response.status === 'error') {
                     noty({
@@ -90,22 +93,7 @@ $(function() {
                         message : response.msg
                     });
                 }
-                if (response.status === 'empty') {
-                    var tab, nav, $link;
-                    $.each(response.data, function (key, value) {
-                        $.each(value, function(k, v) {
-                            field = $('input[name="' + key + '[' + v + ']"], textarea[name="' + v + '"]');
-                            field.addClass('error');
-                        });
-                        tab = $('#'+key).closest('.tab-pane');
-                        nav = tab.attr('id');
-                        $link = $('#tabs').find('a[href^=#'+nav+']');
-                        $link.next('.error').remove();
-                        $('<span>', {
-                            class : 'error'
-                        }).insertAfter($link);
-                    });
-                }
+                $('.csrf').val(response.csrf);
             },
             'json'
         );

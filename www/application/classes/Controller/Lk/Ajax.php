@@ -180,10 +180,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_addPapers()
     {
-        $s = Session::instance();
-        $post = $this->request->post('data');
 
-        if (Security::is_token($this->request->post('csrf')))
+        $s = Session::instance();
+        $post = $this->request->post();
+
+        if (Security::is_token($post['csrf']))
         {
             try
             {
@@ -222,7 +223,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
             $this->ajax_data(
                 View::factory('main/blank/result', array(
-                    'age' => $this->getAge($data['statement']['data_rojdeniya'])
+                    'age' => $this->getAge($post['statement']['data_rojdeniya'])
                 ))->render()
             );
         }
@@ -509,6 +510,18 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         if (Security::is_token($post['csrf']))
         {
+            $is_email = Arr::get($_POST, 'your_email');
+            if (!isset($is_email))
+                $user = json_decode($this->request->post('data'), true);
+            else {
+                $user['email'] = Arr::get($_POST, 'email');
+
+                if (!Valid::email($user['email'], true)) {
+                    $this->ajax_msg('Неверный email адрес', 'error');
+                    exit;
+                }
+            }
+
             if (empty($user['photo_big']) || $user['photo_big'] === 'https://ulogin.ru/img/photo_big.png')
                 $user['photo_big'] = 'img/photo.jpg';
 

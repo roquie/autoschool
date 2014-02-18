@@ -170,6 +170,9 @@
 
                         <input type="button" class="btn btn-success span12 send" id="send" value="Отправить заявку" data-url="<?=URL::site('lk/ajax/addPapers')?>">
                     </div>
+
+                    <input type="hidden" name="csrf" class="csrf" value="<?=Security::token()?>"/>
+
                 </form>
             </div>
 

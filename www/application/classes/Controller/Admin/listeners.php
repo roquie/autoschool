@@ -18,7 +18,10 @@ class Controller_Admin_Listeners extends Controller_Admin
         $nationality = '';
         $education = '';
 
-        if (Request::initial()->is_ajax() && Security::is_token($post['csrf']))
+        /**
+         * запрос идёт на аяксом, там же просто нажатие на кнопку и ты отдаёшь док, всё.
+         */
+        if (/*Request::initial()->is_ajax() && */Security::is_token($post['csrf']))
         {
             if (isset($statement['nationality_id']))
             {
@@ -93,7 +96,7 @@ class Controller_Admin_Listeners extends Controller_Admin
                if (!isset($statement[$key]))
                    $statement[$key] = '';
 
-        if (Request::initial()->is_ajax() && Security::is_token($post['csrf']))
+        if (/*Request::initial()->is_ajax() && */Security::is_token($post['csrf']))
         {
             $obj = new TemplateDocx(APPPATH.'templates/contract/dogovor.docx');
 
@@ -132,13 +135,14 @@ class Controller_Admin_Listeners extends Controller_Admin
 
     public function action_g_add()
     {
+
         $csrf = $this->request->post('csrf');
 
         if (Request::initial()->is_ajax() && Security::is_token($csrf))
         {
-            $email = $this->request->post('data.email');
-            $statement = $this->request->post('data.statement');
-            $contract = $this->request->post('data.contract');
+            $email = $this->request->post('email');
+            $statement = $this->request->post('statement');
+            $contract = $this->request->post('contract');
 
             $newpass = Text::random();
 
@@ -178,7 +182,7 @@ class Controller_Admin_Listeners extends Controller_Admin
                     array(
                           'content' => View::factory('tmpmail/lk/registr',
                                   array(
-                                          'user' => Session::instance()->get('statement'),
+                                          'user' => $statement,
                                           'login' => $email,
                                           'pass' => $newpass
                                        ))
@@ -192,21 +196,21 @@ class Controller_Admin_Listeners extends Controller_Admin
                      ->from('info@auto.mpt.ru', 'Автошкола')
                      ->send();
 
-                $this->ajax_msg('Все четко');
+                $this->ajax_msg('Слушатель зарегистрирован и добавлен в базу данных. Данные для входа отправлены на указанную почту.');
             }
             catch(Swift_SwiftException $e)
             {
                 $this->ajax_msg($e->getMessage(), 'error');
             }
+        } else {
+            $Nationality = ORM::factory('Nationality')
+                ->find_all();
+            $Educations  = ORM::factory('Educations')
+                ->find_all();
+
+            $this->template->content =
+                View::factory('admin/listeners/g_add', compact('Nationality', 'Educations'));
         }
-
-        $Nationality = ORM::factory('Nationality')
-                          ->find_all();
-        $Educations  = ORM::factory('Educations')
-                          ->find_all();
-
-        $this->template->content =
-            View::factory('admin/listeners/g_add', compact('Nationality', 'Educations'));
     }
 
     public function action_distrib()

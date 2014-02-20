@@ -22,10 +22,10 @@
                 </script>
                 <h5 class="header_block">Настройки SMTP</h5>
                 <div style="margin-left: 20px; margin-bottom: 10px">
-                <div class="check <?=(!empty($smtp)) ? 'active _ch_off_smtp ' : null?>smtp" data-url="<?=Route::url('admin.ajax', array('controller' => 'settings', 'action' => 'off_smtp'))?>" data-callback="smtp">
-                    Использовать SMTP
-                    <input type="checkbox" name="smtp" <?=(!empty($smtp)) ? 'checked' : null?>/>
-                </div>
+                    <div class="check <?=(!empty($smtp)) ? 'active _ch_off_smtp ' : null?>smtp" data-url="<?=Route::url('admin.ajax', array('controller' => 'settings', 'action' => 'off_smtp'))?>" data-callback="smtp" data-params="csrf">
+                        Использовать SMTP
+                        <input type="checkbox" name="smtp" <?=(!empty($smtp)) ? 'checked' : null?>/>
+                    </div>
                 </div>
                 <form class="_ch_data_smtp" style="margin-left: 20px"  action="<?=Route::url('admin.ajax', array('controller' => 'settings', 'action' => 'smtp'))?>" method="post" data-callback="smtp">
                     <label for="server">Сервер:</label>
@@ -37,6 +37,7 @@
                     <label for="password">Пароль:</label>
                     <input name="password" id="password" type="password" placeholder="Пароль" value="<?=isset($smtp['password'])?'*************':null?>" <?=(empty($smtp)) ? 'disabled' : null?>><br>
                     <input type="submit" class="btn btn-info pull-right" value="Готово" style="margin-right: 20px" <?=(empty($smtp)) ? 'disabled' : null?>>
+                    <input type="hidden" name="csrf" value="<?=Security::token()?>" class="csrf"/>
                 </form>
             </div>
 

@@ -36,7 +36,7 @@ $(function() {
         },
         functions : {
             // добавление администратора
-            add_admin : function(response) {
+            add_admin : function(response, that) {
                 if (response.status === 'error') {
                     noty({
                         type : response.status,
@@ -57,14 +57,16 @@ $(function() {
                             text : date('Y-m-d H:i:s', new Date())
                         }),
                         del = $('<td>', {
-                            html : '<a data-callback="del_admin" class="_admins_link" data-url="'+url+'" href="#"><i class="icon-trash icon-large"></i></a>'
+                            html : '<a data-callback="del_admin" class="_admins_link" data-url="'+url+'" href="#" data-params="csrf"><i class="icon-trash icon-large"></i></a>'
                         });
-                    tr.append(sharp, Email, dateTime, del).prependTo('tbody', '#table_admins');
+                    tr.append(sharp, Email, dateTime, del).prependTo('#table_admins tbody');
                     noty({
                         type : response.status,
                         message : response.msg
                     });
+                    that.$element[0].reset();
                 }
+                $('.csrf').val(response.csrf);
             },
             // удаление администратора
             del_admin : function(response, that) {
@@ -82,6 +84,7 @@ $(function() {
                         message : response.msg
                     });
                 }
+                $('.csrf').val(response.csrf);
             },
             // получение данных о слушателях
             get_user : function(response, that) {
@@ -149,6 +152,7 @@ $(function() {
                         message : response.msg
                     });
                 }
+                $('.csrf').val(response.csrf);
             },
             // добавление гражданства/образования
             add_nat_edu : function(response, that) {

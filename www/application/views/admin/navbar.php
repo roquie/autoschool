@@ -70,7 +70,7 @@
                         <div class="pull-left">
                             <img class="img-login" style="width: 95px; height: 95px" src="<?=$session->get('photo')?>"/>
                         </div>
-                        <div class="pull-right" style="width: 170px">
+                        <div class="pull-right" style="width: 180px">
                             <span style="font-weight: bolder"">  <?=$session->get('first_name').'&nbsp;'.$session->get('last_name')?></span><br>
                             <span class="muted"><?=$session->get('email')?></span><br>
                             Администратор

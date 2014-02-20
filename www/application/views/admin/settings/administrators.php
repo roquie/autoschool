@@ -11,6 +11,7 @@
                 <legend>Новый администратор</legend>
                 <label>Введите E-mail</label>
                 <input name="email" type="email" class="placeholder" placeholder="example@gmail.com" id="email">
+                <input type="hidden" name="csrf" value="<?=Security::token()?>" class="csrf" id="csrf"/>
                 <input type="submit" class="btn btn-success" value="Добавить">
             </form>
 
@@ -50,7 +51,7 @@
                             <?=$admins->datetime?>
                         </td>
                         <td>
-                            <a data-callback="del_admin" class="_admins_link" data-url="<?=URL::site('admin/administrators/delete/'.$admins->id)?>" href="#"><i class="icon-trash icon-large"></i></a>
+                            <a data-callback="del_admin" class="_admins_link" data-url="<?=URL::site('admin/administrators/delete/'.$admins->id)?>" href="#" data-params="csrf"><i class="icon-trash icon-large"></i></a>
                         </td>
                     </tr>
                 <?endforeach?>

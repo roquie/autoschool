@@ -103,24 +103,6 @@
         </style>
         <div class="well" style="height: 300px;">
             <legend>Загрузить</legend>
-            <p>Тут текст о том, что надо нажать сначала на тип файла слева, а потом его загрузить</p>
-            <!--class="_file_up"-->   <!-- <form  action="<?/*=Route::url('admin.ajax', array('controller'=>'settings', 'action' =>'upload'))*/?>" method="post" enctype="multipart/form-data">
-                <div class="fileupload fileupload-new" data-provides="fileupload">
-                    <div class="input-append">
-                        <div style="width: 170px" class="uneditable-input"><i class="icon-file fileupload-exists"></i>
-                            <span class="fileupload-preview"></span>
-                        </div>
-                        <span class="btn btn-file">
-                            <span class="fileupload-new"><i class="icon-upload-alt"></i></span>
-                            <span class="fileupload-exists"><i class="icon-pencil"></i></span>
-                            <input type="file" name="files"/>
-                        </span>
-                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload"><i class="icon-trash"></i></a>
-                    </div>
-                </div>
-                <input type="hidden" id="type_file" name="type_file"/>
-                <input type="submit" id="submit" class="btn btn-success" value="Отправить"/>
-            </form>-->
             <div class="b-button js-fileapi-wrapper" style="margin-bottom: 10px; margin-left: 60px">
                 <div class="browse">
                     <a class="b-button__text btn btn-success" href="#" data-url="<?=Route::url('admin.ajax', array('controller'=>'settings', 'action' =>'upload'))?>">Загрузить файл</a>
@@ -171,7 +153,8 @@
                                         file: file
                                     },
                                     data : {
-                                        type_file : $('#type_file').val()
+                                        type_file : $('#type_file').val(),
+                                        csrf : $('.csrf').val()
                                     },
                                     upload: function () {
                                         $('.browse').hide();
@@ -189,6 +172,7 @@
                                                 message : res.msg
                                             });
                                         }
+                                        $('.csrf').val(res.csrf);
                                         $('.browse').show();
                                         $('.js-upload').hide();
                                         FU.index++;
@@ -213,7 +197,6 @@
                             else {
                                 FU.add(file, obj.data('url'));
                                 FU.start();
-                                alert(FU.url);
                             }
                         });
                     }

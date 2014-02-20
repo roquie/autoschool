@@ -59,7 +59,7 @@
                                 <option>Шуверов В.В.</option>
                             </select>
                         </div>
-                        <div class="span2 pull-right ok">
+                        <div class="pull-right ok">
 
                             <input type="hidden" name="csrf" value="<?=Security::token()?>"/>
                             <input type="submit" class="btn" rel="tooltip" title="Применить фильтр" value="OK"/>

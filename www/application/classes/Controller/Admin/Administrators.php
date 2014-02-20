@@ -65,13 +65,15 @@ class Controller_Admin_Administrators extends Controller_Admin
     public function action_delete()
     {
         $this->auto_render = false;
-        $post = $this->request->post('data');
+        $csrf = $this->request->post('data.csrf');
 
-        if (Request::initial()->is_ajax() && Security::is_token($post['csrf']))
+        $id = $this->request->param('id');
+
+        if (Security::is_token($csrf))
         {
             try
             {
-                $admin = ORM::factory('Administrators', $post['id'])
+                $admin = ORM::factory('Administrators', $id)
                     ->delete();
 
                 $this->ajax_data(

@@ -17,12 +17,10 @@
                 <h5 class="header_block">Номер группы</h5>
                 <label for="">Выберите:</label>
                 <select name="select2">
-                    <option selected="selected">Все ...</option>
-                    <option>01-13</option>
-                    <option>02-13</option>
-                    <option>03-13</option>
-                    <option>04-13</option>
-                    <option>05-13</option>
+                    <option value="0" selected="selected">Все ...</option>
+                    <?foreach($list_groups as $item):?>
+                        <option value="<?=$item->id?>"><?=$item->name?></option>
+                    <?endforeach?>
                 </select>
             </div>
         </div>
@@ -41,12 +39,10 @@
                         <div class="span2">
                             <label for="">Группа №:</label>
                             <select name="group_num">
-                                <option selected="selected"> --- </option>
-                                <option>01-13</option>
-                                <option>02-13</option>
-                                <option>03-13</option>
-                                <option>04-13</option>
-                                <option>05-13</option>
+                                <option value="0" selected="selected"> --- </option>
+                                <?foreach($list_groups as $item):?>
+                                    <option value="<?=$item->id?>"><?=$item->name?></option>
+                                <?endforeach?>
                             </select>
                         </div>
                         <div class="span2">
@@ -78,10 +74,10 @@
             <div class="well">
                 <h5 class="header_block">Фамилия И.О.</h5>
                 <div class="wrap">
-                    <?for($i=1;$i<=99;++$i):?>
+                    <?foreach($list_users as $item):?>
                         <!-- http://stackoverflow.com/questions/9709209/html-select-only-one-checkbox-in-a-group -->
-                        <input type="radio" name="listeners_names" style="margin-bottom: 6px"/><span> Петров Г.А. <?=$i?></span><br>
-                    <?endfor?>
+                        <input type="radio" name="listeners_names" style="margin-bottom: 6px"/><span><?=$item?></span><br>
+                    <?endforeach?>
                 </div>
 
             </div>

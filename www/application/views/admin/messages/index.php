@@ -43,12 +43,12 @@
         <div class="span3 l_fio">
             <div class="well">
                 <h5 class="header_block">Фамилия И.О.</h5>
-                <div class="wrap">
-                    <?foreach($list_users as $item):?>
-                        <!-- http://stackoverflow.com/questions/9709209/html-select-only-one-checkbox-in-a-group -->
-                        <input type="radio" name="listeners_names" style="margin-bottom: 6px"/><span><?=$item?></span><br>
-                    <?endforeach?>
-                </div>
+                    <div class="wrap">
+                        <?foreach($list_users as $item):?>
+                            <!-- http://stackoverflow.com/questions/9709209/html-select-only-one-checkbox-in-a-group -->
+                            <input type="radio" name="listeners_names" style="margin-bottom: 6px"/><span><?=$item?></span><br>
+                        <?endforeach?>
+                    </div>
 
             </div>
         </div>

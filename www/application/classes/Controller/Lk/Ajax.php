@@ -19,11 +19,11 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $userId = Cookie::get('userId');
             if (empty($userId)) HTTP::redirect('/');
         }
-        $post = $this->request->post('csrf');
+        $csrf = $this->request->post('data.csrf');
 
-        if (!Security::is_token($post['csrf']))
+        if (!Security::is_token($csrf))
         {
-        //    throw new HTTP_Exception_404();
+            throw new HTTP_Exception_404();
         }
     }
 

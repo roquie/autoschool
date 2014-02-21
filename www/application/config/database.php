@@ -6,7 +6,7 @@ return array(
         'type'       => 'MySQL',
         'connection' => array(
             'hostname'   => 'localhost',
-            'username'   => 'melnik5g_ampt',    //zxc
+            'username'   => 'melnik5g_ampt',    //zxchg gjhgjgg
             'password'   => 'qweasdzxc',
             'persistent' => FALSE,
             'database'   => 'melnik5g_ampt',

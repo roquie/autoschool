@@ -23,7 +23,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
 
         if (!Security::is_token($post['csrf']))
         {
-            throw new HTTP_Exception_404();
+        //    throw new HTTP_Exception_404();
         }
     }
 

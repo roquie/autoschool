@@ -3,57 +3,54 @@
 
 class Controller_Admin_Edu extends Controller_Ajax_Admin
 {
+    public function before()
+    {
+        parent::before();
+
+        if (!Security::is_token($this->request->post('csrf')))
+        {
+            throw new HTTP_Exception_404();
+        }
+    }
+
 
     public function action_create()
     {
         $post = $this->request->post('data');
-        if (Security::is_token($post['csrf']))
+        try
         {
-            try
-            {
-                $id = ORM::factory('Educations')
-                    ->values($post)
-                    ->save()->pk();
+            $id = ORM::factory('Educations')
+                ->values($post)
+                ->save()->pk();
 
-                $this->ajax_data(array(
-                    'id' => $id
-                ), 'Запись добавлена');
-            }
-            catch (ORM_Validation_Exception  $e)
-            {
-                $errors = $e->errors('validation');
-                $this->ajax_msg(array_shift($errors), 'error');
-            }
+            $this->ajax_data(array(
+                'id' => $id
+            ), 'Запись добавлена');
         }
-        else
+        catch (ORM_Validation_Exception  $e)
         {
-            throw new HTTP_Exception_404();
+            $errors = $e->errors('validation');
+            $this->ajax_msg(array_shift($errors), 'error');
         }
     }
 
     public function action_read()
     {
         $post = $this->request->post();
-        if (Security::is_token($post['csrf']))
-        {
-            try
-            {
-                $result = ORM::factory('Educations')
-                    ->find_all();
-                $data = array();
-                foreach ($result as $value)
-                    $data[] = $value->as_array();
 
-                $this->ajax_data($data);
-            }
-            catch (Exception  $e)
-            {
-                $this->ajax_msg($e->getMessage(), 'error');
-            }
-        }
-        else
+        try
         {
-            throw new HTTP_Exception_404();
+            $result = ORM::factory('Educations')
+                ->find_all();
+            $data = array();
+            foreach ($result as $value)
+                $data[] = $value->as_array();
+
+            $this->ajax_data($data);
+        }
+        catch (Exception  $e)
+        {
+            $this->ajax_msg($e->getMessage(), 'error');
         }
 
     }
@@ -63,25 +60,18 @@ class Controller_Admin_Edu extends Controller_Ajax_Admin
         $id = $this->request->param('id');
         $post = $this->request->post('data');
 
-        if (Security::is_token($post['csrf']))
+        try
         {
-            try
-            {
-                ORM::factory('Educations', $id)
-                    ->delete();
+            ORM::factory('Educations', $id)
+                ->delete();
 
-                $this->ajax_data(array(
-                    'id' => $id
-                ), 'Запись удалена');
-            }
-            catch (Exception  $e)
-            {
-                $this->ajax_msg($e->getMessage(), 'error');
-            }
+            $this->ajax_data(array(
+                'id' => $id
+            ), 'Запись удалена');
         }
-        else
+        catch (Exception  $e)
         {
-            throw new HTTP_Exception_404();
+            $this->ajax_msg($e->getMessage(), 'error');
         }
 
     }

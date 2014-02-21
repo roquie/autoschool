@@ -6,10 +6,10 @@ return array(
         'type'       => 'MySQL',
         'connection' => array(
             'hostname'   => 'localhost',
-            'username'   => 'melnik5g_ampt',    //zxcfhggfvvvvvv
-            'password'   => 'qweasdzxc',
+            'username'   => 'rootuser',
+            'password'   => 'root',
             'persistent' => FALSE,
-            'database'   => 'melnik5g_ampt',
+            'database'   => 'mpt_auto',
         ),
         'table_prefix' => '',
         'charset'      => 'utf8',

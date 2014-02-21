@@ -113,36 +113,19 @@ $(function() {
                     $('form#toggle_pass_email').toggle('slow');
                 }
             },
-            add_title : function(response, that) {
-                if (response.status == 'error') {
-                    noty({
-                        type : response.status,
-                        message : response.msg
-                    });
-                }
-                if (response.status == 'success') {
-                    $('.titles').prepend(response.msg);
-                    $('.hideSend').trigger('click');
-                    if ($('#clear-block').length)
-                        $('#clear-block').remove();
-                    that.$element[0].reset();
-                }
-            },
             add_message : function(response, that) {
                 if (response.status == 'error') {
                     noty({
                         type : response.status,
                         message : response.msg
                     });
-                    $('.hideSend').trigger('click');
                 }
                 if (response.status == 'success') {
-                    var title = $('.titles').find('.row[id="'+$('#title_id').val()+'"]');
-                    title.find('.text').text($('.msg').find('form textarea').val());
-                    $('#mesg_with_title').prepend(response.msg);
+                    $('#messages').prepend(response.data);
                     that.$element[0].reset();
                     $('.hidemsg').trigger('click');
                 }
+                $('.csrf').val(response.csrf);
             }
         },
         errorCallback : function(that, request, status, error) {
@@ -158,5 +141,7 @@ $(function() {
     $('._lk_form').ajaxForm({
         form : true
     });
+
+/*    $('.placeholder').placeholder();*/
 
 });

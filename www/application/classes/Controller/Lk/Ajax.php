@@ -272,7 +272,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_messages()
     {
-
         $result = ORM::factory('News')
             ->where('group_id', '=', Cookie::get('group_id'))
             ->find_all();
@@ -311,54 +310,10 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_help()
     {
         echo View::factory('lk/pages/help', array(
-            'messages' => Model::factory('Titles')->getTitles(Cookie::get('userId')),
+            'messages' => Model::factory('Messages')->getMessage(Cookie::get('userId')),
             'userPhoto' => Cookie::get('userPhoto'),
             'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
         ));
-    }
-
-    /**
-     * Добавление новой темы
-     */
-    public function action_addTitle()
-    {
-        $message = $this->request->post('data.message');
-        $title = $this->request->post('data.title');
-
-        try
-        {
-            $t_id =
-
-            ORM::factory('Titles')->values(
-                array(
-                    'user_id' => Cookie::get('userId'),
-                    'title' => $title
-                )
-            )->create()->pk();
-
-            ORM::factory('Messages')->values(
-                array(
-                    'user_id' => Cookie::get('userId'),
-                    'message' => $message,
-                    'title_id' => $t_id
-                )
-            )->create();
-        }
-        catch (ORM_Validation_Exception  $e)
-        {
-            $errors = $e->errors('validation');
-            $this->ajax_msg(array_shift($errors), 'error');
-        }
-
-        $this->ajax_msg(
-            View::factory('lk/pages/html/newtitle', array(
-                'title_id' => $t_id,
-                'title' => Security::xss_clean($title),
-                'message' => Security::xss_clean($message),
-                'userPhoto' =>   Cookie::get('userPhoto'),
-            ))->render()
-        );
-
     }
 
     /**
@@ -367,7 +322,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     public function action_addMessage()
     {
         $message = $this->request->post('data.message');
-        $id = $this->request->param('id');
 
         try
         {
@@ -375,7 +329,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
                 array(
                     'user_id' => Cookie::get('userId'),
                     'message' => $message,
-                    'title_id' => $id
                 )
             )->create();
         }
@@ -386,7 +339,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
         }
 
 
-        $this->ajax_msg(
+        $this->ajax_data(
             View::factory('lk/pages/html/newmsg', array(
                 'message' => Security::xss_clean($message),
                 'userPhoto' => Cookie::get('userPhoto'),
@@ -395,43 +348,30 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     }
 
     /**
-     * Дозагрузка тем
+     * Заргузка сообщений пользователя
      */
-    public function action_load()
+    public function action_load_message()
     {
-        $result = Model::factory('Titles')->getTitles(Cookie::get('userId'), $this->request->post('offset'));
+        try
+        {
+            $m = new Model_Messages();
+            $result = $m->getMessage(Cookie::get('userId'), $this->request->post('data.offset'));
+        }
+        catch(Database_Exception $e)
+        {
+            $this->ajax_msg($e->getMessage(), 'error');
+        }
         if (empty($result)) {
             $this->ajax_msg('', 'empty');
             exit;
         }
-
-        $this->ajax_msg(
-            View::factory('lk/pages/html/loadtitle', array(
+        $this->ajax_data(
+            View::factory('lk/pages/html/loadmsg', array(
                 'messages' => $result,
                 'userPhoto' => Cookie::get('userPhoto'),
                 'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
             ))->render()
         );
-    }
-
-    /**
-     * Заргузка сообщений выбранной темы
-     */
-    public function action_load_message()
-    {
-        $id = $this->request->param('id');
-
-        $data = ORM::factory('Messages')
-            ->where('title_id', '=', $id)
-            ->order_by('id', 'DESC')
-            ->find_all();
-
-        echo View::factory('lk/pages/html/loadmsg', array(
-            'title_id' => $id,
-            'messages' => $data,
-            'userPhoto' => Cookie::get('userPhoto'),
-            'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
-        ));
     }
 
     /**

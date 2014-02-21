@@ -30,37 +30,6 @@ $(function() {
         scrollToElement(href);
     });
 
-/*    $('#send').validation({
-        callback : function(response) {
-            var $this = $('#send');
-            // Если пустые поля
-            if (response.status === 'empty') {
-                var element;
-                $.each(response.data, function(i, v) {
-                    element = $this.find('input[name="'+ v +'"], textarea[name="'+ v +'"]').addClass('error');
-                });
-            }
-            // Если получена ошибка или всё нормально
-            if (response.status === 'error') {
-                noty({
-                    type : response.status,
-                    message : response.msg
-                });
-            }
-            if (response.status === 'success') {
-                noty({
-                    type : response.status,
-                    message : response.msg
-                });
-                reload();
-                $('#send')[0].reset();
-                $('#send').find('.placeholder').placeholder('reset');
-            }
-        },
-        trigger : 'blur',
-        offsetTopBalloon : 30
-    });*/
-
     /**
      * Подсказки в полях ввода
      */
@@ -71,7 +40,6 @@ $(function() {
  * Обновление captcha
  */
 function reload() {
-    //var id = Math.floor(Math.random()*1000000);
     $("img.captcha").attr("src","/captcha/default");
 }
 

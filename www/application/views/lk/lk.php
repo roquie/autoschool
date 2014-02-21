@@ -1,5 +1,4 @@
 <?=HTML::style('css/lk/lk.css')?>
-<?=HTML::style('css/chat.css')?>
 <?=HTML::script('js/lk/lk.js')?>
 <?=HTML::script('js/vendor/moment+langs.min.js')?>
 <?=HTML::style('css/vendor/bootstrap-editable.css')?>

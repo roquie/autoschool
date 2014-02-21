@@ -18,10 +18,7 @@ class Controller_Admin_Listeners extends Controller_Admin
         $nationality = '';
         $education = '';
 
-        /**
-         * запрос идёт на аяксом, там же просто нажатие на кнопку и ты отдаёшь док, всё.
-         */
-        if (/*Request::initial()->is_ajax() && */Security::is_token($post['csrf']))
+        if (Security::is_token($post['csrf']))
         {
             if (isset($statement['nationality_id']))
             {

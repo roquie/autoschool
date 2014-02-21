@@ -11,8 +11,6 @@ class Model_Messages extends ORM
         'user_id' => array('data_type' => 'int', 'is_nullable' => false),
         'admin' => array('data_type' => 'int', 'is_nullable' => false),
         'message' => array('data_type' => 'string', 'is_nullable' => false),
-        'is_read' => array('data_type' => 'int', 'is_nullable' => false),
-        'title_id' => array('data_type' => 'int', 'is_nullable' => false),
         'datetime' => array('data_type' => 'string', 'is_nullable' => false),
     );
 
@@ -32,12 +30,6 @@ class Model_Messages extends ORM
                 array('min_length', array(':value', 3)),
                 array('max_length', array(':value', 130)),
             ),
-            'is_read' => array(
-                array('digit'),
-            ),
-            'title_id' => array(
-                array('digit'),
-            ),
             'user_id' => array(
                 array('digit'),
             ),
@@ -52,8 +44,6 @@ class Model_Messages extends ORM
     {
         return array(
             'message' => 'Текст сообщения',
-            'is_read' => 'is_read',
-            'title_id' => 'title_id',
             'user_id' => 'user_id',
             'admin' => 'admin',
         );
@@ -80,17 +70,17 @@ class Model_Messages extends ORM
     public function getMessage($user_id, $offset = 1, $limit = 10)
     {
         $start = ($offset - 1) * $limit;
-        try {
-            $messages = ORM::factory('Messages')
-                ->where('user_id', '=', $user_id)
-                ->order_by('id', 'DESC')
-                ->limit($limit)
-                ->offset( $start )
-                ->find_all();
-        } catch(ORM_Validation_Exception $e) {
+
+        $messages = ORM::factory('Messages')
+                       ->where('user_id', '=', $user_id)
+                       ->order_by('id', 'DESC')
+                       ->limit($limit)
+                       ->offset($start)
+                       ->find_all();
+        if ($messages->count() > 0)
+            return $messages;
+        else
             return false;
-        }
-        return $messages;
     }
 
 }

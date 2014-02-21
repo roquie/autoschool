@@ -3,9 +3,6 @@
         <div class="span7">
             <h1><small>Добавить в БД или создать документы</small></h1>
         </div>
-        <div class="span5 btn_actions">
-            <!-- btn's maybe create ...-->
-        </div>
     </div>
 
     <!--css-->

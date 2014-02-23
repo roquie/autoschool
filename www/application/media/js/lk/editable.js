@@ -9,6 +9,7 @@ $.fn.editable.defaults.ajaxOptions = {
 };
 $.fn.editableform.defaults.url = $('.data').data('url');
 $.fn.editable.defaults.emptytext = 'Пусто';
+
 $.fn.editableform.defaults.success = function(response, newValue) {
     if (response.status === 'empty') return response.msg;
     if (response.status === 'error') {
@@ -48,10 +49,15 @@ $(function() {
         }
     });
 
-    getData($('#education'));
-    getData($('#grajdanstvo'));
+    //$(document).on('load', function() {
+        getData($('#education'), $('#grajdanstvo'));
+    //});
+
 
     $('.pasport_data_vyda4i').editable({
+        params : {
+            csrf : $('.csrf').val()
+        },
         format: 'DD.MM.YYYY',
         viewformat: 'DD.MM.YYYY',
         combodate: {
@@ -79,13 +85,21 @@ $(function() {
         $('#enable').show();
     });
 
-    function getData(obj) {
+    var num = 0;
+
+    function getData(obj, obj2) {
         var project = [];
         $.post(
             obj.data('action'),
-            function(data)
             {
-                project = data.results;
+                data : {
+                    csrf : $('.csrf').val()
+                }
+            },
+            function(response)
+            {
+                $('.csrf').val(response.csrf);
+                project = response.data;
                 obj.editable({
                     source: project,
                     select2 : {
@@ -93,6 +107,9 @@ $(function() {
                     }
                 });
                 obj.editable('disable');
+                num++;
+                if (num == 1)
+                    getData(obj2);
             },
             'json'
         );

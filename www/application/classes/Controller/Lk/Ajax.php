@@ -15,14 +15,19 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             'login',
             'forgot',
         );
+        $no_token = array(
+            'changeStatement',
+            'changeContract'
+        );
         if (!in_array($this->request->action(), $no_check)) {
             $userId = Cookie::get('userId');
             if (empty($userId)) HTTP::redirect('/');
         }
         $csrf = $this->request->post('data.csrf');
 
-        if (!Security::is_token($csrf))
+        if (!Security::is_token($csrf) && !in_array($this->request->action(), $no_token))
         {
+            //$this->ajax_msg($csrf);
             throw new HTTP_Exception_404();
         }
     }
@@ -81,6 +86,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changepass()
     {
+/*        $csrf = $this->request->post('data.csrf');
+        $this->ajax_msg($csrf, 'error');
+        exit;*/
         $pass_old = $this->request->post('data.password_old');
         $pass_new = $this->request->post('data.password_new');
 
@@ -142,7 +150,6 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_changeStatement()
     {
-
         $id = $this->request->param('id') ?: Cookie::get('userId');
         $data = array(
             $this->request->post('name') => $this->request->post('value')
@@ -293,8 +300,10 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             foreach ($result as $v)
                 $data[] = $v->as_array();
 
-        echo View::factory('lk/pages/messages')
-            ->set('messages', $data);
+        $this->ajax_data(
+            View::factory('lk/pages/messages')
+                ->set('messages', $data)->render()
+        );
     }
 
     /**
@@ -304,10 +313,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
-        echo View::factory('lk/pages/statement', array(
-            'info' => Model::factory('Statements')->getBy('user_id', Cookie::get('userId')),
-            'status' => $result->status,
-        ));
+        $this->ajax_data(
+            View::factory('lk/pages/statement', array(
+                'info' => Model::factory('Statements')->getBy('user_id', Cookie::get('userId')),
+                'status' => $result->status,
+            ))->render()
+        );
     }
 
     /**
@@ -315,11 +326,13 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_help()
     {
-        echo View::factory('lk/pages/help', array(
-            'messages' => Model::factory('Messages')->getMessage(Cookie::get('userId')),
-            'userPhoto' => Cookie::get('userPhoto'),
-            'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
-        ));
+        $this->ajax_data(
+            View::factory('lk/pages/help', array(
+                'messages' => Model::factory('Messages')->getMessage(Cookie::get('userId')),
+                'userPhoto' => Cookie::get('userPhoto'),
+                'admin_avatar' => Kohana::$config->load('settings.admin_avatar'),
+            ))->render()
+        );
     }
 
     /**
@@ -387,10 +400,12 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
     {
         $result = Model::factory('Users')->getBy('id', Cookie::get('userId'));
 
-        echo View::factory('lk/pages/contract', array(
-            'info' => Model::factory('Contracts')->getBy('user_id', Cookie::get('userId')),
-            'status' => $result->status,
-        ));
+        $this->ajax_data(
+            View::factory('lk/pages/contract', array(
+                'info' => Model::factory('Contracts')->getBy('user_id', Cookie::get('userId')),
+                'status' => $result->status,
+            ))->render()
+        );
     }
 
     /**
@@ -398,7 +413,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_download()
     {
-        echo View::factory('lk/pages/downloads');
+        $this->ajax_data(
+            View::factory('lk/pages/downloads')->render()
+        );
     }
 
     /**
@@ -406,7 +423,9 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
      */
     public function action_settings()
     {
-        echo View::factory('lk/pages/settings');
+        $this->ajax_data(
+            View::factory('lk/pages/settings')->render()
+        );
     }
 
 
@@ -423,9 +442,8 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $temp_data['text'] = $value->grajdanstvo;
             array_push($data, $temp_data);
         }
-        $ret = array();
-        $ret['results'] = $data;
-        echo json_encode($ret);
+
+        $this->ajax_data($data);
     }
 
     /**
@@ -441,9 +459,7 @@ class Controller_Lk_Ajax extends Controller_Ajax_Main
             $temp_data['text'] = $value->obrazovanie;
             array_push($data, $temp_data);
         }
-        $ret = array();
-        $ret['results'] = $data;
-        echo json_encode($ret);
+        $this->ajax_data($data);
     }
 
     /**

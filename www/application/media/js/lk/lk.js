@@ -1,58 +1,87 @@
 $(function() {
-    $.fn.navigate.setDefaults({
-        block : '#content',
-        active : function(that) {
-            var arrow = $('<i>', {
-                class : 'icon-angle-right'
-            });
-            $('.' + that.options.classElement).parent().removeClass(that.options.classActive);
-            if (!that.options.noactive || that.options.noactive == 'undefined') {
-                that.$element.parent().addClass(that.options.classActive);
-            }
-            $('.' + that.options.classElement).find('i.icon-angle-right').remove();
-            if (!that.options.noactive || that.options.noactive == 'undefined')
-                that.$element.append(arrow);
-        },
-        beforeLoad : function(options, that) {
-            $(options.block).html($('#loader').html());
-        },
-        afterLoad : function(options, that) {
-            var arrow = $('<i>', {
-                class : 'icon-angle-right'
-            });
-            if (!that.data('noactive') || that.data('noactive') == 'undefined') {
-                that.parent().addClass(options.classActive);
-                that.append(arrow);
-            }
-        },
-        otherLoad : function(options) {
-            var arrow = $('<i>', {
-                    class : 'icon-angle-right'
-                }),
-                obj = $('#left_menu > li > a'),
-                link;
-            $.each(obj, function() {
-                if ($(this).data('nav') && $(this).data('nav') != 'undefined') {
-                    link = $(this).attr('href');
-                    if (!$(this).data('noactive') || $(this).data('noactive') == 'undefined') {
-                        $(this).parent().addClass(options.classActive);
-                        $(this).append(arrow);
-                    }
-                    $(options.block).load(link);
-                    return false;
-                }
-            });
-        },
-        defaultCallback : function(response, that) {
-            $(that.options.block).html(response);
-        }
-    });
 
-    $('.navigate').navigate();
+    first_load();
+
+    $('body').on('click', '#ajaxLink', function(e) {
+        e.preventDefault();
+
+        if ($(this).attr('ajax') === 'false') {
+            return false;
+        }
+
+        var $this = $(this),
+            action = $this.attr('href'),
+            nav = $('#left_menu').find('li'),
+            arrow = $('<i>', {
+                class : 'icon-angle-right'
+            }),
+            link,
+            obj = $('#loader');
+        $('#content').html(obj.html());
+        load_content(action);
+        if ($this.closest('#left_menu').length != 0) {
+            nav.removeClass('active').find('a > i.icon-angle-right').remove();
+            $this.parent().addClass('active').find('a').append(arrow);
+        }
+        link = action.split('/');
+        location.hash = link[link.length-1];
+    });
 
     $(window).on('load', function() {
         $('.menu').css({'margin-top' : $('.profile').find('img').height() - $('.back1').height() + 20});
     });
+
+    function first_load() {
+        var url,
+            link,
+            arrow = $('<i>', {
+                class : 'icon-angle-right'
+            }),
+            content = $('#content'),
+            isset = false;
+        content.html($('#loader').html());
+        if (location.hash != '') {
+            url = location.hash.replace('#', '');
+            if (url === 'settings') {
+                load_content($('.settings').find('a#ajaxLink').attr('href'));
+                isset = true;
+            } else {
+                $('#left_menu > li > a').each(function() {
+                    link = $(this).attr('href').split('/');
+                    if (link[link.length-1] === url) {
+                        $(this).parent().addClass('active').find('a').append(arrow);
+                        load_content($(this).attr('href'));
+                        isset = true;
+                    }
+                });
+            }
+        }
+        if (location.hash == '' || !isset) {
+            var obj = $('#left_menu > li').eq(0);
+            link = obj.find('a').attr('href');
+            obj.addClass('active').find('a').append(arrow);
+            load_content(link);
+            link = link.split('/');
+            location.hash = link[link.length-1];
+        }
+    }
+
+    function load_content(url) {
+        var content = $('#content');
+        $.post(
+            url,
+            {
+                data : {
+                    csrf : $('.csrf').val()
+                }
+            },
+            function(response) {
+                content.html(response.data);
+                $('.csrf').val(response.csrf);
+            },
+            'json'
+        );
+    }
 
     $.fn.ajaxForm.setDefaults({
         errorValidate : function() {
@@ -78,6 +107,7 @@ $(function() {
             if (that.isForm && response.status == 'success') {
                 that.$element[0].reset();
             }
+            $('.csrf').val(response.csrf);
         },
         functions : {
             check_pass : function(response, that) {
@@ -93,6 +123,7 @@ $(function() {
                     }
                     $('form#toggle_pass_email').toggle('slow');
                 }
+                $('.csrf').val(response.csrf);
             },
             change_email : function(response, that) {
                 if (response.status == 'error') {
@@ -112,6 +143,7 @@ $(function() {
                     }
                     $('form#toggle_pass_email').toggle('slow');
                 }
+                $('.csrf').val(response.csrf);
             },
             add_message : function(response, that) {
                 if (response.status == 'error') {

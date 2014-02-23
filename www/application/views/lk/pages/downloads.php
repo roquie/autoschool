@@ -79,8 +79,14 @@
         $('.view_doc_createtmpfile').on('click', function() {
             $.post(
                 $(this).data('url'),
-                function(response){
+                {
+                    data : {
+                        csrf : $('.csrf').val()
+                    }
+                },
+                function(response) {
                     $('#docs_viewer').attr('src', "http://view.officeapps.live.com/op/view.aspx?src="+response.data.url+"/"+response.data.file);
+                    $('.csrf').val(response.csrf);
                 },
                 'json'
             );

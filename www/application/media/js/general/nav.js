@@ -26,12 +26,25 @@
             var url = '',
                 link;
             if (location.hash != '') {
+
                 $.each($('.' + $.fn[pluginName].defaults.classElement), function() {
                     url = location.hash.replace('#', '');
                     link = $(this).attr('href').split('/');
                     if (url === link[link.length-1]) {
                         $.fn[pluginName].defaults.beforeLoad($.fn[pluginName].defaults, $(this));
-                        $($.fn[pluginName].defaults.block).load($(this).attr('href'));
+                        $.post(
+                            $(this).attr('href'),
+                            {
+                                data : {
+                                    csrf : $('.csrf').val()
+                                }
+                            },
+                            function(response) {
+                                $.fn[pluginName].defaults.defaultCallback(response, $.fn[pluginName].defaults);
+                                //$.fn[pluginName].defaults.afterLoad($.fn[pluginName].defaults, $(this));
+                            },
+                            'json'
+                        );
                         $.fn[pluginName].defaults.afterLoad($.fn[pluginName].defaults, $(this));
                     }
                 });
@@ -48,6 +61,7 @@
             this.metadata = this.$element.data();
             this.options = $.extend( {}, $.fn[pluginName].defaults, options, this.metadata);
             this.$element.on('click', $.proxy(this.process, this));
+            this.options.params = this.options.params.split(this.options.separator);
             this.work = false;
         },
         process : function(e) {
@@ -78,6 +92,9 @@
             $.ajax({
                 type : this.options.method,
                 url  : this.$element.attr('href') ? this.$element.attr('href') : this.options.url,
+                data : {
+                    data : this.fields()
+                },
                 dataType : this.options.type,
                 beforeSend : function() {
                     that.options.beforeLoad(that.options, that);
@@ -104,6 +121,28 @@
                 }
             });
             return false;
+        },
+        /**
+         * Формирование строки с данными для отправки на сервер
+         * @returns {string}
+         */
+        fields : function() {
+            var data = {},
+                field;
+            $.each(this.options.params, function(k, v) {
+                if ($('#'+v).attr('name')) {
+                    field = $('#'+v).val();
+                } else {
+                    field = $('#'+v).text();
+                }
+                data[v] = field;
+            });
+            if (this.options.debug) {
+                console.log('Массив данных для передачи: ');
+                console.log(data);
+            }
+
+            return data;
         }
     };
 
@@ -131,7 +170,7 @@
         /**
          * Настройка Ajax
          */
-        type : 'html', // тип передаваемых данных
+        type : 'json', // тип передаваемых данных
         method : 'post', // метод передачи данных
         cache : false, // кэширование запроса
         functions : {}, // массив callback
@@ -141,6 +180,8 @@
 
         classActive : 'active',
         classElement : 'navigate',
+        separator : ',', // разделитель значений строки
+        params : '', // данные для отправки при нажатии на ссылку
         block : '.content',
         debug : false
     };

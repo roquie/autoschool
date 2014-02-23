@@ -12,6 +12,7 @@
                 <input id="password_new" name="password_new" placeholder="новый пароль" type="password">
             </div>
             <br>
+            <input type="hidden" name="csrf" class="csrf" value="<?=Security::token()?>" id="csrf"/>
             <input type="submit" value="Готово" class="btn btn-info pull-right"/>
         </form>
     </div>
@@ -26,6 +27,7 @@
                 <input id="check_password" name="check_password" placeholder="ваш пароль" type="password">
             </div>
             <br>
+            <input type="hidden" name="csrf" class="csrf" value="<?=Security::token()?>" id="csrf"/>
             <input type="submit" value="Далее" class="btn btn-success pull-right"/>
         </form>
 
@@ -34,7 +36,7 @@
                 <span class="add-on"><b style="font-weight: 600">@</b></span>
                 <input id="new_email" name="new_email" placeholder="новый email" type="email">
             </div>
-
+            <input type="hidden" name="csrf" class="csrf" value="<?=Security::token()?>" id="csrf"/>
             <input type="submit" value="Готово" class="btn btn-info pull-right"/>
         </form>
     </div>

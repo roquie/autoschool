@@ -47,6 +47,7 @@
                                         </div>
                                         <i title="Забыли пароль?" class="icon-unlock icon-large pull-right" id="forgot"></i>
                                         <div class="clearfix"></div>
+                                        <input type="hidden" name="csrf" class="csrf" value="<?=Security::token()?>" id="csrf"/>
                                         <input type="submit" value="Войти" class="btn btn-info btn-block"/>
                                     </form>
                                     <form method="post" action="<?=URL::site('lk/ajax/forgot')?>" class="_mains_form hide" data-callback="forgot" novalidate>
@@ -56,6 +57,7 @@
                                             <input type="email" name="email" placeholder="Email">
                                         </div>
                                         <input type="submit" value="Отправить" class="btn btn-info pull-left"/>
+                                        <input type="hidden" name="csrf" class="csrf" value="<?=Security::token()?>" id="csrf"/>
                                         <input type="button" class="btn pull-right" id="forgot" value="Назад">
                                     </form>
                                 </div>

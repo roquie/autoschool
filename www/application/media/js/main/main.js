@@ -55,6 +55,7 @@ $(function() {
                 if (response.status === 'success') {
                     window.location.href = response.msg;
                 }
+                $('.csrf').val(response.csrf);
             },
             forgot : function(response) {
                 if (response.status == 'error' || response.status == 'success') {
@@ -66,6 +67,7 @@ $(function() {
                 if (response.status == 'success') {
                     $('#popup').find('form').toggle('slow');
                 }
+                $('.csrf').val(response.csrf);
             },
             contact_form : function(response) {
                 if (response.status == 'error') {
@@ -96,9 +98,6 @@ $(function() {
                         },
                         'json'
                     );
-
-
-
                 }
             }
         },

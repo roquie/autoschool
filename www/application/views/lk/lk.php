@@ -60,7 +60,7 @@
                         </div>
                         <div class="row">
                             <div class="span6 settings">
-                                <i class="icon-envelope-alt"></i> <span id="userEmail"><?=$userEmail?></span>, <a href="<?=URL::site('lk/ajax/settings')?>" data-nav="true" data-noactive="true"><i class="icon-cog"></i> Настройки</a>
+                                <i class="icon-envelope-alt"></i> <span id="userEmail"><?=$userEmail?></span>, <a href="<?=URL::site('lk/ajax/settings')?>" id="ajaxLink"><i class="icon-cog"></i> Настройки</a>
                             </div>
                         </div>
                     </div>
@@ -70,12 +70,13 @@
 
         <div class="row">
             <div class="span3 menu">
+                <input type="hidden" name="csrf" class="csrf" value="<?=Security::token()?>" id="csrf"/>
                 <ul class="nav nav-pills nav-stacked" id="left_menu">
-                    <li><a href="<?=URL::site('lk/ajax/messages')?>" data-nav="true"><i class="icon-comments"></i><span>Группа</span></a></li>
-                    <li><a href="<?=URL::site('lk/ajax/statement')?>" data-nav="true"><i class="icon-file"></i><span>Заявление</span></a></li>
-                    <li><a href="<?=URL::site('lk/ajax/contract')?>" data-nav="true"><i class="icon-file"></i><span>Договор</span></a></li>
-                    <li><a href="<?=URL::site('lk/ajax/download')?>" data-nav="true"><i class="icon-cloud-download"></i><span>Загрузки</span></a></li>
-                    <li><a href="<?=URL::site('lk/ajax/help')?>" data-nav="true">&nbsp;<i class="icon-info"></i><span>&nbsp;Помощь</span></a></li>
+                    <li><a href="<?=URL::site('lk/ajax/messages')?>" id="ajaxLink"><i class="icon-comments"></i><span>Группа</span></a></li>
+                    <li><a href="<?=URL::site('lk/ajax/statement')?>" id="ajaxLink"><i class="icon-file"></i><span>Заявление</span></a></li>
+                    <li><a href="<?=URL::site('lk/ajax/contract')?>" id="ajaxLink"><i class="icon-file"></i><span>Договор</span></a></li>
+                    <li><a href="<?=URL::site('lk/ajax/download')?>" id="ajaxLink"><i class="icon-cloud-download"></i><span>Загрузки</span></a></li>
+                    <li><a href="<?=URL::site('lk/ajax/help')?>" id="ajaxLink">&nbsp;<i class="icon-info"></i><span>&nbsp;Помощь</span></a></li>
                 </ul>
             </div>
 

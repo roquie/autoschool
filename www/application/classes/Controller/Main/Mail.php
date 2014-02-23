@@ -3,6 +3,19 @@
 class Controller_Main_Mail extends Controller_Ajax_Main
 {
 
+    public function before()
+    {
+        parent::before();
+
+        $csrf = $this->request->post('csrf');
+
+        if(!Security::is_token($csrf))
+        {
+            throw new HTTP_Exception_404();
+        }
+
+    }
+
     public function action_upload()
     {
         if (!$this->request->is_ajax() || empty($_FILES))
